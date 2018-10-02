@@ -2,7 +2,7 @@
 Welcome to our contribution guide!
 
 ## Getting Started
-Please message one of the co-directors at hack4impact or the person in responsible for this portal for credentials. This will be used to connect to our database along with the other features here. Then follow the README instructions in both the `backend/` and `frontend/` folders to run this application.
+Follow the README instructions in both the `backend/` and `frontend/` folders to run this application.
 
 ## Issue Guidelines
 Issues are how we keep track of our work and the progress of our development. Use Issues to define features, Epics, submitting bugs, etc. They are also where general discussions are made. 
@@ -23,7 +23,7 @@ Obvious Fixes that do not introduce any new functionality or creative thinking d
 
 Just make a PR that follows the guidelines in the next section. 
 ## Pull Request Guidelines
-Pull Requests are the way concrete changes are made to the code, dependencies, documentation, and tools in `hack4impact-uiuc/recruitment-portal`. 
+Pull Requests are the way concrete changes are made to the code, dependencies, documentation, and tools in `hack4impact-uiuc/childs-play-tool`. 
 
 ### Process of Making Changes
 As a rule of thumb, try to keep your Pull Requests small instead of huge PRs with changes in 20 files. It is much easier to review smaller incremental changes.
@@ -39,7 +39,7 @@ Commits are how we keep track of code changes and thus should be explicit.
 Unless your changes are trivial (when it doesn't require an issue), our commits must include a reference to an issue. Use the `Fixes` prefix, `Resolves`, or `Refs` depending on the type of your changes. Then, include a description of your changes.
 
 Ex: 
-- `Ref #14 List Page now filters candidates by Time Commitment`
+- `Resolves #14 List Page now filters games by lead character`
 - `Fixes #15 HomePage no longer shows a blank page when the passcode is incorrect`
 
 You may reference multiple issues if needed.
@@ -49,8 +49,7 @@ Once your PR is approved, you must squash your commits. Instructions are provide
 ### Step 4: Rebase
 It is recommended that you rebase your branch with master frequently to synchronize your work to ensure you have the latest changes and that you will pass tests when it's merged in.
 ```
-git fetch origin master
-git rebase origin/master
+git pull origin master
 ```
 If your branch was already pushed to github, do this as well:
 ```
