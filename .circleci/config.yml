@@ -22,6 +22,16 @@ jobs:
             pipenv install --skip-lock
             pipenv install --skip-lock --dev
             pipenv run pytest
+  frontend_format:
+    docker:
+      - image: node:8.4.0
+    steps:
+      - checkout
+      - run:
+          command: |
+            cd frontend
+            npm install
+            npm run format:check
 
 workflows:
   version: 2
@@ -29,3 +39,4 @@ workflows:
     jobs:
       - backend_format
       - backend_test
+      - frontend_format
