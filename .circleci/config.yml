@@ -6,22 +6,22 @@ jobs:
     steps:
       - checkout
       - run:
-        command: |
-          cd backend
-          pipenv install --skip-lock
-          pipenv install --skip-lock --dev
-          pipenv run black . --check 
+          command: |
+            cd backend
+            pipenv install --skip-lock
+            pipenv install --skip-lock --dev
+            pipenv run black . --check 
   backend_test:
     docker:
       - image: circleci/python:3.7
     steps:
       - checkout
       - run:
-        command: |
-          cd backend
-          pipenv install --skip-lock
-          pipenv install --skip-lock --dev
-          pipenv run pytest
+          command: |
+            cd backend
+            pipenv install --skip-lock
+            pipenv install --skip-lock --dev
+            pipenv run pytest
 
 workflows:
   version: 2
