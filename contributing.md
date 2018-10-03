@@ -31,7 +31,7 @@ As a rule of thumb, try to keep your Pull Requests small instead of huge PRs wit
 As a best practice, create local branches to work within. They should be created off of the `master` branch.
 
 #### Step 2: Code
-Please make sure to run `yarn format` in both `backend/` and `frontend/` folders before commiting to ensure that changes follow our code style. Our code style is [standard](https://github.com/standard/standard). Our frontend also uses Flow for prop typing, so remember to add those in if you are modifying props in components.
+Please make sure to run `npm run format` in both `frontend/` and `pipenv run black .` in `backend/` folders before commiting to ensure that changes follow our code style. Our code style is [standard](https://github.com/standard/standard). Our frontend also uses Flow for prop typing, so remember to add those in if you are modifying props in components.
 
 ### Step 3: Commit
 Commits are how we keep track of code changes and thus should be explicit.
@@ -66,7 +66,7 @@ Your reviewers will get then provide feedback or requests for changes to your Pu
 
 Whenever you're making changes, please label your PR as "WIP"
 
-Each PR requires at least one approval from a collaborator and pass the CI run. The CI checks whether your code is formatted so remember to run `npm run format` in the frontend! 
+Each PR requires at least two approvals from a collaborator and pass the CI run.
 
 ### Step 8: Approval!
 Once your PR is approved, please squash your commits. To do this:
