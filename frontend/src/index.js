@@ -1,8 +1,23 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './index.css'
-import App from './App'
+import { Provider } from 'react-redux'
+import { Route } from 'react-router'
+import { ConnectedRouter } from 'react-router-redux'
+import './styles/index.css'
+import { Counter } from './components'
 import registerServiceWorker from './registerServiceWorker'
+import configureStore, { history } from './redux/configureStore'
 
-ReactDOM.render(<App />, document.getElementById('root'))
+const store = configureStore()
+
+ReactDOM.render(
+  <Provider store={store}>
+    <ConnectedRouter history={history}>
+      <div>
+        <Route exact path="/" component={Counter} />
+      </div>
+    </ConnectedRouter>
+  </Provider>,
+  document.getElementById('root')
+)
 registerServiceWorker()
