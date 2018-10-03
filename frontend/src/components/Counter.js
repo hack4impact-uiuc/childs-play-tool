@@ -23,8 +23,8 @@ class Counter extends Component {
   render() {
     const { count } = this.props.counter.count
     return (
-      <div className="App">
-        <p className="App-intro">Count: {this.props.counter.count}</p>
+      <div className="Counter">
+        <p className="Counter-intro">Count: {this.props.counter.count}</p>
         <button onClick={this.props.increment}>Increment</button>
         <button onClick={this.props.reset}>Reset</button>
         <button onClick={() => this.props.set(this.state.newCount)}>Set</button>
@@ -35,7 +35,6 @@ class Counter extends Component {
   }
 }
 
-// export default App
 export default connect(
   mapStateToProps,
   mapDispatchToProps
