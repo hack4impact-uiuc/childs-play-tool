@@ -14,7 +14,10 @@ class Update extends Component {
     return (
       <div className="Update">
         <form>
-          <label>Upload .csv file here and submit:<input/></label>
+          <label>
+            Upload .csv file here and submit:
+            <input />
+          </label>
           <button onClick={this.handleSubmit} type="button">
             Submit
           </button>
