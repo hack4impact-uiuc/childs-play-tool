@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { Route } from 'react-router'
 import { ConnectedRouter } from 'react-router-redux'
-import { Counter, Description } from './components'
+import { Counter, Description, Update } from './components'
 import registerServiceWorker from './registerServiceWorker'
 import configureStore, { history } from './redux/configureStore'
 
@@ -18,6 +18,7 @@ ReactDOM.render(
       <div>
         <Route exact path="/" component={Counter} />
         <Description title={title} tags={tags} summary={summary} description={description} />
+        <Route exact path="/" component={Update} />
       </div>
     </ConnectedRouter>
   </Provider>,
