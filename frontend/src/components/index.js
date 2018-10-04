@@ -1,3 +1,3 @@
 import Counter from './Counter'
-
-export { Counter }
+import Update from './Update'
+export { Counter, Update }
