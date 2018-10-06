@@ -31,7 +31,7 @@ As a rule of thumb, try to keep your Pull Requests small instead of huge PRs wit
 As a best practice, create local branches to work within. They should be created off of the `master` branch.
 
 #### Step 2: Code
-Please make sure to run `yarn format` in both `backend/` and `frontend/` folders before commiting to ensure that changes follow our code style. Our code style is [standard](https://github.com/standard/standard). Our frontend also uses Flow for prop typing, so remember to add those in if you are modifying props in components.
+Please make sure to run `npm run format` in both `frontend/` and `pipenv run black .` in `backend/` folders before commiting to ensure that changes follow our code style. Our code style is [standard](https://github.com/standard/standard). Our frontend also uses Flow for prop typing, so remember to add those in if you are modifying props in components.
 
 ### Step 3: Commit
 Commits are how we keep track of code changes and thus should be explicit.
@@ -64,12 +64,14 @@ Push your branch to github and open a PR! From there, reference the issues relat
 ### Step 7: Review
 Your reviewers will get then provide feedback or requests for changes to your Pull Reuqest. Make those changes, add a new commit, and push them to your remote branch in Github! Remember to still rebase your branch with `master`! Feel free to put a comment down when your ready for re-reviews.
 
-Whenever you're making changes, please label your PR as "Work in Progress"
+Whenever you're making changes, please label your PR as "WIP"
 
-Each PR requires at least one approval from a collaborator and pass the CI run. The CI checks whether your code is formatted so remember to run `yarn lint`! 
+Each PR requires at least two approvals from a collaborator and pass the CI run.
 
 ### Step 8: Approval!
 Once your PR is approved, please squash your commits. To do this:
+- Use the Github squash and merge option in your PR.
+Or you can do this from terminal:
 - `git rebase -i <the git commit hash of the commit before your first commit in your PR>`
 - An editor will pop out and you must delete `pick` and add `squash` in front of the PRs that you want to squash. Save.
 - Another editor will open and delete the commit messages you don't want to keep. Save. Remember your final commit message must oblige to the commits guidelines.
