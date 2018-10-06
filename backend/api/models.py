@@ -25,7 +25,7 @@ class Ranking(db.model):
 	age = db.Column(db.Boolean, nullable=False)
 	system = db.Column(db.String, nullable=False)
 	ailment = db.Column(db.String, nullable=False)
-	game_id = db.ForeignKey("game.id", nullable=False)
+	game_id = db.Column(db.Integer, db.ForeignKey("game_id", ondelete="SET NULL"), nullable=False)
 	rank = db.Column(db.Integer, nullable=False)
 
 	def __repr__(self):
