@@ -11,7 +11,11 @@ const store = configureStore()
 let title = 'Mario Kart'
 let summary = 'A racing game'
 let description = 'A racing game where the most important skill is luck'
-let tags = [{type: "age", tag: "0-5"}, {type: "system", tag:"Switch"}, {type: "ailment", tag:"Pain"}]
+let tags = [
+  { type: 'age', tag: '0-5' },
+  { type: 'system', tag: 'Switch' },
+  { type: 'ailment', tag: 'Pain' }
+]
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
