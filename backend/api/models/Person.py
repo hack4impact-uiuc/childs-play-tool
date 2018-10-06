@@ -15,4 +15,4 @@ class Person(Mixin, db.Model):
         self.name = name
 
     def __repr__(self):
-        return f"<Person {self.name}>"
+        return "<Person {self.name}>"
