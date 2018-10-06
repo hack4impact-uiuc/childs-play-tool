@@ -1,5 +1,5 @@
 import Counter from './Counter'
-import Description from './Description'
+import Card from './Card'
 import Update from './Update'
 
-export { Counter, Description, Update }
+export { Counter, Card, Update }
