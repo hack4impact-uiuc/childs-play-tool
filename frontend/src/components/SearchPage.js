@@ -6,7 +6,7 @@ import { updateConsoleField } from '../redux/modules/searchpage'
 //import '../styles/Counter.css'
 
 const mapStateToProps = state => ({
-   console: state.consoleField
+  console: state.consoleField
 })
 
 const mapDispatchToProps = dispatch => {
@@ -23,13 +23,13 @@ class SearchPage extends Component {
     return (
       <div className="SearchPage">
         <Dropdown
-                  title="Console Type"
-                  items={[
-                    { id: '1', value: 'Wii' },
-                    { id: '2', value: 'iPhone' },
-                    { id: '3', value: 'XBOX' }
-                  ]}
-                />
+          title="Console Type"
+          items={[
+            { id: '1', value: 'Wii' },
+            { id: '2', value: 'iPhone' },
+            { id: '3', value: 'XBOX' }
+          ]}
+        />
       </div>
     )
   }

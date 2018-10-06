@@ -1,3 +1,5 @@
 import Counter from './Counter'
+import SearchPage from './SearchPage'
+import Dropdown from './Dropdown'
 
-export { Counter }
+export { Counter, SearchPage, Dropdown }

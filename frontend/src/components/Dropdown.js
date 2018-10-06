@@ -14,7 +14,7 @@ class Dropdown extends Component {
     super(props)
     this.state = {
       selectedVal: '',
-      title : ''
+      title: ''
     }
   }
 
@@ -22,23 +22,20 @@ class Dropdown extends Component {
   render() {
     //const { count } = this.props.counter.count
     return (
-            <span className="space">
-            <DropdownButton
-
-              title={this.props.title }
-              id="dropdown-menu"> 
-
-              {this.dropdownItems.map(item => (
-                <MenuItem
-                  key={item.id}
-                  onSelect={() => {
-                    this.setState({ selectedVal: item.value})
-                  }}>
-                  {item.value}
-                </MenuItem>
-                ))}
-            </DropdownButton>
-            </span>
+      <span className="space">
+        <DropdownButton title={this.props.title} id="dropdown-size-large">
+          {this.dropdownItems.map(item => (
+            <MenuItem
+              key={item.id}
+              onSelect={() => {
+                this.setState({ selectedVal: item.value })
+              }}
+            >
+              {item.value}
+            </MenuItem>
+          ))}
+        </DropdownButton>
+      </span>
     )
   }
 }

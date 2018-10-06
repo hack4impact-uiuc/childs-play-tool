@@ -2,7 +2,7 @@
 const UPDATE_CONSOLE_FIELD = 'searchpage/UPDATE_CONSOLE_FIELD'
 
 const initialState = {
-  fieldvalue: "teststring"
+  fieldvalue: 'teststring'
 }
 
 export default function reducer(state = initialState, action) {
