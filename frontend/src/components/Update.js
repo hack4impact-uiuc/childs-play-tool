@@ -1,33 +1,37 @@
 import React, { Component } from 'react'
+import Dropzone from 'react-dropzone'
 
 class Update extends Component {
   constructor(props) {
     super(props)
-    this.state = { submitted: false }
+    this.state = { files: [] }
   }
 
-  handleSubmit = () => {
-    this.setState({ submitted: true })
+  onDrop(files) {
+    this.setState({
+      files
+    })
   }
 
-  displaySubmit = () => {
-    var ret = null
-    if (this.state.submitted) {
-      ret = <div>Submitted!</div>
-    }
-    return ret
-  }
   render() {
     return (
-      <div className="Update">
-        <form>
-          <label>Upload .csv file here and submit:</label>
-          <button onClick={this.handleSubmit} type="button">
-            Submit
-          </button>
-        </form>
-        {this.displaySubmit}
-      </div>
+      <section>
+        <div className="Update">
+          <Dropzone onDrop={this.onDrop.bind(this)}>
+            <p>Drop updated csv file here, or click to select files to upload</p>
+          </Dropzone>
+        </div>
+        <aside>
+          <h2>Dropped files</h2>
+          <ul>
+            {this.state.files.map(f => (
+              <li key={f.name}>
+                {f.name} - {f.size} bytes
+              </li>
+            ))}
+          </ul>
+        </aside>
+      </section>
     )
   }
 }
