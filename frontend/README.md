@@ -1,13 +1,8 @@
 To run the frontend:
-npm start
+`npm start`
 
 Before commiting:
-yarn format
-
-
-
-
-
+`npm run format`
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
