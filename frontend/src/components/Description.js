@@ -41,5 +41,4 @@ class Description extends Component {
   }
 }
 
-//export default Description
 export default connect(mapStateToProps)(Description)

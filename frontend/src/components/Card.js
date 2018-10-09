@@ -37,10 +37,3 @@ class Card extends Component {
 }
 
 export default Card
-
-/*
-  Search results passed to results redux state.
-    This is used by the results page component (render cards).
-    This is also accessed by description component to pick the right game.
-  Router path: index > results (with cards) > description
-*/

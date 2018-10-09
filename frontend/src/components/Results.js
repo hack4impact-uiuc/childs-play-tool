@@ -20,5 +20,4 @@ class Results extends Component {
   }
 }
 
-//export default Results
 export default connect(mapStateToProps)(Results)
