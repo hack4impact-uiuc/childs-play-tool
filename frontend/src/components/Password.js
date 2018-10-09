@@ -4,15 +4,20 @@ import { bindActionCreators } from 'redux'
 
 
 
-class Counter extends Component {
+class Password extends Component {
   render() {
-    const { count } = this.props.counter.count
     return (
       <div className="Password">
-        
+        <form>
+            <label>
+                Key:
+                <input />
+            </label>
+            <button type="button">Submit</button>
+        </form>
       </div>
     )
   }
 }
 
-export default (Counter)
+export default (Password)

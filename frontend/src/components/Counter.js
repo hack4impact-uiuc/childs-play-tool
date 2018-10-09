@@ -21,9 +21,10 @@ const mapDispatchToProps = dispatch => {
 
 class Counter extends Component {
   render() {
-    const { count } = this.props.counter.count
+    // const { count } = this.props.counter.count
     return (
       <div className="Counter">
+        <a href="directorPage">Director Page</a>
         <p className="Counter-intro">Count: {this.props.counter.count}</p>
         <button onClick={this.props.increment}>Increment</button>
         <button onClick={this.props.reset}>Reset</button>
