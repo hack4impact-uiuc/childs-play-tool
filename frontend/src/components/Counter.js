@@ -21,7 +21,7 @@ const mapDispatchToProps = dispatch => {
 
 class Counter extends Component {
   render() {
-    // const { count } = this.props.counter.count
+    const { count } = this.props.counter.count
     return (
       <div className="Counter">
         <a href="directorPage">Director Page</a>

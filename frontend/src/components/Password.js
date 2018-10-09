@@ -12,6 +12,7 @@ class Password extends Component {
             <input />
           </label>
           <button type="button">Submit</button>
+          <a href="uploadPage">Upload Page</a>
         </form>
       </div>
     )

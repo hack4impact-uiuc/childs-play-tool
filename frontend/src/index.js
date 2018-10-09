@@ -8,6 +8,7 @@ import { Counter } from './components'
 import { Password } from './components'
 import registerServiceWorker from './registerServiceWorker'
 import configureStore, { history } from './redux/configureStore'
+import { Update } from './components'
 
 const store = configureStore()
 
@@ -17,6 +18,8 @@ ReactDOM.render(
       <div>
         <Route exact path="/" component={Counter} />
         <Route path="/directorPage" component={Password} />
+        <Route exact path="/" component={Update} />
+        <Route exact path="/uploadPage" component={Update} />
       </div>
     </ConnectedRouter>
   </Provider>,
