@@ -1,18 +1,19 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Dropdown } from './'
-import { updateConsoleField } from '../redux/modules/searchpage'
+import { DropdownButton } from './'
+//import { DropdownButton, MenuItem } from 'react-bootstrap'
+import { updateField } from '../redux/modules/searchpage'
 //import '../styles/Counter.css'
 
 const mapStateToProps = state => ({
-  console: state.consoleField
+  //console: state.consoleField
 })
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      updateConsoleField
+      updateField
     },
     dispatch
   )
@@ -20,18 +21,7 @@ const mapDispatchToProps = dispatch => {
 
 class SearchPage extends Component {
   render() {
-    return (
-      <div className="SearchPage">
-        <Dropdown
-          title="Console Type"
-          items={[
-            { id: '1', value: 'Wii' },
-            { id: '2', value: 'iPhone' },
-            { id: '3', value: 'XBOX' }
-          ]}
-        />
-      </div>
-    )
+    return <DropdownButton title="Console Type" fieldName="consoleField" />
   }
 }
 

@@ -1,23 +1,39 @@
 // @flow
-const UPDATE_CONSOLE_FIELD = 'searchpage/UPDATE_CONSOLE_FIELD'
+const UPDATE_FIELD = 'searchpage/UPDATE_FIELD'
+const FIELD_CHANGED = 'FIELD_CHANGED'
 
 const initialState = {
-  fieldvalue: 'teststring'
+  consoleField: '',
+  ageField: '',
+  ailmentField: '',
+  nameSearchField: ''
 }
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case UPDATE_CONSOLE_FIELD:
+    case UPDATE_FIELD:
       return {
         ...state,
-        consoleField: action.value
+        [action.payload.field]: action.payload.value
       }
     default:
       return state
   }
 }
 
-export const updateConsoleField = value => ({
-  type: UPDATE_CONSOLE_FIELD,
-  value
+export const updateField = (field, value) => ({
+  type: UPDATE_FIELD,
+  payload: {
+    field,
+    value
+  }
 })
+//
+// export function changedFormData(field, value) {
+//   return dispatch => dispatch(formDataChanged(field, value))
+// }
+//
+// export const updateField = value => ({
+//   type: UPDATE_FIELD,
+//   value
+// })
