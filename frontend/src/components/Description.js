@@ -1,30 +1,45 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import Tag from './Tag'
+
+const mapStateToProps = state => ({
+  results: state.results.games
+})
 
 const descStyle = {}
 const titleStyle = {
   fontSize: '30px'
 }
-
+let game = 0
 class Description extends Component {
-  buildTags = this.props.tags.map(t => <Tag type={t.type} tag={t.tag} />)
+  getGame = () => {
+    for (let i = 0; i < this.props.results.length; i++) {
+      if (this.props.results[i].title === this.props.location.state.title) {
+        game = this.props.results[i]
+      }
+    }
+  }
   render() {
     return (
       <div className="Description" style={descStyle}>
+        {this.getGame()}
         <div align="center" style={titleStyle}>
-          {this.props.title}
+          {game.title}
         </div>
-        <div align="right">
-          {this.buildTags}
+        <div>
+          {game.tags.map(t => (
+            <Tag type={t.type} tag={t.tag} />
+          ))}
           <br />
           <br />
-          {this.props.summary}
+          {game.summary}
         </div>
         <br />
-        {this.props.description}
+        {game.description}
       </div>
     )
   }
 }
 
-export default Description
+//export default Description
+export default connect(mapStateToProps)(Description)

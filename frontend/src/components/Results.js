@@ -1,28 +1,18 @@
 import React, { Component } from 'react'
-import Card from './Card'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import Card from './Card'
 
-let result = {
-  // simulate a result from the backend
-  title: 'Mario Kart',
-  summary: 'A racing game',
-  description: 'A racing game where the most important skill is luck',
-  tags: [
-    { type: 'age', tag: '0-5' },
-    { type: 'system', tag: 'Switch' },
-    { type: 'ailment', tag: 'Pain' }
-  ]
-}
+const mapStateToProps = state => ({
+  results: state.results.games
+})
+
 class Results extends Component {
+  buildCards = this.props.results.map(c => <Card game={c} />)
   render() {
     return (
       <div>
-        <Card
-          title={result.title}
-          tags={result.tags}
-          summary={result.summary}
-          description={result.description}
-        />
+        {this.buildCards}
         <br />
         <Link to={{ pathname: './' }}>Go to home</Link>
       </div>
@@ -30,4 +20,5 @@ class Results extends Component {
   }
 }
 
-export default Results
+//export default Results
+export default connect(mapStateToProps)(Results)

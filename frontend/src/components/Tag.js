@@ -3,34 +3,34 @@ import React, { Component } from 'react'
 const ageTag = {
   background: '#f998e8',
   color: 'white',
-  width: '50px'
+  width: '55px'
 }
 const ailmentTag = {
   background: '#a2f998',
   color: 'white',
-  width: '50px'
+  width: '55px'
 }
 const systemTag = {
   background: '#98d1f9',
   color: 'white',
-  width: '50px'
+  width: '55px'
 }
 
 class Tag extends Component {
   drawTags = (type, tag) => {
-    if (type == 'age') {
+    if (type === 'age') {
       return (
         <div align="center" style={ageTag}>
           {tag}
         </div>
       )
-    } else if (type == 'ailment') {
+    } else if (type === 'ailment') {
       return (
         <div align="center" style={ailmentTag}>
           {tag}
         </div>
       )
-    } else if (type == 'system') {
+    } else if (type === 'system') {
       return (
         <div align="center" style={systemTag}>
           {tag}

@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import Tag from './Tag'
-import Description from './Description'
-import { Route } from 'react-router'
 import { Link } from 'react-router-dom'
+import Tag from './Tag'
+
 const cardStyle = {
   color: 'black',
   border: '2px solid #52e3e5',
@@ -15,20 +14,21 @@ const titleStyle = {
   fontSize: '30px'
 }
 class Card extends Component {
-  buildTags = this.props.tags.map(t => <Tag type={t.type} tag={t.tag} />)
+  buildTags = this.props.game.tags.map(t => <Tag type={t.type} tag={t.tag} />)
   render() {
     return (
       <div>
         <br />
         <div className="Card" style={cardStyle}>
           <div align="center" style={titleStyle}>
-            {this.props.title}
+            {this.props.game.title}
           </div>
           <div align="right">{this.buildTags}</div>
-          <p>{this.props.summary}</p>
-          {this.props.description && <div>An in-depth description has been found.</div>}
-          <Route exact path="/description" component={Description} />
-          <Link to={{ pathname: './description' }}>Go to description</Link>
+          <p>{this.props.game.summary}</p>
+          {this.props.game.description && <div>An in-depth description has been found.</div>}
+          <Link to={{ pathname: './description', state: { title: this.props.game.title } }}>
+            Go to description
+          </Link>
         </div>
         <br />
       </div>
@@ -39,7 +39,8 @@ class Card extends Component {
 export default Card
 
 /*
- Pass results to a result page component. Result page renders Card components. (/Results)
- Card components redirect to Description component.
- Results redux used by cards and descriptions.
+  Search results passed to results redux state.
+    This is used by the results page component (render cards).
+    This is also accessed by description component to pick the right game.
+  Router path: index > results (with cards) > description
 */
