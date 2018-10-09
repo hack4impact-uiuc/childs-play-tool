@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import Tag from './Tag'
+import Description from './Description'
+import { Route } from 'react-router'
+import { Link } from 'react-router-dom'
 const cardStyle = {
   color: 'black',
   border: '2px solid #52e3e5',
@@ -24,6 +27,8 @@ class Card extends Component {
           <div align="right">{this.buildTags}</div>
           <p>{this.props.summary}</p>
           {this.props.description && <div>An in-depth description has been found.</div>}
+          <Route exact path="/description" component={Description} />
+          <Link to={{ pathname: './description' }}>Go to description</Link>
         </div>
         <br />
       </div>
@@ -32,3 +37,9 @@ class Card extends Component {
 }
 
 export default Card
+
+/*
+ Pass results to a result page component. Result page renders Card components. (/Results)
+ Card components redirect to Description component.
+ Results redux used by cards and descriptions.
+*/
