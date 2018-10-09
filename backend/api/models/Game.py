@@ -19,17 +19,19 @@ from .base import db
 #     def __repr__(self):
 #         return f"<Email {self.email}>"
 
-class Game(Mixin, db.model):
+class Game(Mixin, db.Model):
     """Game Table."""
     __tablename__ = 'game'
 
-    id = db.Column(db.Integer, unique=True, primary_key=true)
+    id = db.Column(db.Integer, unique=True, primary_key=True)
     name = db.Column(db.String, nullable=False)
-    system = db.Column(db.String, nullable=False)
-    gender = db.Columnn(db.String, nullable=False)
+    system = db.Column(db.Enum("PlayStation Vita", "Xbox One", "PlayStation 4", "Nintendo Switch", "Nintendo 3DS", 
+                               "Apple iOS", "Android", "PlayStation VR", "HTC VIVE", "Oculus Rift", name="system_types"), nullable=False)
+    gender = db.Column(db.Enum("Male", "Female", "Both", "No Discernable Gender", name="gender_types"), nullable=False)
     # age can be string or even boolean?
-    age = db.Column(db.Boolean, nullable=False)
-    ailment = db.Column(db.String, nullable=False)
+    age = db.Column(db.Enum("Under 12", "13 and Older", name="age_types"), nullable=False)
+    ailment = db.Column(db.Enum("Bored (Long Term)", "Bored (Short Term)", "Pain", "Anxiety/Hyperactivity", "Sadness", 
+                                "Cognitive Impairment", name="ailment_types"), nullable=False)
 
     def __repr__(self):
         return '<name {}>'.format(self.name)

@@ -25,11 +25,13 @@ class Ranking(db.Model):
     """Ranking Table."""
     __tablename__ = 'ranking'
 
-    id = db.Column(db.Integer, unique=True, primary_key=true)
-    age = db.Column(db.Enum, nullable=False)
-    system = db.Column(db.Enum, nullable=False)
-    ailment = db.Column(db.Enum, nullable=False)
-    game_id = db.Column(db.Integer, db.ForeignKey("game_id", ondelete="SET NULL"), nullable=False)
+    id = db.Column(db.Integer, unique=True, primary_key=True)
+    age = db.Column(db.Enum("Under 12", "13 and Older", name="age_types"), nullable=False)
+    system = db.Column(db.Enum("PlayStation Vita", "Xbox One", "PlayStation 4", "Nintendo Switch", "Nintendo 3DS", 
+                               "Apple iOS", "Android", "PlayStation VR", "HTC VIVE", "Oculus Rift", name="system_types"), nullable=False)
+    ailment = db.Column(db.Enum("Bored (Long Term)", "Bored (Short Term)", "Pain", "Anxiety/Hyperactivity", "Sadness", 
+                                "Cognitive Impairment", name="ailment_types"), nullable=False)
+    game_id = db.Column(db.Integer, db.ForeignKey("game.id", ondelete="SET NULL"), nullable=False)
     rank = db.Column(db.Integer, nullable=False)
 
     def __repr__(self):
