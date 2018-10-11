@@ -16,6 +16,7 @@ class Description extends Component {
     for (let i = 0; i < this.props.results.length; i++) {
       if (this.props.results[i].title === this.props.location.state.title) {
         game = this.props.results[i]
+        break
       }
     }
   }
