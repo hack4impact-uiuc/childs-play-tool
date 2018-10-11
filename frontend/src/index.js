@@ -17,7 +17,6 @@ ReactDOM.render(
         <Route exact path="/" component={Counter} />
         <Route exact path="/results" component={Results} />
         <Route exact path="/description" component={Description} />
-        <Link to={{ pathname: './results' }}>Go to results</Link>
         <br />
       </div>
     </ConnectedRouter>
