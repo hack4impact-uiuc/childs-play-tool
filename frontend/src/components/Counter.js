@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { increment, reset, set } from '../redux/modules/counter'
-// import '../styles/Counter.css'
-import { Link } from 'react-router-dom'
 
 const mapStateToProps = state => ({
   counter: state.counter
