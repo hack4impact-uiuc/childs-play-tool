@@ -34,12 +34,16 @@ class DropdownButton extends Component {
   }
 
   determineDropdownItems(fieldName) {
-          switch (fieldName) {
-                  case "consoleField": return Constants.consoles
-                  case "ailmentField": return Constants.ailments
-                  case "ageField": return Constants.ages
-                  default: return Constants.consoles
-          }
+    switch (fieldName) {
+      case 'consoleField':
+        return Constants.consoles
+      case 'ailmentField':
+        return Constants.ailments
+      case 'ageField':
+        return Constants.ages
+      default:
+        return Constants.consoles
+    }
   }
 
   dropdownItems = this.determineDropdownItems(this.props.fieldName)
