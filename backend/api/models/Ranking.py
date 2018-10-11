@@ -34,5 +34,13 @@ class Ranking(db.Model):
     game_id = db.Column(db.Integer, db.ForeignKey("game.id", ondelete="SET NULL"), nullable=False)
     rank = db.Column(db.Integer, nullable=False)
 
+    def __init__(self, data):
+        self.id = data["id"]
+        self.age = data["age"]
+        self.system = data["system"]
+        self.ailment = data["ailment"]
+        self.game_id = data["game_id"]
+        self.rank = data["rank"]
+    
     def __repr__(self):
         return '<ranking {}>'.format(self.rank)

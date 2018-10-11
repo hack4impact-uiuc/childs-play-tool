@@ -33,5 +33,13 @@ class Game(Mixin, db.Model):
     ailment = db.Column(db.Enum("Bored (Long Term)", "Bored (Short Term)", "Pain", "Anxiety/Hyperactivity", "Sadness", 
                                 "Cognitive Impairment", name="ailment_types"), nullable=False)
 
+    def __init__(self, data):
+        self.id = data["id"]
+        self.name = data["name"]
+        self.system = data["system"]
+        self.gender = data["gender"]
+        self.age = data["age"]
+        self.ailment = data["ailment"]
+    
     def __repr__(self):
         return '<name {}>'.format(self.name)
