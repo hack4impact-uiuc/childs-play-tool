@@ -25,9 +25,6 @@ class Counter extends Component {
     const { count } = this.props.counter.count
     return (
       <div className="Counter">
-      <Link to={{ pathname: './directorPage' }}>
-      Login
-      </Link>
         <p className="Counter-intro">Count: {this.props.counter.count}</p>
         <button onClick={this.props.increment}>Increment</button>
         <button onClick={this.props.reset}>Reset</button>

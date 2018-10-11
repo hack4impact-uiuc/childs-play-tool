@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { Link } from 'react-router-dom'
 
 class Password extends Component {
   render() {
@@ -11,8 +12,9 @@ class Password extends Component {
             Key:
             <input />
           </label>
-          <button type="button">Submit</button>
-          <a href="uploadPage">Upload Page</a>
+          <Link to="/uploadPage">
+            <button type="submit">Submit</button>
+          </Link>
         </form>
       </div>
     )
