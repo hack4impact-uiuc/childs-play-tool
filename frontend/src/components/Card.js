@@ -25,7 +25,7 @@ class Card extends Component {
         <div align="right">{this.buildTags}</div>
         <p>{this.props.game.summary}</p>
         {this.props.game.description && <p>An in-depth description has been found.</p>}
-        <Link to={{ pathname: './description', state: { title: this.props.game.title } }}>
+        <Link to={{ pathname: './description', state: { game: this.props.game } }}>
           Go to description
         </Link>
       </p>
