@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { increment, reset, set } from '../redux/modules/counter'
 // import '../styles/Counter.css'
+import { Link } from 'react-router-dom'
 
 const mapStateToProps = state => ({
   counter: state.counter
@@ -24,7 +25,9 @@ class Counter extends Component {
     const { count } = this.props.counter.count
     return (
       <div className="Counter">
-        <a href="directorPage">Director Page</a>
+      <Link to={{ pathname: './directorPage' }}>
+      Login
+      </Link>
         <p className="Counter-intro">Count: {this.props.counter.count}</p>
         <button onClick={this.props.increment}>Increment</button>
         <button onClick={this.props.reset}>Reset</button>
