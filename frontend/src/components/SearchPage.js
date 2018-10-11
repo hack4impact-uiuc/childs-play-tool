@@ -21,7 +21,12 @@ const mapDispatchToProps = dispatch => {
 
 class SearchPage extends Component {
   render() {
-    return <DropdownButton title="Console Type" fieldName="consoleField" />
+    return (
+    <div>
+    <DropdownButton title="Console Type" fieldName="consoleField" />
+    <DropdownButton title="Age" fieldName="ageField" />
+    <DropdownButton title="Ailment" fieldName="ailmentField" />
+    </div>)
   }
 }
 

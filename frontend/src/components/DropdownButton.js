@@ -6,7 +6,9 @@ import { updateField } from '../redux/modules/searchpage'
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
 
 const mapStateToProps = state => ({
-  consoleField: state.consoleField
+  consoleField: state.consoleField,
+  ageField: state.ageField,
+  ailmentField: state.ailmentField
 })
 
 const mapDispatchToProps = dispatch => {
@@ -27,10 +29,20 @@ class DropdownButton extends Component {
       dropdownOpen: false
     }
     this.toggle = this.toggle.bind(this)
+    this.determineDropdownItems = this.determineDropdownItems.bind(this)
     this.props.updateField(this.props.fieldName, this.state.selectedVal)
   }
 
-  dropdownItems = Constants.consoles
+  determineDropdownItems(fieldName) {
+          switch (fieldName) {
+                  case "consoleField": return Constants.consoles
+                  case "ailmentField": return Constants.ailments
+                  case "ageField": return Constants.ages
+                  default: return Constants.consoles
+          }
+  }
+
+  dropdownItems = this.determineDropdownItems(this.props.fieldName)
 
   toggle() {
     this.setState(prevState => ({
@@ -47,9 +59,8 @@ class DropdownButton extends Component {
             {this.dropdownItems.map(item => (
               <DropdownItem
                 onClick={e => {
-                  console.log(item.value)
                   this.setState({ selectedVal: item.value })
-                  this.props.updateField(this.props.fieldName, this.state.selectedVal)
+                  this.props.updateField(this.props.fieldName, item.value)
                 }}
               >
                 {item.value}
@@ -57,7 +68,6 @@ class DropdownButton extends Component {
             ))}
           </DropdownMenu>
         </Dropdown>
-        <h>Current value: {this.state.selectedVal}</h>
       </div>
     )
   }
