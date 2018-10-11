@@ -17,4 +17,4 @@ class Email(Mixin, db.Model):
         self.email = email
 
     def __repr__(self):
-        return f"<Email {self.email}>"
+        return "<Email {self.email}>"
