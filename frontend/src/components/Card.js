@@ -18,18 +18,17 @@ class Card extends Component {
   buildTags = this.props.game.tags.map(t => <Tag type={t.type} tag={t.tag} />)
   render() {
     return (
-        <p className="Card" style={cardStyle}>
-          <div align="center" style={titleStyle}>
-            {this.props.game.title}
-          </div>
-          <div align="right">{this.buildTags}</div>
-          <p>{this.props.game.summary}</p>
-          {this.props.game.description && <p>An in-depth description has been found.</p>}
-          <Link to={{ pathname: './description', state: { title: this.props.game.title } }}>
-            Go to description
-          </Link>
-        </p>
-      
+      <p className="Card" style={cardStyle}>
+        <div align="center" style={titleStyle}>
+          {this.props.game.title}
+        </div>
+        <div align="right">{this.buildTags}</div>
+        <p>{this.props.game.summary}</p>
+        {this.props.game.description && <p>An in-depth description has been found.</p>}
+        <Link to={{ pathname: './description', state: { title: this.props.game.title } }}>
+          Go to description
+        </Link>
+      </p>
     )
   }
 }

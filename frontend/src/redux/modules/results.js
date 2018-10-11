@@ -24,52 +24,52 @@ const initialState = {
     },
     {
       title: 'Test',
-      summary: "A test",
-      description: "A test",
-      tags : [
-        {type: 'age', tag: '3'},
-        {type: 'system', tag: 'xbox'},
-        {type:'ailment', tag:'debug'}
+      summary: 'A test',
+      description: 'A test',
+      tags: [
+        { type: 'age', tag: '3' },
+        { type: 'system', tag: 'xbox' },
+        { type: 'ailment', tag: 'debug' }
       ]
     },
     {
       title: 'Test',
-      summary: "A test",
-      description: "A test",
-      tags : [
-        {type: 'age', tag: '3'},
-        {type: 'system', tag: 'xbox'},
-        {type:'ailment', tag:'debug'}
+      summary: 'A test',
+      description: 'A test',
+      tags: [
+        { type: 'age', tag: '3' },
+        { type: 'system', tag: 'xbox' },
+        { type: 'ailment', tag: 'debug' }
       ]
     },
     {
       title: 'Test',
-      summary: "A test",
-      description: "A test",
-      tags : [
-        {type: 'age', tag: '3'},
-        {type: 'system', tag: 'xbox'},
-        {type:'ailment', tag:'debug'}
+      summary: 'A test',
+      description: 'A test',
+      tags: [
+        { type: 'age', tag: '3' },
+        { type: 'system', tag: 'xbox' },
+        { type: 'ailment', tag: 'debug' }
       ]
     },
     {
       title: 'Test',
-      summary: "A test",
-      description: "A test",
-      tags : [
-        {type: 'age', tag: '3'},
-        {type: 'system', tag: 'xbox'},
-        {type:'ailment', tag:'debug'}
+      summary: 'A test',
+      description: 'A test',
+      tags: [
+        { type: 'age', tag: '3' },
+        { type: 'system', tag: 'xbox' },
+        { type: 'ailment', tag: 'debug' }
       ]
     },
     {
       title: 'Test',
-      summary: "A test",
-      description: "A test",
-      tags : [
-        {type: 'age', tag: '3'},
-        {type: 'system', tag: 'xbox'},
-        {type:'ailment', tag:'debug'}
+      summary: 'A test',
+      description: 'A test',
+      tags: [
+        { type: 'age', tag: '3' },
+        { type: 'system', tag: 'xbox' },
+        { type: 'ailment', tag: 'debug' }
       ]
     }
   ]

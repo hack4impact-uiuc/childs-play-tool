@@ -13,7 +13,7 @@ class Results extends Component {
     return (
       <div>
         {this.buildCards}
-        <br/>
+        <br />
         <Link to={{ pathname: './' }}>Go to home</Link>
       </div>
     )
