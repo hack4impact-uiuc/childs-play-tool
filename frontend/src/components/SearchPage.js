@@ -2,13 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { DropdownButton } from './'
-//import { DropdownButton, MenuItem } from 'react-bootstrap'
 import { updateField } from '../redux/modules/searchpage'
-//import '../styles/Counter.css'
 
-const mapStateToProps = state => ({
-  //console: state.consoleField
-})
+const mapStateToProps = state => ({})
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
@@ -23,9 +19,9 @@ class SearchPage extends Component {
   render() {
     return (
       <div>
-        <DropdownButton title="Console Type" fieldName="consoleField" />
-        <DropdownButton title="Age" fieldName="ageField" />
-        <DropdownButton title="Ailment" fieldName="ailmentField" />
+        <DropdownButton title="Console Type" fieldName="consoles" />
+        <DropdownButton title="Age" fieldName="ageRange" />
+        <DropdownButton title="Ailment" fieldName="ailments" />
       </div>
     )
   }

@@ -6,9 +6,9 @@ import { updateField } from '../redux/modules/searchpage'
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
 
 const mapStateToProps = state => ({
-  consoleField: state.consoleField,
-  ageField: state.ageField,
-  ailmentField: state.ailmentField
+  consoleField: state.consoles,
+  ageField: state.ageRange,
+  ailmentField: state.ailments
 })
 
 const mapDispatchToProps = dispatch => {
@@ -34,16 +34,7 @@ class DropdownButton extends Component {
   }
 
   determineDropdownItems(fieldName) {
-    switch (fieldName) {
-      case 'consoleField':
-        return Constants.consoles
-      case 'ailmentField':
-        return Constants.ailments
-      case 'ageField':
-        return Constants.ages
-      default:
-        return Constants.consoles
-    }
+    return Constants[fieldName]
   }
 
   dropdownItems = this.determineDropdownItems(this.props.fieldName)

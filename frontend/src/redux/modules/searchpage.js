@@ -3,9 +3,9 @@ const UPDATE_FIELD = 'searchpage/UPDATE_FIELD'
 const FIELD_CHANGED = 'FIELD_CHANGED'
 
 const initialState = {
-  consoleField: '',
-  ageField: '',
-  ailmentField: '',
+  consoles: '',
+  ageRange: '',
+  ailments: '',
   nameSearchField: ''
 }
 
@@ -28,12 +28,3 @@ export const updateField = (field, value) => ({
     value
   }
 })
-//
-// export function changedFormData(field, value) {
-//   return dispatch => dispatch(formDataChanged(field, value))
-// }
-//
-// export const updateField = value => ({
-//   type: UPDATE_FIELD,
-//   value
-// })
