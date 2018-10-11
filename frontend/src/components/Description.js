@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import Tag from './Tag'
 
 const mapStateToProps = state => ({
@@ -37,6 +38,10 @@ class Description extends Component {
         </div>
         <br />
         {game.description}
+        <br /><br/>
+        <Link to={{ pathname: './results' }}>
+          Return to results
+        </Link>
       </div>
     )
   }
