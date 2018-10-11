@@ -29,7 +29,8 @@ const initialState = {
       tags: [
         { type: 'age', tag: '3' },
         { type: 'system', tag: 'xbox' },
-        { type: 'ailment', tag: 'debug' }
+        { type: 'ailment', tag: 'debug' },
+        { type: 'misc', tag: 'test' }
       ]
     },
     {

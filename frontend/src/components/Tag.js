@@ -16,11 +16,20 @@ const style = {
     width: '55px'
   }
 }
+const defaultStyle = {
+  background: 'gray',
+  color: 'white',
+  width: '55px'
+}
 
 class Tag extends Component {
   render() {
     return (
-      <div className="Tag" align="center" style={style[this.props.type]}>
+      <div
+        className="Tag"
+        align="center"
+        style={style[this.props.type] ? style[this.props.type] : defaultStyle}
+      >
         {this.props.tag}
       </div>
     )
