@@ -8,4 +8,4 @@ import SearchPage from './SearchPage'
 import DropdownButton from './DropdownButton'
 import Constants from './Constants'
 
-export { Counter, SearchPage, DropdownButton, Constants, Card, Description, Results }
+export { Counter, SearchPage, DropdownButton, Constants, Card, Description, Results, Password, Update }
