@@ -1,6 +1,13 @@
 import React, { Component } from 'react'
-import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import Card from './Card'
+import { TabContent, TabPane, Nav, NavItem, NavLink, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
+
+const mapStateToProps = state => ({
+  results: state.results.games
+})
 
 
 class Results extends Component {
@@ -12,6 +19,8 @@ class Results extends Component {
           activeTab: '1'
         };
       }
+
+      
     
       toggle(tab) {
         if (this.state.activeTab !== tab) {
@@ -20,6 +29,7 @@ class Results extends Component {
           });
         }
     }
+    buildCards = (games) => games.map(c => <Card game={c} />)
     render() {
         return (
           <div>
@@ -29,7 +39,7 @@ class Results extends Component {
                   className={classnames({ active: this.state.activeTab === '1' })}
                   onClick={() => { this.toggle('1'); }}
                 >
-                  Tab1
+                  Tab 1
                 </NavLink>
               </NavItem>
               <NavItem>
@@ -52,25 +62,20 @@ class Results extends Component {
               <TabPane tabId="2">
                 <Row>
                   <Col sm="6">
-                    <Card body>
-                      <CardTitle>Special Title Treatment</CardTitle>
-                      <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                      <Button>Go somewhere</Button>
-                    </Card>
+                      test
                   </Col>
                   <Col sm="6">
-                    <Card body>
-                      <CardTitle>Special Title Treatment</CardTitle>
-                      <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                      <Button>Go somewhere</Button>
-                    </Card>
+                      hi
                   </Col>
                 </Row>
               </TabPane>
             </TabContent>
+            {this.buildCards(this.props.results)}
+            <br />
+            <Link to={{ pathname: './' }}>Go to home</Link>
           </div>
         );
       }
 }
 
-export default (Results)
+export default connect(mapStateToProps)(Results)
