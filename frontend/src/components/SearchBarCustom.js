@@ -1,40 +1,41 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-// import { bindActionCreators } from 'redux'
-// import { increment, reset, set } from '../redux/modules/counter'
-import '../styles/SearchBar.css'
+import { bindActionCreators } from 'redux'
+import { updateField } from '../redux/modules/searchpage'
+import { Form, FormGroup, Label, Input} from 'reactstrap'
+//import '../styles/SearchBar.css'
 
-const mapStateToProps = state => ({})
+const mapStateToProps = state => ({
+  nameSearchField: state.nameSearchField
+})
 
-const mapDispatchToProps = dispatch => {}
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      updateField
+    },
+    dispatch
+  )
+}
 
-class SearchBarCustom extends Component<Props, State> {
+class SearchBarCustom extends Component {
   constructor(props) {
     super(props)
-  }
-  state = {
-    isClearable: false,
-    isSearchable: true,
-    selectedOption: null
-  }
-
-  handleChange = selectedOption => {
-    this.setState({ selectedOption: selectedOption })
   }
 
   render() {
     return (
       <div>
-        <form>
-          <input
-            type="text"
-            placeholder="Search..."
-            value={this.props.filterText}
-            ref="filterTextInput"
-            onChange={this.handleChange}
-          />
-          <p />
-        </form>
+        <Form>
+        <FormGroup>
+          <Label for="exampleSearch">Search by Name</Label>
+          <Input type="search"
+                name="search"
+                id="exampleSearch"
+                placeholder="Type name here... "
+                onChange = {e => {this.props.updateField(this.props.fieldName, e.target.value)}}/>
+        </FormGroup>
+        </Form>
       </div>
     )
   }
