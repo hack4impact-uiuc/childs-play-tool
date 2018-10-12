@@ -13,11 +13,11 @@ ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <div>
-        <Route path="/directorPage" component={Password} />
-        <Route path="/uploadPage" component={Update} />
         <Route exact path="/" component={SearchPage} />
         <Route path="/results" component={Results} />
         <Route path="/description" component={Description} />
+        <Route path="/directorPage" component={Password} />
+        <Route path="/uploadPage" component={Update} />
         <br />
       </div>
     </ConnectedRouter>
