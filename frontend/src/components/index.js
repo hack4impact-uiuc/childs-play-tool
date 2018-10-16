@@ -1,4 +1,6 @@
 import Counter from './Counter'
+import Password from './Password'
+import Update from './Update'
 import Card from './Card'
 import Description from './Description'
 import Results from './Results'
@@ -10,10 +12,13 @@ import SearchBarCustom from './SearchBarCustom'
 export {
   Counter,
   SearchPage,
-  SearchBarCustom,
   DropdownButton,
+  SearchBarCustom, 
   Constants,
   Card,
   Description,
-  Results
+  Results,
+  Password,
+  Update
 }
+

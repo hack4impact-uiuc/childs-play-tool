@@ -4,6 +4,7 @@ import { Provider } from 'react-redux'
 import { Route } from 'react-router'
 import { ConnectedRouter } from 'react-router-redux'
 import { SearchPage, Dropdown, SearchBarCustom, Results, Description } from './components'
+import { Counter, Password, SearchPage, SearchBarCustom, Dropdown, Update, Results, Description } from './components'
 import registerServiceWorker from './registerServiceWorker'
 import configureStore, { history } from './redux/configureStore'
 
@@ -16,6 +17,8 @@ ReactDOM.render(
         <Route exact path="/" component={SearchPage} />
         <Route path="/results" component={Results} />
         <Route path="/description" component={Description} />
+        <Route path="/directorPage" component={Password} />
+        <Route path="/uploadPage" component={Update} />
         <br />
       </div>
     </ConnectedRouter>
