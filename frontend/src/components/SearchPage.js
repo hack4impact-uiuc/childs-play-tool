@@ -21,7 +21,7 @@ class SearchPage extends Component {
     return (
       <div>
         <SearchBarCustom fieldName = "nameSearchField" />
-        <Link to={{ pathname: './results' }}>Search By Name</Link>
+
         <DropdownButton title="Console Type" fieldName="consoles" />
         <DropdownButton title="Age" fieldName="ageRange" />
         <DropdownButton title="Ailment" fieldName="ailments" />
