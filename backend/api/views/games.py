@@ -23,6 +23,7 @@ def get_games():
     system = data["system"]
     age = data["age"]
     symptom = data["symptom"]
+    ranked_games = []
 
     if age is None or symptom is None:
         return create_response(status=400, message="Age and symptom are required")
@@ -45,7 +46,11 @@ def get_games():
                     status=400,
                     message="No appropriate games for the specified age, symptom, and system",
                 )
-    return create_response(status=200, data={"games": [g.to_dict() for g in games]})
+            for g in games:
+                r = Ranking.query.filter(Ranking.game_id == g.id)
+                ranked_games.append(r)
+            ranked_games.sort(key=lambda x: x.rank)
+    return create_response(status=200, data={"games": [g.to_dict() for g in ranked_games]})
 
 
 @games_page.route(GAMES_ID_URL, methods=["GET"])
