@@ -16,7 +16,8 @@ class Results extends Component {
     
         this.toggle = this.toggle.bind(this);
         this.state = {
-          activeTab: '1'
+          activeTab: '1',
+          tabGames: ["Xbox", "PS4", "Switch"]
         };
       }
 
@@ -34,41 +35,27 @@ class Results extends Component {
         return (
           <div>
             <Nav tabs>
-              <NavItem>
+            {Array.from(this.state.tabGames.map(((x,index) => 
+              <NavItem key={index}> 
                 <NavLink
-                  className={classnames({ active: this.state.activeTab === '1' })}
-                  onClick={() => { this.toggle('1'); }}
+                  className={classnames({ active: this.state.activeTab === (index + 1).toString() })}
+                  onClick={() => { this.toggle((index + 1).toString()); }}
                 >
-                  Tab 1
+                  {x}
                 </NavLink>
               </NavItem>
-              <NavItem>
-                <NavLink
-                  className={classnames({ active: this.state.activeTab === '2' })}
-                  onClick={() => { this.toggle('2'); }}
-                >
-                  Moar Tabs
-                </NavLink>
-              </NavItem>
+            )))}
             </Nav>
             <TabContent activeTab={this.state.activeTab}>
-              <TabPane tabId="1">
+              {Array.from(this.state.tabGames.map(((x,index) =>
+              <TabPane tabId= {(index+1).toString()} >
                 <Row>
                   <Col sm="12">
-                    <h4>Tab 1 Contents</h4>
+                    <h4>Tab {(index+1).toString()} Contents</h4>
                   </Col>
                 </Row>
               </TabPane>
-              <TabPane tabId="2">
-                <Row>
-                  <Col sm="6">
-                      test
-                  </Col>
-                  <Col sm="6">
-                      hi
-                  </Col>
-                </Row>
-              </TabPane>
+              )))}
             </TabContent>
             {this.buildCards(this.props.results)}
             <br />
