@@ -13,7 +13,7 @@ export {
   Counter,
   SearchPage,
   DropdownButton,
-  SearchBarCustom, 
+  SearchBarCustom,
   Constants,
   Card,
   Description,
@@ -21,4 +21,3 @@ export {
   Password,
   Update
 }
-

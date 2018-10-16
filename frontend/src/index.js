@@ -3,8 +3,16 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { Route } from 'react-router'
 import { ConnectedRouter } from 'react-router-redux'
-import { SearchPage, Dropdown, SearchBarCustom, Results, Description } from './components'
-import { Counter, Password, SearchPage, SearchBarCustom, Dropdown, Update, Results, Description } from './components'
+import {
+  Counter,
+  Password,
+  SearchPage,
+  SearchBarCustom,
+  Dropdown,
+  Update,
+  Results,
+  Description
+} from './components'
 import registerServiceWorker from './registerServiceWorker'
 import configureStore, { history } from './redux/configureStore'
 
