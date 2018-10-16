@@ -6,11 +6,13 @@
     "history": "^4.7.2",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
+    "react-dropzone": "^6.0.4",
     "react-redux": "^5.0.7",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-router-redux": "^5.0.0-alpha.9",
     "react-scripts": "2.0.3",
+    "reactstrap": "^6.5.0",
     "redux": "^4.0.0",
     "redux-thunk": "^2.3.0"
   },
@@ -23,7 +25,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "prettier": "^1.12.1",
+    "prettier": "^1.14.3",
     "redux-devtools": "^3.4.1"
   },
   "browserslist": [
