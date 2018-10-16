@@ -11,7 +11,7 @@ class Ranking(Mixin, db.Model):
     id = db.Column(db.Integer, db.ForeignKey("game.id", ondelete="SET NULL"))
     rank = db.Columm(db.Integer, nullable=False)
     system = db.Columm(db.Enum, nullable=False)
-    ailment = db.Columm(db.Enum, nullable=False)
+    symptom = db.Columm(db.Enum, nullable=False)
     agegroup = db.Columm(db.Enum, nullable=False)
     )
 

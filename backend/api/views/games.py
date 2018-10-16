@@ -50,9 +50,11 @@ def get_games():
 
 @games_page.route(GAMES_ID_URL, methods=["GET"])
 def get_game_specific(game_id):
+    #game = Game.query.filter()
     game = Game.query.filter(Game.id == game_id)
-    print(game)
+    print(serialize_list(game))
     if game.count() == 0:
         return create_response(status=400, message="Game not found")
     else:
-        return create_response(status=200, data={"game": serialize_list(game)})
+        #return create_response(data={"game": serialize_list(game)})
+        return create_response(data={"game": serialize_list(game)})
