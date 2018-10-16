@@ -24,13 +24,12 @@ class Results extends Component {
   constructor(props) {
     super(props)
 
-    this.toggle = this.toggle.bind(this)
     this.state = {
       activeTab: '1'
     }
   }
 
-  toggle(tab) {
+  toggle = tab => {
     if (this.state.activeTab !== tab) {
       this.setState({
         activeTab: tab
