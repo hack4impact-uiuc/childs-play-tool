@@ -30,8 +30,8 @@ class Game(Mixin, db.Model):
     gender = db.Column(db.Enum("Male", "Female", "Both", "No Discernable Gender", name="gender_types"), nullable=False)
     # age can be string or even boolean?
     age = db.Column(db.Enum("Under 12", "13 and Older", name="age_types"), nullable=False)
-    ailment = db.Column(db.Enum("Bored (Long Term)", "Bored (Short Term)", "Pain", "Anxiety/Hyperactivity", "Sadness", 
-                                "Cognitive Impairment", name="ailment_types"), nullable=False)
+    symptom = db.Column(db.Enum("Bored (Long Term)", "Bored (Short Term)", "Pain", "Anxiety/Hyperactivity", "Sadness", 
+                                "Cognitive Impairment", name="symptom_types"), nullable=False)
 
     def __init__(self, data):
         self.id = data["id"]
@@ -39,7 +39,7 @@ class Game(Mixin, db.Model):
         self.system = data["system"]
         self.gender = data["gender"]
         self.age = data["age"]
-        self.ailment = data["ailment"]
+        self.symptom = data["symptom"]
     
     def __repr__(self):
         return '<name {}>'.format(self.name)

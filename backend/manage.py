@@ -33,7 +33,7 @@ game_ages = [
     "13 and Older"
 ]
 
-game_ailments = [
+game_symptoms = [
     "Bored (Long Term)",
     "Bored (Short Term)",
     "Pain"
@@ -57,7 +57,7 @@ ranking_systems = [
     "PlayStation 4"
 ]
 
-ranking_ailments = [
+ranking_symptoms = [
     "Bored (Long Term)",
     "Bored (Short Term)",
     "Pain"
@@ -108,7 +108,7 @@ def recreate_db():
         game["system"] = game_systems[i]
         game["gender"] = game_genders[i]
         game["age"] = game_ages[i]
-        game["ailment"] = game_ailments[i]
+        game["symptom"] = game_symptoms[i]
         g = Game(game)
         db.session.add(g)
 
@@ -116,7 +116,7 @@ def recreate_db():
         ranking["id"] = ranking_ids[i]
         ranking["age"] = ranking_ages[i]
         ranking["system"] = ranking_systems[i]
-        ranking["ailment"] = ranking_ailments[i]
+        ranking["symptom"] = ranking_symptoms[i]
         ranking["game_id"] = ranking_game_ids[i]
         ranking["rank"] = ranking_ranks[i]
         r = Ranking(ranking)
@@ -127,4 +127,7 @@ def recreate_db():
 
 
 if __name__ == "__main__":
+    manager.run()
+
+if __name__ == "__games__":
     manager.run()

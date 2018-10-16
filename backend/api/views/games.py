@@ -1,37 +1,36 @@
-from api import app, db
 from api.models import Game, Ranking
-from api.utils import create_response, row_constructor
-from api.auth_tokens import token_required
+from api.core import create_response, serialize_list
+#from api.auth_tokens import token_required
 from flask import Blueprint, request, jsonify
 import json
 from collections import defaultdict
 
 
-mod = Blueprint("games", __name__)
+games_page = Blueprint("games", __name__)
 
 GLOBAL_POST_URL = "/"
 GAMES_URL = "/games"
 GAMES_ID_URL = "/games/<int:game_id>"
 
 
-@app.route(GAMES_URL, methods=["GET"])
+@games_page.route(GAMES_URL, methods=["GET"])
 def get_games():
 
-    # age, ailment required
+    # age, symptom required
     # system optional
     data = request.args
 
     system = data["system"]
     age = data["age"]
-    ailment = data["ailment"]
+    symptom = data["symptom"]
 
-    if age is None or ailment is None:
-        return create_response(status=400, message="Age and ailment are required")
+    if age is None or symptom is None:
+        return create_response(status=400, message="Age and symptom are required")
 
-    games = Game.query.filter(Game.ailment == ailment, Game.age == age)
+    games = Game.query.filter(Game.symptom == symptom, Game.age == age)
     if games.count() == 0:
         return create_response(
-            status=400, message="No appropriate games for the specified age and ailment"
+            status=400, message="No appropriate games for the specified age and symptom"
         )
     if system is not None:
         games_by_system = Game.query.filter(Game.system == system)
@@ -44,15 +43,16 @@ def get_games():
             if games.count() == 0:
                 return create_response(
                     status=400,
-                    message="No appropriate games for the specified age, ailment, and system",
+                    message="No appropriate games for the specified age, symptom, and system",
                 )
-    return create_response({"games": [g.to_dict() for g in games]})
+    return create_response(status=200, data={"games": [g.to_dict() for g in games]})
 
 
-@app.route(GAMES_ID_URL, methods=["GET"])
-def get_game_specific():
-    game = Game.query.filter(Game.id == int(id))
+@games_page.route(GAMES_ID_URL, methods=["GET"])
+def get_game_specific(game_id):
+    game = Game.query.filter(Game.id == game_id)
+    print(game)
     if game.count() == 0:
         return create_response(status=400, message="Game not found")
     else:
-        return create_response({"game": [g.to_dict() for g in game]})
+        return create_response(status=200, data={"game": serialize_list(game)})
