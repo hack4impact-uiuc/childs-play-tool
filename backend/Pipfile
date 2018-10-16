@@ -24,7 +24,6 @@ flask = "*"
 black = "==18.6b4"
 mypy = "*"
 pytest = "*"
-pipenv = "*"
 
 [requires]
 python_version = "3.7"
