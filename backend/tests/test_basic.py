@@ -1,5 +1,5 @@
 from api.models import db, Game, Ranking
-
+import json
 
 game_ids = [
     1,
@@ -82,8 +82,10 @@ def test_index(client):
     assert rs.status_code == 200
 
 def test_get_games(client):
-    rs = client.get("/games")
+    rs = client.get("/games?symptom=Bored (Long Term)&system=Xbox One&age=13 and Older")
+    print(rs)
     assert rs.status_code == 200
+
 
 def test_get_game_specific(client):
     for i in range(3):
@@ -106,11 +108,15 @@ def test_get_game_specific(client):
         ranking["rank"] = ranking_ranks[i]
         r = Ranking(ranking)
         db.session.add(r)
+    db.drop_all()
+    db.create_all()
     db.session.commit()
 
     rs = client.get("/games/1")
     assert rs.status_code == 200
     print(rs)
+    print(rs.__dict__)   
+
     ret_dict = rs.json  # gives you a dictionary
     assert ret_dict["success"] == True
     assert len(ret_dict["result"]["game"]) == 1
