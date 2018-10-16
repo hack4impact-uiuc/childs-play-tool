@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { updateField } from '../redux/modules/searchpage'
-import { Form, FormGroup, Label, Input} from 'reactstrap'
+import { Form, FormGroup, Label, Input } from 'reactstrap'
 //import '../styles/SearchBar.css'
 
 const mapStateToProps = state => ({
@@ -27,14 +27,18 @@ class SearchBarCustom extends Component {
     return (
       <div>
         <Form>
-        <FormGroup>
-          <Label for="exampleSearch">Search by Name</Label>
-          <Input type="search"
-                name="search"
-                id="exampleSearch"
-                placeholder="Type name here... "
-                onChange = {e => {this.props.updateField(this.props.fieldName, e.target.value)}}/>
-        </FormGroup>
+          <FormGroup>
+            <Label for="exampleSearch">Search by Name</Label>
+            <Input
+              type="search"
+              name="search"
+              id="exampleSearch"
+              placeholder="Type name here... "
+              onChange={e => {
+                this.props.updateField(this.props.fieldName, e.target.value)
+              }}
+            />
+          </FormGroup>
         </Form>
       </div>
     )

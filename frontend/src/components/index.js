@@ -7,4 +7,13 @@ import DropdownButton from './DropdownButton'
 import Constants from './Constants'
 import SearchBarCustom from './SearchBarCustom'
 
-export { Counter, SearchPage, SearchBarCustom, DropdownButton, Constants, Card, Description, Results }
+export {
+  Counter,
+  SearchPage,
+  SearchBarCustom,
+  DropdownButton,
+  Constants,
+  Card,
+  Description,
+  Results
+}

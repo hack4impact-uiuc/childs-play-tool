@@ -20,7 +20,7 @@ class SearchPage extends Component {
   render() {
     return (
       <div>
-        <SearchBarCustom fieldName = "nameSearchField" />
+        <SearchBarCustom fieldName="nameSearchField" />
 
         <DropdownButton title="Console Type" fieldName="consoles" />
         <DropdownButton title="Age" fieldName="ageRange" />
