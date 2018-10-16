@@ -1,5 +1,5 @@
 from api import app, db
-from api.models import Game
+from api.models import Game, Ranking
 from api.utils import create_response, row_constructor
 from api.auth_tokens import token_required
 from flask import Blueprint, request, jsonify
@@ -51,8 +51,8 @@ def get_games():
 
 @app.route(GAMES_ID_URL, methods=["GET"])
 def get_game_specific():
-    game = Game.query.filter(Game.id == id)
+    game = Game.query.filter(Game.id == int(id))
     if game.count() == 0:
         return create_response(status=400, message="Game not found")
     else:
-        return create_response({"game": [g.to_dict() for g in games]})
+        return create_response({"game": [g.to_dict() for g in game]})
