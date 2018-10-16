@@ -11,7 +11,7 @@ from flask_migrate import Migrate
 
 from api import create_app
 
-SQLITE_FILE_PATH = f"{os.getcwd()}/test.db"
+SQLITE_FILE_PATH = os.getcwd() + "test.db"
 
 
 # testing using sqlite, which may
@@ -20,7 +20,7 @@ SQLITE_FILE_PATH = f"{os.getcwd()}/test.db"
 @pytest.fixture(scope="session")
 def client():
     config_dict = {
-        "SQLALCHEMY_DATABASE_URI": f"sqlite:///{SQLITE_FILE_PATH}",
+        "SQLALCHEMY_DATABASE_URI": "sqlite:///" + SQLITE_FILE_PATH,
         "DEBUG": True,
         "SQLALCHEMY_TRACK_MODIFICATIONS": False,
     }
