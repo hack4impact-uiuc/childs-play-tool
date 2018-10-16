@@ -17,7 +17,7 @@ class Results extends Component {
         this.toggle = this.toggle.bind(this);
         this.state = {
           activeTab: '1',
-          tabGames: ["Xbox", "PS4", "Switch"]
+          tabGames: ["Xbox", "PS4", "Switch", "That"]
         };
       }
 
