@@ -6,73 +6,81 @@ from api.models import db, Game, Ranking
 game_ids = [
     1,
     2,
-    3
+    3,
+    4,
+    5
 ]
 
 game_names = [
     "Halo",
     "Mario Kart",
-    "Fortnite"
+    "Fortnite",
+    "BotW",
+    "Super Mario Odyssey"
 ]
 
 game_systems = [
     "Xbox One",
     "Nintendo Switch",
-    "PlayStation 4"
+    "PlayStation 4",
+    "Nintendo Switch",
+    "Nintendo Switch"
 ]
 
 game_genders = [
     "Male",
     "Both",
-    "Both"
-]
-
-game_ages = [
-    "13 and Older",
-    "Under 12",
-    "13 and Older"
-]
-
-game_symptoms = [
-    "Bored (Long Term)",
-    "Bored (Short Term)",
-    "Pain"
+    "Both",
+    "Male",
+    "Male"
 ]
 
 ranking_ids = [
     4,
     5,
-    6
+    6,
+    7,
+    8
 ]
 
 ranking_ages = [
     "13 and Older",
     "Under 12",
-    "13 and Older"
+    "13 and Older",
+    "Under 12",
+    "Under 12"
 ]
 
 ranking_systems = [
     "Xbox One",
     "Nintendo Switch",
-    "PlayStation 4"
+    "PlayStation 4",
+    "Nintendo Switch",
+    "Nintendo Switch"
 ]
 
 ranking_symptoms = [
     "Bored (Long Term)",
     "Bored (Short Term)",
-    "Pain"
+    "Pain",
+    "Bored (Short Term)",
+    "Bored (Short Term)"
 ]
 
 ranking_game_ids = [
     1,
     2,
-    3
+    3,
+    4,
+    5
 ]
 
 ranking_ranks = [
     5,
+    18,
+    18,
     2,
-    18
+    9
 ]
 
 
@@ -103,21 +111,17 @@ def recreate_db():
     """
     db.drop_all()
     db.create_all()
-
-    for i in range(3):
+    for i in range(5):
         game = {}
         game["id"] = game_ids[i]
         game["name"] = game_names[i]
         game["system"] = game_systems[i]
         game["gender"] = game_genders[i]
-        game["age"] = game_ages[i]
-        game["symptom"] = game_symptoms[i]
         g = Game(game)
         db.session.add(g)
-
     db.session.commit()
 
-    for i in range(3):
+    for i in range(5):
         ranking = {}
         ranking["id"] = ranking_ids[i]
         ranking["age"] = ranking_ages[i]
@@ -127,7 +131,6 @@ def recreate_db():
         ranking["rank"] = ranking_ranks[i]
         r = Ranking(ranking)
         db.session.add(r)
-
     db.session.commit()
 
 
