@@ -40,7 +40,7 @@ def get_games():
                 message="This system has no appropriate games for the specified age and symptom",
             )
         
-        ranked_games = db.session.query(Game.name, Game.gender, Game.system, Ranking.rank).join(Ranking).filter(Ranking.system == system, Ranking.symptom == symptom, Ranking.age == age).order_by(Ranking.rank).all()
+        ranked_games = db.session.query(Game.name, Game.gender, Game.system, Ranking.rank).join(Ranking).filter(Ranking.system == system, Ranking.symptom == symptom, Ranking.age == age).order_by(Ranking.rank).group_by(Game.system).all()
         ranked_games = [dict(zip(ranked_game.keys(), ranked_game)) for ranked_game in ranked_games]
 
     return create_response(status=200, data={"games": ranked_games})
