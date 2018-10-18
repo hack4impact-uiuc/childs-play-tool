@@ -3,60 +3,30 @@ from flask_migrate import Migrate, MigrateCommand
 from api import create_app
 from api.models import db, Game, Ranking
 
-game_ids = [
-    1,
-    2,
-    3,
-    4,
-    5
-]
+game_ids = [1, 2, 3, 4, 5]
 
-game_names = [
-    "Halo",
-    "Mario Kart",
-    "Fortnite",
-    "BotW",
-    "Super Mario Odyssey"
-]
+game_names = ["Halo", "Mario Kart", "Fortnite", "BotW", "Super Mario Odyssey"]
 
 game_systems = [
     "Xbox One",
     "Nintendo Switch",
     "PlayStation 4",
     "Nintendo Switch",
-    "Nintendo Switch"
+    "Nintendo Switch",
 ]
 
-game_genders = [
-    "Male",
-    "Both",
-    "Both",
-    "Male",
-    "Male"
-]
+game_genders = ["Male", "Both", "Both", "Male", "Male"]
 
-ranking_ids = [
-    4,
-    5,
-    6,
-    7,
-    8
-]
+ranking_ids = [4, 5, 6, 7, 8]
 
-ranking_ages = [
-    "13 and Older",
-    "Under 12",
-    "13 and Older",
-    "Under 12",
-    "Under 12"
-]
+ranking_ages = ["13 and Older", "Under 12", "13 and Older", "Under 12", "Under 12"]
 
 ranking_systems = [
     "Xbox One",
     "Nintendo Switch",
     "PlayStation 4",
     "Nintendo Switch",
-    "Nintendo Switch"
+    "Nintendo Switch",
 ]
 
 ranking_symptoms = [
@@ -64,25 +34,12 @@ ranking_symptoms = [
     "Bored (Short Term)",
     "Pain",
     "Bored (Short Term)",
-    "Bored (Short Term)"
+    "Bored (Short Term)",
 ]
 
-ranking_game_ids = [
-    1,
-    2,
-    3,
-    4,
-    5
-]
+ranking_game_ids = [1, 2, 3, 4, 5]
 
-ranking_ranks = [
-    5,
-    18,
-    18,
-    2,
-    9
-]
-
+ranking_ranks = [5, 18, 18, 2, 9]
 
 
 app = create_app()

@@ -4,7 +4,6 @@ from flask import Blueprint, request, jsonify
 import json
 from collections import defaultdict
 
-
 games_page = Blueprint("games", __name__)
 
 GLOBAL_POST_URL = "/"
@@ -20,7 +19,7 @@ def get_games():
     data = request.args
 
     if data.get("age") is None or data.get("symptom") is None:
-        return create_response(status=400, message="Age and symptom are required")    
+        return create_response(status=400, message="Age and symptom are required")
 
     age = data["age"]
     symptom = data["symptom"]
@@ -39,9 +38,20 @@ def get_games():
                 status=400,
                 message="This system has no appropriate games for the specified age and symptom",
             )
-        
-        ranked_games = db.session.query(Game.name, Game.gender, Game.system, Ranking.rank).join(Ranking).filter(Ranking.system == system, Ranking.symptom == symptom, Ranking.age == age).order_by(Ranking.rank).group_by(Game.system).all()
-        ranked_games = [dict(zip(ranked_game.keys(), ranked_game)) for ranked_game in ranked_games]
+
+        ranked_games = (
+            db.session.query(Game.name, Game.gender, Game.system, Ranking.rank)
+            .join(Ranking)
+            .filter(
+                Ranking.system == system, Ranking.symptom == symptom, Ranking.age == age
+            )
+            .order_by(Ranking.rank)
+            .group_by(Game.system)
+            .all()
+        )
+        ranked_games = [
+            dict(zip(ranked_game.keys(), ranked_game)) for ranked_game in ranked_games
+        ]
 
     return create_response(status=200, data={"games": ranked_games})
 
