@@ -21,7 +21,7 @@ from .base import db
 #     def __repr__(self):
 #         return f"<Ranking {self.ranking}>"
 
-class Ranking(db.Model):
+class Ranking(Mixin, db.Model):
     """Ranking Table."""
     __tablename__ = 'ranking'
 

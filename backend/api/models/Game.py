@@ -28,18 +28,12 @@ class Game(Mixin, db.Model):
     system = db.Column(db.Enum("PlayStation Vita", "Xbox One", "PlayStation 4", "Nintendo Switch", "Nintendo 3DS", 
                                "Apple iOS", "Android", "PlayStation VR", "HTC VIVE", "Oculus Rift", name="system_types"), nullable=False)
     gender = db.Column(db.Enum("Male", "Female", "Both", "No Discernable Gender", name="gender_types"), nullable=False)
-    # age can be string or even boolean?
-    age = db.Column(db.Enum("Under 12", "13 and Older", name="age_types"), nullable=False)
-    symptom = db.Column(db.Enum("Bored (Long Term)", "Bored (Short Term)", "Pain", "Anxiety/Hyperactivity", "Sadness", 
-                                "Cognitive Impairment", name="symptom_types"), nullable=False)
 
     def __init__(self, data):
         self.id = data["id"]
         self.name = data["name"]
         self.system = data["system"]
         self.gender = data["gender"]
-        self.age = data["age"]
-        self.symptom = data["symptom"]
     
     def __repr__(self):
         return '<name {}>'.format(self.name)
