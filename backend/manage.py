@@ -101,6 +101,9 @@ def recreate_db():
     Recreates a local database. You probably should not use this on
     production.
     """
+    db.drop_all()
+    db.create_all()
+
     for i in range(3):
         game = {}
         game["id"] = game_ids[i]
@@ -112,6 +115,9 @@ def recreate_db():
         g = Game(game)
         db.session.add(g)
 
+    db.session.commit()
+
+    for i in range(3):
         ranking = {}
         ranking["id"] = ranking_ids[i]
         ranking["age"] = ranking_ages[i]
@@ -121,8 +127,7 @@ def recreate_db():
         ranking["rank"] = ranking_ranks[i]
         r = Ranking(ranking)
         db.session.add(r)
-    db.drop_all()
-    db.create_all()
+
     db.session.commit()
 
 
