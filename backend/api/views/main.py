@@ -9,4 +9,3 @@ def index():
     # access the logger with the logger from api.core and uses the standard logging module
     logger.info("Hello World!")
     return "<h1>Hello World!</h1>"
-

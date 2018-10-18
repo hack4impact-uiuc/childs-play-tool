@@ -1,6 +1,7 @@
 from api.core import Mixin
 from .base import db
 
+
 class Game(Mixin, db.Model):
     """Game Table."""
 

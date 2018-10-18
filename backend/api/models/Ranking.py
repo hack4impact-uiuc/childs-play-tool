@@ -54,4 +54,3 @@ class Ranking(Mixin, db.Model):
 
     def __repr__(self):
         return "<ranking {}>".format(self.rank)
-
