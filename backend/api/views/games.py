@@ -52,4 +52,4 @@ def get_game_specific(game_id):
     if game.count() == 0:
         return create_response(status=400, message="Game not found")
     else:
-        return create_response(data={"game": serialize_list(game)})
+        return create_response(data={"game": serialize_list(game)[0]})
