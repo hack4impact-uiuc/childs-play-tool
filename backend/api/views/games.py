@@ -1,5 +1,4 @@
 from api.models import db, Game, Ranking
-from api.models.enums import systems
 from api.core import create_response, serialize_list, Mixin, logger
 from flask import Blueprint, request, jsonify
 import json
