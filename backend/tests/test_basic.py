@@ -33,34 +33,36 @@ def test_get_games(client):
 
     rs = client.get("games?age=Under+12&symptom=Bored+(Short+Term)")
     assert rs.status_code == 200
-    systems = json.loads(rs.data)["result"]["systems"]
-    for system in systems:
-        if system["system"] == "Nintendo Switch":
-            assert len(system["games"]) == 3
+    games = json.loads(rs.data)["result"]["games"]
+    for system in games:
+        if system == "Nintendo Switch":
+            system_games = games[system]
+            assert len(system_games) == 3
 
-            game = system["games"][0]
+            game = system_games[0]
             assert game["name"] == "BotW"
             assert game["rank"] == 2
             assert game["gender"] == "Male"
 
-            game = system["games"][1]
+            game = system_games[1]
             assert game["name"] == "Super Mario Odyssey"
             assert game["rank"] == 9
             assert game["gender"] == "Male"
 
-            game = system["games"][2]
+            game = system_games[2]
             assert game["name"] == "Mario Kart"
             assert game["rank"] == 18
             assert game["gender"] == "Both"
 
-        elif system["system"] == "Nintendo 3DS":
-            assert len(system["games"]) == 1
-            game = system["games"][0]
+        elif system == "Nintendo 3DS":
+            system_games = games[system]
+            assert len(system_games) == 1
+            game = system_games[0]
             assert game["name"] == "Pokemon Sun"
             assert game["rank"] == 3
             assert game["gender"] == "Both"
         else:
-            assert len(system["games"]) == 0
+            assert len(games[system]) == 0
 
     rs = client.get("games?age=Under+12&symptom=Bored+(Short+Term)&system=HTC+Vive")
     assert rs.status_code == 400
@@ -74,7 +76,7 @@ def test_get_games(client):
         "games?age=Under+12&symptom=Bored+(Short+Term)&system=Nintendo+Switch"
     )
     assert rs.status_code == 200
-    games = json.loads(rs.data)["result"]["games"]
+    games = json.loads(rs.data)["result"]["games"]["Nintendo Switch"]
     assert len(games) == 3
 
     game = games[0]
