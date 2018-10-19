@@ -2,7 +2,18 @@ from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 from api import create_app
 from api.models import db, Game, Ranking
-from tests.mock_data import game_ids, game_names, game_systems, game_genders, ranking_ages, ranking_game_ids, ranking_ids, ranking_ranks, ranking_symptoms, ranking_systems
+from tests.mock_data import (
+    game_ids,
+    game_names,
+    game_systems,
+    game_genders,
+    ranking_ages,
+    ranking_game_ids,
+    ranking_ids,
+    ranking_ranks,
+    ranking_symptoms,
+    ranking_systems,
+)
 
 app = create_app()
 

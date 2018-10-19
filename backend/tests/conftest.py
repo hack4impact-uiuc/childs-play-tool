@@ -10,7 +10,18 @@ import sqlalchemy
 from flask_migrate import Migrate
 
 from api import create_app
-from .mock_data import game_ids, game_names, game_systems, game_genders, ranking_ages, ranking_game_ids, ranking_ids, ranking_ranks, ranking_symptoms, ranking_systems
+from .mock_data import (
+    game_ids,
+    game_names,
+    game_systems,
+    game_genders,
+    ranking_ages,
+    ranking_game_ids,
+    ranking_ids,
+    ranking_ranks,
+    ranking_symptoms,
+    ranking_systems,
+)
 
 SQLITE_FILE_PATH = os.getcwd() + "test.db"
 
