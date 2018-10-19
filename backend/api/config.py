@@ -8,7 +8,7 @@ class Config:
 
 
 class DevelopmentConfig(Config):
-    SQLALCHEMY_DATABASE_URI = "postgresql://testusr:password@127.0.0.1:5432/testdb"
+    SQLALCHEMY_DATABASE_URI = "postgresql://testusr:password@127.0.0.1:5432/cpdb"
     # SQLALCHEMY_DATABASE_URI = 'postgres://127.0.0.1:5432'
     DEBUG = True
 
@@ -19,7 +19,7 @@ class ProductionConfig(Config):
 
 
 class DockerDevConfig(Config):
-    SQLALCHEMY_DATABASE_URI = "postgresql://testusr:password@postgres/testdb"
+    SQLALCHEMY_DATABASE_URI = "postgresql://testusr:password@postgres/cpdb"
     DEBUG = True
 
 
