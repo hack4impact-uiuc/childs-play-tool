@@ -41,7 +41,7 @@ def get_games():
             )
 
         ranked_games = (
-            db.session.query(Game.name, Game.gender, Game.system, Ranking.rank)
+            db.session.query(Game.name, Game.gender, Ranking.rank)
             .join(Ranking)
             .filter(
                 Ranking.system == system, Ranking.symptom == symptom, Ranking.age == age
@@ -53,13 +53,13 @@ def get_games():
         ranked_games = [
             dict(zip(ranked_game.keys(), ranked_game)) for ranked_game in ranked_games
         ]
-        return create_response(status=200, data={"games": {system: ranked_games}})
+        return create_response(status=200, data={"games": ranked_games})
 
     else:
         ranked_games = []
         for system in Game.system.type.enums:
             ranked_games_by_system = (
-                db.session.query(Game.name, Game.gender, Game.system, Ranking.rank)
+                db.session.query(Game.name, Game.gender, Ranking.rank)
                 .join(Ranking)
                 .filter(
                     Ranking.system == system,
@@ -71,14 +71,15 @@ def get_games():
             )
             ranked_games.append(
                 {
-                    system: [
+                    "system": system,
+                    "games": [
                         dict(zip(ranked_game.keys(), ranked_game))
                         for ranked_game in ranked_games_by_system
-                    ]
+                    ],
                 }
             )
 
-        return create_response(status=200, data={"games": ranked_games})
+        return create_response(status=200, data={"systems": ranked_games})
 
 
 @games_page.route(GAMES_ID_URL, methods=["GET"])
