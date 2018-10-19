@@ -1,5 +1,6 @@
 from api.core import Mixin
 from .base import db
+from .enums import systems, genders
 
 
 class Game(Mixin, db.Model):
@@ -9,26 +10,8 @@ class Game(Mixin, db.Model):
 
     id = db.Column(db.Integer, unique=True, primary_key=True)
     name = db.Column(db.String, nullable=False)
-    system = db.Column(
-        db.Enum(
-            "PlayStation Vita",
-            "Xbox One",
-            "PlayStation 4",
-            "Nintendo Switch",
-            "Nintendo 3DS",
-            "Apple iOS",
-            "Android",
-            "PlayStation VR",
-            "HTC VIVE",
-            "Oculus Rift",
-            name="system_types",
-        ),
-        nullable=False,
-    )
-    gender = db.Column(
-        db.Enum("Male", "Female", "Both", "No Discernable Gender", name="gender_types"),
-        nullable=False,
-    )
+    system = db.Column(systems, nullable=False)
+    gender = db.Column(genders, nullable=False)
 
     def __init__(self, data):
         self.id = data["id"]

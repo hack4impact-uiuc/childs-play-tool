@@ -1,7 +1,9 @@
 from api.models import db, Game, Ranking
+from api.models.enums import systems
 from api.core import create_response, serialize_list, Mixin, logger
 from flask import Blueprint, request, jsonify
 import json
+
 from collections import defaultdict
 
 games_page = Blueprint("games", __name__)
@@ -46,14 +48,38 @@ def get_games():
                 Ranking.system == system, Ranking.symptom == symptom, Ranking.age == age
             )
             .order_by(Ranking.rank)
-            .group_by(Game.system)
             .all()
         )
+
         ranked_games = [
             dict(zip(ranked_game.keys(), ranked_game)) for ranked_game in ranked_games
         ]
+        return create_response(status=200, data={"games": {system: ranked_games}})
 
-    return create_response(status=200, data={"games": ranked_games})
+    else:
+        ranked_games = []
+        for system in Game.system.type.enums:
+            ranked_games_by_system = (
+                db.session.query(Game.name, Game.gender, Game.system, Ranking.rank)
+                .join(Ranking)
+                .filter(
+                    Ranking.system == system,
+                    Ranking.symptom == symptom,
+                    Ranking.age == age,
+                )
+                .order_by(Ranking.rank)
+                .all()
+            )
+            ranked_games.append(
+                {
+                    system: [
+                        dict(zip(ranked_game.keys(), ranked_game))
+                        for ranked_game in ranked_games_by_system
+                    ]
+                }
+            )
+
+        return create_response(status=200, data={"games": ranked_games})
 
 
 @games_page.route(GAMES_ID_URL, methods=["GET"])
