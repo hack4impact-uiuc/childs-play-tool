@@ -100,6 +100,8 @@ def post_games():
         for each grouping of 25 (unique):
             for each game:
                 if game not in database:
+                    use helper method on game name & system to get description, image, etc.
+                    (get_giantbomb_data(name, system))
                     create Game object
                     db.add(game)
             db.commit()
