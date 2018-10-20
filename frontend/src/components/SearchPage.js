@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { DropdownButton } from './'
+import { DropdownButton, SearchBarCustom } from './'
 import { updateField } from '../redux/modules/searchpage'
-import { Link } from 'react-router-dom'
 
 const mapStateToProps = state => ({})
 
@@ -20,9 +20,13 @@ class SearchPage extends Component {
   render() {
     return (
       <div>
+        <SearchBarCustom fieldName="nameSearchField" />
+        <Link to={{ pathname: './Results' }}>Search By Name</Link>
         <DropdownButton title="Console Type" fieldName="consoles" />
         <DropdownButton title="Age" fieldName="ageRange" />
         <DropdownButton title="Ailment" fieldName="ailments" />
+        <Link to={{ pathname: './Results' }}>Search By Filters</Link>
+        <br />
         <Link to={{ pathname: './directorPage' }}>Login</Link>
       </div>
     )
