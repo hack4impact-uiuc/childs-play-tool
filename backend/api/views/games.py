@@ -11,7 +11,6 @@ GLOBAL_POST_URL = "/"
 GAMES_URL = "/games"
 GAMES_ID_URL = "/games/<int:game_id>"
 
-
 @games_page.route(GAMES_URL, methods=["GET"])
 def get_games():
 
@@ -85,3 +84,15 @@ def get_game_specific(game_id):
         return create_response(status=400, message="Game not found")
     else:
         return create_response(data={"game": serialize_list(game)[0]})
+
+@@games_page.route(GLOBAL_POST_URL, methods["POST"])
+def post_game():
+    # use bytea for images
+    gb_url = "http://www.giantbomb.com/api/search/?"
+    gb_params = {'api_key': "4c90e74792bf11dc995f9868863bb24bb7de836b", 
+                'resources': 'game', 
+                'query': game_name,
+                'field_list' : 'name,image,api_detail_url,id,platform,deck'
+                'format' : 'json'}
+    data = request.get_json()
+    gb_data = requests.get(url)
