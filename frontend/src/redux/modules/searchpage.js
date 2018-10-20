@@ -5,9 +5,11 @@ const FIELD_CHANGED = 'FIELD_CHANGED'
 const initialState = {
   consoles: '',
   ageRange: '',
-  ailments: '',
+  symptoms: '',
   nameSearchField: ''
 }
+
+
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {

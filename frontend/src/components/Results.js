@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { updateResults } from '../redux/modules/results'
 import Card from './Card'
+import axios from 'axios'
 import {
   TabContent,
   TabPane,
@@ -17,9 +20,41 @@ import {
 import classnames from 'classnames'
 
 const mapStateToProps = state => ({
-  results: state.results.games
+  results: state.results.games,
+  filters: 
+    {console: state.searchpage.consoles, 
+    age: state.searchpage.ageRange, 
+    symptom: state.searchpage.symptoms,
+    name: state.searchpage.nameSearchField}
 })
 
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      updateResults
+    },
+    dispatch
+  )
+}
+function getGames(age, symptom, system){
+  return axios
+    .get(
+      'localhost::8080/games' +
+      'get_games()?age=' +
+      age +
+      '&symptom=' +
+      symptom +
+      '&system=' +
+      system
+    )
+    .then(response => {
+      return response.data.result.games
+    })
+    .catch(function(error) {
+      console.log('ERROR: ', error)
+      return null
+    })
+}
 class Results extends Component {
   constructor(props) {
     super(props)
@@ -36,7 +71,7 @@ class Results extends Component {
       })
     }
   }
-  buildCards = games => games.map(c => <Card game={c} />)
+  buildCards = games => (games) ? games.map(c => <Card game={c} />) : null
   render() {
     return (
       <div>
@@ -72,4 +107,4 @@ class Results extends Component {
   }
 }
 
-export default connect(mapStateToProps)(Results)
+export default connect(mapStateToProps, mapDispatchToProps)(Results)

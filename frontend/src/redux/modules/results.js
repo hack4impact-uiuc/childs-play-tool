@@ -1,7 +1,10 @@
 // @flow
-
+const UPDATE_RESULTS = 'results/UPDATE_RESULTS'
 const initialState = {
-  games: {
+  games: ''
+  
+  /*
+  {
     Switch: [
       {
         title: 'Mario Kart',
@@ -80,8 +83,25 @@ const initialState = {
       }
     ]
   }
+  */
 }
 
 export default function reducer(state = initialState, action) {
-  return state
+  switch (action.type) {
+    case UPDATE_RESULTS:
+      return {
+        ...state,
+        games: state.games.append(action.payload.value)
+      }
+    default:
+      return state
+    }
 }
+
+export const updateResults = (field, value) => ({
+  type: UPDATE_RESULTS,
+  payload: {
+    field,
+    value
+  }
+})
