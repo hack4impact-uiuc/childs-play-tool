@@ -60,9 +60,10 @@ def create_app(test_config=None):
     Migrate(app, db)
 
     # import and register blueprints
-    from api.views import main
+    from api.views import main, games
 
     app.register_blueprint(main.main)
+    app.register_blueprint(games.games_page)
 
     # register error Handler
     app.register_error_handler(Exception, all_exception_handler)
