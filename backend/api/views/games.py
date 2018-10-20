@@ -2,6 +2,7 @@ from api.models import db, Game, Ranking
 from api.core import create_response, serialize_list, Mixin, logger
 from flask import Blueprint, request, jsonify
 import json
+import xlrd
 
 from collections import defaultdict
 
@@ -85,3 +86,27 @@ def get_game_specific(game_id):
         return create_response(status=400, message="Game not found")
     else:
         return create_response(data={"game": serialize_list(game)[0]})
+
+@games_page.route(GAMES_URL, methods=["POST"])
+def post_games():
+    if 'file' not in request.files:
+        return create_response(status=400, message="File not provided")
+    db.drop_all()
+    db.create_all()
+    file = request.files["file"]
+    book = xlrd.open_workbook(file)
+    for sheet_index in range(len(book.sheets)):
+        '''
+        for each grouping of 25 (unique):
+            for each game:
+                if game not in database:
+                    create Game object
+                    db.add(game)
+            db.commit()
+            for each game:
+                find Game object with same name and system using query
+                create Ranking object
+                db.add(ranking)
+            db.commit() (maybe)
+        '''
+    return create_response(status=201, message="Database updated")
