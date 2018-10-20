@@ -2,10 +2,6 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Card from './Card'
-<<<<<<< HEAD
-import { TabContent, TabPane, Nav, NavItem, NavLink, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
-import classnames from 'classnames';
-=======
 import {
   TabContent,
   TabPane,
@@ -19,7 +15,6 @@ import {
   Col
 } from 'reactstrap'
 import classnames from 'classnames'
->>>>>>> a180bdcbf42eeea227352a398dc72459cc935cf6
 
 const mapStateToProps = state => ({
   results: state.results.games
