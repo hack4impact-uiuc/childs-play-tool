@@ -1,4 +1,5 @@
 // @flow
+const SAVE_SEARCH = 'results/SAVE_SEARCH'
 
 const initialState = {
   games: {
@@ -78,10 +79,29 @@ const initialState = {
           { type: 'symptom', tag: 'debug' }
         ]
       }
-    ]
-  }
+    ]},
+  searches: [{ name: 'test', search: 'test' }]
 }
 
 export default function reducer(state = initialState, action) {
-  return state
+  switch (action.type) {
+    case SAVE_SEARCH:
+      return {
+        ...state,
+        searches: state.searches.concat({
+          name: action.payload.field,
+          search: action.payload.value
+        })
+      }
+    default:
+      return state
+  }
 }
+
+export const saveSearch = (field, value) => ({
+  type: SAVE_SEARCH,
+  payload: {
+    field,
+    value
+  }
+})

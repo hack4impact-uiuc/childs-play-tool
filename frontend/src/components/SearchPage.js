@@ -17,6 +17,15 @@ const mapDispatchToProps = dispatch => {
 }
 
 class SearchPage extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { test: 'test' }
+  }
+
+  componentWillUpdate = (nextProps, nextState) => {
+    localStorage.setItem('searchResults', JSON.stringify(nextState.test))
+  }
+
   render() {
     return (
       <div>
@@ -24,7 +33,7 @@ class SearchPage extends Component {
         <Link to={{ pathname: './Results' }}>Search By Name</Link>
         <DropdownButton title="Console Type" fieldName="consoles" />
         <DropdownButton title="Age" fieldName="ageRange" />
-        <DropdownButton title="Ailment" fieldName="ailments" />
+        <DropdownButton title="Symptom" fieldName="symptoms" />
         <Link to={{ pathname: './Results' }}>Search By Filters</Link>
         <br />
         <Link to={{ pathname: './directorPage' }}>Login</Link>
