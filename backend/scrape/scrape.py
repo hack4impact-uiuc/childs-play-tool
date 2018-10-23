@@ -28,6 +28,6 @@ for loop
         game["name"] = sheet.cell(row, 1)
         game["gender"] = sheet.cell(row,2)
 
-    db.
+db.
 
     
