@@ -1,9 +1,14 @@
 // change to actual values from database
 
 const Constants = {
-  consoles: [{ value: 'XBox One' }, { value: 'Nintendo Switch' }, { value: 'PlayStation 4' }, { value: 'Nintendo 3DS'}],
-  ageRange: [{ value: '2 and under' }, { value: '2 to 5' }, { value: '5 and over' }],
-  symptoms: [{ value: 'sad' }, { value: 'angry' }, { value: 'upset' }]
+  consoles: [
+    { value: 'XBox One' },
+    { value: 'Nintendo Switch' },
+    { value: 'PlayStation 4' },
+    { value: 'Nintendo 3DS' }
+  ],
+  ageRange: [{ value: 'Under 12' }, { value: '13 and Older' }],
+  symptoms: [{ value: 'Bored (Long Term)' }, { value: 'Bored (Short Term)' }, { value: 'Pain' }]
 }
 
 export default Constants

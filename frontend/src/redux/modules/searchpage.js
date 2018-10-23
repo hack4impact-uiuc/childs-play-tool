@@ -9,8 +9,6 @@ const initialState = {
   nameSearchField: ''
 }
 
-
-
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case UPDATE_FIELD:
