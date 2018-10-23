@@ -1,8 +1,8 @@
 from api.models import db, Game, Ranking
 from api.core import create_response, serialize_list, Mixin, logger
-from flask import Blueprint, request, jsonify
-import json
+from flask import Blueprint, request
 import xlrd
+import math
 
 from collections import defaultdict
 
@@ -95,20 +95,69 @@ def post_games():
     db.create_all()
     file = request.files["file"]
     book = xlrd.open_workbook(file)
-    for sheet_index in range(len(book.sheets)):
-        '''
-        for each grouping of 25 (unique):
-            for each game:
-                if game not in database:
-                    use helper method on game name & system to get description, image, etc.
-                    (get_giantbomb_data(name, system))
-                    create Game object
-                    db.add(game)
+    NUMBER_RANKING = 25
+    NUMBER_CATEGORIES = 12
+    BEGIN_SPACE = 3
+    CATEGORY_SPACE = 28
+    for sheet in book.sheets():
+        system = sheet.cell(0,1).value
+        for symptom_index in range(NUMBER_CATEGORIES):
+            for row in range(BEGIN_SPACE + CATEGORY_SPACE * math.floor(symptom_index/2), BEGIN_SPACE + CATEGORY_SPACE * math.floor(symptom_index/2) + NUMBER_RANKING, 1):
+                age_index = symptom_index % 2
+                same_game = Game.query.filter(Game.name == sheet.cell(row, 2 * age_index + 1).value, Game.system == system)
+                if (same_game.count() == 0):
+                    extra_data = get_giantbomb_data(sheet.cell(row, 2 * age_index + 1), system)
+                    game = {}
+                    game["system"] = system
+                    game["name"] = sheet.cell(row, 2 * age_index + 1).value
+                    game["gender"] = sheet.cell(row, 2 * age_index + 2).value
+                    game["thumbnail"] = extra_data["thumbnail"]
+                    game["image"] = extra_data["image"]
+                    game["description"] = extra_data["description"]
+                    g = Game(game)
+                    db.session.add(g)
             db.commit()
-            for each game:
-                find Game object with same name and system using query
-                create Ranking object
-                db.add(ranking)
-            db.commit() (maybe)
-        '''
+    '''
+    add games
+    '''
+    for sheet in book.sheets:
+        system = sheet.cell(0,1).value
+        for symptom_index in range(6):
+            for age_index in range(2):
+                system_symptom_age = sheet.cell(2 + 28 * symptom_index, 1 + 2 * age_index).value
+                descriptors = system_symptom_age.split(" - ")
+                symptom = descriptors[1]
+                age = descriptors[2]
+                for game_index in range(25):
+                    rank = int(sheet.cell(3 + 28 * symptom_index, 0).value)
+                    name = sheet.cell(3 + 28 * symptom_index, 1).value
+                    game_id = Game.query(Game.id).filter(Game.name == name).first().id
+                    ranking_id = i
+                    i = i + 1
+                    ranking = {}
+                    ranking["id"] = ranking_id
+                    ranking["age"] = age
+                    ranking["system"] = system
+                    ranking["symptom"] = symptom
+                    ranking["game_id"] = game_id
+                    ranking["rank"] = rank
+                    r = Ranking(ranking)
+                    db.session.add(r)
+    db.commit()
+    
+    '''
+    for each grouping of 25 (unique):
+        for each game:
+            if game not in database:
+                use helper method on game name & system to get description, image, etc.
+                (get_giantbomb_data(name, system))
+                create Game object
+                db.add(game)
+        db.commit()
+        for each game:
+            find Game object with same name and system using query
+            create Ranking object
+            db.add(ranking)
+        db.commit() (maybe)
+    '''
     return create_response(status=201, message="Database updated")
