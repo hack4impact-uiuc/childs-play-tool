@@ -1,7 +1,7 @@
 // @flow
 const UPDATE_RESULTS = 'results/UPDATE_RESULTS'
 const initialState = {
-  games: ''
+  games: {}
 
   /*
   HARD-CODED TEST DATA

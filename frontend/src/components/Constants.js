@@ -7,7 +7,7 @@ const Constants = {
     { value: 'PlayStation 4' },
     { value: 'Nintendo 3DS' }
   ],
-  ageRange: [{ value: 'Under 12' }, { value: '13 and Older' }],
+  ageRange: [{ value: '12 and Under' }, { value: '13 and Older' }],
   symptoms: [{ value: 'Bored (Long Term)' }, { value: 'Bored (Short Term)' }, { value: 'Pain' }]
 }
 
