@@ -106,14 +106,14 @@ def post_games():
                 age_index = symptom_index % 2
                 same_game = Game.query.filter(Game.name == sheet.cell(row, 2 * age_index + 1).value, Game.system == system)
                 if (same_game.count() == 0):
-                    extra_data = get_giantbomb_data(sheet.cell(row, 2 * age_index + 1), system)
+                    # extra_data = get_giantbomb_data(sheet.cell(row, 2 * age_index + 1), system)
                     game = {}
                     game["system"] = system
                     game["name"] = sheet.cell(row, 2 * age_index + 1).value
                     game["gender"] = sheet.cell(row, 2 * age_index + 2).value
-                    game["thumbnail"] = extra_data["thumbnail"]
-                    game["image"] = extra_data["image"]
-                    game["description"] = extra_data["description"]
+                    # game["thumbnail"] = extra_data["thumbnail"]
+                    # game["image"] = extra_data["image"]
+                    # game["description"] = extra_data["description"]
                     g = Game(game)
                     db.session.add(g)
             db.commit()
