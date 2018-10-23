@@ -119,3 +119,7 @@ def test_get_game_specific(client):
     assert ret_dict["result"]["game"]["name"] == "BotW"
     assert ret_dict["result"]["game"]["system"] == "Nintendo Switch"
     assert ret_dict["result"]["game"]["gender"] == "Male"
+
+def test_post_games(client):
+    rs = client.post("/games", files=dict(file="Sept2018.xlsx"))
+    assert rs.status_code == 200
