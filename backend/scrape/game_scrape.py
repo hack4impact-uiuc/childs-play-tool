@@ -27,10 +27,13 @@ for sheet in book.sheets():
 
 
 # TEST PRINTING NAMES OF ONE SHEET USING SAME VARIABLES
-# sheet = book_sheets[0]
-# system = sheet.cell(0,1).value
+book_sheets = book.sheets()
+sheet = book_sheets[0]
+system = sheet.cell(0,1).value
+print(type(system))
+print(type(sheet.cell(3,0).value))
 # for symptom_index in range(NUMBER_CATEGORIES):
 #     print("\n")
 #     for row in range(3 + 28 * math.floor(symptom_index/2), 3 + 28 * math.floor(symptom_index/2) + 25, 1):
 #         age_index = symptom_index % 2
-#         print(sheet.cell(row, 2 * age_index + 1).value)
+#         print(sheet.cell(row, 2 * age_index + 1).value == )

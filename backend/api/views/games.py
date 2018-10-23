@@ -131,6 +131,7 @@ def post_games():
     i = 0
     for sheet in book.sheets():
         system = sheet.cell(0,1).value
+        
         for symptom_index in range(6):
             for age_index in range(2):
                 #print("system index")

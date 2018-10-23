@@ -1,1 +1,1 @@
-print(cell)
+from ../api/models import db, Game, Ranking
