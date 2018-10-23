@@ -5,8 +5,8 @@ import { bindActionCreators } from 'redux'
 import { DropdownButton, SearchBarCustom } from './'
 import { updateField } from '../redux/modules/searchpage'
 import { updateResults } from '../redux/modules/results'
-import axios from 'axios'
 import { Button } from 'reactstrap'
+import { getGames } from '../utils/ApiWrapper'
 
 const mapStateToProps = state => ({
   system: state.searchpage.consoles,
@@ -24,24 +24,6 @@ const mapDispatchToProps = dispatch => {
     dispatch
   )
 }
-
-function getGames(age, symptom, system) {
-  return axios
-    .get(
-      'http://localhost:8080/games' + '?age=' + age + '&symptom=' + symptom + '&system=' + system
-    )
-    .then(response => {
-      console.log(
-        'http://localhost:8080/games' + '?age=' + age + '&symptom=' + symptom + '&system=' + system
-      )
-      return response.data.result.games
-    })
-    .catch(function(error) {
-      console.log('ERROR: ', error)
-      return null
-    })
-}
-
 class SearchPage extends Component {
   render() {
     return (
