@@ -47,12 +47,24 @@ class SearchPage extends Component {
     return (
       <div>
         <SearchBarCustom fieldName="nameSearchField" />
-        <Link to={{ pathname: './Results' }}>Search By Name</Link>
+        <Link to={{ pathname: './Results' }}>
+          <Button
+            color="blue"
+            onClick={e =>
+              getGames(this.props.age, this.props.symptom, this.props.system).then(results =>
+                this.props.updateResults(results)
+              )
+            }
+          >
+            Search By Name
+          </Button>
+        </Link>
         <DropdownButton title="Console Type" fieldName="consoles" />
         <DropdownButton title="Age" fieldName="ageRange" />
         <DropdownButton title="Symptom" fieldName="symptoms" />
         <Link to={{ pathname: './Results' }}>
           <Button
+            color="blue"
             onClick={e =>
               getGames(this.props.age, this.props.symptom, this.props.system).then(results =>
                 this.props.updateResults(results)

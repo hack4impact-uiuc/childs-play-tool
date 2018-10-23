@@ -4,6 +4,7 @@ const initialState = {
   games: ''
 
   /*
+  HARD-CODED TEST DATA
   {
     Switch: [
       {
