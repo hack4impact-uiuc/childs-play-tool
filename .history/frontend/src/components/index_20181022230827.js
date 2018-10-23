@@ -8,7 +8,7 @@ import SearchPage from './SearchPage'
 import DropdownButton from './DropdownButton'
 import Constants from './Constants'
 import SearchBarCustom from './SearchBarCustom'
-import EditableResults from './EditableResults'
+import EditableCard from './EditableCard'
 
 export {
   Counter,
@@ -21,5 +21,5 @@ export {
   Results,
   Password,
   Update,
-  EditableResults
+  EditableCard
 }
