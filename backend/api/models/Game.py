@@ -21,6 +21,7 @@ class Game(Mixin, db.Model):
         self.name = data["name"]
         self.system = data["system"]
         self.gender = data["gender"]
+        self.description = data["description"]
         self.thumbnail = data["thumbnail"]
         self.image = data["image"]
 
