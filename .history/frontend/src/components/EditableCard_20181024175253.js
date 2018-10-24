@@ -72,6 +72,9 @@ handleInputChange(e) {
             <input type="text" value={this.state.description} onChange={e => this.handleInputChange(e)}/>
             <input type="submit" value="Submit"/>   
         </form>
+        <Link to={{ pathname: './description', state: { game: this.props.game } }}>
+          Go to description
+        </Link>
       </p>
     )
   }

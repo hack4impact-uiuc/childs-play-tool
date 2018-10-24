@@ -43,7 +43,7 @@ handleInputChange(e) {
       files
     })
   }
-
+  
   render() {
     return (
       <p className="Card" style={cardStyle}>
@@ -58,7 +58,7 @@ handleInputChange(e) {
           </Dropzone>
         </div>
         <aside>
-          <p>Dropped Image</p>
+          <h2>Dropped Image</h2>
           <ul>
             {this.state.files.map(f => (
               <li key={f.name}>
@@ -72,6 +72,9 @@ handleInputChange(e) {
             <input type="text" value={this.state.description} onChange={e => this.handleInputChange(e)}/>
             <input type="submit" value="Submit"/>   
         </form>
+        <Link to={{ pathname: './description', state: { game: this.props.game } }}>
+          Go to description
+        </Link>
       </p>
     )
   }

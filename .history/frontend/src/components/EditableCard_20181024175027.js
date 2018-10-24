@@ -19,8 +19,7 @@ class EditableCard extends Component {
     constructor(props){
         super(props);
         this.state =  {
-          description: this.props.game.description,
-          files: [] //this.props.game.picture  
+          description: this.props.game.description  
       };
     }
 
@@ -38,12 +37,6 @@ handleInputChange(e) {
     //here's where the info would update
   }
 
-  onDrop(files) {
-    this.setState({
-      files
-    })
-  }
-
   render() {
     return (
       <p className="Card" style={cardStyle}>
@@ -51,30 +44,16 @@ handleInputChange(e) {
           {this.props.game.title}
         </div>
         <div align="right">{this.buildTags}</div>
-        <section>
-        <div className="Update">
-          <Dropzone onDrop={this.onDrop.bind(this)}>
-            <p>Upload image here</p>
-          </Dropzone>
-        </div>
-        <aside>
-          <p>Dropped Image</p>
-          <ul>
-            {this.state.files.map(f => (
-              <li key={f.name}>
-                {f.name} - {f.size} bytes
-              </li>
-            ))}
-          </ul>
-        </aside>
-      </section>
         <form onSubmit={e => this.handleSubmit(e)}>
             <input type="text" value={this.state.description} onChange={e => this.handleInputChange(e)}/>
             <input type="submit" value="Submit"/>   
         </form>
+        <Link to={{ pathname: './description', state: { game: this.props.game } }}>
+          Go to description
+        </Link>
       </p>
     )
   }
 }
 
-export default EditableCard
+export default Card
