@@ -150,10 +150,10 @@ def post_games():
             for symptom_index in range(6):
                 for age_index in range(2):
                     start_row = start_row + 1
-                    while sheet.cell(2 + 28 * symptom_index, 1 + 2 * age_index).value != "Rank":
-                        start_row = start_row + 1                    
+                    while sheet.cell(start_row, 0).value != "Rank":
+                        start_row = start_row + 1                  
                     #print("system index")
-                    if 1 + 2 * age_index < sheet.ncols and len(system_symptom_age = sheet.cell(start_row, 1 + 2 * age_index).value) != 0:
+                    if 1 + 2 * age_index < sheet.ncols and len(sheet.cell(start_row, 1 + 2 * age_index).value) != 0:
                         system_symptom_age = sheet.cell(start_row, 1 + 2 * age_index).value
                         descriptors = system_symptom_age.split("-")
                         symptom = descriptors[1].strip()
@@ -190,7 +190,7 @@ def post_games():
                                 ranking["rank"] = rank
                                 r = Ranking(ranking)
                                 db.session.add(r)
-                                print(ranking["id"])
+                                print(name)
         '''
         for each grouping of 25 (unique):
             for each game:
