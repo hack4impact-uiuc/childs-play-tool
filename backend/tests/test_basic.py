@@ -14,7 +14,7 @@ def test_get_games(client):
     ret_dict = json.loads(rs.data)
     assert ret_dict["message"] == "Age and symptom are required"
 
-    rs = client.get("games?age=Under+12")
+    rs = client.get("games?age=12+and+Under")
     assert rs.status_code == 400
     ret_dict = json.loads(rs.data)
     assert ret_dict["message"] == "Age and symptom are required"
@@ -24,14 +24,14 @@ def test_get_games(client):
     ret_dict = json.loads(rs.data)
     assert ret_dict["message"] == "Age and symptom are required"
 
-    rs = client.get("games?age=Under+12&symptom=Pain")
+    rs = client.get("games?age=12+and+Under&symptom=Pain")
     assert rs.status_code == 400
     ret_dict = json.loads(rs.data)
     assert (
         ret_dict["message"] == "No appropriate games for the specified age and symptom"
     )
 
-    rs = client.get("games?age=Under+12&symptom=Bored+(Short+Term)")
+    rs = client.get("games?age=12+and+Under&symptom=Bored+(Short+Term)")
     assert rs.status_code == 200
     games = json.loads(rs.data)["result"]["games"]
     for system in games:
@@ -64,7 +64,7 @@ def test_get_games(client):
         else:
             assert len(games[system]) == 0
 
-    rs = client.get("games?age=Under+12&symptom=Bored+(Short+Term)&system=HTC+Vive")
+    rs = client.get("games?age=12+and+Under&symptom=Bored+(Short+Term)&system=HTC+Vive")
     assert rs.status_code == 400
     ret_dict = json.loads(rs.data)
     assert (
@@ -73,7 +73,7 @@ def test_get_games(client):
     )
 
     rs = client.get(
-        "games?age=Under+12&symptom=Bored+(Short+Term)&system=Nintendo+Switch"
+        "games?age=12+and+Under&symptom=Bored+(Short+Term)&system=Nintendo+Switch"
     )
     assert rs.status_code == 200
     games = json.loads(rs.data)["result"]["games"]["Nintendo Switch"]
@@ -119,3 +119,7 @@ def test_get_game_specific(client):
     assert ret_dict["result"]["game"]["name"] == "BotW"
     assert ret_dict["result"]["game"]["system"] == "Nintendo Switch"
     assert ret_dict["result"]["game"]["gender"] == "Male"
+
+def test_post_games(client):
+    rs = client.post("/games", files=dict(file="Sept2018.xlsx"))
+    assert rs.status_code == 200
