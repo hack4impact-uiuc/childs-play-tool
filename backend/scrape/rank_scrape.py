@@ -3,15 +3,16 @@ from ../api/models import db, Game, Ranking
 
 book = xlrd.open_workbook("Sept2018.xlsx")
 i = 0
-    for sheet in book.sheets():
-        system = sheet.cell(0,1).value
-        start_row = 0        
-        for symptom_index in range(6):
-            for age_index in range(2):
-                start_row = start_row + 1
-                while sheet.cell(2 + 28 * symptom_index, 1 + 2 * age_index).value != "Rank":
-                    start_row = start_row + 1                    
-                #print("system index")
+for sheet in book.sheets():
+    system = sheet.cell(0,1).value
+    start_row = 0        
+    for symptom_index in range(6):
+        for age_index in range(2):
+            start_row = start_row + 1
+            while sheet.cell(2 + 28 * symptom_index, 1 + 2 * age_index).value != "Rank":
+                start_row = start_row + 1                    
+            #print("system index")
+            if 1 + 2 * age_index < sheet.ncols and len(system_symptom_age = sheet.cell(start_row, 1 + 2 * age_index).value) != 0:
                 system_symptom_age = sheet.cell(start_row, 1 + 2 * age_index).value
                 descriptors = system_symptom_age.split("-")
                 symptom = descriptors[1].strip()

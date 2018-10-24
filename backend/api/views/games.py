@@ -103,89 +103,108 @@ def post_games():
     i = 0
     for sheet in book.sheets():
         system = sheet.cell(0,1).value
-        for symptom_index in range(NUMBER_CATEGORIES):
-            for row in range(BEGIN_SPACE + CATEGORY_SPACE * math.floor(symptom_index/2), BEGIN_SPACE + CATEGORY_SPACE * math.floor(symptom_index/2) + NUMBER_RANKING, 1):
-                age_index = symptom_index % 2
-                same_game = Game.query.filter(Game.name == sheet.cell(row, 2 * age_index + 1).value, Game.system == system)
-                if (same_game.count() == 0):
-                    #extra_data = get_giantbomb_data(sheet.cell(row, 2 * age_index + 1), system)
-                    #print(i)
-                    if len(sheet.cell(row, 2 * age_index + 1).value) != 0:
+        count = 0
+        current_row = 0
+        while (count != 12):
+            while (sheet.cell(current_row, 0).value != 1):
+                current_row += 1
+            initial_row = current_row
+            for age_index in range(2):
+                name = sheet.cell(current_row, 2 * age_index + 1).value
+                while (name != ""):
+                    same_game = Game.query.filter(Game.name == name, Game.system == system)
+                    if (same_game.count() == 0):
+                        # extra_data = get_giantbomb_data(name, system)
                         game = {}
                         game["system"] = system
-                        game["name"] = sheet.cell(row, 2 * age_index + 1).value
-                        game["gender"] = sheet.cell(row, 2 * age_index + 2).value
+                        game["name"] = name
+                        game["gender"] = sheet.cell(current_row, 2 * age_index + 2).value
                         game["id"] = i
                         i = i + 1
-                        #game["thumbnail"] = extra_data["thumbnail"]
-                        #game["image"] = extra_data["image"]
-                        #game["description"] = extra_data["description"]
+                        # game["thumbnail"] = extra_data["thumbnail"]
+                        # game["image"] = extra_data["image"]
+                        # game["description"] = extra_data["description"]
                         g = Game(game)
+                        print(game["id"])
                         db.session.add(g)
-                    #print(g)
-            db.session.commit()
-            
-    '''
-    add games
-    '''
-    i = 0
-    for sheet in book.sheets():
-        system = sheet.cell(0,1).value
-        
-        for symptom_index in range(6):
-            for age_index in range(2):
-                #print("system index")
-                system_symptom_age = sheet.cell(2 + 28 * symptom_index, 1 + 2 * age_index).value
-                descriptors = system_symptom_age.split("-")
-                symptom = descriptors[1].strip()
-                if symptom == "Pain Management":
-                    symptom = "Pain"
-                elif symptom == "Calming":
-                    symptom = "Anxiety/Hyperactivity"
-                elif symptom == "Cheering":
-                    symptom = "Sadness"
-                elif symptom == "Fuzzy":
-                    symptom = "Cognitive Impairment"    
-                age = descriptors[2].strip()
-                if age == "13 and Above":
-                    age = "13 and Older"
-                for game_index in range(25):
-                    #print(game_index)
-                    #print(3 + 28 * symptom_index + game_index)
-                    #print(sheet.cell(3 + 28 * symptom_index + game_index, 1 + 2 * age_index).value)
-                    #print("rank index")
-                    rank = int(sheet.cell(3 + 28 * symptom_index + game_index, 0).value)
-                    #print("name index")
-                    name = sheet.cell(3 + 28 * symptom_index + game_index, 1 + 2 * age_index).value
-                    if (len(name) != 0):
-                        game_id = Game.query.filter(Game.name == name).first().id                    
-                        #print("put id")
-                        ranking_id = i
-                        i = i + 1
-                        ranking = {}
-                        ranking["id"] = ranking_id
-                        ranking["age"] = age
-                        ranking["system"] = system
-                        ranking["symptom"] = symptom
-                        ranking["game_id"] = game_id
-                        ranking["rank"] = rank
-                        r = Ranking(ranking)
-                        db.session.add(r)
+                    current_row += 1
+                    if (current_row == sheet.nrows):
+                        break
+                    name = sheet.cell(current_row, 2 * age_index + 1).value
+                if (sheet.ncols < 5):
+                    count += 2
+                    db.session.commit()
+                    break
+                if (age_index == 0):
+                    current_row = initial_row
+                count += 1
+                db.session.commit()
+                
+        '''
+        add games
+        '''
+        i = 0
+        for sheet in book.sheets():
+            system = sheet.cell(0,1).value
+            start_row = 0        
+            for symptom_index in range(6):
+                for age_index in range(2):
+                    start_row = start_row + 1
+                    while sheet.cell(2 + 28 * symptom_index, 1 + 2 * age_index).value != "Rank":
+                        start_row = start_row + 1                    
+                    #print("system index")
+                    if 1 + 2 * age_index < sheet.ncols and len(system_symptom_age = sheet.cell(start_row, 1 + 2 * age_index).value) != 0:
+                        system_symptom_age = sheet.cell(start_row, 1 + 2 * age_index).value
+                        descriptors = system_symptom_age.split("-")
+                        symptom = descriptors[1].strip()
+                        if symptom == "Pain Management":
+                            symptom = "Pain"
+                        elif symptom == "Calming":
+                            symptom = "Anxiety/Hyperactivity"
+                        elif symptom == "Cheering":
+                            symptom = "Sadness"
+                        elif symptom == "Fuzzy":
+                            symptom = "Cognitive Impairment"    
+                        age = descriptors[2].strip()
+                        if age == "13 and Above":
+                            age = "13 and Older"
+                        for game_index in range(25):
+                            #print(game_index)
+                            #print(3 + 28 * symptom_index + game_index)
+                            #print(sheet.cell(3 + 28 * symptom_index + game_index, 1 + 2 * age_index).value)
+                            #print("rank index")
+                            rank = int(sheet.cell(start_row + 1 + game_index, 0).value)
+                            #print("name index")
+                            name = sheet.cell(start_row + 1 + game_index, 1 + 2 * age_index).value
+                            if (len(name) != 0):
+                                game_id = Game.query.filter(Game.name == name).first().id                    
+                                #print("put id")
+                                ranking_id = i
+                                i = i + 1
+                                ranking = {}
+                                ranking["id"] = ranking_id
+                                ranking["age"] = age
+                                ranking["system"] = system
+                                ranking["symptom"] = symptom
+                                ranking["game_id"] = game_id
+                                ranking["rank"] = rank
+                                r = Ranking(ranking)
+                                db.session.add(r)
+                                print(ranking["id"])
+        '''
+        for each grouping of 25 (unique):
+            for each game:
+                if game not in database:
+                    use helper method on game name & system to get description, image, etc.
+                    (get_giantbomb_data(name, system))
+                    create Game object
+                    db.add(game)
+            db.commit()
+            for each game:
+                find Game object with same name and system using query
+                create Ranking object
+                db.add(ranking)
+            db.commit() (maybe)
+        '''
     db.session.commit()
-    
-    '''
-    for each grouping of 25 (unique):
-        for each game:
-            if game not in database:
-                use helper method on game name & system to get description, image, etc.
-                (get_giantbomb_data(name, system))
-                create Game object
-                db.add(game)
-        db.commit()
-        for each game:
-            find Game object with same name and system using query
-            create Ranking object
-            db.add(ranking)
-        db.commit() (maybe)
-    '''
     return create_response(status=201, message="Database updated")
