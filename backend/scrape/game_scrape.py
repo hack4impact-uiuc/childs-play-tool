@@ -18,7 +18,7 @@ for sheet in book.sheets():
             current_row += 1
         initial_row = current_row
         for age_index in range(2):
-            name = sheet.cell(row, 2 * age_index + 1).value
+            name = sheet.cell(current_row, 2 * age_index + 1).value
             while (name != ""):
                 same_game = Game.query.filter(Game.name == name, Game.system == system)
                 if (same_game.count() == 0):
