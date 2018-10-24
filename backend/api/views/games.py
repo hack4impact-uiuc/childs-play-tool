@@ -110,7 +110,7 @@ def post_games():
                 current_row += 1
             initial_row = current_row
             for age_index in range(2):
-                name = sheet.cell(current_row, 2 * age_index + 1).value
+                name = str(sheet.cell(current_row, 2 * age_index + 1).value)
                 while (name != ""):
                     same_game = Game.query.filter(Game.name == name, Game.system == system)
                     if (same_game.count() == 0):
@@ -125,12 +125,12 @@ def post_games():
                         # game["image"] = extra_data["image"]
                         # game["description"] = extra_data["description"]
                         g = Game(game)
-                        print(game["id"])
+                        #print(game["id"])
                         db.session.add(g)
                     current_row += 1
                     if (current_row == sheet.nrows):
                         break
-                    name = sheet.cell(current_row, 2 * age_index + 1).value
+                    name = str(sheet.cell(current_row, 2 * age_index + 1).value)
                 if (sheet.ncols < 5):
                     count += 2
                     db.session.commit()
@@ -143,54 +143,59 @@ def post_games():
         '''
         add games
         '''
-        i = 0
-        for sheet in book.sheets():
-            system = sheet.cell(0,1).value
-            start_row = 0        
-            for symptom_index in range(6):
-                for age_index in range(2):
-                    start_row = start_row + 1
-                    while sheet.cell(start_row, 0).value != "Rank":
-                        start_row = start_row + 1                  
-                    #print("system index")
-                    if 1 + 2 * age_index < sheet.ncols and len(sheet.cell(start_row, 1 + 2 * age_index).value) != 0:
-                        system_symptom_age = sheet.cell(start_row, 1 + 2 * age_index).value
-                        descriptors = system_symptom_age.split("-")
-                        symptom = descriptors[1].strip()
-                        if symptom == "Pain Management":
-                            symptom = "Pain"
-                        elif symptom == "Calming":
-                            symptom = "Anxiety/Hyperactivity"
-                        elif symptom == "Cheering":
-                            symptom = "Sadness"
-                        elif symptom == "Fuzzy":
-                            symptom = "Cognitive Impairment"    
-                        age = descriptors[2].strip()
-                        if age == "13 and Above":
-                            age = "13 and Older"
-                        for game_index in range(25):
-                            #print(game_index)
-                            #print(3 + 28 * symptom_index + game_index)
-                            #print(sheet.cell(3 + 28 * symptom_index + game_index, 1 + 2 * age_index).value)
-                            #print("rank index")
-                            rank = int(sheet.cell(start_row + 1 + game_index, 0).value)
-                            #print("name index")
-                            name = sheet.cell(start_row + 1 + game_index, 1 + 2 * age_index).value
-                            if (len(name) != 0):
-                                game_id = Game.query.filter(Game.name == name).first().id                    
-                                #print("put id")
-                                ranking_id = i
-                                i = i + 1
-                                ranking = {}
-                                ranking["id"] = ranking_id
-                                ranking["age"] = age
-                                ranking["system"] = system
-                                ranking["symptom"] = symptom
-                                ranking["game_id"] = game_id
-                                ranking["rank"] = rank
-                                r = Ranking(ranking)
-                                db.session.add(r)
-                                print(name)
+    i = 0
+    for sheet in book.sheets():
+        system = sheet.cell(0,1).value
+        start_row = 0       
+        #print(system, " nrows: ", sheet.nrows)
+        for symptom_index in range(6):
+            start_row = start_row + 1
+            while sheet.cell(start_row, 0).value != "Rank":
+                start_row = start_row + 1    
+            for age_index in range(2):              
+                #print("system index")
+                if 1 + 2 * age_index < sheet.ncols and len(sheet.cell(start_row, 1 + 2 * age_index).value) != 0:
+                    system_symptom_age = sheet.cell(start_row, 1 + 2 * age_index).value
+                    #print(system_symptom_age)
+                    descriptors = system_symptom_age.split("-")
+                    symptom = descriptors[1].strip()
+                    if symptom == "Pain Management":
+                        symptom = "Pain"
+                    elif symptom == "Calming":
+                        symptom = "Anxiety/Hyperactivity"
+                    elif symptom == "Cheering":
+                        symptom = "Sadness"
+                    elif symptom == "Fuzzy":
+                        symptom = "Cognitive Impairment"    
+                    age = descriptors[2].strip()
+                    if age == "13 and Above":
+                        age = "13 and Older"
+                    for game_index in range(25):
+                        #print(system, ": row " , start_row + 1 + game_index)
+                        #print(game_index)
+                        #print(3 + 28 * symptom_index + game_index)
+                        #print(sheet.cell(3 + 28 * symptom_index + game_index, 1 + 2 * age_index).value)
+                        #print("rank index")
+                        rank = int(sheet.cell(start_row + 1 + game_index, 0).value)
+                        #print("name index")
+                        name = str(sheet.cell(start_row + 1 + game_index, 1 + 2 * age_index).value)
+                        if (len(name) != 0):
+                            #print(name, " ", start_row + 1 + game_index)
+                            game_id = Game.query.filter(Game.name == name).first().id
+                            #print("here")                    
+                            #print("put id")
+                            ranking_id = i
+                            i = i + 1
+                            ranking = {}
+                            ranking["id"] = ranking_id
+                            ranking["age"] = age
+                            ranking["system"] = system
+                            ranking["symptom"] = symptom
+                            ranking["game_id"] = game_id
+                            ranking["rank"] = rank
+                            r = Ranking(ranking)
+                            db.session.add(r)
+                            #print(system, ": ", name, ": row " , start_row + 1 + game_index)
         '''
         for each grouping of 25 (unique):
             for each game:
