@@ -45,7 +45,11 @@ import math
 #                 current_row = initial_row
 #             count += 1
 
-# book = xlrd.open_workbook("Sept2018.xlsx")
+book = xlrd.open_workbook("Sept2018.xlsx")
+book_sheets = book.sheets()
+sheet = book_sheets[9]
+print(sheet.cell(29,0).value)
+
 # i = 0
 # for sheet in book.sheets():
 #     system = sheet.cell(0,1).value
