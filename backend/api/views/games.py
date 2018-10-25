@@ -132,10 +132,10 @@ def post_games():
                         game["id"] = id
                         id = id + 1
                         # API extra information stuff
-                        extra_data = get_giantbomb_data(name, system)
-                        game["thumbnail"] = extra_data["thumbnail"]
-                        game["image"] = extra_data["image"]
-                        game["description"] = extra_data["description"]
+                        # extra_data = get_giantbomb_data(name, system)
+                        # game["thumbnail"] = extra_data["thumbnail"]
+                        # game["image"] = extra_data["image"]
+                        # game["description"] = extra_data["description"]
                         g = Game(game)
                         db.session.add(g)
                     current_row += 1
