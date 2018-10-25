@@ -129,8 +129,8 @@ def post_games():
                         game["system"] = system
                         game["name"] = name
                         game["gender"] = sheet.cell(current_row, 2 * age_index + 2).value
-                        game["id"] = i
-                        i = i + 1
+                        game["id"] = id
+                        id = id + 1
                         # API extra information stuff
                         extra_data = get_giantbomb_data(name, system)
                         game["thumbnail"] = extra_data["thumbnail"]
