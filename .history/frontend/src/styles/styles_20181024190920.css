@@ -20,19 +20,8 @@
 
 .searchButton{
     margin: 5%;
-    margin-bottom: 5%;
+    margin-bottom: 1%;
     margin-top: 1%;
     color: green;
     background: white;
-    border: 1px;
-    border-style: solid;
-    border-color: black;
-}
-
-.loginLink{
-    margin: 5%;
-}
-
-.homePage{
-    margin: 5%;
 }

@@ -29,8 +29,7 @@ class SearchPage extends Component {
   render() {
     return (
       <div>
-        <p className = "homePage" >Hello! Welcome to the Child's Play Game Finder. You can search a game by name or filter by inputs.</p>
-        <SearchBarCustom fieldName="nameSearchField" />
+        <SearchBarCustom className="right" fieldName="nameSearchField" />
         <Link to={{ pathname: './Results' }}>
           <Button className="right" 
             onClick={e =>
@@ -46,7 +45,7 @@ class SearchPage extends Component {
         <DropdownButton title="Age" fieldName="ageRange" />
         <DropdownButton title="Symptom" fieldName="symptoms" />
         <Link to={{ pathname: './Results' }}>
-          <Button className="searchButton"
+          <Button
             color="blue"
             onClick={e =>
               getGames(this.props.age, this.props.symptom, this.props.system).then(results =>
@@ -58,7 +57,7 @@ class SearchPage extends Component {
           </Button>
         </Link>
         <br />
-        <Link className = "loginLink" to={{ pathname: './directorPage' }}> Admin Login </Link>
+        <Link to={{ pathname: './directorPage' }}>Login</Link>
       </div>
     )
   }

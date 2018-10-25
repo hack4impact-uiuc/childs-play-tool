@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux'
 import { Constants } from './'
 import { updateField } from '../redux/modules/searchpage'
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
-import '../styles/styles.css'
 
 const mapStateToProps = state => ({
   consoleField: state.consoles,
@@ -49,7 +48,7 @@ class DropdownButton extends Component {
   render() {
     return (
       <div>
-        <Dropdown className="dropdown" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+        <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
           <DropdownToggle caret>{this.state.selectedVal}</DropdownToggle>
           <DropdownMenu right>
             {this.dropdownItems.map(item => (

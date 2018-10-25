@@ -49,7 +49,7 @@ class DropdownButton extends Component {
   render() {
     return (
       <div>
-        <Dropdown className="dropdown" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+        <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
           <DropdownToggle caret>{this.state.selectedVal}</DropdownToggle>
           <DropdownMenu right>
             {this.dropdownItems.map(item => (

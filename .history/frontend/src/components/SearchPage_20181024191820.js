@@ -29,7 +29,7 @@ class SearchPage extends Component {
   render() {
     return (
       <div>
-        <p className = "homePage" >Hello! Welcome to the Child's Play Game Finder. You can search a game by name or filter by inputs.</p>
+        <p>Hello! Welcome to the Child's Play Game Finder. You can search a game by name or filter by inputs.</p>
         <SearchBarCustom fieldName="nameSearchField" />
         <Link to={{ pathname: './Results' }}>
           <Button className="right" 
@@ -58,7 +58,7 @@ class SearchPage extends Component {
           </Button>
         </Link>
         <br />
-        <Link className = "loginLink" to={{ pathname: './directorPage' }}> Admin Login </Link>
+        <Link className = "loginLink" to={{ pathname: './directorPage' }}>Login </Link>
       </div>
     )
   }

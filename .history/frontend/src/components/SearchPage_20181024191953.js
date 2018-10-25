@@ -58,7 +58,7 @@ class SearchPage extends Component {
           </Button>
         </Link>
         <br />
-        <Link className = "loginLink" to={{ pathname: './directorPage' }}> Admin Login </Link>
+        <Link className = "loginLink" to={{ pathname: './directorPage' }}>Login </Link>
       </div>
     )
   }

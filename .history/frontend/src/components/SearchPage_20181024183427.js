@@ -7,7 +7,6 @@ import { updateField } from '../redux/modules/searchpage'
 import { updateResults } from '../redux/modules/results'
 import { Button } from 'reactstrap'
 import { getGames } from '../utils/ApiWrapper'
-import '../styles/styles.css'
 
 const mapStateToProps = state => ({
   system: state.searchpage.consoles,
@@ -29,10 +28,10 @@ class SearchPage extends Component {
   render() {
     return (
       <div>
-        <p className = "homePage" >Hello! Welcome to the Child's Play Game Finder. You can search a game by name or filter by inputs.</p>
         <SearchBarCustom fieldName="nameSearchField" />
         <Link to={{ pathname: './Results' }}>
-          <Button className="right" 
+          <Button
+            color="blue"
             onClick={e =>
               getGames(this.props.age, this.props.symptom, this.props.system).then(results =>
                 this.props.updateResults(results)
@@ -46,7 +45,7 @@ class SearchPage extends Component {
         <DropdownButton title="Age" fieldName="ageRange" />
         <DropdownButton title="Symptom" fieldName="symptoms" />
         <Link to={{ pathname: './Results' }}>
-          <Button className="searchButton"
+          <Button
             color="blue"
             onClick={e =>
               getGames(this.props.age, this.props.symptom, this.props.system).then(results =>
@@ -58,7 +57,7 @@ class SearchPage extends Component {
           </Button>
         </Link>
         <br />
-        <Link className = "loginLink" to={{ pathname: './directorPage' }}> Admin Login </Link>
+        <Link to={{ pathname: './directorPage' }}>Login</Link>
       </div>
     )
   }
