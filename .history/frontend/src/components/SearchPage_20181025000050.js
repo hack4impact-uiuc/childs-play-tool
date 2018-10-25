@@ -29,7 +29,7 @@ class SearchPage extends Component {
   render() {
     return (
       <div className="background">
-        <body className="background">
+        <body >
         <p className = "homePage" >Hello! Welcome to the Child's Play Game Finder. You can search a game by name or filter by inputs.</p>
         <SearchBarCustom fieldName="nameSearchField" />
         <Link to={{ pathname: './Results' }}>
