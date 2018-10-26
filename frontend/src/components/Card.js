@@ -15,19 +15,22 @@ const titleStyle = {
   fontSize: '30px'
 }
 class Card extends Component {
-  buildTags = this.props.game.tags.map(t => <Tag type={t.type} tag={t.tag} />)
+  buildTags = tags => tags.map(t => <Tag type={t.type} tag={t.tag} />)
   render() {
     return (
       <p className="Card" style={cardStyle}>
         <div align="center" style={titleStyle}>
-          {this.props.game.title}
+          {this.props.game.name}
         </div>
-        <div align="right">{this.buildTags}</div>
-        <p>{this.props.game.summary}</p>
-        {this.props.game.description && <p>An in-depth description has been found.</p>}
-        <Link to={{ pathname: './description', state: { game: this.props.game } }}>
-          Go to description
-        </Link>
+        <div align="right">
+          {this.props.game.tags ? this.buildTags(this.props.game.tags) : null}
+        </div>
+        <p>{this.props.game.summary ? this.props.game.summary : null}</p>
+        {this.props.game.description && (
+          <Link to={{ pathname: './description', state: { game: this.props.game } }}>
+            Go to description
+          </Link>
+        )}
       </p>
     )
   }

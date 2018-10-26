@@ -1,10 +1,14 @@
 // @flow
-
+const UPDATE_RESULTS = 'results/UPDATE_RESULTS'
 const initialState = {
-  games: {
+  games: {}
+
+  /*
+  HARD-CODED TEST DATA
+  {
     Switch: [
       {
-        title: 'Mario Kart',
+        name: 'Mario Kart',
         summary: 'A racing game',
         description: 'A racing game where the most important skill is luck',
         tags: [
@@ -16,7 +20,7 @@ const initialState = {
     ],
     That: [
       {
-        title: 'Childs Play',
+        name: 'Childs Play',
         summary: 'Best team',
         description: 'Best team to ever exist ever',
         tags: [
@@ -28,7 +32,7 @@ const initialState = {
     ],
     XBox: [
       {
-        title: 'Test',
+        name: 'Test',
         summary: 'A test',
         description: 'A test',
         tags: [
@@ -39,7 +43,7 @@ const initialState = {
         ]
       },
       {
-        title: 'Test',
+        name: 'Test',
         summary: 'A test',
         description: 'A test',
         tags: [
@@ -49,7 +53,7 @@ const initialState = {
         ]
       },
       {
-        title: 'Test',
+        name: 'Test',
         summary: 'A test',
         description: 'A test',
         tags: [
@@ -59,7 +63,7 @@ const initialState = {
         ]
       },
       {
-        title: 'Test',
+        name: 'Test',
         summary: 'A test',
         description: 'A test',
         tags: [
@@ -69,7 +73,7 @@ const initialState = {
         ]
       },
       {
-        title: 'Test',
+        name: 'Test',
         summary: 'A test',
         description: 'A test',
         tags: [
@@ -80,8 +84,22 @@ const initialState = {
       }
     ]
   }
+  */
 }
 
 export default function reducer(state = initialState, action) {
-  return state
+  switch (action.type) {
+    case UPDATE_RESULTS:
+      return {
+        ...state,
+        games: action.value
+      }
+    default:
+      return state
+  }
 }
+
+export const updateResults = value => ({
+  type: UPDATE_RESULTS,
+  value
+})
