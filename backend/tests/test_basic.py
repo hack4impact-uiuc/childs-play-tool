@@ -128,11 +128,22 @@ def test_post_games(client):
     assert ret_dict["message"] == "File not provided"
 
     input_file = open("tests/Sept2018.xlsx", "rb")
-    rs = client.post("/games", content_type='multipart/form-data', data={"file": input_file})
+    rs = client.post(
+        "/games", content_type="multipart/form-data", data={"file": input_file}
+    )
     assert rs.status_code == 201
     systems = db.session.query(Game.system.distinct().label("system"))
     systems = [row.system for row in systems.all()]
     list.sort(systems)
-    assert systems == ["Android", "Apple iOS", "HTC VIVE", "Nintendo 3DS", "Nintendo Switch", "Oculus Rift", "PlayStation 4", "PlayStation VR", "PlayStation Vita", "Xbox One"]
-
-    
+    assert systems == [
+        "Android",
+        "Apple iOS",
+        "HTC VIVE",
+        "Nintendo 3DS",
+        "Nintendo Switch",
+        "Oculus Rift",
+        "PlayStation 4",
+        "PlayStation VR",
+        "PlayStation Vita",
+        "Xbox One",
+    ]
