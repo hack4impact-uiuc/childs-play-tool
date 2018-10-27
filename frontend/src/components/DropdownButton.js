@@ -8,7 +8,7 @@ import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap
 const mapStateToProps = state => ({
   consoleField: state.consoles,
   ageField: state.ageRange,
-  ailmentField: state.ailments
+  symptomField: state.symptoms
 })
 
 const mapDispatchToProps = dispatch => {

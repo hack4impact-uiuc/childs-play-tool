@@ -2,18 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Card from './Card'
-import {
-  TabContent,
-  TabPane,
-  Nav,
-  NavItem,
-  NavLink,
-  Button,
-  CardTitle,
-  CardText,
-  Row,
-  Col
-} from 'reactstrap'
+import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap'
 import classnames from 'classnames'
 
 const mapStateToProps = state => ({
@@ -22,7 +11,6 @@ const mapStateToProps = state => ({
 
 
 class Results extends Component {
-<<<<<<< HEAD
     constructor(props) {
         super(props);
     
@@ -75,7 +63,6 @@ class Results extends Component {
           </div>
         );
       }
-=======
   constructor(props) {
     super(props)
 
@@ -91,41 +78,46 @@ class Results extends Component {
       })
     }
   }
-  buildCards = games => games.map(c => <Card game={c} />)
+  buildCards = games => (games ? games.map(c => <Card game={c} />) : null)
   render() {
     return (
       <div>
-        <Nav tabs>
-          {Object.getOwnPropertyNames(this.props.results).map((x, index) => (
-            <NavItem key={index}>
-              <NavLink
-                className={classnames({
-                  active: this.state.activeTab === (index + 1).toString()
-                })}
-                onClick={() => {
-                  this.toggle((index + 1).toString())
-                }}
-              >
-                {x}
-              </NavLink>
-            </NavItem>
-          ))}
-        </Nav>
-        <TabContent activeTab={this.state.activeTab}>
-          {Object.getOwnPropertyNames(this.props.results).map((x, index) => (
-            <TabPane tabId={(index + 1).toString()}>
-              <Row>
-                <Col sm="12">{this.buildCards(this.props.results[x])}</Col>
-              </Row>
-            </TabPane>
-          ))}
-        </TabContent>
+        {this.props.results ? (
+          <div>
+            <Nav tabs>
+              {Object.getOwnPropertyNames(this.props.results).map((x, index) => (
+                <NavItem key={index}>
+                  <NavLink
+                    className={classnames({
+                      active: this.state.activeTab === (index + 1).toString()
+                    })}
+                    onClick={() => {
+                      this.toggle((index + 1).toString())
+                    }}
+                  >
+                    {x}
+                  </NavLink>
+                </NavItem>
+              ))}
+            </Nav>
+            <TabContent activeTab={this.state.activeTab}>
+              {Object.getOwnPropertyNames(this.props.results).map((x, index) => (
+                <TabPane tabId={(index + 1).toString()}>
+                  <Row>
+                    <Col sm="12">{this.buildCards(this.props.results[x])}</Col>
+                  </Row>
+                </TabPane>
+              ))}
+            </TabContent>
+          </div>
+        ) : (
+          <div>No matching results :(</div>
+        )}
         <br />
         <Link to={{ pathname: './' }}>Go to home</Link>
       </div>
     )
   }
->>>>>>> a180bdcbf42eeea227352a398dc72459cc935cf6
 }
 
 export default connect(mapStateToProps)(Results)
