@@ -1,9 +1,27 @@
 // change to actual values from database
 
 const Constants = {
-  consoles: [{ value: 'Wii' }, { value: 'iPhone' }, { value: 'XBOX' }],
-  ageRange: [{ value: '2 and under' }, { value: '2 to 5' }, { value: '5 and over' }],
-  ailments: [{ value: 'sad' }, { value: 'angry' }, { value: 'upset' }]
+  consoles: [
+    { value: 'PlayStation Vita' },
+    { value: 'Xbox One' },
+    { value: 'PlayStation 4' },
+    { value: 'Nintendo Switch' },
+    { value: 'Nintendo 3DS' },
+    { value: 'Apple iOS' },
+    { value: 'Android' },
+    { value: 'PlayStation VR' },
+    { value: 'HTC VIVE' },
+    { value: 'Oculus Rift' }
+  ],
+  ageRange: [{ value: '12 and Under' }, { value: '13 and Older' }],
+  symptoms: [
+    { value: 'Bored (Long Term)' },
+    { value: 'Bored (Short Term)' },
+    { value: 'Pain' },
+    { value: 'Anxiety/Hyperactivity' },
+    { value: 'Sadness' },
+    { value: 'Cognitive Impairment' }
+  ]
 }
 
 export default Constants

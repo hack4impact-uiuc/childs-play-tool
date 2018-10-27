@@ -5,7 +5,7 @@ const FIELD_CHANGED = 'FIELD_CHANGED'
 const initialState = {
   consoles: '',
   ageRange: '',
-  ailments: '',
+  symptoms: '',
   nameSearchField: ''
 }
 
