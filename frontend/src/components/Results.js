@@ -11,7 +11,6 @@ const mapStateToProps = state => ({
 
 
 class Results extends Component {
-<<<<<<< HEAD
     constructor(props) {
         super(props);
     
@@ -64,7 +63,6 @@ class Results extends Component {
           </div>
         );
       }
-=======
   constructor(props) {
     super(props)
 
@@ -120,7 +118,6 @@ class Results extends Component {
       </div>
     )
   }
->>>>>>> a180bdcbf42eeea227352a398dc72459cc935cf6
 }
 
 export default connect(mapStateToProps)(Results)
