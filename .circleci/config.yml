@@ -9,7 +9,7 @@ jobs:
           command: |
             cd backend
             pip install -r requirements-dev.txt --user
-            black . --check 
+            /home/circleci/.local/bin/black . --check 
   backend_test:
     docker:
       - image: circleci/python:3.7
@@ -20,7 +20,7 @@ jobs:
             cd backend
             pip install -r requirements.txt --user
             pip install -r requirements-dev.txt --user
-            pytest
+            /home/circleci/.local/bin/pytest
   frontend_format:
     docker:
       - image: node:8.4.0
