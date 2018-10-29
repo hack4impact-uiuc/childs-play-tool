@@ -18,6 +18,7 @@ const savePersistedState = store => () => {
 }
 
 export default function configureStore() {
+  console.log(persistedState)
   let store = createStore(
     reducer,
     persistedState,

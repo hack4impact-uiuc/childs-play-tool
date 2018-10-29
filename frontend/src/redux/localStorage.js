@@ -1,4 +1,4 @@
-import resultsState from './modules/results'
+import { resultsState } from './modules/results'
 
 const STATE_STORAGE = 'childs_play_state'
 
