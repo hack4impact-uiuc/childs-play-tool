@@ -19,11 +19,7 @@ const savePersistedState = store => () => {
 
 export default function configureStore() {
   console.log(persistedState)
-  let store = createStore(
-    reducer,
-    persistedState,
-    devtools(composedMiddleware)
-  )
+  let store = createStore(reducer, persistedState, devtools(composedMiddleware))
   store.subscribe(savePersistedState(store))
   return store
 }

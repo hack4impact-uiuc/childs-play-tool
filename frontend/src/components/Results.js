@@ -13,7 +13,10 @@ import {
   CardText,
   Row,
   Col,
-  Form, FormGroup, Label, Input
+  Form,
+  FormGroup,
+  Label,
+  Input
 } from 'reactstrap'
 import classnames from 'classnames'
 import { saveSearch } from '../redux/modules/results'
@@ -88,15 +91,19 @@ class Results extends Component {
               id="saveName"
               placeholder="Input name for saved search "
               onChange={e => {
-                this.setState({saveName: e.target.value})
+                this.setState({ saveName: e.target.value })
               }}
             />
           </FormGroup>
         </Form>
-        <Button color="primary" onClick={()=>
-                this.props.saveSearch(this.state.saveName,
-                        JSON.stringify(this.props.results))}>
-                Save Search</Button>
+        <Button
+          color="primary"
+          onClick={() =>
+            this.props.saveSearch(this.state.saveName, JSON.stringify(this.props.results))
+          }
+        >
+          Save Search
+        </Button>
         <Link to={{ pathname: './' }}>Go to home</Link>
       </div>
     )

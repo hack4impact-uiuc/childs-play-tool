@@ -79,7 +79,8 @@ export const resultsState = {
           { type: 'symptom', tag: 'debug' }
         ]
       }
-    ]},
+    ]
+  },
   searches: [{ value: 'testName', searchResults: 'testResults' }]
 }
 

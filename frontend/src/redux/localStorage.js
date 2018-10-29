@@ -7,13 +7,13 @@ export const loadState = () => {
     const serializedState = localStorage.getItem(STATE_STORAGE)
     if (serializedState === undefined || serializedState === null) {
       localStorage.setItem(STATE_STORAGE, resultsState)
-      return {results: resultsState}
+      return { results: resultsState }
     }
     let savedState = JSON.parse(serializedState)
     resultsState.searches = savedState.searches
-    return {results: resultsState}
+    return { results: resultsState }
   } catch (err) {
-    return {results: resultsState}
+    return { results: resultsState }
   }
 }
 
