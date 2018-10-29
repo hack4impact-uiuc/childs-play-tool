@@ -8,7 +8,7 @@ jobs:
       - run:
           command: |
             cd backend
-            pip install -r requirements-dev.txt
+            pip install -r requirements-dev.txt --user
             black . --check 
   backend_test:
     docker:
@@ -18,8 +18,8 @@ jobs:
       - run:
           command: |
             cd backend
-            pip install -r requirements.txt
-            pip install -r requirements-dev.txt
+            pip install -r requirements.txt --user
+            pip install -r requirements-dev.txt --user
             pytest
   frontend_format:
     docker:
