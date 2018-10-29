@@ -8,9 +8,8 @@ jobs:
       - run:
           command: |
             cd backend
-            pipenv install --skip-lock
-            pipenv install --skip-lock --dev
-            pipenv run black . --check 
+            pip install -r requirements-dev.txt
+            black . --check 
   backend_test:
     docker:
       - image: circleci/python:3.7
@@ -19,9 +18,9 @@ jobs:
       - run:
           command: |
             cd backend
-            pipenv install --skip-lock
-            pipenv install --skip-lock --dev
-            pipenv run pytest
+            pip install -r requirements.txt
+            pip install -r requirements-dev.txt
+            pytest
   frontend_format:
     docker:
       - image: node:8.4.0
