@@ -1,9 +1,64 @@
 .cardStyle {
-    color: 'black';
-    fontFamily: 'Arial';
-    border: '2px solid #52e3e5';
-    borderRadius: '25px';
-    margin: '10px';
-    padding: '10px';
-    display: 'inline-block';
+  color: black;
+  font-family: Arial;
+  border: 2px solid #00cc99;
+  margin: 0.5%;
+  padding: 2%;
+  display: inline-table;
+  height: 300px;
+  width: 300px;
+}
+.cardStyleHover {
+  color: black;
+  font-family: Arial;
+  border: 2px solid #00cc99;
+  margin: 0.5%;
+  padding: 2%;
+  display: inline-table;
+  height: 300px;
+  width: 300px;
+  background: #d8ddd8;
+}
+.cardName {
+  font-size: 30px;
+}
+.tag_age_12under {
+  background: #9fc972;
+  color: white;
+  width: 80px;
+}
+.tag_age_13over {
+  background: #4b563a;
+  color: white;
+  width: 80px;
+}
+.tag_symptom_pain {
+  background: #eb9ea1;
+  color: white;
+  width: 80px;
+}
+.tag_symptom_bored_short {
+  background: #f3d26a;
+  color: white;
+  width: 80px;
+}
+.tag_symptom_bored_long {
+  background: #c2bfde;
+  color: white;
+  width: 80px;
+}
+.tag_symptom_anxiety {
+  background: #a1d6ee;
+  color: white;
+  width: 80px;
+}
+.tag_symptom_sadness {
+  background: #fab169;
+  color: white;
+  width: 80px;
+}
+.tag_symptom_cognitive {
+  background: #ccd7c2;
+  color: white;
+  width: 80px;
 }
