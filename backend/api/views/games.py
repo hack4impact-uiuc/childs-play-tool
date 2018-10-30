@@ -52,7 +52,15 @@ def get_games():
             )
 
         ranked_games = (
-            db.session.query(Game.name, Game.gender, Ranking.rank)
+            db.session.query(
+                Game.name,
+                Game.id,
+                Game.description,
+                Game.thumbnail,
+                Game.image,
+                Game.gender,
+                Ranking.rank,
+            )
             .join(Ranking)
             .filter(
                 Ranking.system == system, Ranking.symptom == symptom, Ranking.age == age
@@ -71,7 +79,15 @@ def get_games():
         systems = {}
         for system in Game.system.type.enums:
             ranked_games_by_system = (
-                db.session.query(Game.name, Game.gender, Ranking.rank)
+                db.session.query(
+                    Game.name,
+                    Game.id,
+                    Game.description,
+                    Game.thumbnail,
+                    Game.image,
+                    Game.gender,
+                    Ranking.rank,
+                )
                 .join(Ranking)
                 .filter(
                     Ranking.system == system,
@@ -92,11 +108,10 @@ def get_games():
 @games_page.route(GAMES_ID_URL, methods=["GET"])
 def get_game_specific(game_id):
     game = Game.query.filter(Game.id == game_id)
-    print(game.first())
     if game.count() == 0:
         return create_response(status=400, message="Game not found")
     else:
-        return create_response(data={"game": serialize_list(game)[0]})
+        return create_response(data={"game": game.first().to_dict()})
 
 
 @games_page.route(GAMES_URL, methods=["POST"])
