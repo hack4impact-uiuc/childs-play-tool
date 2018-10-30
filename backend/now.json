@@ -1,0 +1,9 @@
+{
+  "name": "childs-play-backend",
+  "public": true,
+  "type": "docker",
+  "features": {
+    "cloud": "v2"
+  },
+  "alias": "h4i-childs-play-backend.now.sh"
+}

@@ -52,35 +52,41 @@ class Results extends Component {
       })
     }
   }
-  buildCards = games => games.map(c => <Card game={c} />)
+  buildCards = games => (games ? games.map(c => <Card game={c} />) : null)
   render() {
     return (
       <div>
-        <Nav tabs>
-          {Object.getOwnPropertyNames(this.props.results).map((x, index) => (
-            <NavItem key={index}>
-              <NavLink
-                className={classnames({
-                  active: this.state.activeTab === (index + 1).toString()
-                })}
-                onClick={() => {
-                  this.toggle((index + 1).toString())
-                }}
-              >
-                {x}
-              </NavLink>
-            </NavItem>
-          ))}
-        </Nav>
-        <TabContent activeTab={this.state.activeTab}>
-          {Object.getOwnPropertyNames(this.props.results).map((x, index) => (
-            <TabPane tabId={(index + 1).toString()}>
-              <Row>
-                <Col sm="12">{this.buildCards(this.props.results[x])}</Col>
-              </Row>
-            </TabPane>
-          ))}
-        </TabContent>
+        {this.props.results ? (
+          <div>
+            <Nav tabs>
+              {Object.getOwnPropertyNames(this.props.results).map((x, index) => (
+                <NavItem key={index}>
+                  <NavLink
+                    className={classnames({
+                      active: this.state.activeTab === (index + 1).toString()
+                    })}
+                    onClick={() => {
+                      this.toggle((index + 1).toString())
+                    }}
+                  >
+                    {x}
+                  </NavLink>
+                </NavItem>
+              ))}
+            </Nav>
+            <TabContent activeTab={this.state.activeTab}>
+              {Object.getOwnPropertyNames(this.props.results).map((x, index) => (
+                <TabPane tabId={(index + 1).toString()}>
+                  <Row>
+                    <Col sm="12">{this.buildCards(this.props.results[x])}</Col>
+                  </Row>
+                </TabPane>
+              ))}
+            </TabContent>
+          </div>
+        ) : (
+          <div>No matching results :(</div>
+        )}
         <br />
         <Form>
           <FormGroup>

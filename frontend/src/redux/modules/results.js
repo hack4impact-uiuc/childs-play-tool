@@ -1,11 +1,15 @@
 // @flow
 const SAVE_SEARCH = 'results/SAVE_SEARCH'
+const UPDATE_RESULTS = 'results/UPDATE_RESULTS'
+const initialState = {
+  games: {}
 
-export const resultsState = {
-  games: {
+  /*
+  HARD-CODED TEST DATA
+  {
     Switch: [
       {
-        title: 'Mario Kart',
+        name: 'Mario Kart',
         summary: 'A racing game',
         description: 'A racing game where the most important skill is luck',
         tags: [
@@ -17,7 +21,7 @@ export const resultsState = {
     ],
     That: [
       {
-        title: 'Childs Play',
+        name: 'Childs Play',
         summary: 'Best team',
         description: 'Best team to ever exist ever',
         tags: [
@@ -29,7 +33,7 @@ export const resultsState = {
     ],
     XBox: [
       {
-        title: 'Test',
+        name: 'Test',
         summary: 'A test',
         description: 'A test',
         tags: [
@@ -40,7 +44,7 @@ export const resultsState = {
         ]
       },
       {
-        title: 'Test',
+        name: 'Test',
         summary: 'A test',
         description: 'A test',
         tags: [
@@ -50,7 +54,7 @@ export const resultsState = {
         ]
       },
       {
-        title: 'Test',
+        name: 'Test',
         summary: 'A test',
         description: 'A test',
         tags: [
@@ -60,7 +64,7 @@ export const resultsState = {
         ]
       },
       {
-        title: 'Test',
+        name: 'Test',
         summary: 'A test',
         description: 'A test',
         tags: [
@@ -70,7 +74,7 @@ export const resultsState = {
         ]
       },
       {
-        title: 'Test',
+        name: 'Test',
         summary: 'A test',
         description: 'A test',
         tags: [
@@ -80,29 +84,36 @@ export const resultsState = {
         ]
       }
     ]
-  },
-  searches: [{ value: 'testName', searchResults: 'testResults' }]
+  }
+  */
 }
 
-export default function reducer(state = resultsState, action) {
+export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case SAVE_SEARCH:
+    case UPDATE_RESULTS:
       return {
         ...state,
-        searches: state.searches.concat({
-          value: action.payload.value,
-          searchResults: action.payload.searchResults
-        })
+        games: action.value
       }
+        case SAVE_SEARCH:
+        return {
+          ...state,
+          searches: state.searches.concat({
+            value: action.payload.value,
+            searchResults: action.payload.searchResults
+          })
     default:
       return state
   }
 }
-
 export const saveSearch = (value, searchResults) => ({
   type: SAVE_SEARCH,
   payload: {
     value,
     searchResults
   }
+})
+export const updateResults = value => ({
+  type: UPDATE_RESULTS,
+  value
 })

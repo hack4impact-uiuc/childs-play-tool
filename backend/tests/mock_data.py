@@ -24,11 +24,11 @@ ranking_ids = [4, 5, 6, 7, 8, 9]
 
 ranking_ages = [
     "13 and Older",
-    "Under 12",
+    "12 and Under",
     "13 and Older",
-    "Under 12",
-    "Under 12",
-    "Under 12",
+    "12 and Under",
+    "12 and Under",
+    "12 and Under",
 ]
 
 ranking_systems = [
