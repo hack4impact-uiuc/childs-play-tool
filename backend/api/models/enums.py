@@ -1,6 +1,6 @@
 from .base import db
 
-ages = db.Enum("Under 12", "13 and Older", name="age_types")
+ages = db.Enum("12 and Under", "13 and Older", name="age_types")
 
 genders = db.Enum(
     "Male", "Female", "Both", "No Discernable Gender", name="gender_types"

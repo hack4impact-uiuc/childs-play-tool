@@ -5,7 +5,7 @@ const style = {
     color: 'white',
     width: '55px'
   },
-  ailment: {
+  symptom: {
     background: '#a2f998',
     color: 'white',
     width: '55px'

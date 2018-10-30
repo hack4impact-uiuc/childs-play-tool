@@ -18,6 +18,7 @@ Flask-Cors = "*"
 flask-script = "*"
 sqlalchemy-utils = "*"
 flask = "*"
+xlrd = "==1.1.0"
 
 [dev-packages]
 "flake8" = "*"
