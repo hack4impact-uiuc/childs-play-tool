@@ -6,10 +6,7 @@ const initialState = {
   consoles: '',
   ageRange: '',
   symptoms: '',
-<<<<<<< HEAD
   selectedSaveSearch: '',
-=======
->>>>>>> master
   nameSearchField: ''
 }
 

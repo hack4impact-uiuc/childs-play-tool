@@ -95,13 +95,14 @@ export default function reducer(state = initialState, action) {
         ...state,
         games: action.value
       }
-        case SAVE_SEARCH:
-        return {
-          ...state,
-          searches: state.searches.concat({
-            value: action.payload.value,
-            searchResults: action.payload.searchResults
-          })
+    case SAVE_SEARCH:
+      return {
+        ...state,
+        searches: state.searches.concat({
+          value: action.payload.value,
+          searchResults: action.payload.searchResults
+        })
+      }
     default:
       return state
   }
