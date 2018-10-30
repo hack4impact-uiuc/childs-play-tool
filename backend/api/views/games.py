@@ -3,6 +3,11 @@ from api.core import create_response, serialize_list, Mixin, logger
 from flask import Blueprint, request
 import xlrd
 import math
+import json
+import requests
+from keys import keys
+from collections import defaultdict
+import base64
 
 from collections import defaultdict
 
@@ -137,12 +142,19 @@ def post_games():
                         game["id"] = id
                         id = id + 1
                         # API extra information stuff
-                        # extra_data = get_giantbomb_data(name, system)
-                        # game["thumbnail"] = extra_data["thumbnail"]
-                        # game["image"] = extra_data["image"]
-                        # game["description"] = extra_data["description"]
+                        # logger.info("about to load giantbomb")
+                        extra_data = get_giantbomb_data(name, system)
+                        # logger.info(type(extra_data))
+                        game["thumbnail"] = extra_data["thumbnail"]
+                        # logger.info("loaded thumbnail")
+                        game["image"] = extra_data["image"]
+                        # logger.info("loaded image")
+                        game["description"] = extra_data["description"]
+                        # logger.info("loaded description")
                         g = Game(game)
+                        # logger.info("created game")
                         db.session.add(g)
+                        # logger.info("added game")
                     current_row += 1
                     # Breaks out of the loop if we have reached the end of the sheet
                     if current_row == sheet.nrows:
@@ -214,28 +226,66 @@ def post_games():
     db.session.commit()
     return create_response(status=201, message="Database updated")
 
+
+"""
+Duplicate system names:
+New Nintendo 3DS
+Nintendo 3DS eShop
+
+iPhone
+
+PlayStation Network (Vita)
+
+"""
+
+giantbomb_systems = {
+    "PlayStation Vita": ["PlayStation Vita", "PlayStation Network (Vita)"],
+    "Xbox One": ["Xbox One"],
+    "PlayStation 4": ["PlayStation 4"],
+    "Nintendo Switch": ["Nintendo Switch"],
+    "Nintendo 3DS": ["Nintendo 3DS", "New Nintendo 3DS", "Nintendo 3DS eShop"],
+    "Apple iOS": ["iPhone"],
+    "Android": ["Android"],
+    "PlayStation VR": ["PC"],
+    "HTC VIVE": ["PC"],
+    "Oculus Rift": ["PC"],
+}
+
+
 def get_giantbomb_data(game_name, game_system):
-    headers =   {
-        'User-Agent' : 'childs-play',
-    }
+    logger.info(game_name)
+    logger.info(game_system)
+    headers = {"User-Agent": "childs-play"}
     gb_url = "http://www.giantbomb.com/api/search/?"
-    gb_params = {'api_key': keys['api_key'], 
-                'resources': 'game', 
-                'query': game_name,
-                'field_list' : 'name,image,api_detail_url,id,platforms,deck',
-                'format' : 'json'}
+    gb_params = {
+        "api_key": keys["api_key"],
+        "resources": "game",
+        "query": game_name,
+        "field_list": "name,image,api_detail_url,id,platforms,deck",
+        "format": "json",
+    }
     gb_dict = {}
+    gb_dict["description"] = ""
+    gb_dict["thumbnail"] = ""
+    gb_dict["image"] = ""
+
     gb_data = requests.get(url=gb_url, params=gb_params, headers=headers).json()
-    if len(gb_data['results']) == 0:
+    if len(gb_data["results"]) == 0:
+        # logger.info("none foun")
         return gb_dict
-    for result in gb_data['results']:
-        if game_name.lower() == result['name'].lower():
-            for platform in result['platforms']:
-                if game_system.lower() == platform['name'].lower():
-                    gb_dict['description'] = result['deck']
-                    gb_dict['thumbnail'] = result['image']['icon_url']
-                    gb_dict['image']= result['image']['small_url']
-                    #gb_dict['thumbnail'] = base64.b64encode(requests.get(icon_url)).json()
-                    #gb_dict['image'] = base64.b64encode(requests.get(small_url)).json()
-                    print(gb_dict)
-                    return gb_dict
+    for result in gb_data["results"]:
+        if game_name.lower() == result["name"].lower():
+            # for platform in result['platforms']:
+            # for giantbomb_system in giantbomb_systems[game_system]:
+            # if giantbomb_system.lower() == platform['name'].lower():
+            if result["deck"] is not None:
+                gb_dict["description"] = result["deck"]
+            if result["image"]["icon_url"] is not None:
+                gb_dict["thumbnail"] = result["image"]["icon_url"]
+            if result["image"]["small_url"] is not None:
+                gb_dict["image"] = result["image"]["small_url"]
+            # gb_dict['thumbnail'] = base64.b64encode(requests.get(icon_url)).json()
+            # gb_dict['image'] = base64.b64encode(requests.get(small_url)).json()
+            # logger.info("reached end")
+            return gb_dict
+    return gb_dict
