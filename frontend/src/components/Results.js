@@ -34,6 +34,19 @@ class Results extends Component {
           </Link>
         ))
       : null
+  chooseImage = system => {
+    if (system === 'PlayStation Vita') return <img src={require('../styles/psvita.png')} />
+    else if (system === 'Xbox One') return <img src={require('../styles/xbox1.png')} />
+    else if (system === 'PlayStation 4') return <img src={require('../styles/ps4.png')} />
+    else if (system === 'Nintendo Switch') return <img src={require('../styles/switch.png')} />
+    else if (system === 'Nintendo 3DS') return <img src={require('../styles/3ds.png')} />
+    else if (system === 'Apple iOS') return <img src={require('../styles/apple.png')} />
+    else if (system === 'Android') return <img src={require('../styles/android.png')} />
+    else if (system === 'PlayStation VR') return <img src={require('../styles/psvr.png')} />
+    else if (system === 'HTC VIVE') return <img src={require('../styles/htc.png')} />
+    else if (system === 'Oculus Rift') return <img src={require('../styles/oculus.png')} />
+    else return
+  }
   render() {
     return (
       <div>
@@ -50,7 +63,7 @@ class Results extends Component {
                       this.toggle((index + 1).toString())
                     }}
                   >
-                    {x}
+                    {x} {this.chooseImage(x)}
                   </NavLink>
                 </NavItem>
               ))}
@@ -68,17 +81,6 @@ class Results extends Component {
         ) : (
           <div>No matching results :(</div>
         )}
-        <br />
-        <img src={require('../styles/switch.png')} />
-        <img src={require('../styles/psvita.png')} />
-        <img src={require('../styles/xbox1.png')} />
-        <img src={require('../styles/ps4.png')} />
-        <img src={require('../styles/3ds.png')} />
-        <img src={require('../styles/android.png')} />
-        <img src={require('../styles/apple.png')} />
-        <img src={require('../styles/htc.png')} />
-        <img src={require('../styles/psvr.png')} />
-        <img src={require('../styles/oculus.png')} />
         <br />
         <Link to={{ pathname: './' }}>
           <Button className="homeButton">Go to Home</Button>

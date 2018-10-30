@@ -2,7 +2,7 @@
 const UPDATE_RESULTS = 'results/UPDATE_RESULTS'
 const initialState = {
   games: {
-    Switch: [
+    'Nintendo Switch': [
       {
         name: 'Mario Kart',
         summary: 'A racing game',
@@ -18,7 +18,7 @@ const initialState = {
         tags: [{ type: 'age', tag: 'Bounce' }, { type: 'symptom', tag: 'shit' }]
       }
     ],
-    XBox: [
+    'Xbox One': [
       {
         name: 'Test',
         summary: 'A test',
