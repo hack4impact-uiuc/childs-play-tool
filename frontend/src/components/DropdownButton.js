@@ -31,7 +31,7 @@ class DropdownButton extends Component {
   }
 
   determineDropdownItems = fieldName => {
-    if (fieldName === 'savedSearches') {
+    if (fieldName === 'selectedSaveSearch') {
       return this.props.savedSearches
     } else {
       return Constants[fieldName]
