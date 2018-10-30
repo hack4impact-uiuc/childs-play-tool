@@ -6,7 +6,6 @@ import Description from './Description'
 import Results from './Results'
 import SearchPage from './SearchPage'
 import DropdownButton from './DropdownButton'
-import Constants from './Constants'
 import SearchBarCustom from './SearchBarCustom'
 
 export {
@@ -14,7 +13,6 @@ export {
   SearchPage,
   DropdownButton,
   SearchBarCustom,
-  Constants,
   Card,
   Description,
   Results,

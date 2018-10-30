@@ -15,6 +15,7 @@ import {
 } from './components'
 import registerServiceWorker from './registerServiceWorker'
 import configureStore, { history } from './redux/configureStore'
+import { loadState } from './redux/localStorage'
 
 const store = configureStore()
 

@@ -6,6 +6,7 @@ const initialState = {
   consoles: '',
   ageRange: '',
   symptoms: '',
+  selectedSaveSearch: '',
   nameSearchField: ''
 }
 

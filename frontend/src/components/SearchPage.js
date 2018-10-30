@@ -57,6 +57,9 @@ class SearchPage extends Component {
           </Button>
         </Link>
         <br />
+        <h> Load Previous Search </h>
+        <DropdownButton title="Saved Searches" fieldName="selectedSaveSearch" />
+        <h> Admin Login: </h>
         <Link to={{ pathname: './directorPage' }}>Login</Link>
       </div>
     )

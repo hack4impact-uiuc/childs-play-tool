@@ -1,7 +1,10 @@
 // @flow
+const SAVE_SEARCH = 'results/SAVE_SEARCH'
 const UPDATE_RESULTS = 'results/UPDATE_RESULTS'
-const initialState = {
-  games: {}
+
+export const resultsState = {
+  games: {},
+  searches: {}
 
   /*
   HARD-CODED TEST DATA
@@ -87,17 +90,33 @@ const initialState = {
   */
 }
 
-export default function reducer(state = initialState, action) {
+export default function reducer(state = resultsState, action) {
   switch (action.type) {
     case UPDATE_RESULTS:
       return {
         ...state,
         games: action.value
       }
+    case SAVE_SEARCH:
+      return {
+        ...state,
+        searches: state.searches.concat({
+          value: action.payload.value,
+          searchResults: action.payload.searchResults
+        })
+      }
     default:
       return state
   }
 }
+
+export const saveSearch = (value, searchResults) => ({
+  type: SAVE_SEARCH,
+  payload: {
+    value,
+    searchResults
+  }
+})
 
 export const updateResults = value => ({
   type: UPDATE_RESULTS,
