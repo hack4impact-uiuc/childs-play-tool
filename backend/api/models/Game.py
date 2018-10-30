@@ -13,8 +13,8 @@ class Game(Mixin, db.Model):
     system = db.Column(systems, nullable=False)
     gender = db.Column(genders, nullable=False)
     description = db.Column(db.String, nullable=False)
-    thumbnail = db.Column(db.LargeBinary, nullable=False)
-    image = db.Column(db.LargeBinary, nullable=False)
+    thumbnail = db.Column(db.String, nullable=False)
+    image = db.Column(db.String, nullable=False)
 
     def __init__(self, data):
         self.id = data["id"]
