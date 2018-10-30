@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import Tag from './Tag'
 import styles from '../styles/styles.css'
 

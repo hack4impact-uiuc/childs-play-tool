@@ -116,6 +116,14 @@
   border-color: black;
 }
 
+.dropdownButton {
+  color: cornflowerblue;
+  background: white;
+  border: 1px;
+  border-style: solid;
+  border-color: black;
+}
+
 .loginLink {
   margin: 5%;
 }

@@ -69,6 +69,17 @@ class Results extends Component {
           <div>No matching results :(</div>
         )}
         <br />
+        <img src={require('../styles/switch.png')} />
+        <img src={require('../styles/psvita.png')} />
+        <img src={require('../styles/xbox1.png')} />
+        <img src={require('../styles/ps4.png')} />
+        <img src={require('../styles/3ds.png')} />
+        <img src={require('../styles/android.png')} />
+        <img src={require('../styles/apple.png')} />
+        <img src={require('../styles/htc.png')} />
+        <img src={require('../styles/psvr.png')} />
+        <img src={require('../styles/oculus.png')} />
+        <br />
         <Link to={{ pathname: './' }}>
           <Button className="homeButton">Go to Home</Button>
         </Link>
