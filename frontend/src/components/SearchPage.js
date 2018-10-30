@@ -30,36 +30,43 @@ class SearchPage extends Component {
     return (
       <div className="background">
         <body className="background">
-        <p className = "homePage" >Hello! Welcome to the Child's Play Game Finder. You can search a game by name or filter by inputs.</p>
-        <SearchBarCustom fieldName="nameSearchField" />
-        <Link to={{ pathname: './Results' }}>
-          <Button className="right" 
-            onClick={e =>
-              getGames(this.props.age, this.props.symptom, this.props.system).then(results =>
-                this.props.updateResults(results)
-              )
-            }
-          >
-            Search By Name
-          </Button>
-        </Link>
-        <DropdownButton title="Console Type" fieldName="consoles" />
-        <DropdownButton title="Age" fieldName="ageRange" />
-        <DropdownButton title="Symptom" fieldName="symptoms" />
-        <Link to={{ pathname: './Results' }}>
-          <Button className="searchButton"
-            color="blue"
-            onClick={e =>
-              getGames(this.props.age, this.props.symptom, this.props.system).then(results =>
-                this.props.updateResults(results)
-              )
-            }
-          >
-            Search By Filter
-          </Button>
-        </Link>
-        <br />
-        <Link className = "loginLink" to={{ pathname: './directorPage' }}> Admin Login </Link>
+          <p className="homePage">
+            Hello! Welcome to the Child's Play Game Finder. You can search a game by name or filter
+            by inputs.
+          </p>
+          <SearchBarCustom fieldName="nameSearchField" />
+          <Link to={{ pathname: './Results' }}>
+            <Button
+              className="right"
+              onClick={e =>
+                getGames(this.props.age, this.props.symptom, this.props.system).then(results =>
+                  this.props.updateResults(results)
+                )
+              }
+            >
+              Search By Name
+            </Button>
+          </Link>
+          <DropdownButton title="Console Type" fieldName="consoles" />
+          <DropdownButton title="Age" fieldName="ageRange" />
+          <DropdownButton title="Symptom" fieldName="symptoms" />
+          <Link to={{ pathname: './Results' }}>
+            <Button
+              className="searchButton"
+              color="blue"
+              onClick={e =>
+                getGames(this.props.age, this.props.symptom, this.props.system).then(results =>
+                  this.props.updateResults(results)
+                )
+              }
+            >
+              Search By Filter
+            </Button>
+          </Link>
+          <br />
+          <Link className="loginLink" to={{ pathname: './directorPage' }}>
+            <Button className="adminButton">Admin Login</Button>
+          </Link>
         </body>
       </div>
     )

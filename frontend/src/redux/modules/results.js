@@ -33,25 +33,28 @@ const initialState = {
         name: 'Test',
         summary: 'A test',
         description: 'A test',
-        tags: [{ type: 'age', tag: '3' }, { type: 'symptom', tag: 'Sadness' }]
+        tags: [{ type: 'age', tag: '12 and Under' }, { type: 'symptom', tag: 'Sadness' }]
       },
       {
         name: 'Test',
         summary: 'A test',
         description: 'A test',
-        tags: [{ type: 'age', tag: '3' }, { type: 'symptom', tag: 'Bored (Long Term)' }]
+        tags: [{ type: 'age', tag: '12 and Under' }, { type: 'symptom', tag: 'Bored (Long Term)' }]
       },
       {
         name: 'Test',
         summary: 'A test',
         description: 'A test',
-        tags: [{ type: 'age', tag: '3' }, { type: 'symptom', tag: 'Bored (Short Term)' }]
+        tags: [{ type: 'age', tag: '12 and Under' }, { type: 'symptom', tag: 'Bored (Short Term)' }]
       },
       {
         name: 'Test',
         summary: 'A test',
         description: 'A test',
-        tags: [{ type: 'age', tag: '3' }, { type: 'symptom', tag: 'Anxiety/Hyperactivity' }]
+        tags: [
+          { type: 'age', tag: '12 and Under' },
+          { type: 'symptom', tag: 'Anxiety/Hyperactivity' }
+        ]
       }
     ]
   }

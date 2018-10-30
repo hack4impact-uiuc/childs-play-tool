@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import Card from './Card'
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap'
 import classnames from 'classnames'
+import { Button } from 'reactstrap'
 
 const mapStateToProps = state => ({
   results: state.results.games
@@ -68,7 +69,9 @@ class Results extends Component {
           <div>No matching results :(</div>
         )}
         <br />
-        <Link to={{ pathname: './' }}>Go to home</Link>
+        <Link to={{ pathname: './' }}>
+          <Button className="homeButton">Go to Home</Button>
+        </Link>
       </div>
     )
   }
