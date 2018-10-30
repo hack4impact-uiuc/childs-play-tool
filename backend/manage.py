@@ -2,7 +2,7 @@ from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 from api import create_app
 from api.models import db, Game, Ranking
-from tests.mock_data import (
+from api.mock_data import (
     game_ids,
     game_names,
     game_systems,
