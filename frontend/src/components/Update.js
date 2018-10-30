@@ -15,14 +15,15 @@ class Update extends Component {
 
   render() {
     return (
-      <section>
-        <div className="Update">
-          <Dropzone onDrop={this.onDrop.bind(this)}>
-            <p>Drop updated csv file here, or click to select files to upload</p>
+      <section className="droppedBox">
+        <h2>Upload excel sheet with new game data</h2>
+        <div className="dropZone">
+          <Dropzone onDrop={this.onDrop.bind(this)} className="dropBox">
+            <p>Drop excel file here or click to select files to upload</p>
           </Dropzone>
         </div>
         <aside>
-          <h2>Dropped files</h2>
+          <h3>Files Dropped</h3>
           <ul>
             {this.state.files.map(f => (
               <li key={f.name}>
