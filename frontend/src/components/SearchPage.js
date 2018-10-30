@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { DropdownButton, SearchBarCustom } from './'
 import { updateField } from '../redux/modules/searchpage'
-import { loadState } from '../redux/localStorage'
 
 const mapStateToProps = state => ({})
 

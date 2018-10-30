@@ -13,12 +13,10 @@ const composedMiddleware = compose(applyMiddleware(...middleware))
 const persistedState = loadState()
 
 const savePersistedState = store => () => {
-  console.log(persistedState.searches)
   saveState({ searches: store.getState().results.searches })
 }
 
 export default function configureStore() {
-  console.log(persistedState)
   let store = createStore(reducer, persistedState, devtools(composedMiddleware))
   store.subscribe(savePersistedState(store))
   return store

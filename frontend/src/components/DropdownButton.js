@@ -4,12 +4,9 @@ import { bindActionCreators } from 'redux'
 import { Constants } from './'
 import { updateField } from '../redux/modules/searchpage'
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
-import { loadState } from '../redux/localStorage'
 
 const mapStateToProps = state => ({
-  consoleField: state.consoles,
-  ageField: state.ageRange,
-  symptomField: state.symptoms
+  savedSearches: state.results.searches
 })
 
 const mapDispatchToProps = dispatch => {
@@ -29,18 +26,21 @@ class DropdownButton extends Component {
       title: this.props.title,
       dropdownOpen: false
     }
-    this.toggle = this.toggle.bind(this)
-    this.determineDropdownItems = this.determineDropdownItems.bind(this)
+
     this.props.updateField(this.props.fieldName, this.state.selectedVal)
   }
 
-  determineDropdownItems(fieldName) {
-    return Constants[fieldName]
+  determineDropdownItems = fieldName => {
+    if (fieldName === 'savedSearches') {
+      return this.props.savedSearches
+    } else {
+      return Constants[fieldName]
+    }
   }
 
   dropdownItems = this.determineDropdownItems(this.props.fieldName)
 
-  toggle() {
+  toggle = () => {
     this.setState(prevState => ({
       dropdownOpen: !prevState.dropdownOpen
     }))

@@ -98,9 +98,9 @@ class Results extends Component {
         </Form>
         <Button
           color="primary"
-          onClick={() =>
+          onClick={() => {
             this.props.saveSearch(this.state.saveName, JSON.stringify(this.props.results))
-          }
+          }}
         >
           Save Search
         </Button>
