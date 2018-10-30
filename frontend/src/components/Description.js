@@ -11,7 +11,7 @@ class Description extends Component {
     return (
       <div className="Description">
         <div align="center" style={titleStyle}>
-          {this.props.location.state.game.title}
+          {this.props.location.state.game.name}
         </div>
         <div>
           {this.props.location.state.game.tags.map(t => (

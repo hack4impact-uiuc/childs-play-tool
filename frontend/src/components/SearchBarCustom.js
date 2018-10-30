@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { updateField } from '../redux/modules/searchpage'
 import { Form, FormGroup, Label, Input } from 'reactstrap'
+import '../styles/styles.css'
 
 const mapStateToProps = state => ({
   nameSearchField: state.nameSearchField
@@ -25,7 +26,7 @@ class SearchBarCustom extends Component {
   render() {
     return (
       <div>
-        <Form>
+        <Form className="search">
           <FormGroup>
             <Label for="exampleSearch">Search by Name</Label>
             <Input

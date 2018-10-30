@@ -1,36 +1,32 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import Tag from './Tag'
+import styles from '../styles/styles.css'
 
-const cardStyle = {
-  color: 'black',
-  fontFamily: 'Arial',
-  border: '2px solid #52e3e5',
-  borderRadius: '25px',
-  margin: '10px',
-  padding: '10px',
-  display: 'inline-block'
-}
-const titleStyle = {
-  fontSize: '30px'
-}
 class Card extends Component {
-  buildTags = tags => tags.map(t => <Tag type={t.type} tag={t.tag} />)
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      hover: 'cardStyle'
+    }
+  }
+  buildTags = tags =>
+    tags.map(t => (t.type.toLowerCase() != 'system' ? <Tag type={t.type} tag={t.tag} /> : null))
   render() {
     return (
-      <p className="Card" style={cardStyle}>
-        <div align="center" style={titleStyle}>
+      <p
+        className={this.state.hover}
+        onMouseOver={e => this.setState({hover: 'cardStyleHover'})}
+        onMouseLeave={e => this.setState({hover: 'cardStyle'})}
+      >
+        <div className="cardName" align="center">
           {this.props.game.name}
         </div>
         <div align="right">
           {this.props.game.tags ? this.buildTags(this.props.game.tags) : null}
         </div>
         <p>{this.props.game.summary ? this.props.game.summary : null}</p>
-        {this.props.game.description && (
-          <Link to={{ pathname: './description', state: { game: this.props.game } }}>
-            Go to description
-          </Link>
-        )}
       </p>
     )
   }

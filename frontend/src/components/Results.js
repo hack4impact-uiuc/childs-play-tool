@@ -25,7 +25,14 @@ class Results extends Component {
       })
     }
   }
-  buildCards = games => (games ? games.map(c => <Card game={c} />) : null)
+  buildCards = games =>
+    games
+      ? games.map(c => (
+          <Link to={{ pathname: './description', state: { game: c } }}>
+            <Card game={c} />
+          </Link>
+        ))
+      : null
   render() {
     return (
       <div>
