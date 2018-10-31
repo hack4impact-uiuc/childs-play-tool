@@ -123,7 +123,13 @@ def test_get_game_specific(client):
     assert ret_dict["result"]["game"]["gender"] == "Male"
 
 
-def test_post_games(client):
+@requests_mock.Mocker(kw="mock")
+def test_post_games(client, **kwargs):
+    kwargs["mock"].get(
+        "http://www.giantbomb.com/api/search/?",
+        json='{"results": [{"name": "", "deck": "", "image": {"icon_url": "", "small_url": ""}}]}',
+    )
+
     rs = client.post("/games")
     assert rs.status_code == 400
     ret_dict = json.loads(rs.data)
@@ -149,12 +155,3 @@ def test_post_games(client):
         "PlayStation Vita",
         "Xbox One",
     ]
-
-
-@requests_mock.mock()
-def test_func(m):
-    m.get(
-        "http://www.giantbomb.com/api/search/?",
-        res={"description": "", "image": {"icon_url": "", "small_url": ""}},
-    )
-    return requests.get("http://www.giantbomb.com/api/search/?").res
