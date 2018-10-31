@@ -7,6 +7,9 @@ from api.mock_data import (
     game_names,
     game_systems,
     game_genders,
+    game_descriptions,
+    game_images,
+    game_thumbnails,
     ranking_ages,
     ranking_game_ids,
     ranking_ids,
@@ -40,16 +43,19 @@ def recreate_db():
     production.
     """
     db.drop_all()
-    # db.create_all()
-    # for i in range(len(game_ids)):
-    #     game = {}
-    #     game["id"] = game_ids[i]
-    #     game["name"] = game_names[i]
-    #     game["system"] = game_systems[i]
-    #     game["gender"] = game_genders[i]
-    #     g = Game(game)
-    #     db.session.add(g)
-    # db.session.commit()
+    db.create_all()
+    for i in range(len(game_ids)):
+        game = {}
+        game["id"] = game_ids[i]
+        game["name"] = game_names[i]
+        game["system"] = game_systems[i]
+        game["gender"] = game_genders[i]
+        game["description"] = game_descriptions[i]
+        game["image"] = game_images[i]
+        game["thumbnail"] = game_thumbnails[i]
+        g = Game(game)
+        db.session.add(g)
+    db.session.commit()
 
     # for i in range(len(ranking_ids)):
     #     ranking = {}
@@ -68,4 +74,7 @@ if __name__ == "__main__":
     manager.run()
 
 if __name__ == "__games__":
+    manager.run()
+
+if __name__ == "__search_page__":
     manager.run()
