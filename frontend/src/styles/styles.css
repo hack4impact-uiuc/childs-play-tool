@@ -75,14 +75,6 @@
   margin-bottom: 1%;
 }
 
-.background {
-  margin: 0%;
-  /* background-image: linear-gradient(#4D553D, #E9F0DE); */
-  /* background-image: url("https://file-ivtwpfvbja.now.sh/"); */
-}
-/* .backgroundGreen{
-    background: #e5efda
-} */
 .dropdown {
   margin: 5%;
   margin-bottom: 1%;
@@ -117,10 +109,6 @@
 }
 
 .loginLink{
-  margin: 5%;
-}
-
-.homePage{
   margin: 5%;
 }
 
@@ -173,5 +161,16 @@
 }
 
 .homePage {
-  margin: 5%;
+  opacity: 1;
+}
+
+.homeText{
+  padding: 5%;
+}
+
+.background {
+  margin: 0%;
+  background: url("childs_play_light.png");
+  height: 100%; 
+  background-size: cover;
 }
