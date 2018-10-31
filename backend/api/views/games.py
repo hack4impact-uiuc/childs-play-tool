@@ -1,11 +1,10 @@
 from api.models import db, Game, Ranking
 from api.core import create_response, Mixin
-from flask import Blueprint, request
+from flask import Blueprint, request, current_app as app
 import xlrd
 import math
 import json
 import requests
-from keys import keys
 from collections import defaultdict
 
 games_page = Blueprint("games", __name__)
@@ -236,7 +235,7 @@ def get_giantbomb_data(game_name, game_system):
     headers = {"User-Agent": "childs-play"}
     gb_url = "http://www.giantbomb.com/api/search/?"
     gb_params = {
-        "api_key": keys["api_key"],
+        "api_key": app.config["GIANTBOMB_KEY"],
         "resources": "game",
         "query": game_name,
         "field_list": "name,image,api_detail_url,id,platforms,deck",

@@ -20,11 +20,18 @@ game_systems = [
 
 game_genders = ["Male", "Both", "Both", "Male", "Male", "Both"]
 
-game_descriptions = ["Fun game", "My childhood", "Cool", "Pretty good", "Best game ever", "My Childhood"]
+game_descriptions = [
+    "Fun game",
+    "My childhood",
+    "Cool",
+    "Pretty good",
+    "Best game ever",
+    "My Childhood",
+]
 
 game_images = ["jpg", "jpg", "jpg", "jpg", "jpg", "jpg"]
 
-game_thumbnails = ["jpg", "jpg", "jpg", "jpg", "jpg" ,"jpg"]
+game_thumbnails = ["jpg", "jpg", "jpg", "jpg", "jpg", "jpg"]
 ranking_ids = [4, 5, 6, 7, 8, 9]
 
 ranking_ages = [
