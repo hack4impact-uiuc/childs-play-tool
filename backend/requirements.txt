@@ -8,6 +8,7 @@ gunicorn==19.7.1
 psycopg2==2.7.3.2
 pyflakes==1.6.0
 requests==2.18.4
+requests-mock==1.5.2
 SQLAlchemy==1.1.14
 urllib3==1.22
 Flask-Cors==3.0.3

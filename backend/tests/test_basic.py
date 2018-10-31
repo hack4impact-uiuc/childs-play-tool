@@ -1,5 +1,7 @@
 from api.models import db, Game, Ranking
 import json, os
+import requests
+import requests_mock
 
 # client passed from client - look into pytest for more info about fixtures
 # test client api: http://flask.pocoo.org/docs/1.0/api/#test-client
@@ -147,3 +149,12 @@ def test_post_games(client):
         "PlayStation Vita",
         "Xbox One",
     ]
+
+
+@requests_mock.mock()
+def test_func(m):
+    m.get(
+        "http://www.giantbomb.com/api/search/?",
+        res={"description": "", "image": {"icon_url": "", "small_url": ""}},
+    )
+    return requests.get("http://www.giantbomb.com/api/search/?").res
