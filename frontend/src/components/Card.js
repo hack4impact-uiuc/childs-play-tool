@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import Tag from './Tag'
 import styles from '../styles/styles.css'
 
@@ -17,10 +16,10 @@ class Card extends Component {
     return (
       <p
         className={this.state.hover}
-        onMouseOver={e => this.setState({hover: 'cardStyleHover'})}
-        onMouseLeave={e => this.setState({hover: 'cardStyle'})}
+        onMouseOver={e => this.setState({ hover: 'cardStyleHover' })}
+        onMouseLeave={e => this.setState({ hover: 'cardStyle' })}
       >
-        <div className="cardName" align="center">
+        <div className="cardName" align="left">
           {this.props.game.name}
         </div>
         <div align="right">
