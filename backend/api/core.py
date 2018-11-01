@@ -1,4 +1,5 @@
 from typing import Tuple, List
+import configparser
 
 from werkzeug.local import LocalProxy
 from flask import current_app, jsonify
@@ -65,3 +66,12 @@ def all_exception_handler(error: Exception) -> Tuple[Response, int]:
     :returns Tuple of a Flask Response and int
     """
     return create_response(message=str(error), status=500)
+
+def get_api_keys(file: str = "creds.ini") -> str:
+    try:
+        config = configparser.ConfigParser()
+        config.read(file)
+        return config["API-KEYS"]["GIANTBOMB"]
+    except:
+        return None
+
