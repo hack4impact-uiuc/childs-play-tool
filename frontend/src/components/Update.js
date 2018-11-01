@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Dropzone from 'react-dropzone'
+import '../styles/styles.scss'
 
 class Update extends Component {
   constructor(props) {

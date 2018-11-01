@@ -5,6 +5,7 @@ import Card from './Card'
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap'
 import classnames from 'classnames'
 import { Button } from 'reactstrap'
+import '../styles/styles.scss'
 
 const mapStateToProps = state => ({
   results: state.results.games
@@ -30,7 +31,7 @@ class Results extends Component {
     games
       ? games.map(c => (
           <Link to={{ pathname: './description', state: { game: c } }}>
-            <Card game={c} />
+            <Card className="cardBorder" game={c} />
           </Link>
         ))
       : null

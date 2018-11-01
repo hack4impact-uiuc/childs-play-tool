@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Tag from './Tag'
-import styles from '../styles/styles.css'
+import styles from '../styles/styles.scss'
 
 class Card extends Component {
   constructor(props) {
@@ -22,7 +22,7 @@ class Card extends Component {
         <div className="cardName" align="left">
           {this.props.game.name}
         </div>
-        <div align="right">
+        <div align="center">
           {this.props.game.tags ? this.buildTags(this.props.game.tags) : null}
         </div>
         <p>{this.props.game.summary ? this.props.game.summary : null}</p>

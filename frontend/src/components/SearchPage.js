@@ -7,7 +7,7 @@ import { updateField } from '../redux/modules/searchpage'
 import { updateResults } from '../redux/modules/results'
 import { Button } from 'reactstrap'
 import { getGames } from '../utils/ApiWrapper'
-import '../styles/styles.css'
+import '../styles/styles.scss'
 
 const mapStateToProps = state => ({
   system: state.searchpage.consoles,
@@ -28,12 +28,13 @@ const mapDispatchToProps = dispatch => {
 class SearchPage extends Component {
   render() {
     return (
-      <div className="background">
+      <div>
         <body className="background">
-          <p className="homePage">
+          {/* <div className="background"></div> */}
+          <h3 className="homeText">
             Hello! Welcome to the Child's Play Game Finder. You can search a game by name or filter
             by inputs.
-          </p>
+          </h3>
           <SearchBarCustom fieldName="nameSearchField" />
           <Link to={{ pathname: './Results' }}>
             <Button

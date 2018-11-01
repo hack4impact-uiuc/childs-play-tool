@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { Constants } from './'
 import { updateField } from '../redux/modules/searchpage'
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
-import '../styles/styles.css'
+import '../styles/styles.scss'
 
 const mapStateToProps = state => ({
   consoleField: state.consoles,

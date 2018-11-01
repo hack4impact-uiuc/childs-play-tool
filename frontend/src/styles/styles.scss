@@ -1,3 +1,4 @@
+
 .cardStyle {
   color: black;
   font-family: Arial;
@@ -7,6 +8,8 @@
   display: inline-table;
   height: 300px;
   width: 300px;
+  border-radius: 10%;
+  text-align: center;
 }
 .cardStyleHover {
   color: black;
@@ -18,16 +21,26 @@
   height: 300px;
   width: 300px;
   background: #d8ddd8;
+  border-radius: 10%;
+  text-align: center;
 }
 .cardName {
   font-size: 30px;
+  text-align: center;
 }
 .tag_age_12under {
+  margin-top: 2%;
   background: #9fc972;
   color: white;
   width: 160px;
 }
+
+.tags{
+  margin: 12%;
+}
+
 .tag_age_13over {
+  margin-top: 2%;
   background: #4b563a;
   color: white;
   width: 160px;
@@ -173,4 +186,9 @@
   background: url("childs_play_light.png");
   height: 100%; 
   background-size: cover;
+  background-position: center;
+}
+
+.centered{
+  text-align: center;
 }

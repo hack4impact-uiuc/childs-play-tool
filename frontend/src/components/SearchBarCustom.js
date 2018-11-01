@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { updateField } from '../redux/modules/searchpage'
 import { Form, FormGroup, Label, Input } from 'reactstrap'
-import '../styles/styles.css'
+import '../styles/styles.scss'
 
 const mapStateToProps = state => ({
   nameSearchField: state.nameSearchField

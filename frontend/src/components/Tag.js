@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import styles from '../styles/styles.css'
+import styles from '../styles/styles.scss'
 /* const style = {
   age: {
     background: '#f998e8',
