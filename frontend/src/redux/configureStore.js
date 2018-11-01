@@ -7,7 +7,7 @@ import reducer from './modules/reducer'
 import { loadState, saveState } from './localStorage'
 
 export const history = createHistory()
-const devtools = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+const devtools = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const middleware = [thunk, routerMiddleware(history)]
 const composedMiddleware = compose(applyMiddleware(...middleware))
 const persistedState = loadState()

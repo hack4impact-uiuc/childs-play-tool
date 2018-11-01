@@ -1,16 +1,15 @@
 FROM python:3.7-alpine as build
 LABEL maintainer "Angad Garg <angad.garg3@gmail.com>"
 
-COPY Pipfile Pipfile.lock ./
+COPY requirements.txt ./
 RUN apk update && \
     apk add --virtual build-deps gcc musl-dev && \
     apk add postgresql-dev && \
     rm -rf /var/cache/apk/*
 
-RUN pip install pipenv
-RUN pipenv install --system
+RUN pip install -r requirements.txt
 
-RUN apk del build-deps gcc musl-dev && pip uninstall -y pipenv
+RUN apk del build-deps gcc musl-dev
 COPY . /app
 WORKDIR /app
 ENV FLASK_ENV=prod
