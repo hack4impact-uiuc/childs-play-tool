@@ -67,6 +67,7 @@ def all_exception_handler(error: Exception) -> Tuple[Response, int]:
     """
     return create_response(message=str(error), status=500)
 
+
 def get_api_keys(file: str = "creds.ini") -> str:
     try:
         config = configparser.ConfigParser()
@@ -74,4 +75,3 @@ def get_api_keys(file: str = "creds.ini") -> str:
         return config["API-KEYS"]["GIANTBOMB"]
     except:
         return None
-
