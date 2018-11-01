@@ -21,18 +21,15 @@ class Game(Mixin, db.Model):
         self.name = data["name"]
         self.system = data["system"]
         self.gender = data["gender"]
+        self.image = ""
+        self.thumbnail = ""
+        self.description = ""
         if "description" in data:
             self.description = data["description"]
-        else:
-            self.description = ""
         if "thumbnail" in data:
             self.thumbnail = data["thumbnail"]
-        else:
-            self.thumbnail = ""
         if "image" in data:
             self.image = data["image"]
-        else:
-            self.image = ""
 
     def __repr__(self):
         return "<name {}>".format(self.name)
