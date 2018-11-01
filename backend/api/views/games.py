@@ -250,8 +250,6 @@ def get_giantbomb_data(game_name):
     gb_dict["image"] = ""
 
     gb_data = requests.get(url=gb_url, params=gb_params, headers=headers).json()
-    if gb_data.text == "mock":
-        return gb_dict
 
     if len(gb_data["results"]) != 0:
         best_match = gb_data["results"][0]

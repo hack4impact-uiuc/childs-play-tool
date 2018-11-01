@@ -127,8 +127,7 @@ def test_get_game_specific(client):
 def test_post_games(client, **kwargs):
     kwargs["mock"].get(
         "http://www.giantbomb.com/api/search/?",
-        json='{"results": [{"name": "", "deck": "", "image": {"icon_url": "", "small_url": ""}}]}',
-        text="mock",
+        json='{"results": [{"name": "mock", "deck": "mock", "image": {"icon_url": "mock", "small_url": "mock"}}]}',
     )
 
     rs = client.post("/games")
