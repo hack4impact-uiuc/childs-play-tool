@@ -30,7 +30,6 @@ class SearchPage extends Component {
     return (
       <div>
         <body className="background">
-          {/* <div className="background"></div> */}
           <h3 className="homeText">
             Hello! Welcome to the Child's Play Game Finder. You can search a game by name or filter
             by inputs.

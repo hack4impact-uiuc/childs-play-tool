@@ -1,5 +1,3 @@
-// change to actual values from database
-
 const Constants = {
   consoles: [
     { value: 'PlayStation Vita' },
