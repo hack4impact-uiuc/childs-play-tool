@@ -37,7 +37,7 @@ class Tag extends Component {
     else if (tag === Constants.symptoms[5].value) return '_cognitive'
     else if (tag === Constants.ageRange[0].value) return '_12under'
     else if (tag === Constants.ageRange[1].value) return '_13over'
-    else return '_' + tag
+    else return '_' + tag.toLowerCase()
   }
   ageDisplay = tag => {
     if (tag === '12 and Under') return '12-'
