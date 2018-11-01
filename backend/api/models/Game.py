@@ -12,18 +12,24 @@ class Game(Mixin, db.Model):
     name = db.Column(db.String, nullable=False)
     system = db.Column(systems, nullable=False)
     gender = db.Column(genders, nullable=False)
-    # description = db.Column(db.String, nullable=False)
-    # thumbnail = db.Column(db.LargeBinary, nullable=False)
-    # image = db.Column(db.LargeBinary, nullable=False)
+    description = db.Column(db.String, nullable=False)
+    thumbnail = db.Column(db.String, nullable=False)
+    image = db.Column(db.String, nullable=False)
 
     def __init__(self, data):
         self.id = data["id"]
         self.name = data["name"]
         self.system = data["system"]
         self.gender = data["gender"]
-        # self.description = data["description"]
-        # self.thumbnail = data["thumbnail"]
-        # self.image = data["image"]
+        self.image = ""
+        self.thumbnail = ""
+        self.description = ""
+        if "description" in data:
+            self.description = data["description"]
+        if "thumbnail" in data:
+            self.thumbnail = data["thumbnail"]
+        if "image" in data:
+            self.image = data["image"]
 
     def __repr__(self):
         return "<name {}>".format(self.name)

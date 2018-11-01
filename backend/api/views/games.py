@@ -1,9 +1,10 @@
 from api.models import db, Game, Ranking
-from api.core import create_response, serialize_list, Mixin, logger
-from flask import Blueprint, request
+from api.core import create_response, Mixin
+from flask import Blueprint, request, current_app as app
 import xlrd
 import math
-
+import json
+import requests
 from collections import defaultdict
 
 games_page = Blueprint("games", __name__)
@@ -47,7 +48,15 @@ def get_games():
             )
 
         ranked_games = (
-            db.session.query(Game.name, Game.gender, Ranking.rank)
+            db.session.query(
+                Game.name,
+                Game.id,
+                Game.description,
+                Game.thumbnail,
+                Game.image,
+                Game.gender,
+                Ranking.rank,
+            )
             .join(Ranking)
             .filter(
                 Ranking.system == system, Ranking.symptom == symptom, Ranking.age == age
@@ -66,7 +75,15 @@ def get_games():
         systems = {}
         for system in Game.system.type.enums:
             ranked_games_by_system = (
-                db.session.query(Game.name, Game.gender, Ranking.rank)
+                db.session.query(
+                    Game.name,
+                    Game.id,
+                    Game.description,
+                    Game.thumbnail,
+                    Game.image,
+                    Game.gender,
+                    Ranking.rank,
+                )
                 .join(Ranking)
                 .filter(
                     Ranking.system == system,
@@ -87,11 +104,10 @@ def get_games():
 @games_page.route(GAMES_ID_URL, methods=["GET"])
 def get_game_specific(game_id):
     game = Game.query.filter(Game.id == game_id)
-    print(game.first())
     if game.count() == 0:
         return create_response(status=400, message="Game not found")
     else:
-        return create_response(data={"game": serialize_list(game)[0]})
+        return create_response(data={"game": game.first().to_dict()})
 
 
 @games_page.route(GAMES_URL, methods=["POST"])
@@ -137,10 +153,10 @@ def post_games():
                         game["id"] = id
                         id = id + 1
                         # API extra information stuff
-                        # extra_data = get_giantbomb_data(name, system)
-                        # game["thumbnail"] = extra_data["thumbnail"]
-                        # game["image"] = extra_data["image"]
-                        # game["description"] = extra_data["description"]
+                        extra_data = get_giantbomb_data(name, system)
+                        game["thumbnail"] = extra_data["thumbnail"]
+                        game["image"] = extra_data["image"]
+                        game["description"] = extra_data["description"]
                         g = Game(game)
                         db.session.add(g)
                     current_row += 1
@@ -213,3 +229,35 @@ def post_games():
                             db.session.add(r)
     db.session.commit()
     return create_response(status=201, message="Database updated")
+
+
+def get_giantbomb_data(game_name, game_system):
+    headers = {"User-Agent": "childs-play"}
+    gb_url = "http://www.giantbomb.com/api/search/?"
+    gb_params = {
+        "api_key": app.config["GIANTBOMB_KEY"],
+        "resources": "game",
+        "query": game_name,
+        "field_list": "name,image,api_detail_url,id,platforms,deck",
+        "format": "json",
+    }
+    gb_dict = {}
+    gb_dict["description"] = ""
+    gb_dict["thumbnail"] = ""
+    gb_dict["image"] = ""
+
+    gb_data = json.loads(
+        requests.get(url=gb_url, params=gb_params, headers=headers).json()
+    )
+    if len(gb_data["results"]) == 0:
+        return gb_dict
+    for result in gb_data["results"]:
+        if game_name.lower() == result["name"].lower():
+            if result["deck"] is not None:
+                gb_dict["description"] = result["deck"]
+            if result["image"]["icon_url"] is not None:
+                gb_dict["thumbnail"] = result["image"]["icon_url"]
+            if result["image"]["small_url"] is not None:
+                gb_dict["image"] = result["image"]["small_url"]
+            return gb_dict
+    return gb_dict

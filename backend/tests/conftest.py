@@ -34,6 +34,7 @@ def client():
         "SQLALCHEMY_DATABASE_URI": "sqlite:///" + SQLITE_FILE_PATH,
         "DEBUG": True,
         "SQLALCHEMY_TRACK_MODIFICATIONS": False,
+        "GIANTBOMB_KEY": "",
     }
     app = create_app(config_dict)
     app.app_context().push()
