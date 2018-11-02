@@ -31,8 +31,8 @@ class SearchPage extends Component {
       <div>
         <body className="background">
           <h3 className="homeText">
-            Hello! Welcome to the Child&#39;s Play Game Finder. You can search a game by name or filter
-            by inputs.
+            Hello! Welcome to the Child&#39;s Play Game Finder. You can search a game by name or
+            filter by inputs.
           </h3>
           <SearchBarCustom fieldName="nameSearchField" />
           <Link to={{ pathname: './Results' }}>

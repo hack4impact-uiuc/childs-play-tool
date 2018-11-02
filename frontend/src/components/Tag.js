@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import styles from '../styles/styles.scss'
-import {Constants} from '../utils/Constants.js'
+import { Constants } from '../utils/Constants.js'
 /* const style = {
   age: {
     background: '#f998e8',
@@ -33,7 +33,7 @@ class Tag extends Component {
   getStyle = tag => {
     if (tag === Constants.symptoms[0].value) return '_bored_long'
     else if (tag === Constants.symptoms[1].value) return '_bored_short'
-    else if (tag === Constants.symptoms[3].value) return '_anxiety'  
+    else if (tag === Constants.symptoms[3].value) return '_anxiety'
     else if (tag === Constants.symptoms[5].value) return '_cognitive'
     else if (tag === Constants.ageRange[0].value) return '_12under'
     else if (tag === Constants.ageRange[1].value) return '_13over'

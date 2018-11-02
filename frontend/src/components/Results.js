@@ -23,7 +23,7 @@ import { Button } from 'reactstrap'
 import '../styles/styles.scss'
 import { saveSearch } from '../redux/modules/results'
 import { bindActionCreators } from 'redux'
-import {Constants} from '../utils/Constants.js'
+import { Constants } from '../utils/Constants.js'
 
 const mapStateToProps = state => ({
   results: state.results.games
@@ -65,15 +65,24 @@ class Results extends Component {
       : null
   chooseImage = system => {
     if (system === Constants.consoles[0].value) return <img src={require('../styles/psvita.png')} />
-    else if (system === Constants.consoles[1].value) return <img src={require('../styles/xbox1.png')} />
-    else if (system === Constants.consoles[2].value) return <img src={require('../styles/ps4.png')} />
-    else if (system === Constants.consoles[3].value) return <img src={require('../styles/switch.png')} />
-    else if (system === Constants.consoles[4].value) return <img src={require('../styles/3ds.png')} />
-    else if (system === Constants.consoles[5].value) return <img src={require('../styles/apple.png')} />
-    else if (system === Constants.consoles[6].value) return <img src={require('../styles/android.png')} />
-    else if (system === Constants.consoles[7].value) return <img src={require('../styles/psvr.png')} />
-    else if (system === Constants.consoles[8].value) return <img src={require('../styles/htc.png')} />
-    else if (system === Constants.consoles[9].value) return <img src={require('../styles/oculus.png')} />
+    else if (system === Constants.consoles[1].value)
+      return <img src={require('../styles/xbox1.png')} />
+    else if (system === Constants.consoles[2].value)
+      return <img src={require('../styles/ps4.png')} />
+    else if (system === Constants.consoles[3].value)
+      return <img src={require('../styles/switch.png')} />
+    else if (system === Constants.consoles[4].value)
+      return <img src={require('../styles/3ds.png')} />
+    else if (system === Constants.consoles[5].value)
+      return <img src={require('../styles/apple.png')} />
+    else if (system === Constants.consoles[6].value)
+      return <img src={require('../styles/android.png')} />
+    else if (system === Constants.consoles[7].value)
+      return <img src={require('../styles/psvr.png')} />
+    else if (system === Constants.consoles[8].value)
+      return <img src={require('../styles/htc.png')} />
+    else if (system === Constants.consoles[9].value)
+      return <img src={require('../styles/oculus.png')} />
     else return
   }
   render() {
