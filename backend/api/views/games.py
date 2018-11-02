@@ -112,13 +112,17 @@ def get_game_specific(game_id):
     else:
         return create_response(data={"game": game.first().to_dict()})
 
+
 @games_page.route(GAMES_ALL_URL, methods=["GET"])
 def get_games_all():
     systems = {}
     for system in Game.system.type.enums:
-        games_by_system = Game.query.filter(Game.system == system).order_by(Game.name).all()
+        games_by_system = (
+            Game.query.filter(Game.system == system).order_by(Game.name).all()
+        )
         systems[system] = [game.to_dict() for game in games_by_system]
     return create_response(status=200, data={"games": systems})
+
 
 @games_page.route(GAMES_URL, methods=["POST"])
 def post_games():
