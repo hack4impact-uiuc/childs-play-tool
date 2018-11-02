@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { DropdownButton, SearchBarCustom } from './'
 import { updateField } from '../redux/modules/searchpage'
-import { updateResults } from '../redux/modules/results'
+import { updateResults, getSavedSearch } from '../redux/modules/results'
 import { Button } from 'reactstrap'
 import { getGames } from '../utils/ApiWrapper'
 
@@ -12,14 +12,16 @@ const mapStateToProps = state => ({
   system: state.searchpage.consoles,
   age: state.searchpage.ageRange,
   symptom: state.searchpage.symptoms,
-  name: state.searchpage.nameSearchField
+  name: state.searchpage.nameSearchField,
+  selectedVal: state.searchpage.selectedSaveSearch
 })
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       updateField,
-      updateResults
+      updateResults,
+      getSavedSearch
     },
     dispatch
   )
@@ -56,9 +58,19 @@ class SearchPage extends Component {
             Search By Filter
           </Button>
         </Link>
-        <br />
         <h> Load Previous Search </h>
         <DropdownButton title="Saved Searches" fieldName="selectedSaveSearch" />
+        <Link to={{ pathname: './Results' }}>
+          <Button
+            color="blue"
+            onClick={e => {
+              this.props.updateResults(this.props.getSavedSearch(this.props.selectedVal))
+              console.log(this.props.getSavedSearch(this.props.selectedVal))
+            }}
+          >
+            Load saved search
+          </Button>
+        </Link>
         <h> Admin Login: </h>
         <Link to={{ pathname: './directorPage' }}>Login</Link>
       </div>

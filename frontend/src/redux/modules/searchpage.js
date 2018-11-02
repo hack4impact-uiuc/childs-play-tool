@@ -6,8 +6,8 @@ const initialState = {
   consoles: '',
   ageRange: '',
   symptoms: '',
-  selectedSaveSearch: '',
-  nameSearchField: ''
+  nameSearchField: '',
+  selectedSaveSearch: ''
 }
 
 export default function reducer(state = initialState, action) {

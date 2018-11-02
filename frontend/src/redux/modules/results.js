@@ -1,11 +1,89 @@
 // @flow
 const SAVE_SEARCH = 'results/SAVE_SEARCH'
 const UPDATE_RESULTS = 'results/UPDATE_RESULTS'
+const GET_SAVED_SEARCH = 'results/GET_SAVED_SEARCH'
 
 export const resultsState = {
-  games: {},
-  searches: []
-
+  games: {
+    Switch: [
+      {
+        name: 'Mario Kart',
+        summary: 'A racing game',
+        description: 'A racing game where the most important skill is luck',
+        tags: [
+          { type: 'age', tag: '0-5' },
+          { type: 'system', tag: 'Switch' },
+          { type: 'symptom', tag: 'Pain' }
+        ]
+      }
+    ],
+    That: [
+      {
+        name: 'Childs Play',
+        summary: 'Best team',
+        description: 'Best team to ever exist ever',
+        tags: [
+          { type: 'age', tag: 'Bounce' },
+          { type: 'system', tag: 'that' },
+          { type: 'symptom', tag: 'shit' }
+        ]
+      }
+    ],
+    XBox: [
+      {
+        name: 'Test',
+        summary: 'A test',
+        description: 'A test',
+        tags: [
+          { type: 'age', tag: '3' },
+          { type: 'system', tag: 'xbox' },
+          { type: 'symptom', tag: 'debug' },
+          { type: 'misc', tag: 'test' }
+        ]
+      },
+      {
+        name: 'Test',
+        summary: 'A test',
+        description: 'A test',
+        tags: [
+          { type: 'age', tag: '3' },
+          { type: 'system', tag: 'xbox' },
+          { type: 'symptom', tag: 'debug' }
+        ]
+      },
+      {
+        name: 'Test',
+        summary: 'A test',
+        description: 'A test',
+        tags: [
+          { type: 'age', tag: '3' },
+          { type: 'system', tag: 'xbox' },
+          { type: 'symptom', tag: 'debug' }
+        ]
+      },
+      {
+        name: 'Test',
+        summary: 'A test',
+        description: 'A test',
+        tags: [
+          { type: 'age', tag: '3' },
+          { type: 'system', tag: 'xbox' },
+          { type: 'symptom', tag: 'debug' }
+        ]
+      },
+      {
+        name: 'Test',
+        summary: 'A test',
+        description: 'A test',
+        tags: [
+          { type: 'age', tag: '3' },
+          { type: 'system', tag: 'xbox' },
+          { type: 'symptom', tag: 'debug' }
+        ]
+      }
+    ]
+  },
+  searches: {}
   /*
   HARD-CODED TEST DATA
   {
@@ -105,6 +183,11 @@ export default function reducer(state = resultsState, action) {
           searchResults: action.payload.searchResults
         })
       }
+    case GET_SAVED_SEARCH:
+      return {
+        ...state,
+        games: state.searches.find(({ value }) => value === action.value).searchResults
+      }
     default:
       return state
   }
@@ -120,5 +203,10 @@ export const saveSearch = (value, searchResults) => ({
 
 export const updateResults = value => ({
   type: UPDATE_RESULTS,
+  value
+})
+
+export const getSavedSearch = value => ({
+  type: GET_SAVED_SEARCH,
   value
 })
