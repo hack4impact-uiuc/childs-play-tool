@@ -289,11 +289,7 @@ def get_giantbomb_data(game_name):
     ):
         # remove last word and retry
         split_modified = modified_name.split(" ")
-        remove_last = ""
-        for i in range(len(split_modified) - 1):
-            remove_last = remove_last + split_modified[i] + " "
-        modified_name = remove_last.strip()
-
+        modified_name = ' '.join(split_modified[:-1])
         gb_params["query"] = modified_name
         gb_data = requests.get(url=gb_url, params=gb_params, headers=headers).json()
 
