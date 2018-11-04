@@ -1,5 +1,5 @@
 from api.models import db, Game, Ranking
-from api.core import create_response, Mixin, logger
+from api.core import create_response, Mixin
 from flask import Blueprint, request, current_app as app
 import xlrd
 import math
@@ -266,7 +266,6 @@ def get_giantbomb_data(game_name):
     if len(gb_data["results"]) != 0:
         best_match = gb_data["results"][0]
         best_similarity = 0
-        logger.info("initialized")
         # look for closest match
         for result in gb_data["results"]:
             similarity = SequenceMatcher(
