@@ -266,6 +266,7 @@ def get_giantbomb_data(game_name):
     if len(gb_data["results"]) != 0:
         best_match = gb_data["results"][0]
         best_similarity = 0
+        logger.info("initialized")
         # look for closest match
         for result in gb_data["results"]:
             similarity = SequenceMatcher(
