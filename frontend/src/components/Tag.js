@@ -1,28 +1,6 @@
 import React, { Component } from 'react'
 import styles from '../styles/styles.scss'
-import { Constants } from '../utils/Constants.js'
-/* const style = {
-  age: {
-    background: '#f998e8',
-    color: 'white',
-    width: '55px'
-  },
-  symptom: {
-    background: '#a2f998',
-    color: 'white',
-    width: '55px'
-  },
-  system: {
-    background: '#98d1f9',
-    color: 'white',
-    width: '55px'
-  }
-}
-const defaultStyle = {
-  background: 'gray',
-  color: 'white',
-  width: '55px'
-} */
+import Constants from '../utils/Constants.js'
 class Tag extends Component {
   constructor(props) {
     super(props)

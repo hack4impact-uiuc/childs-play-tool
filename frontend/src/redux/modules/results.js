@@ -4,21 +4,15 @@ const UPDATE_RESULTS = 'results/UPDATE_RESULTS'
 const GET_SAVED_SEARCH = 'results/GET_SAVED_SEARCH'
 
 export const resultsState = {
-  games: {},
-  searches: {}
-  /*
-  HARD-CODED TEST DATA
-  {
+  searches: {},
+  games: {
+    // default test data
     Switch: [
       {
         name: 'Mario Kart',
         summary: 'A racing game',
         description: 'A racing game where the most important skill is luck',
-        tags: [
-          { type: 'age', tag: '0-5' },
-          { type: 'system', tag: 'Switch' },
-          { type: 'symptom', tag: 'Pain' }
-        ]
+        tags: [{ type: 'age', tag: '12 and Under' }, { type: 'symptom', tag: 'Pain' }]
       }
     ],
     That: [
@@ -26,11 +20,7 @@ export const resultsState = {
         name: 'Childs Play',
         summary: 'Best team',
         description: 'Best team to ever exist ever',
-        tags: [
-          { type: 'age', tag: 'Bounce' },
-          { type: 'system', tag: 'that' },
-          { type: 'symptom', tag: 'shit' }
-        ]
+        tags: [{ type: 'age', tag: 'Bounce' }, { type: 'symptom', tag: 'shit' }]
       }
     ],
     XBox: [
@@ -39,55 +29,40 @@ export const resultsState = {
         summary: 'A test',
         description: 'A test',
         tags: [
-          { type: 'age', tag: '3' },
-          { type: 'system', tag: 'xbox' },
-          { type: 'symptom', tag: 'debug' },
-          { type: 'misc', tag: 'test' }
+          { type: 'age', tag: '13 and Older' },
+          { type: 'symptom', tag: 'Cognitive Impairment' },
+          { type: 'misc', tag: 'debug' }
         ]
       },
       {
         name: 'Test',
         summary: 'A test',
         description: 'A test',
-        tags: [
-          { type: 'age', tag: '3' },
-          { type: 'system', tag: 'xbox' },
-          { type: 'symptom', tag: 'debug' }
-        ]
+        tags: [{ type: 'age', tag: '12 and Under' }, { type: 'symptom', tag: 'Sadness' }]
+      },
+      {
+        name: 'Test',
+        summary: 'A test',
+        description: 'A test',
+        tags: [{ type: 'age', tag: '12 and Under' }, { type: 'symptom', tag: 'Bored (Long Term)' }]
+      },
+      {
+        name: 'Test',
+        summary: 'A test',
+        description: 'A test',
+        tags: [{ type: 'age', tag: '12 and Under' }, { type: 'symptom', tag: 'Bored (Short Term)' }]
       },
       {
         name: 'Test',
         summary: 'A test',
         description: 'A test',
         tags: [
-          { type: 'age', tag: '3' },
-          { type: 'system', tag: 'xbox' },
-          { type: 'symptom', tag: 'debug' }
-        ]
-      },
-      {
-        name: 'Test',
-        summary: 'A test',
-        description: 'A test',
-        tags: [
-          { type: 'age', tag: '3' },
-          { type: 'system', tag: 'xbox' },
-          { type: 'symptom', tag: 'debug' }
-        ]
-      },
-      {
-        name: 'Test',
-        summary: 'A test',
-        description: 'A test',
-        tags: [
-          { type: 'age', tag: '3' },
-          { type: 'system', tag: 'xbox' },
-          { type: 'symptom', tag: 'debug' }
+          { type: 'age', tag: '12 and Under' },
+          { type: 'symptom', tag: 'Anxiety/Hyperactivity' }
         ]
       }
     ]
   }
-  */
 }
 
 export default function reducer(state = resultsState, action) {
