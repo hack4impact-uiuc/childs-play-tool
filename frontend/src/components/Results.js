@@ -41,7 +41,6 @@ const mapDispatchToProps = dispatch => {
 class Results extends Component {
   constructor(props) {
     super(props)
-
     this.state = {
       activeTab: '1',
       saveName: ''
@@ -140,7 +139,7 @@ class Results extends Component {
         <Button
           color="primary"
           onClick={() => {
-            this.props.saveSearch(this.state.saveName, JSON.stringify(this.props.results))
+            this.props.saveSearch(this.state.saveName, this.props.results)
           }}
         >
           Save Search
