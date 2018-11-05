@@ -1,11 +1,11 @@
 // @flow
 const SAVE_SEARCH = 'results/SAVE_SEARCH'
 const UPDATE_RESULTS = 'results/UPDATE_RESULTS'
+const GET_SAVED_SEARCH = 'results/GET_SAVED_SEARCH'
 
 export const resultsState = {
   games: {},
-  searches: []
-
+  searches: {}
   /*
   HARD-CODED TEST DATA
   {
@@ -105,6 +105,11 @@ export default function reducer(state = resultsState, action) {
           searchResults: action.payload.searchResults
         })
       }
+    case GET_SAVED_SEARCH:
+      return {
+        ...state,
+        games: state.searches.find(({ value }) => value === action.value).searchResults
+      }
     default:
       return state
   }
@@ -120,5 +125,10 @@ export const saveSearch = (value, searchResults) => ({
 
 export const updateResults = value => ({
   type: UPDATE_RESULTS,
+  value
+})
+
+export const getSavedSearch = value => ({
+  type: GET_SAVED_SEARCH,
   value
 })
