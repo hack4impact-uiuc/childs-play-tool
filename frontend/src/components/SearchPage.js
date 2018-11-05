@@ -66,19 +66,19 @@ class SearchPage extends Component {
             </Button>
           </Link>
           <br />
-           <h> Load Previous Search </h>
-        <DropdownButton title="Saved Searches" fieldName="selectedSaveSearch" />
-        <Link to={{ pathname: './Results' }}>
-          <Button
-            color="blue"
-            onClick={e => {
-              this.props.updateResults(this.props.getSavedSearch(this.props.selectedVal))
-              console.log(this.props.getSavedSearch(this.props.selectedVal))
-            }}
-          >
-            Load saved search
-          </Button>
-        </Link>
+          <h> Load Previous Search </h>
+          <DropdownButton title="Saved Searches" fieldName="selectedSaveSearch" />
+          <Link to={{ pathname: './Results' }}>
+            <Button
+              color="blue"
+              onClick={e => {
+                this.props.updateResults(this.props.getSavedSearch(this.props.selectedVal))
+                console.log(this.props.getSavedSearch(this.props.selectedVal))
+              }}
+            >
+              Load saved search
+            </Button>
+          </Link>
           <Link className="loginLink" to={{ pathname: './directorPage' }}>
             <Button className="adminButton">Admin Login</Button>
           </Link>
