@@ -256,31 +256,12 @@ def get_giantbomb_data(game_name):
         "field_list": "name,image,api_detail_url,id,platforms,deck",
         "format": "json",
     }
+
     gb_dict = {}
     gb_dict["description"] = ""
     gb_dict["thumbnail"] = ""
     gb_dict["image"] = ""
-
-    gb_data = requests.get(url=gb_url, params=gb_params, headers=headers).json()
-
-    if len(gb_data["results"]) != 0:
-        best_match = gb_data["results"][0]
-        best_similarity = 0
-        # look for closest match
-        for result in gb_data["results"]:
-            similarity = SequenceMatcher(
-                None, game_name.lower(), result["name"].lower()
-            ).ratio()
-            if similarity > best_similarity:
-                best_match = result
-                best_similarity = similarity
-        if best_match["deck"] is not None:
-            gb_dict["description"] = best_match["deck"]
-        if best_match["image"]["icon_url"] is not None:
-            gb_dict["thumbnail"] = best_match["image"]["icon_url"]
-        if best_match["image"]["small_url"] is not None:
-            gb_dict["image"] = best_match["image"]["small_url"]
-
+    should_remove = False
     while (
         gb_dict["description"] == ""
         and gb_dict["image"] == ""
@@ -288,9 +269,10 @@ def get_giantbomb_data(game_name):
         and modified_name != ""
     ):
         # remove last word and retry
-        split_modified = modified_name.split(" ")
-        modified_name = " ".join(split_modified[:-1])
-        gb_params["query"] = modified_name
+        if should_remove:
+            split_modified = modified_name.split(" ")
+            modified_name = " ".join(split_modified[:-1])
+            gb_params["query"] = modified_name
         gb_data = requests.get(url=gb_url, params=gb_params, headers=headers).json()
 
         if len(gb_data["results"]) != 0:
@@ -310,6 +292,7 @@ def get_giantbomb_data(game_name):
                 gb_dict["thumbnail"] = best_match["image"]["icon_url"]
             if best_match["image"]["small_url"] is not None:
                 gb_dict["image"] = best_match["image"]["small_url"]
+        should_remove = True
     return gb_dict
 
 
