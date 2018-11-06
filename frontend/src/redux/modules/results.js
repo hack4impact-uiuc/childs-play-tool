@@ -7,7 +7,7 @@ export const resultsState = {
   searches: [],
   games: {
     // default test data
-    "Nintendo Switch": [
+    'Nintendo Switch': [
       {
         name: 'Mario Kart',
         summary: 'A racing game',
@@ -15,7 +15,7 @@ export const resultsState = {
         tags: [{ type: 'age', tag: '12 and Under' }, { type: 'symptom', tag: 'Pain' }]
       }
     ],
-    "That": [
+    That: [
       {
         name: 'Childs Play',
         summary: 'Best team',
@@ -23,7 +23,7 @@ export const resultsState = {
         tags: [{ type: 'age', tag: 'Bounce' }, { type: 'symptom', tag: 'shit' }]
       }
     ],
-    "Xbox One": [
+    'Xbox One': [
       {
         name: 'Test',
         summary: 'A test',

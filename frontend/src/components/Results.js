@@ -9,8 +9,9 @@ import {
   NavItem,
   NavLink,
   Button,
-  CardTitle,
-  CardText,
+  InputGroup,
+  InputGroupAddon,
+  InputGroupText,
   Row,
   Col,
   Form,
@@ -19,10 +20,19 @@ import {
   Input
 } from 'reactstrap'
 import classnames from 'classnames'
-import '../styles/styles.scss'
+import '../styles/results.scss'
 import { saveSearch } from '../redux/modules/results'
 import { bindActionCreators } from 'redux'
 import Constants from '../utils/Constants.js'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faGamepad, faVrCardboard, faSave, faHome } from '@fortawesome/free-solid-svg-icons'
+import {
+  faNintendoSwitch,
+  faXbox,
+  faPlaystation,
+  faApple,
+  faAndroid
+} from '@fortawesome/free-brands-svg-icons'
 
 const mapStateToProps = state => ({
   results: state.results.games
@@ -62,25 +72,20 @@ class Results extends Component {
         ))
       : null
   chooseImage = system => {
-    if (system === Constants.consoles[0].value) return <img src={require('../styles/psvita.png')} />
-    else if (system === Constants.consoles[1].value)
-      return <img src={require('../styles/xbox1.png')} />
-    else if (system === Constants.consoles[2].value)
-      return <img src={require('../styles/ps4.png')} />
+    if (system === Constants.consoles[0].value) return <FontAwesomeIcon icon={faGamepad} />
+    else if (system === Constants.consoles[1].value) return <FontAwesomeIcon icon={faXbox} />
+    else if (system === Constants.consoles[2].value) return <FontAwesomeIcon icon={faPlaystation} />
     else if (system === Constants.consoles[3].value)
-      return <img src={require('../styles/switch.png')} />
+      return <FontAwesomeIcon icon={faNintendoSwitch} />
     else if (system === Constants.consoles[4].value)
       return <img src={require('../styles/3ds.png')} />
-    else if (system === Constants.consoles[5].value)
-      return <img src={require('../styles/apple.png')} />
-    else if (system === Constants.consoles[6].value)
-      return <img src={require('../styles/android.png')} />
+    else if (system === Constants.consoles[5].value) return <FontAwesomeIcon icon={faApple} />
+    else if (system === Constants.consoles[6].value) return <FontAwesomeIcon icon={faAndroid} />
     else if (system === Constants.consoles[7].value)
       return <img src={require('../styles/psvr.png')} />
     else if (system === Constants.consoles[8].value)
       return <img src={require('../styles/htc.png')} />
-    else if (system === Constants.consoles[9].value)
-      return <img src={require('../styles/oculus.png')} />
+    else if (system === Constants.consoles[9].value) return <FontAwesomeIcon icon={faVrCardboard} />
     else return
   }
   render() {
@@ -113,37 +118,47 @@ class Results extends Component {
                 </TabPane>
               ))}
             </TabContent>
+            <Form>
+              <FormGroup>
+                <div className="saveSearch">
+                  <Label for="exampleSearch">Save Search</Label>
+                  <InputGroup>
+                    <InputGroupAddon addonType="prepend">
+                      <InputGroupText>
+                        <FontAwesomeIcon icon={faSave} />
+                      </InputGroupText>
+                    </InputGroupAddon>
+                    <Input
+                      type="text"
+                      name="saveName"
+                      id="saveName"
+                      placeholder="Input Name"
+                      onChange={e => {
+                        this.setState({ saveName: e.target.value })
+                      }}
+                    />
+                  </InputGroup>
+                </div>
+              </FormGroup>
+              <Button
+                className="resultButtons"
+                onClick={() => {
+                  this.props.saveSearch(this.state.saveName, this.props.results)
+                }}
+              >
+                Save Search
+              </Button>
+            </Form>
           </div>
         ) : (
           <div>No matching results :(</div>
         )}
         <br />
         <Link to={{ pathname: './' }}>
-          <Button className="homeButton">Go to Home</Button>
+          <Button className="resultButtons">
+            <FontAwesomeIcon icon={faHome} /> Go Home
+          </Button>
         </Link>
-        <Form>
-          <FormGroup>
-            <Label for="exampleSearch">Search by Name</Label>
-            <Input
-              type="text"
-              name="saveName"
-              id="saveName"
-              placeholder="Input name for saved search "
-              onChange={e => {
-                this.setState({ saveName: e.target.value })
-              }}
-            />
-          </FormGroup>
-        </Form>
-        <Button
-          color="primary"
-          onClick={() => {
-            this.props.saveSearch(this.state.saveName, this.props.results)
-          }}
-        >
-          Save Search
-        </Button>
-        <Link to={{ pathname: './' }}>Go to home</Link>
       </div>
     )
   }
