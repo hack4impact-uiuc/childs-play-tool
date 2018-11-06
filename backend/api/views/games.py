@@ -5,6 +5,8 @@ import xlrd
 import math
 import json
 import requests
+import re
+from difflib import SequenceMatcher
 from collections import defaultdict
 
 games_page = Blueprint("games", __name__)
@@ -12,6 +14,7 @@ games_page = Blueprint("games", __name__)
 GLOBAL_POST_URL = "/"
 GAMES_URL = "/games"
 GAMES_ID_URL = "/games/<int:game_id>"
+GAMES_ALL_URL = "/games/all"
 
 SYMPTOM_NUMBER = 6
 AGE_NUMBER = 2
@@ -110,6 +113,17 @@ def get_game_specific(game_id):
         return create_response(data={"game": game.first().to_dict()})
 
 
+@games_page.route(GAMES_ALL_URL, methods=["GET"])
+def get_games_all():
+    systems = {}
+    for system in Game.system.type.enums:
+        games_by_system = (
+            Game.query.filter(Game.system == system).order_by(Game.name).all()
+        )
+        systems[system] = [game.to_dict() for game in games_by_system]
+    return create_response(status=200, data={"games": systems})
+
+
 @games_page.route(GAMES_URL, methods=["POST"])
 def post_games():
     if "file" not in request.files:
@@ -153,7 +167,7 @@ def post_games():
                         game["id"] = id
                         id = id + 1
                         # API extra information stuff
-                        extra_data = get_giantbomb_data(name, system)
+                        extra_data = get_giantbomb_data(name)
                         game["thumbnail"] = extra_data["thumbnail"]
                         game["image"] = extra_data["image"]
                         game["description"] = extra_data["description"]
@@ -231,33 +245,64 @@ def post_games():
     return create_response(status=201, message="Database updated")
 
 
-def get_giantbomb_data(game_name, game_system):
+def get_giantbomb_data(game_name):
     headers = {"User-Agent": "childs-play"}
     gb_url = "http://www.giantbomb.com/api/search/?"
+    modified_name = simplify_name(game_name)
     gb_params = {
         "api_key": app.config["GIANTBOMB_KEY"],
         "resources": "game",
-        "query": game_name,
+        "query": modified_name,
         "field_list": "name,image,api_detail_url,id,platforms,deck",
         "format": "json",
     }
+
     gb_dict = {}
     gb_dict["description"] = ""
     gb_dict["thumbnail"] = ""
     gb_dict["image"] = ""
+    should_remove = False
+    while (
+        gb_dict["description"] == ""
+        and gb_dict["image"] == ""
+        and gb_dict["thumbnail"] == ""
+        and modified_name != ""
+    ):
+        # remove last word and retry
+        if should_remove:
+            split_modified = modified_name.split(" ")
+            modified_name = " ".join(split_modified[:-1])
+            gb_params["query"] = modified_name
+        gb_data = requests.get(url=gb_url, params=gb_params, headers=headers).json()
 
-    gb_data = json.loads(
-        requests.get(url=gb_url, params=gb_params, headers=headers).json()
-    )
-    if len(gb_data["results"]) == 0:
-        return gb_dict
-    for result in gb_data["results"]:
-        if game_name.lower() == result["name"].lower():
-            if result["deck"] is not None:
-                gb_dict["description"] = result["deck"]
-            if result["image"]["icon_url"] is not None:
-                gb_dict["thumbnail"] = result["image"]["icon_url"]
-            if result["image"]["small_url"] is not None:
-                gb_dict["image"] = result["image"]["small_url"]
-            return gb_dict
+        if len(gb_data["results"]) != 0:
+            best_match = gb_data["results"][0]
+            best_similarity = 0
+            for result in gb_data["results"]:
+                # look for closest match
+                similarity = SequenceMatcher(
+                    None, game_name.lower(), result["name"].lower()
+                ).ratio()
+                if similarity > best_similarity:
+                    best_match = result
+                    best_similarity = similarity
+            if best_match["deck"] is not None:
+                gb_dict["description"] = best_match["deck"]
+            if best_match["image"]["icon_url"] is not None:
+                gb_dict["thumbnail"] = best_match["image"]["icon_url"]
+            if best_match["image"]["small_url"] is not None:
+                gb_dict["image"] = best_match["image"]["small_url"]
+        should_remove = True
     return gb_dict
+
+
+def simplify_name(search_name):
+    modified_search = re.sub("[\(\[].*?[\)\]]", "", search_name)
+    modified_search = modified_search.strip()
+    punctuations = "`~!@#$%^&*()_-+={[}]|\:;'<,>.?/"
+    no_punct = ""
+    for char in modified_search:
+        if char not in punctuations:
+            no_punct = no_punct + char
+    modified_search = no_punct
+    return modified_search
