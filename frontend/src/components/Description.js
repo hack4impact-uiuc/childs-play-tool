@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from 'reactstrap'
 import Tag from './Tag'
+import '../styles/description.scss'
 
 const titleStyle = {
   fontSize: '30px'
