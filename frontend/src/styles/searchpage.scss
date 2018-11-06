@@ -1,5 +1,4 @@
 .background {
-    // padding: 30%;
     padding-left: 30%;
     padding-right: 30%;
     padding-bottom: 30%;
@@ -9,6 +8,19 @@
     background-size: contain;
     font-family: 'Poppins', sans-serif;
   }
+
+@media only screen and (max-width : 500px) {
+    .background {
+      padding-left: 10%;
+      padding-right: 10%;
+      padding-bottom: 20%;
+      // padding-top: 1%;
+      // text_align: center;
+      // background: url("childs_play_dark.png");
+      // background-size: contain;
+      // font-family: 'Poppins', sans-serif;
+    }
+}
 
   .homeText{
     padding: 5%;

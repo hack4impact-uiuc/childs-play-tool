@@ -38,10 +38,12 @@ class Description extends Component {
           <Tag type={'age'} tag={this.props.location.state.tags[0]} />
           <Tag type={'symptom'} tag={this.props.location.state.tags[1]} />
         </div>
+        <div>
         <p>{this.props.location.state.game.description}</p>
         <br />
         <Link to={{ pathname: './results' }}>Return to results</Link>
       </div>
+     </body>
     )
   }
 }
