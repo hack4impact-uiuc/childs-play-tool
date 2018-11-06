@@ -159,6 +159,29 @@ class Results extends Component {
             <FontAwesomeIcon icon={faHome} /> Go Home
           </Button>
         </Link>
+        <Form>
+          <FormGroup>
+            <Label for="exampleSearch">Save Search:</Label>
+            <Input
+              type="text"
+              name="saveName"
+              id="saveName"
+              placeholder="Input name for saved search "
+              onChange={e => {
+                this.setState({ saveName: e.target.value })
+              }}
+            />
+          </FormGroup>
+        </Form>
+        <Button
+          color="primary"
+          onClick={() => {
+            this.props.saveSearch(this.state.saveName, this.props.results)
+          }}
+        >
+          Save Search
+        </Button>
+        <Link to={{ pathname: './' }}>Go to home</Link>
       </div>
     )
   }

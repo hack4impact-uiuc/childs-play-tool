@@ -9,20 +9,20 @@ class Password extends Component {
   render() {
     return (
       <body className="passwordPageBackground">
-      <div className="passwordPage">
-        <p> Welcome Administrators. Enter your key to continue: </p>
-        <form>
-          <label className="passwordEnter">
-            <span> Key: </span>
-            <input className="inputKey" />
-          </label>
-          <Link to="/uploadPage">
-            <Button className="searchButton" type="submit">
-              Submit
-            </Button>
-          </Link>
-        </form>
-      </div>
+        <div className="passwordPage">
+          <p> Welcome Administrators. Enter your key to continue: </p>
+          <form>
+            <label className="passwordEnter">
+              <span> Key: </span>
+              <input className="inputKey" />
+            </label>
+            <Link to="/uploadPage">
+              <Button className="searchButton" type="submit">
+                Submit
+              </Button>
+            </Link>
+          </form>
+        </div>
       </body>
     )
   }
