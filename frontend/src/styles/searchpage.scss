@@ -2,12 +2,13 @@
     // padding: 30%;
     padding-left: 30%;
     padding-right: 30%;
-    padding-bottom: 10%;
+    padding-bottom: 30%;
     padding-top: 1%;
     text_align: center;
     margin: 0%;
     background: url("childs_play_dark.png");
-    background-size: cover;
+    background-size: contain;
+    font-family: 'Poppins', sans-serif;
   }
 
   .homeText{
@@ -16,7 +17,6 @@
     margin-bottom: 5%;
     border: 2px solid #73AD21;
     border-radius: 25px;
-    // background: #09B2AB;
     background: white;
     min-width: 225px;
   }
