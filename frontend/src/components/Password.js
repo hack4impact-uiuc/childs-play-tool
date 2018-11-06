@@ -3,10 +3,12 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
 import styles from '../styles/styles.scss'
+import { Button } from 'reactstrap'
 
 class Password extends Component {
   render() {
     return (
+      <body className="passwordPageBackground">
       <div className="passwordPage">
         <p> Welcome Administrators. Enter your key to continue: </p>
         <form>
@@ -15,12 +17,13 @@ class Password extends Component {
             <input className="inputKey" />
           </label>
           <Link to="/uploadPage">
-            <button className="searchButton" type="submit">
+            <Button className="searchButton" type="submit">
               Submit
-            </button>
+            </Button>
           </Link>
         </form>
       </div>
+      </body>
     )
   }
 }
