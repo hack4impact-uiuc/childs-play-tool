@@ -178,13 +178,16 @@ def post_games():
             # AGE_NUMBER = 2
             for age_index in range(AGE_NUMBER):
                 name = str(sheet.cell(current_row, 2 * age_index + 1).value)
-                logger.info(name)
+
                 # Iterates through the rankings of a specific symptom and category until the end
                 while name != "":
+                    logger.info(name)
                     # Checks if the game has already been entered into the database
                     same_game = Game.query.filter(
                         Game.name == name, Game.system == system
                     )
+                    logger.info(same_game)
+                    logger.info(same_game.count())
                     if same_game.count() == 0:
                         game = {}
                         game["system"] = system
