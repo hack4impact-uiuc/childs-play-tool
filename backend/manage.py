@@ -14,8 +14,7 @@ from api.mock_data import (
     ranking_game_ids,
     ranking_ids,
     ranking_ranks,
-    ranking_symptoms,
-    ranking_systems,
+    ranking_symptoms
 )
 
 app = create_app()
