@@ -25,8 +25,7 @@ import { bindActionCreators } from 'redux'
 import Constants from '../utils/Constants.js'
 
 const mapStateToProps = state => ({
-  results: state.results.games,
-  tags: [state.searchpage.ageRange, state.searchpage.symptoms]
+  results: state.results.games
 })
 
 const mapDispatchToProps = dispatch => {
@@ -54,11 +53,11 @@ class Results extends Component {
       })
     }
   }
-  buildCards = (games, tags) =>
+  buildCards = games =>
     games
       ? games.map(c => (
-          <Link to={{ pathname: './description', state: { game: c, tags: tags } }}>
-            <Card className="cardBorder" game={c} tags={tags} />
+          <Link to={{ pathname: './description', state: { game: c } }}>
+            <Card className="cardBorder" game={c} />
           </Link>
         ))
       : null
@@ -109,7 +108,7 @@ class Results extends Component {
               {Object.getOwnPropertyNames(this.props.results).map((x, index) => (
                 <TabPane tabId={(index + 1).toString()}>
                   <Row>
-                    <Col sm="12">{this.buildCards(this.props.results[x], this.props.tags)}</Col>
+                    <Col sm="12">{this.buildCards(this.props.results[x])}</Col>
                   </Row>
                 </TabPane>
               ))}

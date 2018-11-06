@@ -15,21 +15,16 @@ SEARCH_GAMES_URL = "/search/games"
 @search_page.route(SEARCH_GAMES_URL, methods=["GET"])
 def search_game_by_name():
     data = request.args
-    all_empty = True
+
+    games = []
 
     if data.get("name") is None:
         return create_response(status=400, message="Title of game is required")
     name = data.get("name")
     games = Game.query.filter(func.lower(Game.name).contains(name.lower()))
-    systems = {}
-    for system in Game.system.type.enums:
-        games_by_system = games.filter(Game.system == system).all()
-        if len(games_by_system) != 0:
-            systems[system] = [game.to_dict() for game in games_by_system]
-            all_empty = False
-    if all_empty:
+    if games.count() == 0:
         return create_response(
             status=400, message="No games available with specified name"
         )
 
-    return create_response(status=200, data={"games": systems})
+    return create_response(status=200, data={"games": serialize_list(games)})

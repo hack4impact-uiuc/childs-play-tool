@@ -1,5 +1,5 @@
 from api.models import db, Game, Ranking
-from api.core import create_response, Mixin, logger
+from api.core import create_response, Mixin
 from flask import Blueprint, request, current_app as app
 import xlrd
 import math
@@ -178,16 +178,12 @@ def post_games():
             # AGE_NUMBER = 2
             for age_index in range(AGE_NUMBER):
                 name = str(sheet.cell(current_row, 2 * age_index + 1).value)
-
                 # Iterates through the rankings of a specific symptom and category until the end
                 while name != "":
-                    logger.info(name)
                     # Checks if the game has already been entered into the database
                     same_game = Game.query.filter(
                         Game.name == name, Game.system == system
                     )
-                    logger.info(same_game)
-                    logger.info(same_game.count())
                     if same_game.count() == 0:
                         game = {}
                         game["system"] = system
@@ -203,9 +199,7 @@ def post_games():
                         game["image"] = extra_data["image"]
                         game["description"] = extra_data["description"]
                         g = Game(game)
-                        logger.info(game)
                         db.session.add(g)
-                        logger.info("added game")
                     current_row += 1
                     # Breaks out of the loop if we have reached the end of the sheet
                     if current_row == sheet.nrows:
