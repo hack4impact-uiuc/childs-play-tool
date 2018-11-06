@@ -14,23 +14,23 @@ def test_get_games(client):
     rs = client.get("games?")
     assert rs.status_code == 400
     ret_dict = json.loads(rs.data)
-    assert ret_dict["message"] == "Age and symptom are required"
+    assert ret_dict["message"] == "Age and symptom are required."
 
     rs = client.get("games?age=12+and+Under")
     assert rs.status_code == 400
     ret_dict = json.loads(rs.data)
-    assert ret_dict["message"] == "Age and symptom are required"
+    assert ret_dict["message"] == "Age and symptom are required."
 
     rs = client.get("games?symptom=Pain")
     assert rs.status_code == 400
     ret_dict = json.loads(rs.data)
-    assert ret_dict["message"] == "Age and symptom are required"
+    assert ret_dict["message"] == "Age and symptom are required."
 
     rs = client.get("games?age=12+and+Under&symptom=Pain")
     assert rs.status_code == 400
     ret_dict = json.loads(rs.data)
     assert (
-        ret_dict["message"] == "No appropriate games for the specified age and symptom"
+        ret_dict["message"] == "No appropriate games for the specified age and symptom."
     )
 
     rs = client.get("games?age=12+and+Under&symptom=Bored+(Short+Term)")
@@ -71,7 +71,7 @@ def test_get_games(client):
     ret_dict = json.loads(rs.data)
     assert (
         ret_dict["message"]
-        == "This system has no appropriate games for the specified age and symptom"
+        == "This system has no appropriate games for the specified age and symptom."
     )
 
     rs = client.get(
@@ -96,13 +96,62 @@ def test_get_games(client):
     assert game["rank"] == 18
     assert game["gender"] == "Both"
 
+    rs = client.get("games?age=12+and+Under&symptom=Bored+(Short+Term)&gender=Both")
+    games_switch = json.loads(rs.data)["result"]["games"]["Nintendo Switch"]
+    assert len(games_switch) == 1
+
+    game = games_switch[0]
+    assert game["name"] == "Mario Kart"
+    assert game["rank"] == 18
+    assert game["gender"] == "Both"
+
+    games_3ds = json.loads(rs.data)["result"]["games"]["Nintendo 3DS"]
+    assert len(games_3ds) == 1
+
+    game = games_3ds[0]
+    assert game["name"] == "Pokemon Sun"
+    assert game["rank"] == 3
+    assert game["gender"] == "Both"
+
+    rs = client.get(
+        "games?age=12+and+Under&symptom=Bored+(Short+Term)&system=Nintendo+Switch&gender=Both"
+    )
+    games = json.loads(rs.data)["result"]["games"]["Nintendo Switch"]
+    assert len(games) == 1
+
+    game = games[0]
+    assert game["name"] == "Mario Kart"
+    assert game["rank"] == 18
+    assert game["gender"] == "Both"
+
+    rs = client.get(
+        "games?age=12+and+Under&symptom=Bored+(Short+Term)&system=Nintendo+Switch&gender=Male"
+    )
+    games = json.loads(rs.data)["result"]["games"]["Nintendo Switch"]
+    assert len(games) == 3
+
+    game = games[0]
+    assert game["name"] == "BotW"
+    assert game["rank"] == 2
+    assert game["gender"] == "Male"
+
+    game = games[1]
+    assert game["name"] == "Super Mario Odyssey"
+    assert game["rank"] == 9
+    assert game["gender"] == "Male"
+
+    game = games[2]
+    assert game["name"] == "Mario Kart"
+    assert game["rank"] == 18
+    assert game["gender"] == "Both"
+
 
 def test_get_game_specific(client):
     rs = client.get("/games/0")
     assert rs.status_code == 400
 
     ret_dict = json.loads(rs.data)
-    assert ret_dict["message"] == "Game not found"
+    assert ret_dict["message"] == "Game not found."
 
     rs = client.get("/games/1")
     assert rs.status_code == 200
@@ -141,7 +190,7 @@ def test_post_games(client, **kwargs):
     rs = client.post("/games")
     assert rs.status_code == 400
     ret_dict = json.loads(rs.data)
-    assert ret_dict["message"] == "File not provided"
+    assert ret_dict["message"] == "File not provided."
 
     input_file = open("tests/Sept2018.xlsx", "rb")
     rs = client.post(
