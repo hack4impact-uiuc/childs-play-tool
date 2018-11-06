@@ -1,6 +1,6 @@
 from api.core import Mixin
 from .base import db
-from .enums import ages, symptoms, systems
+from .enums import ages, symptoms, systems, genders
 
 
 class Ranking(Mixin, db.Model):
