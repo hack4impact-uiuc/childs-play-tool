@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Tag from './Tag'
-import styles from '../styles/styles.scss'
+import styles from '../styles/results.scss'
 
 class Card extends Component {
   constructor(props) {
