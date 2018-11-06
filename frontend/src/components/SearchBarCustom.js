@@ -6,7 +6,7 @@ import { Form, FormGroup, Label, Input } from 'reactstrap'
 import '../styles/styles.scss'
 
 const mapStateToProps = state => ({
-  nameSearchField: state.nameSearchField
+  nameSearchField: state.searchpage.nameSearchField
 })
 
 const mapDispatchToProps = dispatch => {

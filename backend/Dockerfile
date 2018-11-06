@@ -14,4 +14,4 @@ COPY . /app
 WORKDIR /app
 ENV FLASK_ENV=prod
 EXPOSE 5000
-ENTRYPOINT [ "gunicorn", "-b", "0.0.0.0:5000", "--log-level", "INFO", "manage:app" ]
+ENTRYPOINT [ "gunicorn", "-b", "0.0.0.0:5000", "--log-level", "INFO", "--timeout", "3000", "manage:app" ]
