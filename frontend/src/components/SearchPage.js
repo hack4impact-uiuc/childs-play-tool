@@ -8,6 +8,7 @@ import { updateResults, getSavedSearch } from '../redux/modules/results'
 import { Button } from 'reactstrap'
 import { getGames } from '../utils/ApiWrapper'
 import '../styles/styles.scss'
+import '../styles/searchpage.scss'
 
 const mapStateToProps = state => ({
   system: state.searchpage.consoles,
