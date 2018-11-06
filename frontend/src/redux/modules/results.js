@@ -5,64 +5,7 @@ const GET_SAVED_SEARCH = 'results/GET_SAVED_SEARCH'
 
 export const resultsState = {
   searches: {},
-  games: {
-    // default test data
-    Switch: [
-      {
-        name: 'Mario Kart',
-        summary: 'A racing game',
-        description: 'A racing game where the most important skill is luck',
-        tags: [{ type: 'age', tag: '12 and Under' }, { type: 'symptom', tag: 'Pain' }]
-      }
-    ],
-    That: [
-      {
-        name: 'Childs Play',
-        summary: 'Best team',
-        description: 'Best team to ever exist ever',
-        tags: [{ type: 'age', tag: 'Bounce' }, { type: 'symptom', tag: 'shit' }]
-      }
-    ],
-    XBox: [
-      {
-        name: 'Test',
-        summary: 'A test',
-        description: 'A test',
-        tags: [
-          { type: 'age', tag: '13 and Older' },
-          { type: 'symptom', tag: 'Cognitive Impairment' },
-          { type: 'misc', tag: 'debug' }
-        ]
-      },
-      {
-        name: 'Test',
-        summary: 'A test',
-        description: 'A test',
-        tags: [{ type: 'age', tag: '12 and Under' }, { type: 'symptom', tag: 'Sadness' }]
-      },
-      {
-        name: 'Test',
-        summary: 'A test',
-        description: 'A test',
-        tags: [{ type: 'age', tag: '12 and Under' }, { type: 'symptom', tag: 'Bored (Long Term)' }]
-      },
-      {
-        name: 'Test',
-        summary: 'A test',
-        description: 'A test',
-        tags: [{ type: 'age', tag: '12 and Under' }, { type: 'symptom', tag: 'Bored (Short Term)' }]
-      },
-      {
-        name: 'Test',
-        summary: 'A test',
-        description: 'A test',
-        tags: [
-          { type: 'age', tag: '12 and Under' },
-          { type: 'symptom', tag: 'Anxiety/Hyperactivity' }
-        ]
-      }
-    ]
-  }
+  games: {}
 }
 
 export default function reducer(state = resultsState, action) {
