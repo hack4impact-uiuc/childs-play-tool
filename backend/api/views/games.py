@@ -1,5 +1,5 @@
 from api.models import db, Game, Ranking
-from api.core import create_response, Mixin, logger
+from api.core import create_response, Mixin
 from flask import Blueprint, request, current_app as app
 import xlrd
 import math
@@ -219,7 +219,7 @@ def post_games():
     # Entering the rankings into the database
     id = 0
     for sheet in book.sheets():
-        # system = sheet.cell(0, 1).value
+        system = sheet.cell(0, 1).value
         start_row = 0
         for symptom_index in range(SYMPTOM_NUMBER):
             start_row = start_row + 1
@@ -256,12 +256,19 @@ def post_games():
                             ).value
                         )
                         if len(name) != 0:
-                            game_id = Game.query.filter(Game.name == name).first().id
+                            game_id = (
+                                Game.query.filter(
+                                    Game.name == name, Game.system == system
+                                )
+                                .first()
+                                .id
+                            )
                             ranking_id = id
                             id = id + 1
                             ranking = {}
                             ranking["id"] = ranking_id
                             ranking["age"] = age
+                            # ranking["system"] = system
                             ranking["symptom"] = symptom
                             ranking["game_id"] = game_id
                             ranking["rank"] = rank
