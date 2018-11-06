@@ -19,11 +19,10 @@ import {
   Input
 } from 'reactstrap'
 import classnames from 'classnames'
-import { Button } from 'reactstrap'
 import '../styles/styles.scss'
 import { saveSearch } from '../redux/modules/results'
 import { bindActionCreators } from 'redux'
-import { Constants } from '../utils/Constants.js'
+import Constants from '../utils/Constants.js'
 
 const mapStateToProps = state => ({
   results: state.results.games
