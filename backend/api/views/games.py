@@ -255,6 +255,11 @@ def post_games():
                                 start_row + 1 + game_index, 1 + 2 * age_index
                             ).value
                         )
+                        gender = str(
+                            sheet.cell(
+                                start_row + 1 + game_index, 2 + 2 * age_index
+                            ).value
+                        )
                         if len(name) != 0:
                             game_id = (
                                 Game.query.filter(
@@ -268,7 +273,6 @@ def post_games():
                             ranking = {}
                             ranking["id"] = ranking_id
                             ranking["age"] = age
-                            # ranking["system"] = system
                             ranking["symptom"] = symptom
                             ranking["game_id"] = game_id
                             ranking["rank"] = rank

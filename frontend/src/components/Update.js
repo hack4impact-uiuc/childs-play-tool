@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import Dropzone from 'react-dropzone'
 import '../styles/styles.scss'
+import { Button } from 'reactstrap'
+import { sendFile } from '../utils/ApiWrapper'
 
 class Update extends Component {
   constructor(props) {
@@ -32,6 +34,9 @@ class Update extends Component {
               </li>
             ))}
           </ul>
+          <Button className="right" onClick={e => sendFile(this.state.files[0])}>
+            Upload File
+          </Button>
         </aside>
       </section>
     )
