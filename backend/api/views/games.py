@@ -38,9 +38,9 @@ def get_games():
     rankings = Ranking.query.filter(Ranking.symptom == symptom, Ranking.age == age)
     if rankings.count() == 0:
         return create_response(
-            status=400,
-            message="No appropriate games for the specified age and symptom.",
+            status=400, message="No matching games for the specified age and symptom."
         )
+
     if "gender" in data:
         gender = data["gender"]
         if "system" in data:
@@ -57,7 +57,7 @@ def get_games():
             if rankings.count() == 0:
                 return create_response(
                     status=400,
-                    message="This system has no appropriate games for the specified age, symptom, and gender.",
+                    message="This system has no matching games for the specified age, symptom, and gender.",
                 )
             if gender == "Male" or gender == "Female":
                 ranked_games = (
@@ -111,6 +111,14 @@ def get_games():
 
         else:
             if gender == "Male" or gender == "Female":
+                rankings = rankings.filter(
+                    (Ranking.gender == gender) | (Ranking.gender == "Both")
+                )
+                if rankings.count() == 0:
+                    return create_response(
+                        status=400,
+                        message="No matching games for the specified age, symptom, and gender.",
+                    )
                 systems = {}
                 for system in Game.system.type.enums:
                     ranked_games_by_system = (
@@ -138,6 +146,12 @@ def get_games():
                         for ranked_game in ranked_games_by_system
                     ]
             else:
+                rankings = rankings.filter(Ranking.gender == gender)
+                if rankings.count() == 0:
+                    return create_response(
+                        status=400,
+                        message="No matching games for the specified age, symptom, and gender.",
+                    )
                 systems = {}
                 for system in Game.system.type.enums:
                     ranked_games_by_system = (
@@ -174,7 +188,7 @@ def get_games():
             if rankings.count() == 0:
                 return create_response(
                     status=400,
-                    message="This system has no appropriate games for the specified age and symptom.",
+                    message="This system has no matching games for the specified age and symptom.",
                 )
 
             ranked_games = (

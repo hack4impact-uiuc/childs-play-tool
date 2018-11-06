@@ -29,9 +29,7 @@ def test_get_games(client):
     rs = client.get("games?age=12+and+Under&symptom=Pain")
     assert rs.status_code == 400
     ret_dict = json.loads(rs.data)
-    assert (
-        ret_dict["message"] == "No appropriate games for the specified age and symptom."
-    )
+    assert ret_dict["message"] == "No matching games for the specified age and symptom."
 
     rs = client.get("games?age=12+and+Under&symptom=Bored+(Short+Term)")
     assert rs.status_code == 200
@@ -71,7 +69,7 @@ def test_get_games(client):
     ret_dict = json.loads(rs.data)
     assert (
         ret_dict["message"]
-        == "This system has no appropriate games for the specified age and symptom."
+        == "This system has no matching games for the specified age and symptom."
     )
 
     rs = client.get(
@@ -144,6 +142,26 @@ def test_get_games(client):
     assert game["name"] == "Mario Kart"
     assert game["rank"] == 18
     assert game["gender"] == "Both"
+
+    rs = client.get(
+        "games?age=12+and+Under&symptom=Bored+(Short+Term)&gender=No+Discernable+Gender"
+    )
+    assert rs.status_code == 400
+    ret_dict = json.loads(rs.data)
+    assert (
+        ret_dict["message"]
+        == "No matching games for the specified age, symptom, and gender."
+    )
+
+    rs = client.get(
+        "games?age=12+and+Under&symptom=Bored+(Short+Term)&system=Nintendo+Switch&gender=No+Discernable+Gender"
+    )
+    assert rs.status_code == 400
+    ret_dict = json.loads(rs.data)
+    assert (
+        ret_dict["message"]
+        == "This system has no matching games for the specified age, symptom, and gender."
+    )
 
 
 def test_get_game_specific(client):
