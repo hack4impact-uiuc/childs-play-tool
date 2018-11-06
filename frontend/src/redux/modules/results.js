@@ -4,7 +4,7 @@ const UPDATE_RESULTS = 'results/UPDATE_RESULTS'
 const GET_SAVED_SEARCH = 'results/GET_SAVED_SEARCH'
 
 export const resultsState = {
-  searches: {},
+  searches: [],
   games: {}
 }
 
