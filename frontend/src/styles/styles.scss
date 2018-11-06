@@ -1,79 +1,3 @@
-
-.cardStyle {
-  color: black;
-  font-family: Arial;
-  border: 2px solid #00cc99;
-  margin: 0.5%;
-  padding: 2%;
-  display: inline-table;
-  height: 300px;
-  width: 300px;
-  text-align: center;
-}
-.cardStyleHover {
-  color: black;
-  font-family: Arial;
-  border: 2px solid #00cc99;
-  margin: 0.5%;
-  padding: 2%;
-  display: inline-table;
-  height: 300px;
-  width: 300px;
-  background: #d8ddd8;
-  text-align: center;
-}
-.cardName {
-  font-size: 30px;
-  text-align: center;
-}
-.tag_age_12under {
-  margin-top: 2%;
-  background: #9fc972;
-  color: white;
-  width: 160px;
-  border: 1px black;
-}
-
-.tags{
-  margin: 12%;
-}
-
-.tag_age_13over {
-  margin-top: 2%;
-  background: #4b563a;
-  color: white;
-  width: 160px;
-}
-.tag_symptom_pain {
-  background: #eb9ea1;
-  color: white;
-  width: 160px;
-}
-.tag_symptom_bored_short {
-  background: #f3d26a;
-  color: white;
-  width: 160px;
-}
-.tag_symptom_bored_long {
-  background: #c2bfde;
-  color: white;
-  width: 160px;
-}
-.tag_symptom_anxiety {
-  background: #a1d6ee;
-  color: white;
-  width: 160px;
-}
-.tag_symptom_sadness {
-  background: #fab169;
-  color: white;
-  width: 160px;
-}
-.tag_symptom_cognitive {
-  background: #ccd7c2;
-  color: white;
-  width: 160px;
-}
 .right {
   margin: 5%;
   margin-top: 0%;
@@ -124,7 +48,7 @@
 }
 
 .passwordPageBackground{
-  padding: 30%;  
+  padding: 30%;
   text-align: center;
   margin: 0%;
   background: url("childs_play_light.png");
@@ -175,11 +99,11 @@
 }
 
 .dropPageBackground{
-  padding: 20%;  
+  padding: 20%;
   text-align: center;
   margin: 0%;
   background: url("childs_play_light.png");
-  height: 100%; 
+  height: 100%;
   background-size: cover;
   background-position: center;
 }
@@ -214,7 +138,6 @@
 }
 
 .white-box{
-        width:65%;
         border-radius: 25px;
         border: 2px solid green;
         padding-bottom: 2%;
@@ -242,11 +165,6 @@
   margin: 0%;
   background: url("childs_play_dark.png");
   background-size: cover;
-}
-
-.full-screen{
-        width: 100%;
-        height:100%;
 }
 
 .centered{
