@@ -45,8 +45,6 @@ def get_games():
             Game.gender,
             Game.system,
             Ranking.rank,
-            Ranking.symptom,
-            Ranking.age,
         )
         .join(Ranking)
         .filter(Ranking.symptom == symptom, Ranking.age == age)
