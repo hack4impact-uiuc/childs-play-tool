@@ -32,6 +32,7 @@ class SearchPage extends Component {
   render() {
     return (
       <body className="background">
+      <link href="https://fonts.googleapis.com/css?family=Poppins|Source+Sans+Pro" rel="stylesheet"></link>
         <h3 className="homeText">
           Child&#39;s Play
           <br></br>
