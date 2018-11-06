@@ -56,33 +56,35 @@ def get_games():
             status=400, message="No matching games for the specified age and symptom."
         )
 
-    if "gender" in data:
-        gender = data["gender"]
-        if "system" in data:
-            system = data["system"]
+    if "system" in data:
+        system = data["system"]
+        ranked_games = ranked_games.filter(Game.system == system)
+        if "gender" in data:
+            gender = data["gender"]
             if gender == "Male" or gender == "Female":
                 ranked_games = ranked_games.filter(
-                    Game.system == system,
-                    (Game.gender == gender) | (Game.gender == "Both"),
+                    (Game.gender == gender) | (Game.gender == "Both")
                 )
             else:
-                ranked_games = ranked_games.filter(
-                    Game.system == system, Game.gender == gender
-                )
+                ranked_games = ranked_games.filter(Game.gender == gender)
             if ranked_games.count() == 0:
                 return create_response(
                     status=400,
                     message="This system has no matching games for the specified age, symptom, and gender.",
                 )
-            ranked_games_dict = [
-                dict(zip(ranked_game.keys(), ranked_game))
-                for ranked_game in ranked_games
-            ]
+        if ranked_games.count() == 0:
             return create_response(
-                status=200, data={"games": {system: ranked_games_dict}}
+                status=400,
+                message="This system has no matching games for the specified age and symptom.",
             )
+        ranked_games_dict = [
+            dict(zip(ranked_game.keys(), ranked_game)) for ranked_game in ranked_games
+        ]
+        return create_response(status=200, data={"games": {system: ranked_games_dict}})
 
-        else:
+    else:
+        if "gender" in data:
+            gender = data["gender"]
             if gender == "Male" or gender == "Female":
                 ranked_games = ranked_games.filter(
                     (Game.gender == gender) | (Game.gender == "Both")
@@ -94,41 +96,19 @@ def get_games():
                     status=400,
                     message="No matching games for the specified age, symptom, and gender.",
                 )
-            systems = {}
-            for system in Game.system.type.enums:
-                ranked_games_by_system = ranked_games.filter(Game.system == system)
-                systems[system] = [
-                    dict(zip(ranked_game.keys(), ranked_game))
-                    for ranked_game in ranked_games_by_system
-                ]
-            return create_response(status=200, data={"games": systems})
-
-    else:
-        if "system" in data:
-            system = data["system"]
-            ranked_games = ranked_games.filter(Game.system == system)
-            if ranked_games.count() == 0:
-                return create_response(
-                    status=400,
-                    message="This system has no matching games for the specified age and symptom.",
-                )
-            ranked_games_dict = [
-                dict(zip(ranked_game.keys(), ranked_game))
-                for ranked_game in ranked_games
-            ]
+        if ranked_games.count() == 0:
             return create_response(
-                status=200, data={"games": {system: ranked_games_dict}}
+                status=400,
+                message="No matching games for the specified age and symptom.",
             )
-
-        else:
-            systems = {}
-            for system in Game.system.type.enums:
-                ranked_games_by_system = ranked_games.filter(Game.system == system)
-                systems[system] = [
-                    dict(zip(ranked_game.keys(), ranked_game))
-                    for ranked_game in ranked_games_by_system
-                ]
-            return create_response(status=200, data={"games": systems})
+        systems = {}
+        for system in Game.system.type.enums:
+            ranked_games_by_system = ranked_games.filter(Game.system == system)
+            systems[system] = [
+                dict(zip(ranked_game.keys(), ranked_game))
+                for ranked_game in ranked_games_by_system
+            ]
+        return create_response(status=200, data={"games": systems})
 
 
 @games_page.route(GAMES_ID_URL, methods=["GET"])
