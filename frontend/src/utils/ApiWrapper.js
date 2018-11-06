@@ -1,9 +1,9 @@
 import axios from 'axios'
-const BACKEND_URL = 'http://localhost:8080/games'
+import BACKEND_URL from './ApiConfig'
 
 function getGames(age, symptom, system) {
   return axios
-    .get(BACKEND_URL + '?age=' + age + '&symptom=' + symptom + '&system=' + system)
+    .get(BACKEND_URL + '/games' + '?age=' + age + '&symptom=' + symptom + '&system=' + system)
     .then(response => {
       return response.data.result.games
     })
