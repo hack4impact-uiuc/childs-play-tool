@@ -14,22 +14,22 @@ function getGames(age, symptom, system) {
 }
 
 function sendFile(file) {
-	let data = new FormData()
-	data.append('file', file)
+  let data = new FormData()
+  data.append('file', file)
 
-	return axios
-	  .post(BACKEND_URL, data)
-	  .then(response => {
-	  	return {
-	  	  type: 'UPLOAD_FILE_SUCCESS',
-	  	  response,
-	  	}
-	  })
-	  .catch(function(error) {
-	  	return {
-	  	  type: 'UPLOAD_FILE_FAIL',
-	  	  error,
-	  	}
-	  })
+  return axios
+    .post(BACKEND_URL, data)
+    .then(response => {
+      return {
+        type: 'UPLOAD_FILE_SUCCESS',
+        response
+      }
+    })
+    .catch(function(error) {
+      return {
+        type: 'UPLOAD_FILE_FAIL',
+        error
+      }
+    })
 }
 export { getGames, sendFile }

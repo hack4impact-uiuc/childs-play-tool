@@ -34,14 +34,9 @@ class Update extends Component {
               </li>
             ))}
           </ul>
-           <Button
-              className="right"
-              onClick={e =>
-                sendFile(this.state.files[0])
-              }
-            >
-              Upload File
-            </Button>
+          <Button className="right" onClick={e => sendFile(this.state.files[0])}>
+            Upload File
+          </Button>
         </aside>
       </section>
     )
