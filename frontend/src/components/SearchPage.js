@@ -33,7 +33,9 @@ class SearchPage extends Component {
     return (
       <body className="background">
         <h3 className="homeText">
-          Child&#39;s Play Game Finder
+          Child&#39;s Play
+          <br></br>
+          Game Finder
         </h3>
         <div className="searchPage">
           <SearchBarCustom fieldName="nameSearchField" />

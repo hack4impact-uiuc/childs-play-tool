@@ -5,7 +5,6 @@
     padding-bottom: 10%;
     padding-top: 1%;
     text_align: center;
-    margin: 0%;
     background: url("childs_play_dark.png");
     background-size: cover;
   }
@@ -14,18 +13,22 @@
     padding: 5%;
     text-align: center;
     margin-bottom: 5%;
+    min-width: 250px;
+    margin-left: auto;
+    margin-right: auto;
     border: 2px solid #73AD21;
     border-radius: 25px;
     // background: #09B2AB;
     background: white;
   }
-
+  
   .searchPage{
-    // padding: 10%;
     padding-left: 20%;
     padding-right: 20%;
     padding-bottom: 10%;
+    min-width: 250px;
     text-align: center;
+    margin:0 auto;
     border: 2px solid #73AD21;
     border-radius: 25px;
     background: white;
