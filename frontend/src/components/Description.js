@@ -14,16 +14,10 @@ class Description extends Component {
           {this.props.location.state.game.name}
         </div>
         <div>
-          {this.props.location.state.game.tags.map(t => (
-            <Tag type={t.type} tag={t.tag} />
-          ))}
-          <br />
-          <br />
-          {this.props.location.state.game.summary}
+          <Tag type={'age'} tag={this.props.location.state.tags[0]} />
+          <Tag type={'symptom'} tag={this.props.location.state.tags[1]} />
         </div>
-        <br />
-        {this.props.location.state.game.description}
-        <br />
+        <p>{this.props.location.state.game.description}</p>
         <br />
         <Link to={{ pathname: './results' }}>Return to results</Link>
       </div>
