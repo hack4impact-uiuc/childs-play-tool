@@ -31,6 +31,8 @@ ranking_ages = [
     "12 and Under",
 ]
 
+ranking_genders = ["Male", "Both", "Both", "Male", "Male", "Both"]
+
 ranking_systems = [
     "Xbox One",
     "Nintendo Switch",
