@@ -17,7 +17,6 @@ from .mock_data import (
     game_genders,
     ranking_ages,
     ranking_game_ids,
-    ranking_genders,
     ranking_ids,
     ranking_ranks,
     ranking_symptoms,
