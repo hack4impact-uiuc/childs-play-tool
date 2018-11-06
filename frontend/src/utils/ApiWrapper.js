@@ -1,16 +1,46 @@
 import axios from 'axios'
-const BACKEND_URL = 'http://localhost:8080/games'
+import BACKEND_URL from './ApiConfig'
 
-function getGames(age, symptom, system) {
+export const getGamesByName = name => {
   return axios
-    .get(BACKEND_URL + '?age=' + age + '&symptom=' + symptom + '&system=' + system)
+    .get(BACKEND_URL + '/search/games' + '?name=' + name)
     .then(response => {
       return response.data.result.games
     })
-    .catch(function(error) {
+    .catch(error => {
       console.log('ERROR: ', error)
       return null
     })
 }
 
-export { getGames }
+export const getGames = (age, symptom, system) => {
+  return axios
+    .get(BACKEND_URL + '/games' + '?age=' + age + '&symptom=' + symptom + '&system=' + system)
+    .then(response => {
+      return response.data.result.games
+    })
+    .catch(error => {
+      console.log('ERROR: ', error)
+      return null
+    })
+}
+
+export const sendFile = file => {
+  let data = new FormData()
+  data.append('file', file)
+
+  return axios
+    .post(BACKEND_URL + '/games', data)
+    .then(response => {
+      return {
+        type: 'UPLOAD_FILE_SUCCESS',
+        response
+      }
+    })
+    .catch(error => {
+      return {
+        type: 'UPLOAD_FILE_FAIL',
+        error
+      }
+    })
+}

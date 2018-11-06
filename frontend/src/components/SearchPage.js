@@ -6,7 +6,7 @@ import { DropdownButton, SearchBarCustom } from './'
 import { updateField } from '../redux/modules/searchpage'
 import { updateResults, getSavedSearch } from '../redux/modules/results'
 import { Button } from 'reactstrap'
-import { getGames } from '../utils/ApiWrapper'
+import { getGames, getGamesByName } from '../utils/ApiWrapper'
 import '../styles/styles.scss'
 import '../styles/searchpage.scss'
 
@@ -15,7 +15,8 @@ const mapStateToProps = state => ({
   age: state.searchpage.ageRange,
   symptom: state.searchpage.symptoms,
   name: state.searchpage.nameSearchField,
-  selectedVal: state.searchpage.selectedSaveSearch
+  selectedVal: state.searchpage.selectedSaveSearch,
+  nameSearchField: state.searchpage.nameSearchField
 })
 
 const mapDispatchToProps = dispatch => {
@@ -44,7 +45,7 @@ class SearchPage extends Component {
             <Button
               className="right"
               onClick={e =>
-                getGames(this.props.age, this.props.symptom, this.props.system).then(results =>
+                getGamesByName(this.props.nameSearchField).then(results =>
                   this.props.updateResults(results)
                 )
               }

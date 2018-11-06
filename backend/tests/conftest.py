@@ -17,6 +17,7 @@ from .mock_data import (
     game_genders,
     ranking_ages,
     ranking_game_ids,
+    ranking_genders,
     ranking_ids,
     ranking_ranks,
     ranking_symptoms,
@@ -59,6 +60,7 @@ def client():
         ranking = {}
         ranking["id"] = ranking_ids[i]
         ranking["age"] = ranking_ages[i]
+        ranking["gender"] = ranking_genders[i]
         ranking["system"] = ranking_systems[i]
         ranking["symptom"] = ranking_symptoms[i]
         ranking["game_id"] = ranking_game_ids[i]
