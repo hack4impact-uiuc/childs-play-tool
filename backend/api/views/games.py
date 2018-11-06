@@ -135,11 +135,10 @@ def get_games_all():
 def post_games():
     if "file" not in request.files:
         return create_response(status=400, message="File not provided.")
-    db.drop_all()
-    db.create_all()
+    Ranking.query.delete()
+    Game.query.delete()
     file = request.files["file"]
     book = xlrd.open_workbook(file_contents=file.read())
-
     # Entering the games into database
     id = 0
     for sheet in book.sheets():

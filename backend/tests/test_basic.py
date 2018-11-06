@@ -189,6 +189,15 @@ def test_get_game_specific(client):
     assert ret_dict["result"]["game"]["system"] == "Nintendo Switch"
     assert ret_dict["result"]["game"]["gender"] == "Male"
 
+def test_get_games_all(client):
+    rs = client.get("/games/all")
+    assert rs.status_code == 200
+
+    systems = json.loads(rs.data)["result"]["games"]
+    num_games = 0
+    for system in systems:
+        num_games = num_games + len(systems[system])
+    assert num_games == 6
 
 @requests_mock.Mocker(kw="mock")
 def test_post_games(client, **kwargs):
