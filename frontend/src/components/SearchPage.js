@@ -30,12 +30,11 @@ const mapDispatchToProps = dispatch => {
 class SearchPage extends Component {
   render() {
     return (
-      <div>
-        <body className="background">
-          <h3 className="homeText">
-            Hello! Welcome to the Child&#39;s Play Game Finder. You can search a game by name or
-            filter by inputs.
-          </h3>
+      <body className="background">
+        <h3 className="homeText">
+          Child&#39;s Play Game Finder
+        </h3>
+        <div className="searchPage">
           <SearchBarCustom fieldName="nameSearchField" />
           <Link to={{ pathname: './Results' }}>
             <Button
@@ -49,6 +48,7 @@ class SearchPage extends Component {
               Search By Name
             </Button>
           </Link>
+          <hr></hr>
           <DropdownButton title="Console Type" fieldName="consoles" />
           <DropdownButton title="Age" fieldName="ageRange" />
           <DropdownButton title="Symptom" fieldName="symptoms" />
@@ -65,7 +65,7 @@ class SearchPage extends Component {
               Search By Filter
             </Button>
           </Link>
-          <br />
+          <hr></hr>
           <h> Load Previous Search </h>
           <DropdownButton title="Saved Searches" fieldName="selectedSaveSearch" />
           <Link to={{ pathname: './Results' }}>
@@ -79,11 +79,12 @@ class SearchPage extends Component {
               Load saved search
             </Button>
           </Link>
+          <hr></hr>
           <Link className="loginLink" to={{ pathname: './directorPage' }}>
             <Button className="adminButton">Admin Login</Button>
           </Link>
-        </body>
-      </div>
+        </div>
+      </body>
     )
   }
 }
