@@ -13,6 +13,7 @@ const mapStateToProps = state => ({
   system: state.searchpage.consoles,
   age: state.searchpage.ageRange,
   symptom: state.searchpage.symptoms,
+  gender: state.searchpage.genders,
   name: state.searchpage.nameSearchField,
   selectedVal: state.searchpage.selectedSaveSearch,
   nameSearchField: state.searchpage.nameSearchField
@@ -53,14 +54,18 @@ class SearchPage extends Component {
           <DropdownButton title="Console Type" fieldName="consoles" />
           <DropdownButton title="Age" fieldName="ageRange" />
           <DropdownButton title="Symptom" fieldName="symptoms" />
+          <DropdownButton title="Main Character Gender" fieldName="genders" />
           <Link to={{ pathname: './Results' }}>
             <Button
               className="searchButton"
               color="blue"
               onClick={e =>
-                getGames(this.props.age, this.props.symptom, this.props.system).then(results =>
-                  this.props.updateResults(results)
-                )
+                getGames(
+                  this.props.age,
+                  this.props.symptom,
+                  this.props.system,
+                  this.props.gender
+                ).then(results => this.props.updateResults(results))
               }
             >
               Search By Filter

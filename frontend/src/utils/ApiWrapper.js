@@ -13,9 +13,20 @@ export const getGamesByName = name => {
     })
 }
 
-export const getGames = (age, symptom, system) => {
+export const getGames = (age, symptom, system, gender) => {
   return axios
-    .get(BACKEND_URL + '/games' + '?age=' + age + '&symptom=' + symptom + '&system=' + system)
+    .get(
+      BACKEND_URL +
+        '/games' +
+        '?age=' +
+        age +
+        '&symptom=' +
+        symptom +
+        '&system=' +
+        system +
+        '&gender=' +
+        gender
+    )
     .then(response => {
       return response.data.result.games
     })

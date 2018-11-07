@@ -19,6 +19,12 @@ const Constants = {
     { value: 'Anxiety/Hyperactivity' },
     { value: 'Sadness' },
     { value: 'Cognitive Impairment' }
+  ],
+  genders: [
+    { value: 'Male' },
+    { value: 'Female' },
+    { value: 'Both' },
+    { value: 'No Discernable Gender' }
   ]
 }
 
