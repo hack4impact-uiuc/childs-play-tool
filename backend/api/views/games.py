@@ -35,217 +35,80 @@ def get_games():
     age = data["age"]
     symptom = data["symptom"]
 
-    rankings = Ranking.query.filter(Ranking.symptom == symptom, Ranking.age == age)
-    if rankings.count() == 0:
+    ranked_games = (
+        db.session.query(
+            Game.name,
+            Game.id,
+            Game.description,
+            Game.thumbnail,
+            Game.image,
+            Game.gender,
+            Game.system,
+            Ranking.rank,
+        )
+        .join(Ranking)
+        .filter(Ranking.symptom == symptom, Ranking.age == age)
+        .order_by(Ranking.rank)
+    )
+
+    if ranked_games.count() == 0:
         return create_response(
             status=400, message="No matching games for the specified age and symptom."
         )
 
-    if "gender" in data:
-        gender = data["gender"]
-        if "system" in data:
-            system = data["system"]
+    if "system" in data:
+        system = data["system"]
+        ranked_games = ranked_games.filter(Game.system == system)
+        if "gender" in data:
+            gender = data["gender"]
             if gender == "Male" or gender == "Female":
-                rankings = rankings.filter(
-                    Ranking.system == system,
-                    (Ranking.gender == gender) | (Ranking.gender == "Both"),
+                ranked_games = ranked_games.filter(
+                    (Game.gender == gender) | (Game.gender == "Both")
                 )
             else:
-                rankings = rankings.filter(
-                    Ranking.system == system, Ranking.gender == gender
-                )
-            if rankings.count() == 0:
+                ranked_games = ranked_games.filter(Game.gender == gender)
+            if ranked_games.count() == 0:
                 return create_response(
                     status=400,
                     message="This system has no matching games for the specified age, symptom, and gender.",
                 )
-            if gender == "Male" or gender == "Female":
-                ranked_games = (
-                    db.session.query(
-                        Game.name,
-                        Game.id,
-                        Game.description,
-                        Game.thumbnail,
-                        Game.image,
-                        Game.gender,
-                        Ranking.rank,
-                    )
-                    .join(Ranking)
-                    .filter(
-                        Ranking.system == system,
-                        Ranking.symptom == symptom,
-                        Ranking.age == age,
-                        (Ranking.gender == gender) | (Ranking.gender == "Both"),
-                    )
-                    .order_by(Ranking.rank)
-                    .all()
-                )
-            else:
-                ranked_games = (
-                    db.session.query(
-                        Game.name,
-                        Game.id,
-                        Game.description,
-                        Game.thumbnail,
-                        Game.image,
-                        Game.gender,
-                        Ranking.rank,
-                    )
-                    .join(Ranking)
-                    .filter(
-                        Ranking.system == system,
-                        Ranking.symptom == symptom,
-                        Ranking.age == age,
-                        Ranking.gender == gender,
-                    )
-                    .order_by(Ranking.rank)
-                    .all()
-                )
-
-            ranked_games = [
-                dict(zip(ranked_game.keys(), ranked_game))
-                for ranked_game in ranked_games
-            ]
-
-            return create_response(status=200, data={"games": {system: ranked_games}})
-
-        else:
-            if gender == "Male" or gender == "Female":
-                rankings = rankings.filter(
-                    (Ranking.gender == gender) | (Ranking.gender == "Both")
-                )
-                if rankings.count() == 0:
-                    return create_response(
-                        status=400,
-                        message="No matching games for the specified age, symptom, and gender.",
-                    )
-                systems = {}
-                for system in Game.system.type.enums:
-                    ranked_games_by_system = (
-                        db.session.query(
-                            Game.name,
-                            Game.id,
-                            Game.description,
-                            Game.thumbnail,
-                            Game.image,
-                            Game.gender,
-                            Ranking.rank,
-                        )
-                        .join(Ranking)
-                        .filter(
-                            Ranking.system == system,
-                            Ranking.symptom == symptom,
-                            Ranking.age == age,
-                            (Ranking.gender == gender) | (Ranking.gender == "Both"),
-                        )
-                        .order_by(Ranking.rank)
-                        .all()
-                    )
-                    systems[system] = [
-                        dict(zip(ranked_game.keys(), ranked_game))
-                        for ranked_game in ranked_games_by_system
-                    ]
-            else:
-                rankings = rankings.filter(Ranking.gender == gender)
-                if rankings.count() == 0:
-                    return create_response(
-                        status=400,
-                        message="No matching games for the specified age, symptom, and gender.",
-                    )
-                systems = {}
-                for system in Game.system.type.enums:
-                    ranked_games_by_system = (
-                        db.session.query(
-                            Game.name,
-                            Game.id,
-                            Game.description,
-                            Game.thumbnail,
-                            Game.image,
-                            Game.gender,
-                            Ranking.rank,
-                        )
-                        .join(Ranking)
-                        .filter(
-                            Ranking.system == system,
-                            Ranking.symptom == symptom,
-                            Ranking.age == age,
-                            Ranking.gender == gender,
-                        )
-                        .order_by(Ranking.rank)
-                        .all()
-                    )
-                    systems[system] = [
-                        dict(zip(ranked_game.keys(), ranked_game))
-                        for ranked_game in ranked_games_by_system
-                    ]
-
-            return create_response(status=200, data={"games": systems})
+        if ranked_games.count() == 0:
+            return create_response(
+                status=400,
+                message="This system has no matching games for the specified age and symptom.",
+            )
+        ranked_games_dict = [
+            dict(zip(ranked_game.keys(), ranked_game)) for ranked_game in ranked_games
+        ]
+        return create_response(status=200, data={"games": {system: ranked_games_dict}})
 
     else:
-        if "system" in data:
-            system = data["system"]
-            rankings = rankings.filter(Ranking.system == system)
-            if rankings.count() == 0:
+        if "gender" in data:
+            gender = data["gender"]
+            if gender == "Male" or gender == "Female":
+                ranked_games = ranked_games.filter(
+                    (Game.gender == gender) | (Game.gender == "Both")
+                )
+            else:
+                ranked_games = ranked_games.filter(Game.gender == gender)
+            if ranked_games.count() == 0:
                 return create_response(
                     status=400,
-                    message="This system has no matching games for the specified age and symptom.",
+                    message="No matching games for the specified age, symptom, and gender.",
                 )
-
-            ranked_games = (
-                db.session.query(
-                    Game.name,
-                    Game.id,
-                    Game.description,
-                    Game.thumbnail,
-                    Game.image,
-                    Game.gender,
-                    Ranking.rank,
-                )
-                .join(Ranking)
-                .filter(
-                    Ranking.system == system,
-                    Ranking.symptom == symptom,
-                    Ranking.age == age,
-                )
-                .order_by(Ranking.rank)
-                .all()
+        if ranked_games.count() == 0:
+            return create_response(
+                status=400,
+                message="No matching games for the specified age and symptom.",
             )
-
-            ranked_games = [
+        systems = {}
+        for system in Game.system.type.enums:
+            ranked_games_by_system = ranked_games.filter(Game.system == system)
+            systems[system] = [
                 dict(zip(ranked_game.keys(), ranked_game))
-                for ranked_game in ranked_games
+                for ranked_game in ranked_games_by_system
             ]
-
-            return create_response(status=200, data={"games": {system: ranked_games}})
-
-        else:
-            systems = {}
-            for system in Game.system.type.enums:
-                ranked_games_by_system = (
-                    db.session.query(
-                        Game.name,
-                        Game.id,
-                        Game.description,
-                        Game.thumbnail,
-                        Game.image,
-                        Game.gender,
-                        Ranking.rank,
-                    )
-                    .join(Ranking)
-                    .filter(
-                        Ranking.system == system,
-                        Ranking.symptom == symptom,
-                        Ranking.age == age,
-                    )
-                    .order_by(Ranking.rank)
-                    .all()
-                )
-                systems[system] = [
-                    dict(zip(ranked_game.keys(), ranked_game))
-                    for ranked_game in ranked_games_by_system
-                ]
-
-            return create_response(status=200, data={"games": systems})
+        return create_response(status=200, data={"games": systems})
 
 
 @games_page.route(GAMES_ID_URL, methods=["GET"])
@@ -272,11 +135,10 @@ def get_games_all():
 def post_games():
     if "file" not in request.files:
         return create_response(status=400, message="File not provided.")
-    db.drop_all()
-    db.create_all()
+    Ranking.query.delete()
+    Game.query.delete()
     file = request.files["file"]
     book = xlrd.open_workbook(file_contents=file.read())
-
     # Entering the games into database
     id = 0
     for sheet in book.sheets():
@@ -378,14 +240,18 @@ def post_games():
                             ).value
                         )
                         if len(name) != 0:
-                            game_id = Game.query.filter(Game.name == name).first().id
+                            game_id = (
+                                Game.query.filter(
+                                    Game.name == name, Game.system == system
+                                )
+                                .first()
+                                .id
+                            )
                             ranking_id = id
                             id = id + 1
                             ranking = {}
                             ranking["id"] = ranking_id
                             ranking["age"] = age
-                            ranking["gender"] = gender
-                            ranking["system"] = system
                             ranking["symptom"] = symptom
                             ranking["game_id"] = game_id
                             ranking["rank"] = rank
