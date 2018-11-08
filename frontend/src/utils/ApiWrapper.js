@@ -18,7 +18,7 @@ export const getGames = (age, symptom, system, gender) => {
   if (system.localeCompare('Console Type') != 0) {
     requestString = requestString + '&system=' + system
   }
-  if (gender.localeCompare('Main Character Gender') != 0) {
+  if (gender.localeCompare('Character Gender') != 0) {
     requestString = requestString + '&gender=' + gender
   }
   return axios
