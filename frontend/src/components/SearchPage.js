@@ -7,7 +7,7 @@ import { updateField } from '../redux/modules/searchpage'
 import { updateResults, getSavedSearch } from '../redux/modules/results'
 import { Button } from 'reactstrap'
 import { getGames, getGamesByName } from '../utils/ApiWrapper'
-import '../styles/styles.scss'
+// import '../styles/styles.scss'
 import '../styles/searchpage.scss'
 
 const mapStateToProps = state => ({
@@ -33,10 +33,13 @@ class SearchPage extends Component {
   render() {
     return (
       <body className="background">
-      <link href="https://fonts.googleapis.com/css?family=Poppins|Source+Sans+Pro" rel="stylesheet"></link>
+        <link
+          href="https://fonts.googleapis.com/css?family=Poppins|Source+Sans+Pro"
+          rel="stylesheet"
+        />
         <h3 className="homeText">
           Child&#39;s Play
-          <br></br>
+          <br />
           Game Finder
         </h3>
         <div className="searchPage">
@@ -53,10 +56,17 @@ class SearchPage extends Component {
               Search By Name
             </Button>
           </Link>
-          <hr></hr>
-          <DropdownButton title="Console Type" fieldName="consoles" />
-          <DropdownButton title="Age" fieldName="ageRange" />
-          <DropdownButton title="Symptom" fieldName="symptoms" />
+          <hr />
+          <div className="filterDropdown">
+            <DropdownButton title="Age*" fieldName="ageRange" />
+          </div>
+          <div className="filterDropdown">
+            <DropdownButton title="Symptom*" fieldName="symptoms" />
+          </div>
+          <div className="filterDropdown">
+            <DropdownButton title="Console Type" fieldName="consoles" />
+          </div>
+          <br />
           <Link to={{ pathname: './Results' }}>
             <Button
               className="searchButton"
@@ -70,7 +80,7 @@ class SearchPage extends Component {
               Search By Filter
             </Button>
           </Link>
-          <hr></hr>
+          <hr />
           <h> Load Previous Search </h>
           <DropdownButton title="Saved Searches" fieldName="selectedSaveSearch" />
           <Link to={{ pathname: './Results' }}>
@@ -84,7 +94,7 @@ class SearchPage extends Component {
               Load saved search
             </Button>
           </Link>
-          <hr></hr>
+          <hr />
           <Link className="loginLink" to={{ pathname: './directorPage' }}>
             <Button className="adminButton">Admin Login</Button>
           </Link>

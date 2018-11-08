@@ -160,7 +160,6 @@ class Results extends Component {
             <FontAwesomeIcon icon={faHome} /> Go Home
           </Button>
         </Link>
-        
       </div>
     )
   }
