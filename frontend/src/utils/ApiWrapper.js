@@ -13,9 +13,16 @@ export const getGamesByName = name => {
     })
 }
 
-export const getGames = (age, symptom, system) => {
+export const getGames = (age, symptom, system, gender) => {
+  let requestString = BACKEND_URL + '/games' + '?age=' + age + '&symptom=' + symptom
+  if (system.localeCompare('Console Type') != 0) {
+    requestString = requestString + '&system=' + system
+  }
+  if (gender.localeCompare('Character Gender') != 0) {
+    requestString = requestString + '&gender=' + gender
+  }
   return axios
-    .get(BACKEND_URL + '/games' + '?age=' + age + '&symptom=' + symptom + '&system=' + system)
+    .get(requestString)
     .then(response => {
       return response.data.result.games
     })
