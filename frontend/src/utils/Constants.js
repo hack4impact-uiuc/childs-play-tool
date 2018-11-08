@@ -1,24 +1,24 @@
 const Constants = {
   consoles: [
-    { value: 'PlayStation Vita' },
-    { value: 'Xbox One' },
-    { value: 'PlayStation 4' },
-    { value: 'Nintendo Switch' },
-    { value: 'Nintendo 3DS' },
-    { value: 'Apple iOS' },
     { value: 'Android' },
-    { value: 'PlayStation VR' },
+    { value: 'Apple iOS' },
     { value: 'HTC VIVE' },
-    { value: 'Oculus Rift' }
+    { value: 'Nintendo 3DS' },
+    { value: 'Nintendo Switch' },
+    { value: 'Oculus Rift' },
+    { value: 'PlayStation 4' },
+    { value: 'PlayStation Vita' },
+    { value: 'PlayStation VR' },
+    { value: 'Xbox One' }
   ],
   ageRange: [{ value: '12 and Under' }, { value: '13 and Older' }],
   symptoms: [
+    { value: 'Anxiety/Hyperactivity' },
     { value: 'Bored (Long Term)' },
     { value: 'Bored (Short Term)' },
+    { value: 'Cognitive Impairment' },
     { value: 'Pain' },
-    { value: 'Anxiety/Hyperactivity' },
-    { value: 'Sadness' },
-    { value: 'Cognitive Impairment' }
+    { value: 'Sadness' }
   ],
   genders: [
     { value: 'Male' },
