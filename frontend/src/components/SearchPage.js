@@ -44,7 +44,7 @@ class SearchPage extends Component {
         </h3>
         <div className="searchPage">
           <div className="nameSearch"><SearchBarCustom fieldName="nameSearchField" /></div>
-          <Link to={{ pathname: './Results' }}>
+          <div className="nameSearch"><Link to={{ pathname: './Results' }}>
             <Button
               className="right"
               onClick={e =>
@@ -55,7 +55,7 @@ class SearchPage extends Component {
             >
               Search
             </Button>
-          </Link>
+          </Link></div>
           <hr />
           <h>Search By Filter</h><br></br>
           <div className="filterDropdown">
@@ -67,7 +67,7 @@ class SearchPage extends Component {
           <div className="filterDropdown">
             <DropdownButton title="Console Type" fieldName="consoles" />
           </div>
-          <br />
+          <br></br>
           <Link to={{ pathname: './Results' }}>
             <Button
               className="searchButton"
@@ -85,7 +85,11 @@ class SearchPage extends Component {
           <div className="tinyText">* = required field</div>
           <hr />
           <h> Load Previous Search </h>
+          <br></br>
+          <div className="saveSearch">
           <DropdownButton title="Saved Searches" fieldName="selectedSaveSearch" />
+          </div>
+          <div className="saveSearch">
           <Link to={{ pathname: './Results' }}>
             <Button
               color="blue"
@@ -97,6 +101,7 @@ class SearchPage extends Component {
               Load saved search
             </Button>
           </Link>
+          </div>
           <hr />
           <Link className="loginLink" to={{ pathname: './directorPage' }}>
             <Button className="adminButton">Admin Login</Button>

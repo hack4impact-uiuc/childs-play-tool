@@ -1,6 +1,6 @@
 .background {
-    padding-left: 20%;
-    padding-right: 20%;
+    padding-left: 25%;
+    padding-right: 25%;
     padding-bottom: 30%;
     padding-top: 1%;
     text-align: center;
@@ -73,7 +73,7 @@
 }
 
 .filterDropdown {
-  margin: 2%;
+  margin: 1.5%;
   display: inline-block;
 }
 
@@ -101,6 +101,10 @@
 }
 
 .nameSearch {
-  padding-left: 10%;
-  padding-right: 10%;
+  display: inline-block;
+}
+
+.saveSearch {
+  display: inline-block;
+  margin: 3%;
 }
