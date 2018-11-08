@@ -17,7 +17,10 @@ import {
   Form,
   FormGroup,
   Label,
-  Input
+  Input,
+  Modal,
+  ModalBody,
+  ModalFooter
 } from 'reactstrap'
 import classnames from 'classnames'
 import '../styles/results.scss'
@@ -53,10 +56,17 @@ class Results extends Component {
     super(props)
     this.state = {
       activeTab: '1',
-      saveName: ''
+      saveName: '',
+      modal: false
     }
   }
-
+  saveSearch = () => {
+    this.props.saveSearch(this.state.saveName, this.props.results)
+    this.toggleModal()
+  }
+  toggleModal = () => {
+    this.setState({ modal: !this.state.modal })
+  }
   toggle = tab => {
     if (this.state.activeTab !== tab) {
       this.setState({
@@ -144,7 +154,7 @@ class Results extends Component {
               <Button
                 className="resultButtons"
                 onClick={() => {
-                  this.props.saveSearch(this.state.saveName, this.props.results)
+                  this.saveSearch()
                 }}
               >
                 Save Search
@@ -160,6 +170,14 @@ class Results extends Component {
             <FontAwesomeIcon icon={faHome} /> Go Home
           </Button>
         </Link>
+        <Modal isOpen={this.state.modal}>
+          <ModalBody>Search saved successfully!</ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={this.toggleModal}>
+              Dismiss
+            </Button>
+          </ModalFooter>
+        </Modal>
       </div>
     )
   }
