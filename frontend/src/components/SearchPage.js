@@ -43,7 +43,7 @@ class SearchPage extends Component {
           Game Finder
         </h3>
         <div className="searchPage">
-          <SearchBarCustom fieldName="nameSearchField" />
+          <div className="nameSearch"><SearchBarCustom fieldName="nameSearchField" /></div>
           <Link to={{ pathname: './Results' }}>
             <Button
               className="right"
