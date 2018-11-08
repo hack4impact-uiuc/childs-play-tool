@@ -17,9 +17,7 @@ class Mixin:
 
     def to_dict(self) -> dict:
         d_out = dict((key, val) for key, val in self.__dict__.items())
-        d_out.pop(
-            "_sa_instance_state", None
-        )  # rename id key to interface with response
+        d_out.pop("_sa_instance_state", None)
         return d_out
 
 
