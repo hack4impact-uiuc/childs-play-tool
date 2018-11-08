@@ -39,8 +39,8 @@
 }
 
 .searchPage{
-  padding-left: 18%;
-  padding-right: 18%;
+  padding-left: 16%;
+  padding-right: 16%;
   padding-bottom: 10%;
   min-width: 250px;
   text-align: center;
@@ -93,4 +93,8 @@
   border: 1px;
   border-style: solid;
   border-color: black;
+}
+
+.tinyText {
+  font-size: 70%;
 }

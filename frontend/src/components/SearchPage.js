@@ -53,10 +53,11 @@ class SearchPage extends Component {
                 )
               }
             >
-              Search By Name
+              Search
             </Button>
           </Link>
           <hr />
+          <h>Search By Filter</h><br></br>
           <div className="filterDropdown">
             <DropdownButton title="Age*" fieldName="ageRange" />
           </div>
@@ -77,9 +78,11 @@ class SearchPage extends Component {
                 )
               }
             >
-              Search By Filter
+              Search
             </Button>
           </Link>
+          <br></br>
+          <div className="tinyText">* = required field</div>
           <hr />
           <h> Load Previous Search </h>
           <DropdownButton title="Saved Searches" fieldName="selectedSaveSearch" />
