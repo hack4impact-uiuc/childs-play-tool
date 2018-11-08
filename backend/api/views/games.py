@@ -1,5 +1,5 @@
 from api.models import db, Game, Ranking
-from api.core import create_response, Mixin, logger
+from api.core import create_response, Mixin
 from flask import Blueprint, request, current_app as app
 import xlrd
 import math
@@ -105,7 +105,8 @@ def get_games():
         for system in Game.system.type.enums:
             ranked_games_by_system = ranked_games.filter(Game.system == system)
             systems[system] = [
-                get_game_dict(ranked_game) for ranked_game in ranked_games_by_system.all()
+                get_game_dict(ranked_game)
+                for ranked_game in ranked_games_by_system.all()
             ]
         return create_response(status=200, data={"games": systems})
 
@@ -322,17 +323,28 @@ def simplify_name(search_name):
     modified_search = no_punct
     return modified_search
 
+
 def get_game_dict(game):
-    game_dict = game.to_dict()
-    logger.info("made dict")
-    ages = db.session.query(Ranking).distinct(Ranking.age).filter(Ranking.game_id == game_dict["id"]).all()
-    logger.info("got ages")
-    symptoms = db.session.query(Ranking).distinct(Ranking.symptom).filter(Ranking.game_id == game_dict["id"]).all()
-    logger.info("got symptoms")
+    try:
+        game_dict = game._asdict()
+    except:
+        game_dict = game.to_dict()
+    ages = [
+        age[0]
+        for age in db.session.query(Ranking.age)
+        .distinct(Ranking.age)
+        .filter(Ranking.game_id == game_dict["id"])
+        .all()
+    ]
+    symptoms = [
+        symptom[0]
+        for symptom in db.session.query(Ranking.symptom)
+        .distinct(Ranking.symptom)
+        .filter(Ranking.game_id == game_dict["id"])
+        .all()
+    ]
     tags = {}
     tags["ages"] = ages
     tags["symptoms"] = symptoms
     game_dict["tags"] = tags
     return game_dict
-    
-
