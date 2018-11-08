@@ -52,8 +52,8 @@ class SearchPage extends Component {
             </Button>
           </Link>
           <DropdownButton title="Console Type" fieldName="consoles" />
-          <DropdownButton title="Age" fieldName="ageRange" />
-          <DropdownButton title="Symptom" fieldName="symptoms" />
+          <DropdownButton title="Age*" fieldName="ageRange" />
+          <DropdownButton title="Symptom*" fieldName="symptoms" />
           <DropdownButton title="Main Character Gender" fieldName="genders" />
           <Link to={{ pathname: './Results' }}>
             <Button
