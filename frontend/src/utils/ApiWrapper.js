@@ -16,10 +16,10 @@ export const getGamesByName = name => {
 export const getGames = (age, symptom, system, gender) => {
   let requestString = BACKEND_URL + '/games' + '?age=' + age + '&symptom=' + symptom
   if (system.localeCompare('Console Type') != 0) {
-          requestString = requestString + '&system=' + system
+    requestString = requestString + '&system=' + system
   }
-  if (gender.localeCompare("Main Character Gender") != 0) {
-          requestString = requestString + '&gender=' + gender
+  if (gender.localeCompare('Main Character Gender') != 0) {
+    requestString = requestString + '&gender=' + gender
   }
   return axios
     .get(requestString)
