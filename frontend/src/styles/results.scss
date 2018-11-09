@@ -1,0 +1,117 @@
+.saveSearch {
+    width: 160px;
+    margin: 1%;
+}
+.homeButton {
+    position: absolute;
+    top:1;
+    left:0;
+    color: cornflowerblue;
+    background: white;
+    margin-left: 1%;
+    margin-bottom: 1%;
+    border: 1px;
+    border-style: solid;
+    border-color: black;
+}
+.resultButtons {
+    color: cornflowerblue;
+    background: white;
+    margin-left: 1%;
+    border: 1px;
+    border-style: solid;
+    border-color: black;
+    align: left;
+}
+.cardStyle {
+    color: black;
+    font-family: Arial;
+    border: 2px solid #00cc99;
+    margin: 1.5%;
+    display: inline-table;
+    text-align: center;
+    padding: .1%;
+    background: white;
+}
+.cardStyleHover {
+    color: black;
+    font-family: Arial;
+    border: 2px solid #00cc99;
+    margin: 1.5%;
+    display: inline-table;
+    background: #d8ddd8;
+    text-align: center;
+    padding: .1%;
+}
+.cardName {
+    font-size: 30px;
+    text-align: center;
+}
+.tag_age_12under {
+    margin-top: 2%;
+    background: #9fc972;
+    color: white;
+    width: 160px;
+}
+
+.tag_age_13over {
+    margin-top: 2%;
+    background: #4b563a;
+    color: white;
+    width: 160px;
+}
+.tag_symptom_pain {
+    background: #eb9ea1;
+    color: white;
+    width: 160px;
+}
+.tag_symptom_bored_short {
+    background: #f3d26a;
+    color: white;
+    width: 160px;
+}
+.tag_symptom_bored_long {
+    background: #c2bfde;
+    color: white;
+    width: 160px;
+}
+.tag_symptom_anxiety {
+    background: #a1d6ee;
+    color: white;
+    width: 160px;
+}
+.tag_symptom_sadness {
+    background: #fab169;
+    color: white;
+    width: 160px;
+}
+.tag_symptom_cognitive {
+    background: #ccd7c2;
+    color: white;
+    width: 160px;
+}
+
+.backgroun {
+    background-image: url("childs_play_dark.png");
+    background-size: cover;
+}
+
+.cardBox{
+    // padding: 10%;
+    border: 2px solid #73AD21;
+    border-radius: 25px;
+    background: white;
+    min-width: 225px;
+}
+.resultsText{
+    padding: 5%;
+    text-align: center;
+    // background: #09B2AB;
+    background: white;
+    min-width: 225px;
+    font-size: 50px;
+    color: gray;
+}
+.navbar{
+    width: 100%;
+}
