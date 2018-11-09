@@ -79,7 +79,7 @@ class Results extends Component {
     games
       ? games.map(c => (
           <Link to={{ pathname: './description', state: { game: c } }}>
-            <Card game={c}/>
+            <Card game={c} />
           </Link>
         ))
       : null
@@ -104,9 +104,7 @@ class Results extends Component {
     return (
       <body className="background">
         <div className="cardBox">
-          <h3 className="resultsText">
-            Results found:
-          </h3>
+          <h3 className="resultsText">Results found:</h3>
           {this.props.results ? (
             <div>
               <Link to={{ pathname: './' }}>
@@ -120,27 +118,27 @@ class Results extends Component {
                   <NavItem key={index}>
                     <NavLink
                       className={classnames({
-                        active: this.state.activeTab === (index + 1).toString(),
+                        active: this.state.activeTab === (index + 1).toString()
                       })}
                       onClick={() => {
                         this.toggle((index + 1).toString())
                       }}
-                      style={{backgroundColor: '#ffffff'}}
+                      style={{ backgroundColor: '#ffffff' }}
                     >
                       {x} {this.chooseImage(x)}
                     </NavLink>
                   </NavItem>
                 ))}
               </Nav>
-                <TabContent activeTab={this.state.activeTab}>
-                  {Object.getOwnPropertyNames(this.props.results).map((x, index) => (
-                    <TabPane tabId={(index + 1).toString()}>
-                      <CardDeck>
-                        <Col xs="auto">{this.buildCards(this.props.results[x])}</Col>
-                      </CardDeck>
-                    </TabPane>
-                  ))}
-                </TabContent>
+              <TabContent activeTab={this.state.activeTab}>
+                {Object.getOwnPropertyNames(this.props.results).map((x, index) => (
+                  <TabPane tabId={(index + 1).toString()}>
+                    <CardDeck>
+                      <Col xs="auto">{this.buildCards(this.props.results[x])}</Col>
+                    </CardDeck>
+                  </TabPane>
+                ))}
+              </TabContent>
               <Form>
                 <FormGroup>
                   <div className="saveSearch">

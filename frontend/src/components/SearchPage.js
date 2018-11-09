@@ -43,19 +43,23 @@ class SearchPage extends Component {
           Game Finder
         </h3>
         <div className="searchPage">
-          <div className="nameSearch"><SearchBarCustom fieldName="nameSearchField" /></div>
-          <div className="nameSearch"><Link to={{ pathname: './Results' }}>
-            <Button
-              className="right"
-              onClick={e =>
-                getGamesByName(this.props.nameSearchField).then(results =>
-                  this.props.updateResults(results)
-                )
-              }
-            >
-              Search
-            </Button>
-          </Link></div>
+          <div className="nameSearch">
+            <SearchBarCustom fieldName="nameSearchField" />
+          </div>
+          <div className="nameSearch">
+            <Link to={{ pathname: './Results' }}>
+              <Button
+                className="right"
+                onClick={e =>
+                  getGamesByName(this.props.nameSearchField).then(results =>
+                    this.props.updateResults(results)
+                  )
+                }
+              >
+                Search
+              </Button>
+            </Link>
+          </div>
           <hr />
           <h>Search By Filter</h>
           <br />
@@ -68,7 +72,7 @@ class SearchPage extends Component {
           <div className="filterDropdown">
             <DropdownButton title="Console Type" fieldName="consoles" />
           </div>
-          <br></br>
+          <br />
           <Link to={{ pathname: './Results' }}>
             <Button
               className="searchButton"
@@ -86,22 +90,22 @@ class SearchPage extends Component {
           <div className="tinyText">* = required field</div>
           <hr />
           <h> Load Previous Search </h>
-          <br></br>
+          <br />
           <div className="saveSearch">
-          <DropdownButton title="Saved Searches" fieldName="selectedSaveSearch" />
+            <DropdownButton title="Saved Searches" fieldName="selectedSaveSearch" />
           </div>
           <div className="saveSearch">
-          <Link to={{ pathname: './Results' }}>
-            <Button
-              color="blue"
-              onClick={e => {
-                this.props.updateResults(this.props.getSavedSearch(this.props.selectedVal))
-                console.log(this.props.getSavedSearch(this.props.selectedVal))
-              }}
-            >
-              Load saved search
-            </Button>
-          </Link>
+            <Link to={{ pathname: './Results' }}>
+              <Button
+                color="blue"
+                onClick={e => {
+                  this.props.updateResults(this.props.getSavedSearch(this.props.selectedVal))
+                  console.log(this.props.getSavedSearch(this.props.selectedVal))
+                }}
+              >
+                Load saved search
+              </Button>
+            </Link>
           </div>
           <hr />
           <Link className="loginLink" to={{ pathname: './directorPage' }}>
