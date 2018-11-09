@@ -33,7 +33,7 @@ const mapDispatchToProps = dispatch => {
 class SearchPage extends Component {
   render() {
     return (
-      <body className="background">
+      <div className="background">
         <link
           href="https://fonts.googleapis.com/css?family=Poppins|Source+Sans+Pro"
           rel="stylesheet"
@@ -41,7 +41,7 @@ class SearchPage extends Component {
         <h3 className="homeText">
           Child&#39;s Play
           <br />
-          Game Finder
+          Therapeutic Video Game Guide
         </h3>
         <div className="searchPage">
           <div className="nameSearch">
@@ -119,7 +119,7 @@ class SearchPage extends Component {
             <Button className="adminButton">Admin Login</Button>
           </Link>
         </div>
-      </body>
+      </div>
     )
   }
 }
