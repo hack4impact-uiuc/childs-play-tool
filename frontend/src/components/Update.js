@@ -18,7 +18,7 @@ class Update extends Component {
 
   render() {
     return (
-      <body className="dropPageBackground">
+      <div className="dropPageBackground">
         <div className="dropPage">
           <section className="droppedBox">
             <h4>Upload excel sheet with new game data</h4>
@@ -42,7 +42,7 @@ class Update extends Component {
             </aside>
           </section>
         </div>
-      </body>
+      </div>
     )
   }
 }
