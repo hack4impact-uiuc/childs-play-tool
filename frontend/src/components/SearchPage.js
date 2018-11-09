@@ -6,8 +6,8 @@ import { DropdownButton, SearchBarCustom } from './'
 import { updateField } from '../redux/modules/searchpage'
 import { updateResults, getSavedSearch } from '../redux/modules/results'
 import { Button } from 'reactstrap'
-import { getGames } from '../utils/ApiWrapper'
-import '../styles/styles.scss'
+import { getGames, getGamesByName } from '../utils/ApiWrapper'
+// import '../styles/styles.scss'
 import '../styles/searchpage.scss'
 
 const mapStateToProps = state => ({
@@ -15,7 +15,8 @@ const mapStateToProps = state => ({
   age: state.searchpage.ageRange,
   symptom: state.searchpage.symptoms,
   name: state.searchpage.nameSearchField,
-  selectedVal: state.searchpage.selectedSaveSearch
+  selectedVal: state.searchpage.selectedSaveSearch,
+  nameSearchField: state.searchpage.nameSearchField
 })
 
 const mapDispatchToProps = dispatch => {
@@ -32,27 +33,42 @@ class SearchPage extends Component {
   render() {
     return (
       <body className="background">
+        <link
+          href="https://fonts.googleapis.com/css?family=Poppins|Source+Sans+Pro"
+          rel="stylesheet"
+        />
         <h3 className="homeText">
-          Child&#39;s Play Game Finder
+          Child&#39;s Play
+          <br />
+          Game Finder
         </h3>
         <div className="searchPage">
-          <SearchBarCustom fieldName="nameSearchField" />
-          <Link to={{ pathname: './Results' }}>
+          <div className="nameSearch"><SearchBarCustom fieldName="nameSearchField" /></div>
+          <div className="nameSearch"><Link to={{ pathname: './Results' }}>
             <Button
               className="right"
               onClick={e =>
-                getGames(this.props.age, this.props.symptom, this.props.system).then(results =>
+                getGamesByName(this.props.nameSearchField).then(results =>
                   this.props.updateResults(results)
                 )
               }
             >
-              Search By Name
+              Search
             </Button>
-          </Link>
-          <hr></hr>
-          <DropdownButton title="Console Type" fieldName="consoles" />
-          <DropdownButton title="Age" fieldName="ageRange" />
-          <DropdownButton title="Symptom" fieldName="symptoms" />
+          </Link></div>
+          <hr />
+          <h>Search By Filter</h>
+          <br />
+          <div className="filterDropdown">
+            <DropdownButton title="Age*" fieldName="ageRange" />
+          </div>
+          <div className="filterDropdown">
+            <DropdownButton title="Symptom*" fieldName="symptoms" />
+          </div>
+          <div className="filterDropdown">
+            <DropdownButton title="Console Type" fieldName="consoles" />
+          </div>
+          <br></br>
           <Link to={{ pathname: './Results' }}>
             <Button
               className="searchButton"
@@ -63,12 +79,18 @@ class SearchPage extends Component {
                 )
               }
             >
-              Search By Filter
+              Search
             </Button>
           </Link>
-          <hr></hr>
+          <br />
+          <div className="tinyText">* = required field</div>
+          <hr />
           <h> Load Previous Search </h>
+          <br></br>
+          <div className="saveSearch">
           <DropdownButton title="Saved Searches" fieldName="selectedSaveSearch" />
+          </div>
+          <div className="saveSearch">
           <Link to={{ pathname: './Results' }}>
             <Button
               color="blue"
@@ -80,7 +102,8 @@ class SearchPage extends Component {
               Load saved search
             </Button>
           </Link>
-          <hr></hr>
+          </div>
+          <hr />
           <Link className="loginLink" to={{ pathname: './directorPage' }}>
             <Button className="adminButton">Admin Login</Button>
           </Link>

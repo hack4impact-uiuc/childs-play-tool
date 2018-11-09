@@ -6,7 +6,7 @@ import { Form, FormGroup, Label, Input } from 'reactstrap'
 import '../styles/styles.scss'
 
 const mapStateToProps = state => ({
-  nameSearchField: state.nameSearchField
+  nameSearchField: state.searchpage.nameSearchField
 })
 
 const mapDispatchToProps = dispatch => {
@@ -28,7 +28,7 @@ class SearchBarCustom extends Component {
       <div>
         <Form className="search">
           <FormGroup>
-            <Label for="exampleSearch">Search by Name</Label>
+            <Label for="exampleSearch">Search By Name</Label>
             <Input
               type="search"
               name="search"

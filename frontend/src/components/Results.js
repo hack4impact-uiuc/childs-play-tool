@@ -18,7 +18,10 @@ import {
   FormGroup,
   Label,
   Input,
-  CardDeck
+  CardDeck,
+  Modal,
+  ModalBody,
+  ModalFooter
 } from 'reactstrap'
 import classnames from 'classnames'
 import '../styles/results.scss'
@@ -36,7 +39,8 @@ import {
 } from '@fortawesome/free-brands-svg-icons'
 
 const mapStateToProps = state => ({
-  results: state.results.games
+  results: state.results.games,
+  tags: [state.searchpage.ageRange, state.searchpage.symptoms]
 })
 
 const mapDispatchToProps = dispatch => {
@@ -53,10 +57,17 @@ class Results extends Component {
     super(props)
     this.state = {
       activeTab: '1',
-      saveName: ''
+      saveName: '',
+      modal: false
     }
   }
-
+  saveSearch = () => {
+    this.props.saveSearch(this.state.saveName, this.props.results)
+    this.toggleModal()
+  }
+  toggleModal = () => {
+    this.setState({ modal: !this.state.modal })
+  }
   toggle = tab => {
     if (this.state.activeTab !== tab) {
       this.setState({
@@ -64,7 +75,7 @@ class Results extends Component {
       })
     }
   }
-  buildCards = games =>
+  buildCards = (games, tags) =>
     games
       ? games.map(c => (
           <Link to={{ pathname: './description', state: { game: c } }}>
