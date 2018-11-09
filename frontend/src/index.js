@@ -16,13 +16,14 @@ import {
 import registerServiceWorker from './registerServiceWorker'
 import configureStore, { history } from './redux/configureStore'
 import { loadState } from './redux/localStorage'
+import './styles/htmlstyles.scss'
 
 const store = configureStore()
 
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <div>
+      <div className="heightDef">
         <Route exact path="/" component={SearchPage} />
         <Route path="/results" component={Results} />
         <Route path="/description" component={Description} />

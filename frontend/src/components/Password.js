@@ -8,7 +8,7 @@ import { Button } from 'reactstrap'
 class Password extends Component {
   render() {
     return (
-      <body className="passwordPageBackground">
+      <div className="passwordPageBackground">
         <div className="passwordPage">
           <p> Welcome Administrators. Enter your key to continue: </p>
           <form>
@@ -23,7 +23,7 @@ class Password extends Component {
             </Link>
           </form>
         </div>
-      </body>
+      </div>
     )
   }
 }

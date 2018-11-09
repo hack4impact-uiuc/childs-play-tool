@@ -102,7 +102,7 @@ class Results extends Component {
   }
   render() {
     return (
-      <body className="background">
+      <div className="background">
         <div className="cardBox">
           <h3 className="resultsText">Results found:</h3>
           {this.props.results ? (
@@ -177,7 +177,7 @@ class Results extends Component {
           )}
           <br />
         </div>
-      </body>
+      </div>
     )
   }
 }

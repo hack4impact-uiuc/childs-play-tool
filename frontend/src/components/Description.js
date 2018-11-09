@@ -11,7 +11,7 @@ const titleStyle = {
 class Description extends Component {
   render() {
     return (
-      <body>
+      <div>
         <div className="background">
           <div className="white-box">
             <div className="description-cardName">{this.props.location.state.game.name}</div>
@@ -38,7 +38,7 @@ class Description extends Component {
           {/*<Tag type={'age'} tag={this.props.location.state.tags[0]} />
           <Tag type={'symptom'} tag={this.props.location.state.tags[1]} />*/}
         </div>
-      </body>
+      </div>
     )
   }
 }
