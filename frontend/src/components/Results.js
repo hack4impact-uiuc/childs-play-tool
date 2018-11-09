@@ -107,11 +107,6 @@ class Results extends Component {
           <h3 className="resultsText">Results found:</h3>
           {this.props.results ? (
             <div>
-              <Link to={{ pathname: './' }}>
-                <Button className="homeButton">
-                  <FontAwesomeIcon icon={faHome} /> Go Home
-                </Button>
-              </Link>
               <br />
               <Nav className="navbar" tabs fill>
                 {Object.getOwnPropertyNames(this.props.results).map((x, index) => (
@@ -133,9 +128,9 @@ class Results extends Component {
               <TabContent activeTab={this.state.activeTab}>
                 {Object.getOwnPropertyNames(this.props.results).map((x, index) => (
                   <TabPane tabId={(index + 1).toString()}>
-                    <CardDeck>
-                      <Col xs="auto">{this.buildCards(this.props.results[x])}</Col>
-                    </CardDeck>
+                    <Row>
+                      <Col sm="12" md="4">{this.buildCards(this.props.results[x])}</Col>
+                    </Row>
                   </TabPane>
                 ))}
               </TabContent>
@@ -170,6 +165,12 @@ class Results extends Component {
                   Save Search
                 </Button>
               </Form>
+              <hr />
+              <Link to={{ pathname: './' }}>
+                <Button className="homeButton">
+                  <FontAwesomeIcon icon={faHome} /> Go Home
+                </Button>
+              </Link>
             </div>
           ) : (
             <div>No matching results :(</div>
