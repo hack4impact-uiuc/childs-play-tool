@@ -16,9 +16,9 @@ class Description extends Component {
           <div className="white-box">
             <div className="description-cardName">{this.props.location.state.game.name}</div>
             <div align="center">
-              {this.props.location.state.game.tags.map(t => (
+              {/*this.props.location.state.game.tags.map(t => (
                 <Tag type={t.type} tag={t.tag} />
-              ))}
+              ))*/}
               <br />
               <br />
               {this.props.location.state.game.summary}
