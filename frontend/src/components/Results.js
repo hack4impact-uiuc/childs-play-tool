@@ -17,7 +17,8 @@ import {
   Form,
   FormGroup,
   Label,
-  Input
+  Input,
+  CardDeck
 } from 'reactstrap'
 import classnames from 'classnames'
 import '../styles/results.scss'
@@ -67,7 +68,7 @@ class Results extends Component {
     games
       ? games.map(c => (
           <Link to={{ pathname: './description', state: { game: c } }}>
-            <Card className="cardBorder" game={c} />
+            <Card game={c}/>
           </Link>
         ))
       : null
@@ -90,77 +91,83 @@ class Results extends Component {
   }
   render() {
     return (
-      <div>
-        {this.props.results ? (
-          <div>
-            <Nav tabs>
-              {Object.getOwnPropertyNames(this.props.results).map((x, index) => (
-                <NavItem key={index}>
-                  <NavLink
-                    className={classnames({
-                      active: this.state.activeTab === (index + 1).toString()
-                    })}
-                    onClick={() => {
-                      this.toggle((index + 1).toString())
-                    }}
-                  >
-                    {x} {this.chooseImage(x)}
-                  </NavLink>
-                </NavItem>
-              ))}
-            </Nav>
-            <TabContent activeTab={this.state.activeTab}>
-              {Object.getOwnPropertyNames(this.props.results).map((x, index) => (
-                <TabPane tabId={(index + 1).toString()}>
-                  <Row>
-                    <Col sm="12">{this.buildCards(this.props.results[x])}</Col>
-                  </Row>
-                </TabPane>
-              ))}
-            </TabContent>
-            <Form>
-              <FormGroup>
-                <div className="saveSearch">
-                  <Label for="exampleSearch">Save Search</Label>
-                  <InputGroup>
-                    <InputGroupAddon addonType="prepend">
-                      <InputGroupText>
-                        <FontAwesomeIcon icon={faSave} />
-                      </InputGroupText>
-                    </InputGroupAddon>
-                    <Input
-                      type="text"
-                      name="saveName"
-                      id="saveName"
-                      placeholder="Input Name"
-                      onChange={e => {
-                        this.setState({ saveName: e.target.value })
+      <body className="background">
+        <div className="cardBox">
+          <h3 className="resultsText">
+            Results found:
+          </h3>
+          {this.props.results ? (
+            <div>
+              <Link to={{ pathname: './' }}>
+                <Button className="homeButton">
+                  <FontAwesomeIcon icon={faHome} /> Go Home
+                </Button>
+              </Link>
+              <br />
+              <Nav className="navbar" tabs fill>
+                {Object.getOwnPropertyNames(this.props.results).map((x, index) => (
+                  <NavItem key={index}>
+                    <NavLink
+                      className={classnames({
+                        active: this.state.activeTab === (index + 1).toString(),
+                      })}
+                      onClick={() => {
+                        this.toggle((index + 1).toString())
                       }}
-                    />
-                  </InputGroup>
-                </div>
-              </FormGroup>
-              <Button
-                className="resultButtons"
-                onClick={() => {
-                  this.props.saveSearch(this.state.saveName, this.props.results)
-                }}
-              >
-                Save Search
-              </Button>
-            </Form>
-          </div>
-        ) : (
-          <div>No matching results :(</div>
-        )}
-        <br />
-        <Link to={{ pathname: './' }}>
-          <Button className="resultButtons">
-            <FontAwesomeIcon icon={faHome} /> Go Home
-          </Button>
-        </Link>
-        
-      </div>
+                      style={{backgroundColor: '#ffffff'}}
+                    >
+                      {x} {this.chooseImage(x)}
+                    </NavLink>
+                  </NavItem>
+                ))}
+              </Nav>
+                <TabContent activeTab={this.state.activeTab}>
+                  {Object.getOwnPropertyNames(this.props.results).map((x, index) => (
+                    <TabPane tabId={(index + 1).toString()}>
+                      <CardDeck>
+                        <Col xs="auto">{this.buildCards(this.props.results[x])}</Col>
+                      </CardDeck>
+                    </TabPane>
+                  ))}
+                </TabContent>
+              <Form>
+                <FormGroup>
+                  <div className="saveSearch">
+                    <Label for="exampleSearch">Save Search</Label>
+                    <InputGroup>
+                      <InputGroupAddon addonType="prepend">
+                        <InputGroupText>
+                          <FontAwesomeIcon icon={faSave} />
+                        </InputGroupText>
+                      </InputGroupAddon>
+                      <Input
+                        type="text"
+                        name="saveName"
+                        id="saveName"
+                        placeholder="Input Name"
+                        onChange={e => {
+                          this.setState({ saveName: e.target.value })
+                        }}
+                      />
+                    </InputGroup>
+                  </div>
+                </FormGroup>
+                <Button
+                  className="resultButtons"
+                  onClick={() => {
+                    this.props.saveSearch(this.state.saveName, this.props.results)
+                  }}
+                >
+                  Save Search
+                </Button>
+              </Form>
+            </div>
+          ) : (
+            <div>No matching results :(</div>
+          )}
+          <br />
+        </div>
+      </body>
     )
   }
 }
