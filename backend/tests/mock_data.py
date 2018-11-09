@@ -31,17 +31,6 @@ ranking_ages = [
     "12 and Under",
 ]
 
-ranking_genders = ["Male", "Both", "Both", "Male", "Male", "Both"]
-
-ranking_systems = [
-    "Xbox One",
-    "Nintendo Switch",
-    "PlayStation 4",
-    "Nintendo Switch",
-    "Nintendo Switch",
-    "Nintendo 3DS",
-]
-
 ranking_symptoms = [
     "Bored (Long Term)",
     "Bored (Short Term)",
