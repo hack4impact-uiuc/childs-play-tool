@@ -292,7 +292,7 @@ def get_giantbomb_data(game_name):
             for result in gb_data["results"]:
                 # look for closest match
                 similarity = SequenceMatcher(
-                    None, game_name.lower(), result["name"].lower()
+                    None, simplify_name(game_name.lower()), result["name"].lower()
                 ).ratio()
                 if similarity > best_similarity:
                     best_match = result
@@ -309,14 +309,21 @@ def get_giantbomb_data(game_name):
 
 def simplify_name(search_name):
     modified_search = re.sub("[\(\[].*?[\)\]]", "", search_name)
-    modified_search = modified_search.strip()
+    modified_search = modified_search.strip().lower()
+    if "edition" in modified_search:
+        if ":" in modified_search:
+            modified_search = modified_search[0 : modified_search.rfind(":")]
+        elif "-" in modified_search:
+            modified_search = modified_search[0 : modified_search.rfind("-")]
+    if "for " in modified_search:
+        modified_search = modified_search[0 : modified_search.rfind("for ")]
     punctuations = "`~!@#$%^&*()_-+={[}]|\:;'<,>.?/"
     no_punct = ""
     for char in modified_search:
         if char not in punctuations:
             no_punct = no_punct + char
     modified_search = no_punct
-    return modified_search
+    return modified_search.strip()
 
 
 def get_game_dict(game):
