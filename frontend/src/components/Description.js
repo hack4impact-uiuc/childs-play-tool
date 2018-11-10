@@ -12,7 +12,7 @@ class Description extends Component {
   render() {
     return (
       <div>
-        <div className="background">
+        <div className="description-background">
           <div className="white-box">
             <div className="description-cardName">{this.props.location.state.game.name}</div>
             <div align="center">
