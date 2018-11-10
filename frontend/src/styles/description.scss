@@ -31,3 +31,37 @@
     height: 100vh;
     width: 100hw;
   }
+
+  @media only screen and (max-width: 750px) {
+          .description-background {
+              // padding: 30%;
+              padding-left: 20%;
+              padding-right: 20%;
+              padding-bottom: 1%;
+              padding-top: 1%;
+              text_align: center;
+              background-attachment: fixed;
+              margin: 0%;
+              background: url("childs_play_dark.png");
+              background-size: cover;
+              height: 100vh;
+              width: 100hw;
+            }
+  }
+
+@media only screen and (max-width: 500px) {
+        .description-background {
+            // padding: 30%;
+            padding-left: 10%;
+            padding-right: 10%;
+            padding-bottom: 1%;
+            padding-top: 1%;
+            text_align: center;
+            background-attachment: fixed;
+            margin: 0%;
+            background: url("childs_play_dark.png");
+            background-size: cover;
+            height: 100vh;
+            width: 100hw;
+          }
+}
