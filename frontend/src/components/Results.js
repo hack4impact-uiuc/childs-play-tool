@@ -61,8 +61,8 @@ class Results extends Component {
       modal: false
     }
   }
-  saveSearch = () => {
-    this.props.saveSearch(this.state.saveName, this.props.results)
+  saveSearch = (name, res) => {
+    this.props.saveSearch(name, res)
     this.toggleModal()
   }
   toggleModal = () => {
@@ -84,20 +84,20 @@ class Results extends Component {
         ))
       : null
   chooseImage = system => {
-    if (system === Constants.consoles[0].value) return <FontAwesomeIcon icon={faGamepad} />
-    else if (system === Constants.consoles[1].value) return <FontAwesomeIcon icon={faXbox} />
-    else if (system === Constants.consoles[2].value) return <FontAwesomeIcon icon={faPlaystation} />
-    else if (system === Constants.consoles[3].value)
-      return <FontAwesomeIcon icon={faNintendoSwitch} />
-    else if (system === Constants.consoles[4].value)
-      return <img src={require('../styles/3ds.png')} />
-    else if (system === Constants.consoles[5].value) return <FontAwesomeIcon icon={faApple} />
-    else if (system === Constants.consoles[6].value) return <FontAwesomeIcon icon={faAndroid} />
-    else if (system === Constants.consoles[7].value)
-      return <img src={require('../styles/psvr.png')} />
-    else if (system === Constants.consoles[8].value)
+    if (system === Constants.consoles[0].value) return <FontAwesomeIcon icon={faAndroid} />
+    else if (system === Constants.consoles[1].value) return <FontAwesomeIcon icon={faApple} />
+    else if (system === Constants.consoles[2].value)
       return <img src={require('../styles/htc.png')} />
-    else if (system === Constants.consoles[9].value) return <FontAwesomeIcon icon={faVrCardboard} />
+    else if (system === Constants.consoles[3].value)
+      return <img src={require('../styles/3ds.png')} />
+    else if (system === Constants.consoles[4].value)
+      return <FontAwesomeIcon icon={faNintendoSwitch} />
+    else if (system === Constants.consoles[5].value) return <FontAwesomeIcon icon={faVrCardboard} />
+    else if (system === Constants.consoles[6].value) return <FontAwesomeIcon icon={faPlaystation} />
+    else if (system === Constants.consoles[7].value) return <FontAwesomeIcon icon={faGamepad} />
+    else if (system === Constants.consoles[8].value)
+      return <img src={require('../styles/psvr.png')} />
+    else if (system === Constants.consoles[9].value) return <FontAwesomeIcon icon={faXbox} />
     else return
   }
   render() {
@@ -107,11 +107,6 @@ class Results extends Component {
           <h3 className="resultsText">Results found:</h3>
           {this.props.results ? (
             <div>
-              <Link to={{ pathname: './' }}>
-                <Button className="homeButton">
-                  <FontAwesomeIcon icon={faHome} /> Go Home
-                </Button>
-              </Link>
               <br />
               <Nav className="navbar" tabs fill>
                 {Object.getOwnPropertyNames(this.props.results).map((x, index) => (
@@ -134,7 +129,7 @@ class Results extends Component {
                 {Object.getOwnPropertyNames(this.props.results).map((x, index) => (
                   <TabPane tabId={(index + 1).toString()}>
                     <CardDeck>
-                      <Col xs="auto">{this.buildCards(this.props.results[x])}</Col>
+                      <Col>{this.buildCards(this.props.results[x])}</Col>
                     </CardDeck>
                   </TabPane>
                 ))}
@@ -164,12 +159,26 @@ class Results extends Component {
                 <Button
                   className="resultButtons"
                   onClick={() => {
-                    this.props.saveSearch(this.state.saveName, this.props.results)
+                    this.saveSearch(this.state.saveName, this.props.results)
                   }}
                 >
                   Save Search
                 </Button>
+                <Modal isOpen={this.state.modal}>
+                  <ModalBody>Search saved successfully!</ModalBody>
+                  <ModalFooter>
+                    <Button color="primary" onClick={this.toggleModal}>
+                      Dismiss
+                    </Button>
+                  </ModalFooter>
+                </Modal>
               </Form>
+              <hr />
+              <Link to={{ pathname: './' }}>
+                <Button className="homeButton">
+                  <FontAwesomeIcon icon={faHome} /> Go Home
+                </Button>
+              </Link>
             </div>
           ) : (
             <div>No matching results :(</div>
