@@ -143,7 +143,7 @@ def post_games():
     id = 0
     for sheet in book.sheets():
         # Each sheet has the system name at the top
-        system = sheet.cell(0, 1).value
+        system = str(sheet.cell(0, 1).value).strip()
         count = 0
         current_row = 0
         # Exit out of the while loop when it has iterated through all categories on the page
@@ -156,7 +156,7 @@ def post_games():
             # Iterates through the two age categories that are side by side in the spread sheet
             # AGE_NUMBER = 2
             for age_index in range(AGE_NUMBER):
-                name = str(sheet.cell(current_row, 2 * age_index + 1).value)
+                name = str(sheet.cell(current_row, 2 * age_index + 1).value).strip()
                 # Iterates through the rankings of a specific symptom and category until the end
                 while name != "":
                     # Checks if the game has already been entered into the database
@@ -167,9 +167,9 @@ def post_games():
                         game = {}
                         game["system"] = system
                         game["name"] = name
-                        game["gender"] = sheet.cell(
-                            current_row, 2 * age_index + 2
-                        ).value
+                        game["gender"] = str(
+                            sheet.cell(current_row, 2 * age_index + 2).value
+                        ).strip()
                         game["id"] = id
                         id = id + 1
                         # API extra information stuff
@@ -183,7 +183,7 @@ def post_games():
                     # Breaks out of the loop if we have reached the end of the sheet
                     if current_row == sheet.nrows:
                         break
-                    name = str(sheet.cell(current_row, 2 * age_index + 1).value)
+                    name = str(sheet.cell(current_row, 2 * age_index + 1).value).strip()
                 # If the sheet only has one age category
                 if sheet.ncols < FULL_COLUMN_NUMBER:
                     count += 2
@@ -233,12 +233,7 @@ def post_games():
                             sheet.cell(
                                 start_row + 1 + game_index, 1 + 2 * age_index
                             ).value
-                        )
-                        gender = str(
-                            sheet.cell(
-                                start_row + 1 + game_index, 2 + 2 * age_index
-                            ).value
-                        )
+                        ).strip()
                         if len(name) != 0:
                             game_id = (
                                 Game.query.filter(

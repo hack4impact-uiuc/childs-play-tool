@@ -7,7 +7,8 @@ import { updateField } from '../redux/modules/searchpage'
 import { updateResults, getSavedSearch } from '../redux/modules/results'
 import { Button } from 'reactstrap'
 import { getGames, getGamesByName } from '../utils/ApiWrapper'
-import '../styles/styles.scss'
+// import '../styles/styles.scss'
+import '../styles/searchpage.scss'
 
 const mapStateToProps = state => ({
   system: state.searchpage.consoles,
@@ -32,29 +33,50 @@ const mapDispatchToProps = dispatch => {
 class SearchPage extends Component {
   render() {
     return (
-      <div>
-        <body className="background">
-          <h3 className="homeText">
-            Hello! Welcome to the Child&#39;s Play Game Finder. You can search a game by name or
-            filter by inputs.
-          </h3>
-          <SearchBarCustom fieldName="nameSearchField" />
-          <Link to={{ pathname: './Results' }}>
-            <Button
-              className="right"
-              onClick={e =>
-                getGamesByName(this.props.nameSearchField).then(results =>
-                  this.props.updateResults(results)
-                )
-              }
-            >
-              Search By Name
-            </Button>
-          </Link>
-          <DropdownButton title="Console Type" fieldName="consoles" />
-          <DropdownButton title="Age*" fieldName="ageRange" />
-          <DropdownButton title="Symptom*" fieldName="symptoms" />
-          <DropdownButton title="Character Gender" fieldName="genders" />
+      <div className="background">
+        <link
+          href="https://fonts.googleapis.com/css?family=Poppins|Source+Sans+Pro"
+          rel="stylesheet"
+        />
+        <h3 className="homeText">
+          Child&#39;s Play
+          <br />
+          Therapeutic Video Game Guide
+        </h3>
+        <div className="searchPage">
+          <div className="nameSearch">
+            <SearchBarCustom fieldName="nameSearchField" />
+          </div>
+          <div className="nameSearch">
+            <Link to={{ pathname: './Results' }}>
+              <Button
+                className="right"
+                onClick={e =>
+                  getGamesByName(this.props.nameSearchField).then(results =>
+                    this.props.updateResults(results)
+                  )
+                }
+              >
+                Search
+              </Button>
+            </Link>
+          </div>
+          <hr />
+          <h>Search By Filter</h>
+          <br />
+          <div className="filterDropdown">
+            <DropdownButton title="Age*" fieldName="ageRange" />
+          </div>
+          <div className="filterDropdown">
+            <DropdownButton title="Symptom*" fieldName="symptoms" />
+          </div>
+          <div className="filterDropdown">
+            <DropdownButton title="Console Type" fieldName="consoles" />
+          </div>
+          <div className="filterDropdown">
+            <DropdownButton title="Character Gender" fieldName="genders" />
+          </div>
+          <br />
           <Link to={{ pathname: './Results' }}>
             <Button
               className="searchButton"
@@ -68,27 +90,35 @@ class SearchPage extends Component {
                 ).then(results => this.props.updateResults(results))
               }
             >
-              Search By Filter
+              Search
             </Button>
           </Link>
           <br />
+          <div className="tinyText">* = required field</div>
+          <hr />
           <h> Load Previous Search </h>
-          <DropdownButton title="Saved Searches" fieldName="selectedSaveSearch" />
-          <Link to={{ pathname: './Results' }}>
-            <Button
-              color="blue"
-              onClick={e => {
-                this.props.updateResults(this.props.getSavedSearch(this.props.selectedVal))
-                console.log(this.props.getSavedSearch(this.props.selectedVal))
-              }}
-            >
-              Load saved search
-            </Button>
-          </Link>
+          <br />
+          <div className="saveSearch">
+            <DropdownButton title="Saved Searches" fieldName="selectedSaveSearch" />
+          </div>
+          <div className="saveSearch">
+            <Link to={{ pathname: './Results' }}>
+              <Button
+                color="blue"
+                onClick={e => {
+                  this.props.updateResults(this.props.getSavedSearch(this.props.selectedVal))
+                  console.log(this.props.getSavedSearch(this.props.selectedVal))
+                }}
+              >
+                Load saved search
+              </Button>
+            </Link>
+          </div>
+          <hr />
           <Link className="loginLink" to={{ pathname: './directorPage' }}>
             <Button className="adminButton">Admin Login</Button>
           </Link>
-        </body>
+        </div>
       </div>
     )
   }

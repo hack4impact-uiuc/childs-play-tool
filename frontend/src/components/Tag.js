@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import styles from '../styles/styles.scss'
+import styles from '../styles/results.scss'
 import Constants from '../utils/Constants.js'
 class Tag extends Component {
   constructor(props) {
@@ -24,7 +24,7 @@ class Tag extends Component {
   }
   render() {
     return (
-      <div className={this.state.style} align="center">
+      <div className={this.state.style}>
         {this.props.type == 'age' ? this.ageDisplay(this.props.tag) : this.props.tag}
       </div>
     )

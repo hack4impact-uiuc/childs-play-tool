@@ -23,8 +23,8 @@ class Card extends Component {
         </div>
         <div align="center">
           {/*this.props.game.tags ? this.buildTags(this.props.game.tags) : null*/}
-          <Tag type={'age'} tag={this.props.tags[0]} />
-          <Tag type={'symptom'} tag={this.props.tags[1]} />
+          {/*<Tag type={'age'} tag={this.props.tags[0]} />
+          <Tag type={'symptom'} tag={this.props.tags[1]} />*/}
         </div>
         <p>{this.props.game.description ? this.props.game.description : null}</p>
       </p>
