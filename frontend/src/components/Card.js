@@ -13,7 +13,7 @@ class Card extends Component {
   }
   render() {
     return (
-      <p className="resultsBox">
+      <div className="resultsBox">
         <p
           className={this.state.hover}
           onMouseOver={e => this.setState({ hover: 'cardStyleHover' })}
@@ -29,7 +29,7 @@ class Card extends Component {
           </div>
           <p>{this.props.game.description ? this.props.game.description : null}</p>
         </p>
-      </p>
+      </div>
     )
   }
 }

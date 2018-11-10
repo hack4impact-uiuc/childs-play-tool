@@ -108,6 +108,8 @@
 .resultsBox{
     border-radius: 25px;
     min-width: 225px;
+    display: inline;
+    max-width: 100%;
 }
 .resultsText{
     padding: 5%;
