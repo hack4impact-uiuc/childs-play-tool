@@ -12,13 +12,11 @@ import {
   InputGroup,
   InputGroupAddon,
   InputGroupText,
-  Row,
   Col,
   Form,
   FormGroup,
   Label,
   Input,
-  CardDeck,
   Modal,
   ModalBody,
   ModalFooter
@@ -103,11 +101,11 @@ class Results extends Component {
   render() {
     return (
       <div className="background">
-        <div className="cardBox">
+        <div className="resultsBox">
           <h3 className="resultsText">Results found:</h3>
           {this.props.results ? (
             <div>
-              <div className="resultsBox">
+              <div className="cardBox">
                 <Nav className="navbar" tabs fill>
                   {Object.getOwnPropertyNames(this.props.results).map((x, index) => (
                     <NavItem key={index}>
@@ -128,9 +126,7 @@ class Results extends Component {
                 <TabContent activeTab={this.state.activeTab}>
                   {Object.getOwnPropertyNames(this.props.results).map((x, index) => (
                     <TabPane tabId={(index + 1).toString()}>
-                      <CardDeck>
-                        <Col>{this.buildCards(this.props.results[x])}</Col>
-                      </CardDeck>
+                      <Col>{this.buildCards(this.props.results[x])}</Col>
                     </TabPane>
                   ))}
                 </TabContent>
@@ -156,7 +152,6 @@ class Results extends Component {
                       />
                     </InputGroup>
                   </FormGroup>
-                  <br />
                   <Button
                     className="resultButtons"
                     onClick={() => {
