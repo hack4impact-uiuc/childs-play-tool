@@ -91,11 +91,17 @@
     width: 160px;
 }
 
-.background {
+.results-background {
+    min-height: 100%;
     background-image: url("childs_play_dark.png");
     background-size: cover;
     background-attachment: fixed;
-    // height: 100%;
+    padding-left: 25%;
+    padding-right: 25%;
+    padding-bottom: 10%;
+    padding-top: 1%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
 }
 
 .resultsBox{
