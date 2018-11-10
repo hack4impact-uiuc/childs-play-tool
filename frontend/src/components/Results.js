@@ -128,9 +128,7 @@ class Results extends Component {
                 <TabContent activeTab={this.state.activeTab}>
                   {Object.getOwnPropertyNames(this.props.results).map((x, index) => (
                     <TabPane tabId={(index + 1).toString()}>
-                      <CardDeck>
-                        <Col>{this.buildCards(this.props.results[x])}</Col>
-                      </CardDeck>
+                      <Col>{this.buildCards(this.props.results[x])}</Col>
                     </TabPane>
                   ))}
                 </TabContent>
