@@ -102,7 +102,7 @@ class Results extends Component {
   }
   render() {
     return (
-      <div className="background">
+      <div className="results-background">
         <div className="cardBox">
           <h3 className="resultsText">Results found:</h3>
           {this.props.results ? (
