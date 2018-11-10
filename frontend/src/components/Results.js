@@ -61,8 +61,8 @@ class Results extends Component {
       modal: false
     }
   }
-  saveSearch = () => {
-    this.props.saveSearch(this.state.saveName, this.props.results)
+  saveSearch = (name, res) => {
+    this.props.saveSearch(name, res)
     this.toggleModal()
   }
   toggleModal = () => {
@@ -164,11 +164,19 @@ class Results extends Component {
                 <Button
                   className="resultButtons"
                   onClick={() => {
-                    this.props.saveSearch(this.state.saveName, this.props.results)
+                    this.saveSearch(this.state.saveName, this.props.results)
                   }}
                 >
                   Save Search
                 </Button>
+                <Modal isOpen={this.state.modal}>
+                  <ModalBody>Search saved successfully!</ModalBody>
+                  <ModalFooter>
+                    <Button color="primary" onClick={this.toggleModal}>
+                      Dismiss
+                    </Button>
+                  </ModalFooter>
+                </Modal>
               </Form>
             </div>
           ) : (
