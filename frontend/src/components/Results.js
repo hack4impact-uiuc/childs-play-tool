@@ -84,20 +84,20 @@ class Results extends Component {
         ))
       : null
   chooseImage = system => {
-    if (system === Constants.consoles[0].value) return <FontAwesomeIcon icon={faGamepad} />
-    else if (system === Constants.consoles[1].value) return <FontAwesomeIcon icon={faXbox} />
-    else if (system === Constants.consoles[2].value) return <FontAwesomeIcon icon={faPlaystation} />
-    else if (system === Constants.consoles[3].value)
-      return <FontAwesomeIcon icon={faNintendoSwitch} />
-    else if (system === Constants.consoles[4].value)
-      return <img src={require('../styles/3ds.png')} />
-    else if (system === Constants.consoles[5].value) return <FontAwesomeIcon icon={faApple} />
-    else if (system === Constants.consoles[6].value) return <FontAwesomeIcon icon={faAndroid} />
-    else if (system === Constants.consoles[7].value)
-      return <img src={require('../styles/psvr.png')} />
-    else if (system === Constants.consoles[8].value)
+    if (system === Constants.consoles[0].value) return <FontAwesomeIcon icon={faAndroid} />
+    else if (system === Constants.consoles[1].value) return <FontAwesomeIcon icon={faApple} />
+    else if (system === Constants.consoles[2].value)
       return <img src={require('../styles/htc.png')} />
-    else if (system === Constants.consoles[9].value) return <FontAwesomeIcon icon={faVrCardboard} />
+    else if (system === Constants.consoles[3].value)
+      return <img src={require('../styles/3ds.png')} />
+    else if (system === Constants.consoles[4].value)
+      return <FontAwesomeIcon icon={faNintendoSwitch} />
+    else if (system === Constants.consoles[5].value) return <FontAwesomeIcon icon={faVrCardboard} />
+    else if (system === Constants.consoles[6].value) return <FontAwesomeIcon icon={faPlaystation} />
+    else if (system === Constants.consoles[7].value) return <FontAwesomeIcon icon={faGamepad} />
+    else if (system === Constants.consoles[8].value)
+      return <img src={require('../styles/psvr.png')} />
+    else if (system === Constants.consoles[9].value) return <FontAwesomeIcon icon={faXbox} />
     else return
   }
   render() {
