@@ -107,11 +107,6 @@ class Results extends Component {
           <h3 className="resultsText">Results found:</h3>
           {this.props.results ? (
             <div>
-              <Link to={{ pathname: './' }}>
-                <Button className="homeButton">
-                  <FontAwesomeIcon icon={faHome} /> Go Home
-                </Button>
-              </Link>
               <br />
               <Nav className="navbar" tabs fill>
                 {Object.getOwnPropertyNames(this.props.results).map((x, index) => (
@@ -178,6 +173,12 @@ class Results extends Component {
                   </ModalFooter>
                 </Modal>
               </Form>
+              <hr />
+              <Link to={{ pathname: './' }}>
+                <Button className="homeButton">
+                  <FontAwesomeIcon icon={faHome} /> Go Home
+                </Button>
+              </Link>
             </div>
           ) : (
             <div>No matching results :(</div>

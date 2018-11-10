@@ -3,9 +3,9 @@
     margin: 1%;
 }
 .homeButton {
-    position: absolute;
-    top:1;
-    left:0;
+    // position: absolute;
+    // top:1;
+    // left:0;
     color: cornflowerblue;
     background: white;
     margin-left: 1%;
@@ -94,7 +94,8 @@
 .background {
     background-image: url("childs_play_dark.png");
     background-size: cover;
-    height: 100%;
+    background-attachment: fixed;
+    // height: 100%;
 }
 
 .cardBox{
