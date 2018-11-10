@@ -12,13 +12,11 @@ import {
   InputGroup,
   InputGroupAddon,
   InputGroupText,
-  Row,
   Col,
   Form,
   FormGroup,
   Label,
   Input,
-  CardDeck,
   Modal,
   ModalBody,
   ModalFooter
@@ -102,41 +100,40 @@ class Results extends Component {
   }
   render() {
     return (
-      <div className="background">
-        <div className="cardBox">
+      <div className="results-background">
+        <div className="resultsBox">
           <h3 className="resultsText">Results found:</h3>
           {this.props.results ? (
             <div>
-              <br />
-              <Nav className="navbar" tabs fill>
-                {Object.getOwnPropertyNames(this.props.results).map((x, index) => (
-                  <NavItem key={index}>
-                    <NavLink
-                      className={classnames({
-                        active: this.state.activeTab === (index + 1).toString()
-                      })}
-                      onClick={() => {
-                        this.toggle((index + 1).toString())
-                      }}
-                      style={{ backgroundColor: '#ffffff' }}
-                    >
-                      {x} {this.chooseImage(x)}
-                    </NavLink>
-                  </NavItem>
-                ))}
-              </Nav>
-              <TabContent activeTab={this.state.activeTab}>
-                {Object.getOwnPropertyNames(this.props.results).map((x, index) => (
-                  <TabPane tabId={(index + 1).toString()}>
-                    <CardDeck>
+              <div className="cardBox">
+                <Nav className="navbar" tabs fill>
+                  {Object.getOwnPropertyNames(this.props.results).map((x, index) => (
+                    <NavItem key={index}>
+                      <NavLink
+                        className={classnames({
+                          active: this.state.activeTab === (index + 1).toString()
+                        })}
+                        onClick={() => {
+                          this.toggle((index + 1).toString())
+                        }}
+                        style={{ backgroundColor: '#ffffff' }}
+                      >
+                        {x} {this.chooseImage(x)}
+                      </NavLink>
+                    </NavItem>
+                  ))}
+                </Nav>
+                <TabContent activeTab={this.state.activeTab}>
+                  {Object.getOwnPropertyNames(this.props.results).map((x, index) => (
+                    <TabPane tabId={(index + 1).toString()}>
                       <Col>{this.buildCards(this.props.results[x])}</Col>
-                    </CardDeck>
-                  </TabPane>
-                ))}
-              </TabContent>
-              <Form>
-                <FormGroup>
-                  <div className="saveSearch">
+                    </TabPane>
+                  ))}
+                </TabContent>
+              </div>
+              <div className="saveSearch">
+                <Form>
+                  <FormGroup>
                     <Label for="exampleSearch">Save Search</Label>
                     <InputGroup>
                       <InputGroupAddon addonType="prepend">
@@ -154,36 +151,35 @@ class Results extends Component {
                         }}
                       />
                     </InputGroup>
-                  </div>
-                </FormGroup>
-                <Button
-                  className="resultButtons"
-                  onClick={() => {
-                    this.saveSearch(this.state.saveName, this.props.results)
-                  }}
-                >
-                  Save Search
-                </Button>
-                <Modal isOpen={this.state.modal}>
-                  <ModalBody>Search saved successfully!</ModalBody>
-                  <ModalFooter>
-                    <Button color="primary" onClick={this.toggleModal}>
-                      Dismiss
-                    </Button>
-                  </ModalFooter>
-                </Modal>
-              </Form>
+                  </FormGroup>
+                  <Button
+                    className="resultButtons"
+                    onClick={() => {
+                      this.saveSearch(this.state.saveName, this.props.results)
+                    }}
+                  >
+                    Save Search
+                  </Button>
+                  <Modal isOpen={this.state.modal}>
+                    <ModalBody>Search saved successfully!</ModalBody>
+                    <ModalFooter>
+                      <Button color="primary" onClick={this.toggleModal}>
+                        Dismiss
+                      </Button>
+                    </ModalFooter>
+                  </Modal>
+                </Form>
+              </div>
               <hr />
-              <Link to={{ pathname: './' }}>
-                <Button className="homeButton">
-                  <FontAwesomeIcon icon={faHome} /> Go Home
-                </Button>
-              </Link>
             </div>
           ) : (
             <div>No matching results :(</div>
           )}
-          <br />
+          <Link to={{ pathname: './' }}>
+            <Button className="homeButton">
+              <FontAwesomeIcon icon={faHome} /> Go Home
+            </Button>
+          </Link>
         </div>
       </div>
     )
