@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Tag from './Tag'
 import styles from '../styles/styles.scss'
+// import '../styles/results.scss'
 import Constants from '../utils/Constants'
 
 class Card extends Component {

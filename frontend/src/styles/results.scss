@@ -31,6 +31,7 @@
     display: inline-table;
     text-align: center;
     padding: .1%;
+    flex-wrap: wrap;
     background: white;
 }
 .cardStyleHover {
@@ -91,7 +92,7 @@
     width: 160px;
 }
 
-.backgroun {
+.background {
     background-image: url("childs_play_dark.png");
     background-size: cover;
     height: 100%;
