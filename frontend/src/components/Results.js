@@ -134,7 +134,7 @@ class Results extends Component {
                 {Object.getOwnPropertyNames(this.props.results).map((x, index) => (
                   <TabPane tabId={(index + 1).toString()}>
                     <CardDeck>
-                      <Col xs="auto">{this.buildCards(this.props.results[x])}</Col>
+                      <Col>{this.buildCards(this.props.results[x])}</Col>
                     </CardDeck>
                   </TabPane>
                 ))}

@@ -91,7 +91,7 @@
     width: 160px;
 }
 
-.backgroun {
+.background {
     background-image: url("childs_play_dark.png");
     background-size: cover;
     height: 100%;
@@ -102,6 +102,11 @@
     border: 2px solid #73AD21;
     border-radius: 25px;
     background: white;
+    min-width: 225px;
+}
+
+.resultsBox{
+    border-radius: 25px;
     min-width: 225px;
 }
 .resultsText{
