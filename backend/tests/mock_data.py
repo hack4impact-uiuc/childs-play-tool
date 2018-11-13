@@ -20,7 +20,7 @@ game_systems = [
 
 game_genders = ["Male", "Both", "Both", "Male", "Male", "Both"]
 
-ranking_ids = [4, 5, 6, 7, 8, 9]
+ranking_ids = [4, 5, 6, 7, 8, 9, 10]
 
 ranking_ages = [
     "13 and Older",
@@ -29,6 +29,7 @@ ranking_ages = [
     "12 and Under",
     "12 and Under",
     "12 and Under",
+    "13 and Older",
 ]
 
 ranking_symptoms = [
@@ -38,8 +39,9 @@ ranking_symptoms = [
     "Bored (Short Term)",
     "Bored (Short Term)",
     "Bored (Short Term)",
+    "Sadness",
 ]
 
-ranking_game_ids = [1, 2, 3, 4, 5, 6]
+ranking_game_ids = [1, 2, 3, 4, 5, 6, 4]
 
-ranking_ranks = [5, 18, 18, 2, 9, 3]
+ranking_ranks = [5, 18, 18, 2, 9, 3, 2]

@@ -78,7 +78,7 @@ def get_games():
                 message="This system has no matching games for the specified age and symptom.",
             )
         ranked_games_dict = [
-            dict(zip(ranked_game.keys(), ranked_game)) for ranked_game in ranked_games
+            get_game_dict(ranked_game) for ranked_game in ranked_games.all()
         ]
         return create_response(status=200, data={"games": {system: ranked_games_dict}})
 
@@ -105,8 +105,8 @@ def get_games():
         for system in Game.system.type.enums:
             ranked_games_by_system = ranked_games.filter(Game.system == system)
             systems[system] = [
-                dict(zip(ranked_game.keys(), ranked_game))
-                for ranked_game in ranked_games_by_system
+                get_game_dict(ranked_game)
+                for ranked_game in ranked_games_by_system.all()
             ]
         return create_response(status=200, data={"games": systems})
 
@@ -117,7 +117,7 @@ def get_game_specific(game_id):
     if game.count() == 0:
         return create_response(status=400, message="Game not found.")
     else:
-        return create_response(data={"game": game.first().to_dict()})
+        return create_response(data={"game": get_game_dict(game.first())})
 
 
 @games_page.route(GAMES_ALL_URL, methods=["GET"])
@@ -127,7 +127,7 @@ def get_games_all():
         games_by_system = (
             Game.query.filter(Game.system == system).order_by(Game.name).all()
         )
-        systems[system] = [game.to_dict() for game in games_by_system]
+        systems[system] = [get_game_dict(game) for game in games_by_system]
     return create_response(status=200, data={"games": systems})
 
 
@@ -317,3 +317,29 @@ def simplify_name(search_name):
             no_punct = no_punct + char
     modified_search = no_punct
     return modified_search
+
+
+def get_game_dict(game):
+    try:
+        game_dict = game._asdict()
+    except:
+        game_dict = game.to_dict()
+    ages = [
+        age[0]
+        for age in db.session.query(Ranking.age)
+        .distinct(Ranking.age)
+        .filter(Ranking.game_id == game_dict["id"])
+        .all()
+    ]
+    symptoms = [
+        symptom[0]
+        for symptom in db.session.query(Ranking.symptom)
+        .distinct(Ranking.symptom)
+        .filter(Ranking.game_id == game_dict["id"])
+        .all()
+    ]
+    tags = {}
+    tags["ages"] = ages
+    tags["symptoms"] = symptoms
+    game_dict["tags"] = tags
+    return game_dict
