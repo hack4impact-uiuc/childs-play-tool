@@ -325,7 +325,7 @@ def simplify_name(search_name):
     modified_search = no_punct
     return modified_search.strip()
 
-
+  
 def get_game_dict(game):
     try:
         game_dict = game._asdict()
