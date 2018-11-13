@@ -43,16 +43,25 @@ def test_get_games(client):
             assert game["name"] == "BotW"
             assert game["rank"] == 2
             assert game["gender"] == "Male"
+            tags = game["tags"]
+            assert tags["ages"] == ["12 and Under", "13 and Older"]
+            assert tags["symptoms"] == ["Bored (Short Term)", "Sadness"]
 
             game = system_games[1]
             assert game["name"] == "Super Mario Odyssey"
             assert game["rank"] == 9
             assert game["gender"] == "Male"
+            tags = game["tags"]
+            assert tags["ages"] == ["12 and Under"]
+            assert tags["symptoms"] == ["Bored (Short Term)"]
 
             game = system_games[2]
             assert game["name"] == "Mario Kart"
             assert game["rank"] == 18
             assert game["gender"] == "Both"
+            tags = game["tags"]
+            assert tags["ages"] == ["12 and Under"]
+            assert tags["symptoms"] == ["Bored (Short Term)"]
 
         elif system == "Nintendo 3DS":
             system_games = games[system]
@@ -61,6 +70,9 @@ def test_get_games(client):
             assert game["name"] == "Pokemon Sun"
             assert game["rank"] == 3
             assert game["gender"] == "Both"
+            tags = game["tags"]
+            assert tags["ages"] == ["12 and Under"]
+            assert tags["symptoms"] == ["Bored (Short Term)"]
         else:
             assert len(games[system]) == 0
 
@@ -83,16 +95,25 @@ def test_get_games(client):
     assert game["name"] == "BotW"
     assert game["rank"] == 2
     assert game["gender"] == "Male"
+    tags = game["tags"]
+    assert tags["ages"] == ["12 and Under", "13 and Older"]
+    assert tags["symptoms"] == ["Bored (Short Term)", "Sadness"]
 
     game = games[1]
     assert game["name"] == "Super Mario Odyssey"
     assert game["rank"] == 9
     assert game["gender"] == "Male"
+    tags = game["tags"]
+    assert tags["ages"] == ["12 and Under"]
+    assert tags["symptoms"] == ["Bored (Short Term)"]
 
     game = games[2]
     assert game["name"] == "Mario Kart"
     assert game["rank"] == 18
     assert game["gender"] == "Both"
+    tags = game["tags"]
+    assert tags["ages"] == ["12 and Under"]
+    assert tags["symptoms"] == ["Bored (Short Term)"]
 
     rs = client.get("games?age=12+and+Under&symptom=Bored+(Short+Term)&gender=Both")
     games_switch = json.loads(rs.data)["result"]["games"]["Nintendo Switch"]
@@ -102,6 +123,9 @@ def test_get_games(client):
     assert game["name"] == "Mario Kart"
     assert game["rank"] == 18
     assert game["gender"] == "Both"
+    tags = game["tags"]
+    assert tags["ages"] == ["12 and Under"]
+    assert tags["symptoms"] == ["Bored (Short Term)"]
 
     games_3ds = json.loads(rs.data)["result"]["games"]["Nintendo 3DS"]
     assert len(games_3ds) == 1
@@ -110,6 +134,9 @@ def test_get_games(client):
     assert game["name"] == "Pokemon Sun"
     assert game["rank"] == 3
     assert game["gender"] == "Both"
+    tags = game["tags"]
+    assert tags["ages"] == ["12 and Under"]
+    assert tags["symptoms"] == ["Bored (Short Term)"]
 
     rs = client.get(
         "games?age=12+and+Under&symptom=Bored+(Short+Term)&system=Nintendo+Switch&gender=Both"
@@ -121,6 +148,9 @@ def test_get_games(client):
     assert game["name"] == "Mario Kart"
     assert game["rank"] == 18
     assert game["gender"] == "Both"
+    tags = game["tags"]
+    assert tags["ages"] == ["12 and Under"]
+    assert tags["symptoms"] == ["Bored (Short Term)"]
 
     rs = client.get(
         "games?age=12+and+Under&symptom=Bored+(Short+Term)&system=Nintendo+Switch&gender=Male"
@@ -132,16 +162,25 @@ def test_get_games(client):
     assert game["name"] == "BotW"
     assert game["rank"] == 2
     assert game["gender"] == "Male"
+    tags = game["tags"]
+    assert tags["ages"] == ["12 and Under", "13 and Older"]
+    assert tags["symptoms"] == ["Bored (Short Term)", "Sadness"]
 
     game = games[1]
     assert game["name"] == "Super Mario Odyssey"
     assert game["rank"] == 9
     assert game["gender"] == "Male"
+    tags = game["tags"]
+    assert tags["ages"] == ["12 and Under"]
+    assert tags["symptoms"] == ["Bored (Short Term)"]
 
     game = games[2]
     assert game["name"] == "Mario Kart"
     assert game["rank"] == 18
     assert game["gender"] == "Both"
+    tags = game["tags"]
+    assert tags["ages"] == ["12 and Under"]
+    assert tags["symptoms"] == ["Bored (Short Term)"]
 
     rs = client.get(
         "games?age=12+and+Under&symptom=Bored+(Short+Term)&gender=No+Discernable+Gender"
@@ -176,18 +215,26 @@ def test_get_game_specific(client):
 
     ret_dict = json.loads(rs.data)
     assert ret_dict["success"] == True
-    assert ret_dict["result"]["game"]["name"] == "Halo"
-    assert ret_dict["result"]["game"]["system"] == "Xbox One"
-    assert ret_dict["result"]["game"]["gender"] == "Male"
+    game = ret_dict["result"]["game"]
+    assert game["name"] == "Halo"
+    assert game["system"] == "Xbox One"
+    assert game["gender"] == "Male"
+    tags = game["tags"]
+    assert tags["ages"] == ["13 and Older"]
+    assert tags["symptoms"] == ["Bored (Long Term)"]
 
     rs = client.get("/games/4")
     assert rs.status_code == 200
 
     ret_dict = json.loads(rs.data)
     assert ret_dict["success"] == True
-    assert ret_dict["result"]["game"]["name"] == "BotW"
-    assert ret_dict["result"]["game"]["system"] == "Nintendo Switch"
-    assert ret_dict["result"]["game"]["gender"] == "Male"
+    game = ret_dict["result"]["game"]
+    assert game["name"] == "BotW"
+    assert game["system"] == "Nintendo Switch"
+    assert game["gender"] == "Male"
+    tags = game["tags"]
+    assert tags["ages"] == ["12 and Under", "13 and Older"]
+    assert tags["symptoms"] == ["Bored (Short Term)", "Sadness"]
 
 
 def test_get_games_all(client):

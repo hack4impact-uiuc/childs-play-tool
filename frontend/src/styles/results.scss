@@ -92,14 +92,48 @@
     width: 160px;
 }
 
-.background {
+.results-background {
+    min-height: 100%;
     background-image: url("childs_play_dark.png");
     background-size: cover;
     background-attachment: fixed;
-    // height: 100%;
+    padding-left: 25%;
+    padding-right: 25%;
+    padding-bottom: 10%;
+    padding-top: 1%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
 }
 
-.cardBox{
+@media only screen and (max-width: 750px) {
+        .results-background {
+            background-image: url("childs_play_dark.png");
+            background-size: cover;
+            background-attachment: fixed;
+            padding-left: 20%;
+            padding-right: 20%;
+            padding-bottom: 1%;
+            padding-top: 1%;
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+        }
+}
+
+@media only screen and (max-width: 500px) {
+        .results-background {
+            background-image: url("childs_play_dark.png");
+            background-size: cover;
+            background-attachment: fixed;
+            padding-left: 10%;
+            padding-right: 10%;
+            padding-bottom: 1%;
+            padding-top: 1%;
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+        }
+}
+
+.resultsBox{
     // padding: 10%;
     border: 2px solid #73AD21;
     border-radius: 25px;
@@ -107,7 +141,7 @@
     min-width: 225px;
 }
 
-.resultsBox{
+.cardBox{
     border-radius: 25px;
     min-width: 225px;
     display: inline;
@@ -121,6 +155,7 @@
     min-width: 225px;
     font-size: 50px;
     color: gray;
+    border-radius: 25px;
 }
 .navbar{
     width: 100%;
