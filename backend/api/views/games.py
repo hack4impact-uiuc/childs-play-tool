@@ -315,7 +315,7 @@ def simplify_name(search_name):
             modified_search = modified_search[0 : modified_search.rfind(":")]
         elif "-" in modified_search:
             modified_search = modified_search[0 : modified_search.rfind("-")]
-    if "for " in modified_search:
+    if "for " in modified_search and modified_search.rfind("for ") != 0:
         modified_search = modified_search[0 : modified_search.rfind("for ")]
     punctuations = "`~!@#$%^&*()_-+={[}]|\:;'<,>.?/"
     no_punct = ""
