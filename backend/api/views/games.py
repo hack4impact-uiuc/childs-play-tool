@@ -189,13 +189,11 @@ def post_games():
                 # If the sheet only has one age category
                 if sheet.ncols < FULL_COLUMN_NUMBER:
                     count += 2
-                    # db.session.commit()
                     break
                 # If we are on the first age category, reset row to beginning row of the age category
                 if age_index == 0:
                     current_row = initial_row
                 count += 1
-                # db.session.commit()
 
     # Entering the rankings into the database
     id = 0
