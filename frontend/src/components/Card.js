@@ -25,7 +25,6 @@ class Card extends Component {
         <div align="center">
           {this.props.game.tags ? this.buildTags(this.props.game.tags.ages, 'age') : null}
           {this.props.game.tags ? this.buildTags(this.props.game.tags.symptoms, 'symptom') : null}
-          {}
         </div>
         <p>{this.props.game.description ? this.props.game.description : null}</p>
       </p>
