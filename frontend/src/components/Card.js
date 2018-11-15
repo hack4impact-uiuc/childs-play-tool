@@ -25,7 +25,13 @@ class Card extends Component {
           {this.props.game.gender && this.props.game.gender != 'No Discernable Gender' ? (
             <Tag type={'gender'} tag={this.props.game.gender} />
           ) : null}
-          {this.props.game.tags ? this.buildTags(this.props.game.tags.ages, 'age') : null}
+          {this.props.game.tags ? (
+            this.props.game.tags.ages.length == 2 ? (
+              <Tag type={'age'} tag={'All Ages'} />
+            ) : (
+              <Tag type={'age'} tag={this.props.game.tags.ages[0]} />
+            )
+          ) : null}
           {this.props.game.tags ? this.buildTags(this.props.game.tags.symptoms, 'symptom') : null}
         </div>
         <p>{this.props.game.description ? this.props.game.description : null}</p>

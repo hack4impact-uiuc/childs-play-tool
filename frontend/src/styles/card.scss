@@ -46,6 +46,10 @@
     @extend .tag;
     background: #4b563a;
 }
+.tag_age_both {
+    @extend .tag;
+    background: #759056;
+}
 .tag_symptom_pain {
     @extend .tag;
     background: #eb9ea1;
