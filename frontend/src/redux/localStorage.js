@@ -1,4 +1,5 @@
 import { resultsState } from './modules/results'
+import { searchState} from './modules/searchpage'
 
 const STATE_STORAGE = 'childs_play_state'
 

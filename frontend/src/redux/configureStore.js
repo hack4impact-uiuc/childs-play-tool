@@ -13,7 +13,16 @@ const composedMiddleware = compose(applyMiddleware(...middleware))
 const persistedState = loadState()
 
 const savePersistedState = store => () => {
+        console.log(store.getState());
   saveState({ searches: store.getState().results.searches })
+  saveState({ age: store.getState().searchpage.ageRange })
+
+  /*
+  { age: store.getState().searchpage.ageRange},
+  { console: store.getState().searchpage.consoles},
+  { gender: store.getState().searchpage.genders},
+  { symptom: store.getState().searchpage.symptoms},
+  */
 }
 
 export default function configureStore() {
