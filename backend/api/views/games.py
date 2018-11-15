@@ -322,7 +322,7 @@ def simplify_name(search_name):
     for char in modified_search:
         if char not in punctuations:
             no_punct = no_punct + char
-    modified_search = no_punc
+    modified_search = no_punct
     return modified_search.strip()
 
 
