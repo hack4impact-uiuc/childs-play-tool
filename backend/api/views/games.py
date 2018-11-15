@@ -24,7 +24,6 @@ NUMBER_RANKINGS = 25
 
 @games_page.route(GAMES_URL, methods=["GET"])
 def get_games():
-    db.session.connection(execution_options={"isolation_level": "READ COMMITTED"})
 
     # age, symptom required
     # system optional
@@ -114,7 +113,6 @@ def get_games():
 
 @games_page.route(GAMES_ID_URL, methods=["GET"])
 def get_game_specific(game_id):
-    db.session.connection(execution_options={"isolation_level": "READ COMMITTED"})
     game = Game.query.filter(Game.id == game_id)
     if game.count() == 0:
         return create_response(status=400, message="Game not found.")
@@ -124,7 +122,6 @@ def get_game_specific(game_id):
 
 @games_page.route(GAMES_ALL_URL, methods=["GET"])
 def get_games_all():
-    db.session.connection(execution_options={"isolation_level": "READ COMMITTED"})
     systems = {}
     for system in Game.system.type.enums:
         games_by_system = (
@@ -136,7 +133,6 @@ def get_games_all():
 
 @games_page.route(GAMES_URL, methods=["POST"])
 def post_games():
-    db.session.connection(execution_options={"isolation_level": "READ COMMITTED"})
     if "file" not in request.files:
         return create_response(status=400, message="File not provided.")
     # Ranking.query.delete()

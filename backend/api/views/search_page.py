@@ -15,7 +15,6 @@ SEARCH_GAMES_URL = "/search/games"
 
 @search_page.route(SEARCH_GAMES_URL, methods=["GET"])
 def search_game_by_name():
-    db.session.connection(execution_options={"isolation_level": "READ COMMITTED"})
     data = request.args
     all_empty = True
 
