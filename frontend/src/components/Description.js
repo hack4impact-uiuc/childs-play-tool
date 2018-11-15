@@ -17,6 +17,10 @@ class Description extends Component {
           <div className="white-box">
             <div className="description-cardName">{this.props.location.state.game.name}</div>
             <div align="center">
+              {this.props.location.state.game.gender &&
+              this.props.game.gender != 'No Discernable Gender' ? (
+                <Tag type={'gender'} tag={this.props.location.state.game.gender} />
+              ) : null}
               {this.props.location.state.game.tags
                 ? this.buildTags(this.props.location.state.game.tags.ages, 'age')
                 : null}
