@@ -10,7 +10,6 @@ class Card extends Component {
       hover: 'cardStyle'
     }
   }
-  buildTags = (tags, type) => tags.map(t => <Tag type={type} tag={t} />)
   render() {
     return (
       <p
@@ -32,7 +31,9 @@ class Card extends Component {
               <Tag type={'age'} tag={this.props.game.tags.ages[0]} />
             )
           ) : null}
-          {this.props.game.tags ? this.buildTags(this.props.game.tags.symptoms, 'symptom') : null}
+          {this.props.game.tags
+            ? this.props.game.tags.symptoms.map(t => <Tag type={'symptom'} tag={t} />)
+            : null}
         </div>
         <p>{this.props.game.description ? this.props.game.description : null}</p>
       </p>
