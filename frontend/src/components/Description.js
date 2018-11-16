@@ -32,7 +32,6 @@ class Description extends Component {
                     <Tag type={'symptom'} tag={t} />
                   ))
                 : null}
-
               <br />
             </div>
             <br />
