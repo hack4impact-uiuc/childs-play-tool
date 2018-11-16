@@ -135,8 +135,6 @@ def get_games_all():
 def post_games():
     if "file" not in request.files:
         return create_response(status=400, message="File not provided.")
-    # Ranking.query.delete()
-    # Game.query.delete()
     db.session.query(Ranking).delete()
     db.session.query(Game).delete()
     file = request.files["file"]
