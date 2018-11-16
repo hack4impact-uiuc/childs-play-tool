@@ -20,14 +20,14 @@ class Description extends Component {
               this.props.location.state.game.gender != 'No Discernable Gender' ? (
                 <Tag type={'gender'} tag={this.props.location.state.game.gender} />
               ) : null}
-              {this.props.location.state.game.tags ? (
+              {this.props.location.state.game.tags.ages ? (
                 this.props.location.state.game.tags.ages.length == 2 ? (
                   <Tag type={'age'} tag={'All Ages'} />
                 ) : (
                   <Tag type={'age'} tag={this.props.location.state.game.tags.ages[0]} />
                 )
               ) : null}
-              {this.props.location.state.game.tags
+              {this.props.location.state.game.tags.symptoms
                 ? this.props.location.state.game.tags.symptoms.map(t => (
                     <Tag type={'symptom'} tag={t} />
                   ))
