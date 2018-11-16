@@ -1,0 +1,76 @@
+.cardStyle {
+    color: black;
+    font-family: Arial;
+    border: 2px solid #00cc99;
+    margin: 1.5%;
+    display: inline-table;
+    text-align: center;
+    padding: .1%;
+    background: white;
+}
+.cardStyleHover {
+    color: black;
+    font-family: Arial;
+    border: 2px solid #00cc99;
+    margin: 1.5%;
+    display: inline-table;
+    background: #d8ddd8;
+    text-align: center;
+    padding: .1%;
+}
+.cardName {
+    font-size: 30px;
+    text-align: center;
+}
+.tag{
+    color: white;
+    width: 160px;
+}
+.tag_gender_male {
+    @extend .tag;
+    background: #89acb2;
+}
+.tag_gender_female {
+    @extend .tag;
+    background: #e8a9d7;
+}
+.tag_gender_both {
+    @extend .tag;
+    background: #a289b2;
+}
+.tag_age_12under {
+    @extend .tag;
+    background: #9fc972;
+}
+.tag_age_13over {
+    @extend .tag;
+    background: #4b563a;
+}
+.tag_age_both {
+    @extend .tag;
+    background: #759056;
+}
+.tag_symptom_pain {
+    @extend .tag;
+    background: #eb9ea1;
+}
+.tag_symptom_bored_short {
+    @extend .tag;
+    background: #f3d26a;
+}
+.tag_symptom_bored_long {
+    @extend .tag;
+    background: #c2bfde;
+}
+.tag_symptom_anxiety {
+    background: #a1d6ee;
+    @extend .tag;
+}
+.tag_symptom_sadness {
+    @extend .tag;
+    background: #fab169;
+}
+.tag_symptom_cognitive {
+    @extend .tag;
+    background: #ccd7c2;
+}

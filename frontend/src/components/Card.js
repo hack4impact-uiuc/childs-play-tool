@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Tag from './Tag'
-import '../styles/results.scss'
-import Constants from '../utils/Constants'
+import '../styles/card.scss'
 
 class Card extends Component {
   constructor(props) {
@@ -11,6 +10,7 @@ class Card extends Component {
       hover: 'cardStyle'
     }
   }
+  buildTags = (tags, type) => tags.map(t => <Tag type={type} tag={t} />)
   render() {
     return (
       <p
@@ -22,9 +22,17 @@ class Card extends Component {
           {this.props.game.name}
         </div>
         <div align="center">
-          {/*this.props.game.tags ? this.buildTags(this.props.game.tags) : null*/}
-          {/*<Tag type={'age'} tag={this.props.tags[0]} />
-          <Tag type={'symptom'} tag={this.props.tags[1]} />*/}
+          {this.props.game.gender && this.props.game.gender != 'No Discernable Gender' ? (
+            <Tag type={'gender'} tag={this.props.game.gender} />
+          ) : null}
+          {this.props.game.tags ? (
+            this.props.game.tags.ages.length == 2 ? (
+              <Tag type={'age'} tag={'All Ages'} />
+            ) : (
+              <Tag type={'age'} tag={this.props.game.tags.ages[0]} />
+            )
+          ) : null}
+          {this.props.game.tags ? this.buildTags(this.props.game.tags.symptoms, 'symptom') : null}
         </div>
         <p>{this.props.game.description ? this.props.game.description : null}</p>
       </p>
