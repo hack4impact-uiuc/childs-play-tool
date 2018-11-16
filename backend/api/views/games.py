@@ -343,3 +343,30 @@ def get_game_dict(game):
     tags["symptoms"] = symptoms
     game_dict["tags"] = tags
     return game_dict
+
+@games_page.route(GAMES_ID_URL, methods=['PUT'])
+def edit_game(game_id):
+    game = Game.query.get(game_id)
+    if game is None:
+        return create_response(status=400, message="Game not found")
+    data = request.get_json()
+
+    if data is None:
+        return create_response(status=400, message="No changes made")
+
+    # Edit the description, image, and thumbnail
+    if data.get('description') is not None:
+        game.description = data['description']
+        db.session.commit()
+
+    if data.get('image') is not None:
+        game.image = data['image']
+        db.session.commit()
+
+    if data.get('thumbnail') is not None:
+        game.thumbnail = data['thumbnail']
+        db.session.commit()
+    # DO NOT REMOVE PRINT STATEMENT
+    print(game)
+
+    return create_response(data={'game': get_game_dict(game)}, message="Game successfully edited")
