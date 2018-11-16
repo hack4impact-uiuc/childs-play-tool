@@ -1,12 +1,6 @@
 import React, { Component } from 'react'
 import Tag from './Tag'
-<<<<<<< HEAD
-import styles from '../styles/styles.scss'
-// import '../styles/results.scss'
-=======
 import '../styles/results.scss'
->>>>>>> 59392b3f5f0f7138ede4117f401845f0f79eac4f
-import Constants from '../utils/Constants'
 
 class Card extends Component {
   constructor(props) {
@@ -26,6 +20,8 @@ class Card extends Component {
         <div className="cardName" align="left">
           {this.props.game.name}
         </div>
+        <img className="image" src={this.props.game.image} />
+        <br />
         <div align="center">
           {/*this.props.game.tags ? this.buildTags(this.props.game.tags) : null*/}
           {/*<Tag type={'age'} tag={this.props.tags[0]} />

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Button } from 'reactstrap'
 import Tag from './Tag'
 import '../styles/description.scss'
+import '../styles/results.scss'
 
 const titleStyle = {
   fontSize: '30px'
@@ -15,6 +16,7 @@ class Description extends Component {
         <div className="description-background">
           <div className="white-box">
             <div className="description-cardName">{this.props.location.state.game.name}</div>
+            <img className="image" src={this.props.location.state.game.image} />
             <div align="center">
               {/*this.props.location.state.game.tags.map(t => (
                 <Tag type={t.type} tag={t.tag} />
