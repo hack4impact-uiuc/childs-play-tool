@@ -23,74 +23,6 @@
     border-color: black;
     align: left;
 }
-.cardStyle {
-    color: black;
-    font-family: Arial;
-    border: 2px solid #00cc99;
-    margin: 1.5%;
-    display: inline-table;
-    text-align: center;
-    padding: .1%;
-    flex-wrap: wrap;
-    background: white;
-}
-.cardStyleHover {
-    color: black;
-    font-family: Arial;
-    border: 2px solid #00cc99;
-    margin: 1.5%;
-    display: inline-table;
-    background: #d8ddd8;
-    text-align: center;
-    padding: .1%;
-}
-.cardName {
-    font-size: 30px;
-    text-align: center;
-}
-.tag_age_12under {
-    margin-top: 2%;
-    background: #9fc972;
-    color: white;
-    width: 160px;
-}
-
-.tag_age_13over {
-    margin-top: 2%;
-    background: #4b563a;
-    color: white;
-    width: 160px;
-}
-.tag_symptom_pain {
-    background: #eb9ea1;
-    color: white;
-    width: 160px;
-}
-.tag_symptom_bored_short {
-    background: #f3d26a;
-    color: white;
-    width: 160px;
-}
-.tag_symptom_bored_long {
-    background: #c2bfde;
-    color: white;
-    width: 160px;
-}
-.tag_symptom_anxiety {
-    background: #a1d6ee;
-    color: white;
-    width: 160px;
-}
-.tag_symptom_sadness {
-    background: #fab169;
-    color: white;
-    width: 160px;
-}
-.tag_symptom_cognitive {
-    background: #ccd7c2;
-    color: white;
-    width: 160px;
-}
 
 .results-background {
     min-height: 100%;
@@ -159,11 +91,4 @@
 }
 .navbar{
     width: 100%;
-}
-
-.image{
-    max-width: 200px;
-    max-height: 200px;
-    width: auto;
-    height: auto;
 }
