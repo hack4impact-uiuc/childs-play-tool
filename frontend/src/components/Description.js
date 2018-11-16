@@ -17,7 +17,8 @@ class Description extends Component {
           <div className="white-box">
             <div className="description-cardName">{this.props.location.state.game.name}</div>
             <img className="image" src={this.props.location.state.game.image} />
-            <br/><br/>
+            <br />
+            <br />
             <div align="center">
               {this.props.location.state.game.gender &&
               this.props.location.state.game.gender != 'No Discernable Gender' ? (
