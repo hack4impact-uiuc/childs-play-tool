@@ -38,7 +38,11 @@ import {
 
 const mapStateToProps = state => ({
   results: state.results.games,
-  tags: [state.searchpage.ageRange, state.searchpage.symptoms]
+  tags: [state.searchpage.ageRange, state.searchpage.symptoms],
+  system: state.searchpage.consoles,
+  age: state.searchpage.ageRange,
+  symptom: state.searchpage.symptoms,
+  gender: state.searchpage.genders,
 })
 
 const mapDispatchToProps = dispatch => {
@@ -155,7 +159,14 @@ class Results extends Component {
                   <Button
                     className="resultButtons"
                     onClick={() => {
-                      this.saveSearch(this.state.saveName, this.props.results)
+                            let resultsAndQuery = {
+                                    query: { age: this.props.age,
+                                                system: this.props.consoles,
+                                                symptom: this.props.symptom,
+                                                gender: this.props.gender},
+                                    results: this.props.results
+                            }
+                      this.saveSearch(this.state.saveName, resultsAndQuery)
                     }}
                   >
                     Save Search
