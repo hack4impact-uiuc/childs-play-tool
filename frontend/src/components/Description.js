@@ -9,7 +9,6 @@ const titleStyle = {
 }
 
 class Description extends Component {
-  buildTags = (tags, type) => tags.map(t => <Tag type={type} tag={t} />)
   render() {
     return (
       <div>
@@ -21,11 +20,17 @@ class Description extends Component {
               this.props.location.state.game.gender != 'No Discernable Gender' ? (
                 <Tag type={'gender'} tag={this.props.location.state.game.gender} />
               ) : null}
-              {this.props.location.state.game.tags
-                ? this.buildTags(this.props.location.state.game.tags.ages, 'age')
-                : null}
-              {this.props.location.state.game.tags
-                ? this.buildTags(this.props.location.state.game.tags.symptoms, 'symptom')
+              {this.props.location.state.game.tags.ages ? (
+                this.props.location.state.game.tags.ages.length == 2 ? (
+                  <Tag type={'age'} tag={'All Ages'} />
+                ) : (
+                  <Tag type={'age'} tag={this.props.location.state.game.tags.ages[0]} />
+                )
+              ) : null}
+              {this.props.location.state.game.tags.symptoms
+                ? this.props.location.state.game.tags.symptoms.map(t => (
+                    <Tag type={'symptom'} tag={t} />
+                  ))
                 : null}
               <br />
             </div>
