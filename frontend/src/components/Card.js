@@ -20,6 +20,9 @@ class Card extends Component {
         <div className="cardName" align="left">
           {this.props.game.name}
         </div>
+        <img className="image" src={this.props.game.image} />
+        <br />
+        <br />
         <div align="center">
           {this.props.game.gender && this.props.game.gender != 'No Discernable Gender' ? (
             <Tag type={'gender'} tag={this.props.game.gender} />
