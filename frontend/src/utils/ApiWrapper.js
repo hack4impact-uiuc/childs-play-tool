@@ -1,6 +1,6 @@
 import axios from 'axios'
 import BACKEND_URL from './ApiConfig'
-import BACKEND_KEY from '../keys'
+import { BACKEND_KEY } from '../keys'
 
 export const getGamesByName = name => {
   return axios
