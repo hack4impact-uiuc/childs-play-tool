@@ -51,7 +51,7 @@ class Update extends Component {
         </div>
       </div>
     ) : (
-      <Redirect to='/directorPage' />
+      <Redirect to="/directorPage" />
     )
   }
 }

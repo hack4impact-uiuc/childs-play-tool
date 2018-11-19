@@ -28,7 +28,7 @@ class Password extends Component {
   }
 
   changedKey = event => {
-    this.setState({key: event.target.value})
+    this.setState({ key: event.target.value })
   }
 
   authenticate = event => {
@@ -57,4 +57,7 @@ class Password extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Password)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Password)
