@@ -83,17 +83,21 @@ def authenticate(f):
         config.read("creds.ini")
         auth_key = config["SECURITY-KEY"]["KEY"]
     except:
+
         @wraps(f)
         def decorated_function(*args, **kwargs):
             return f(*args, **kwargs)
+
         return decorated_function
+
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        if  request.method == 'POST' or request.method == 'DELETE':
+        if request.method == "POST" or request.method == "DELETE":
             data = request.get_json()
         else:
             data = request.args
         if data.get("key") is None or data["key"] != auth_key:
             return create_response(status=400, message="No/Wrong key provided")
         return f(*args, **kwargs)
+
     return decorated_function
