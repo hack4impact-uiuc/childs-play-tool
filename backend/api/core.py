@@ -76,6 +76,7 @@ def get_api_keys(file: str = "creds.ini") -> str:
     except:
         return None
 
+
 def authenticate(f):
     try:
         config = configparser.ConfigParser()
