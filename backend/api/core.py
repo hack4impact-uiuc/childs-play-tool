@@ -86,7 +86,6 @@ def authenticate(f):
         def decorated_function(*args, **kwargs):
             return f(*args, **kwargs)
         return decorated_function
-
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if  request.method == 'POST' or request.method == 'DELETE':
