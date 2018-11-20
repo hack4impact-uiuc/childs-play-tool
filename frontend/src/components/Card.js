@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import Tag from './Tag'
-import '../styles/results.scss'
 import '../styles/card.scss'
-import Constants from '../utils/Constants'
 
 class Card extends Component {
   constructor(props) {
