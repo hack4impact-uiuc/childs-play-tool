@@ -14,12 +14,14 @@ class Description extends Component {
     return (
       <div>
         <div className="description-background">
-          <div className="white-box">
             <div className="description-cardName">{this.props.location.state.game.name}</div>
             <img className="image" src={this.props.location.state.game.image} />
             <br />
             <br />
-            <div align="center">
+            {this.props.location.state.game.description}
+            <br />
+            <br />
+            <div>
               {this.props.location.state.game.gender &&
               this.props.location.state.game.gender != 'No Discernable Gender' ? (
                 <Tag type={'gender'} tag={this.props.location.state.game.gender} />
@@ -33,15 +35,11 @@ class Description extends Component {
               <br />
             </div>
             <br />
-            {this.props.location.state.game.description}
-            <br />
-            <br />
             <Link to={{ pathname: './results' }}>
               <Button outline color="success">
                 Return to results
               </Button>
             </Link>
-          </div>
         </div>
       </div>
     )
