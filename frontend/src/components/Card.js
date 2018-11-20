@@ -1,11 +1,7 @@
 import React, { Component } from 'react'
 import Tag from './Tag'
-<<<<<<< HEAD
-import styles from '../styles/styles.scss'
-// import '../styles/results.scss'
-=======
 import '../styles/results.scss'
->>>>>>> 59392b3f5f0f7138ede4117f401845f0f79eac4f
+import '../styles/card.scss'
 import Constants from '../utils/Constants'
 
 class Card extends Component {
@@ -26,10 +22,23 @@ class Card extends Component {
         <div className="cardName" align="left">
           {this.props.game.name}
         </div>
+        <img className="image" src={this.props.game.image} />
+        <br />
+        <br />
         <div align="center">
-          {/*this.props.game.tags ? this.buildTags(this.props.game.tags) : null*/}
-          {/*<Tag type={'age'} tag={this.props.tags[0]} />
-          <Tag type={'symptom'} tag={this.props.tags[1]} />*/}
+          {this.props.game.gender && this.props.game.gender != 'No Discernable Gender' ? (
+            <Tag type={'gender'} tag={this.props.game.gender} />
+          ) : null}
+          {this.props.game.tags ? (
+            this.props.game.tags.ages.length == 2 ? (
+              <Tag type={'age'} tag={'All Ages'} />
+            ) : (
+              <Tag type={'age'} tag={this.props.game.tags.ages[0]} />
+            )
+          ) : null}
+          {this.props.game.tags
+            ? this.props.game.tags.symptoms.map(t => <Tag type={'symptom'} tag={t} />)
+            : null}
         </div>
         <p>{this.props.game.description ? this.props.game.description : null}</p>
       </p>

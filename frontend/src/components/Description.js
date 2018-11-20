@@ -15,13 +15,27 @@ class Description extends Component {
         <div className="description-background">
           <div className="white-box">
             <div className="description-cardName">{this.props.location.state.game.name}</div>
+            <img className="image" src={this.props.location.state.game.image} />
+            <br />
+            <br />
             <div align="center">
-              {/*this.props.location.state.game.tags.map(t => (
-                <Tag type={t.type} tag={t.tag} />
-              ))*/}
+              {this.props.location.state.game.gender &&
+              this.props.location.state.game.gender != 'No Discernable Gender' ? (
+                <Tag type={'gender'} tag={this.props.location.state.game.gender} />
+              ) : null}
+              {this.props.location.state.game.tags.ages ? (
+                this.props.location.state.game.tags.ages.length == 2 ? (
+                  <Tag type={'age'} tag={'All Ages'} />
+                ) : (
+                  <Tag type={'age'} tag={this.props.location.state.game.tags.ages[0]} />
+                )
+              ) : null}
+              {this.props.location.state.game.tags.symptoms
+                ? this.props.location.state.game.tags.symptoms.map(t => (
+                    <Tag type={'symptom'} tag={t} />
+                  ))
+                : null}
               <br />
-              <br />
-              {this.props.location.state.game.summary}
             </div>
             <br />
             {this.props.location.state.game.description}
@@ -33,10 +47,6 @@ class Description extends Component {
               </Button>
             </Link>
           </div>
-        </div>
-        <div>
-          {/*<Tag type={'age'} tag={this.props.location.state.tags[0]} />
-          <Tag type={'symptom'} tag={this.props.location.state.tags[1]} />*/}
         </div>
       </div>
     )
