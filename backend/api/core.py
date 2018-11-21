@@ -92,7 +92,7 @@ def authenticate(f):
 
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        if request.method == "POST" or request.method == "DELETE":
+        if request.method == "POST" or request.method == "DELETE" or request.method == "PUT":
             data = request.get_json()
         else:
             data = request.args

@@ -144,6 +144,7 @@ def post_games():
     book = xlrd.open_workbook(file_contents=file.read())
     # Entering the games into database
     id = 0
+    # dictionary to store ids of current games and tags of old games
     game_info_dict = {}
     for sheet in book.sheets():
         # Each sheet has the system name at the top
@@ -196,13 +197,16 @@ def post_games():
                 if age_index == 0:
                     current_row = initial_row
                 count += 1
+    # query returns previous state
     old_games = db.session.query(Game).all()
     for old_game in old_games:
+        # if game has not been found in new spreadsheet
         if old_game.name not in game_info_dict[old_game.system]:
             old_game_dict = old_game.to_dict()
             old_game_dict["id"] = id
             old_game_dict["current"] = False
             id = id + 1
+            # define tags for ranking purposes
             game_info_dict[old_game.system][old_game.name] = {
                 "ages": [
                     age[0]
@@ -221,8 +225,10 @@ def post_games():
             }
             g = Game(old_game_dict)
             db.session.add(g)
+    # delete before flushing
     db.session.query(Ranking).delete()
     db.session.query(Game).delete()
+    # flushing pushes changes to database but does not persist them
     db.session.flush()
     # Entering the rankings into the database
     id = 0
@@ -264,6 +270,7 @@ def post_games():
                             ).value
                         ).strip()
                         if len(name) != 0:
+                            # fetch id from dict
                             game_id = game_info_dict[system][name]["id"]
                             ranking = {}
                             ranking["id"] = id
@@ -274,9 +281,11 @@ def post_games():
                             r = Ranking(ranking)
                             db.session.add(r)
                             id = id + 1
+    # iterate through all games defined as "old" (not current)
     old_games = db.session.query(Game).filter(Game.current == False).all()
     for old_game in old_games:
         old_game_dict = old_game.to_dict()
+        # create rankings behind all other for all age/symptom combinations
         for age in game_info_dict[old_game.system][old_game.name]["ages"]:
             for symptom in game_info_dict[old_game.system][old_game.name]["symptoms"]:
                 ranking = {}
@@ -388,6 +397,7 @@ def get_game_dict(game):
     return game_dict
 
 
+@authenticate
 @games_page.route(GAMES_ID_URL, methods=["PUT"])
 def edit_game(game_id):
     game = Game.query.get(game_id)
