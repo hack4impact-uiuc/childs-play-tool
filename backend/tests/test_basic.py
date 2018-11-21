@@ -1,5 +1,4 @@
 from api.models import db, Game, Ranking
-from api.core import logger
 import json, os
 import requests
 import requests_mock
