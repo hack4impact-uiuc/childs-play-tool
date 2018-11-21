@@ -10,7 +10,6 @@ class Card extends Component {
       hover: 'cardStyle'
     }
   }
-  buildTags = (tags, type) => tags.map(t => <Tag type={type} tag={t} />)
   render() {
     return (
       <p
@@ -21,6 +20,9 @@ class Card extends Component {
         <div className="cardName" align="left">
           {this.props.game.name}
         </div>
+        <img className="image" src={this.props.game.image} />
+        <br />
+        <br />
         <div align="center">
           {this.props.game.gender && this.props.game.gender != 'No Discernable Gender' ? (
             <Tag type={'gender'} tag={this.props.game.gender} />
@@ -32,7 +34,9 @@ class Card extends Component {
               <Tag type={'age'} tag={this.props.game.tags.ages[0]} />
             )
           ) : null}
-          {this.props.game.tags ? this.buildTags(this.props.game.tags.symptoms, 'symptom') : null}
+          {this.props.game.tags
+            ? this.props.game.tags.symptoms.map(t => <Tag type={'symptom'} tag={t} />)
+            : null}
         </div>
         <p>{this.props.game.description ? this.props.game.description : null}</p>
       </p>
