@@ -141,9 +141,11 @@ def post_games():
     book = xlrd.open_workbook(file_contents=file.read())
     # Entering the games into database
     id = 0
+    game_id_dict = {}
     for sheet in book.sheets():
         # Each sheet has the system name at the top
         system = str(sheet.cell(0, 1).value).strip()
+        game_id_dict[system] = {}
         count = 0
         current_row = 0
         # Exit out of the while loop when it has iterated through all categories on the page
@@ -159,11 +161,8 @@ def post_games():
                 name = str(sheet.cell(current_row, 2 * age_index + 1).value).strip()
                 # Iterates through the rankings of a specific symptom and category until the end
                 while name != "":
-                    # Checks if the game has already been entered into the database
-                    same_game = Game.query.filter(
-                        Game.name == name, Game.system == system
-                    )
-                    if same_game.count() == 0:
+                    # Checks if the game has already found
+                    if name not in game_id_dict[system]:
                         game = {}
                         game["system"] = system
                         game["name"] = name
@@ -171,7 +170,6 @@ def post_games():
                             sheet.cell(current_row, 2 * age_index + 2).value
                         ).strip()
                         game["id"] = id
-                        id = id + 1
                         # API extra information stuff
                         extra_data = get_giantbomb_data(name)
                         game["thumbnail"] = extra_data["thumbnail"]
@@ -179,6 +177,8 @@ def post_games():
                         game["description"] = extra_data["description"]
                         g = Game(game)
                         db.session.add(g)
+                        game_id_dict[system][name] = id
+                        id = id + 1
                     current_row += 1
                     # Breaks out of the loop if we have reached the end of the sheet
                     if current_row == sheet.nrows:
@@ -192,6 +192,7 @@ def post_games():
                 if age_index == 0:
                     current_row = initial_row
                 count += 1
+    db.session.flush()
 
     # Entering the rankings into the database
     id = 0
@@ -233,13 +234,7 @@ def post_games():
                             ).value
                         ).strip()
                         if len(name) != 0:
-                            game_id = (
-                                Game.query.filter(
-                                    Game.name == name, Game.system == system
-                                )
-                                .first()
-                                .id
-                            )
+                            game_id = game_id_dict[system][name]
                             ranking_id = id
                             id = id + 1
                             ranking = {}
