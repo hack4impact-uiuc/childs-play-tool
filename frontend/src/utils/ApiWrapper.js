@@ -1,9 +1,10 @@
 import axios from 'axios'
 import BACKEND_URL from './ApiConfig'
+import { BACKEND_KEY } from '../keys'
 
 export const getGamesByName = name => {
   return axios
-    .get(BACKEND_URL + '/search/games' + '?name=' + name)
+    .get(BACKEND_URL + '/search/games' + '?name=' + name + '&key=' + BACKEND_KEY)
     .then(response => {
       return response.data.result.games
     })
@@ -14,7 +15,8 @@ export const getGamesByName = name => {
 }
 
 export const getGames = (age, symptom, system, gender) => {
-  let requestString = BACKEND_URL + '/games' + '?age=' + age + '&symptom=' + symptom
+  let requestString =
+    BACKEND_URL + '/games' + '?age=' + age + '&symptom=' + symptom + '&key=' + BACKEND_KEY
   if (system.localeCompare('Console Type') != 0) {
     requestString = requestString + '&system=' + system
   }
@@ -35,6 +37,7 @@ export const getGames = (age, symptom, system, gender) => {
 export const sendFile = file => {
   let data = new FormData()
   data.append('file', file)
+  data.set('key', BACKEND_KEY)
 
   return axios
     .post(BACKEND_URL + '/games', data)

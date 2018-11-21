@@ -2,8 +2,9 @@ from typing import Tuple, List
 import configparser
 
 from werkzeug.local import LocalProxy
-from flask import current_app, jsonify
+from flask import current_app, jsonify, request
 from flask.wrappers import Response
+from functools import wraps
 
 # logger object for all views to use
 logger = LocalProxy(lambda: current_app.logger)
@@ -74,3 +75,29 @@ def get_api_keys(file: str = "creds.ini") -> str:
         return config["API-KEYS"]["GIANTBOMB"]
     except:
         return None
+
+
+def authenticate(f):
+    try:
+        config = configparser.ConfigParser()
+        config.read("creds.ini")
+        auth_key = config["SECURITY-KEY"]["KEY"]
+    except:
+
+        @wraps(f)
+        def decorated_function(*args, **kwargs):
+            return f(*args, **kwargs)
+
+        return decorated_function
+
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if request.method == "POST" or request.method == "DELETE":
+            data = request.get_json()
+        else:
+            data = request.args
+        if data.get("key") is None or data["key"] != auth_key:
+            return create_response(status=400, message="No/Wrong key provided")
+        return f(*args, **kwargs)
+
+    return decorated_function
