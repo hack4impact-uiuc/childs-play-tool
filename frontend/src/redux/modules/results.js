@@ -83,7 +83,7 @@ export default function reducer(state = resultsState, action) {
     case GET_SAVED_SEARCH:
       return {
         ...state,
-        games: state.searches.find(({ value }) => value === action.value).searchResults
+        games: state.searches.find(({ value }) => value === action.value).searchResults.results
       }
     default:
       return state

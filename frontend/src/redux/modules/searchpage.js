@@ -2,7 +2,7 @@
 const UPDATE_FIELD = 'searchpage/UPDATE_FIELD'
 const FIELD_CHANGED = 'FIELD_CHANGED'
 
-const initialState = {
+export const searchState = {
   consoles: '',
   ageRange: '',
   symptoms: '',
@@ -11,7 +11,7 @@ const initialState = {
   selectedSaveSearch: ''
 }
 
-export default function reducer(state = initialState, action) {
+export default function reducer(state = searchState, action) {
   switch (action.type) {
     case UPDATE_FIELD:
       return {
