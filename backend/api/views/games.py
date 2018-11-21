@@ -37,13 +37,14 @@ def get_games():
 
     ranked_games = (
         db.session.query(
-            Game.name,
             Game.id,
+            Game.name,
+            Game.system,
+            Game.gender,
             Game.description,
             Game.thumbnail,
             Game.image,
-            Game.gender,
-            Game.system,
+            Game.current,
             Ranking.rank,
         )
         .join(Ranking)
@@ -135,17 +136,15 @@ def get_games_all():
 def post_games():
     if "file" not in request.files:
         return create_response(status=400, message="File not provided.")
-    db.session.query(Ranking).delete()
-    db.session.query(Game).delete()
     file = request.files["file"]
     book = xlrd.open_workbook(file_contents=file.read())
     # Entering the games into database
     id = 0
-    game_id_dict = {}
+    game_info_dict = {}
     for sheet in book.sheets():
         # Each sheet has the system name at the top
         system = str(sheet.cell(0, 1).value).strip()
-        game_id_dict[system] = {}
+        game_info_dict[system] = {}
         count = 0
         current_row = 0
         # Exit out of the while loop when it has iterated through all categories on the page
@@ -161,8 +160,8 @@ def post_games():
                 name = str(sheet.cell(current_row, 2 * age_index + 1).value).strip()
                 # Iterates through the rankings of a specific symptom and category until the end
                 while name != "":
-                    # Checks if the game has already found
-                    if name not in game_id_dict[system]:
+                    # Checks if the game has already been found
+                    if name not in game_info_dict[system]:
                         game = {}
                         game["system"] = system
                         game["name"] = name
@@ -175,9 +174,10 @@ def post_games():
                         game["thumbnail"] = extra_data["thumbnail"]
                         game["image"] = extra_data["image"]
                         game["description"] = extra_data["description"]
+                        game["current"] = True
                         g = Game(game)
                         db.session.add(g)
-                        game_id_dict[system][name] = id
+                        game_info_dict[system][name] = {"id": id}
                         id = id + 1
                     current_row += 1
                     # Breaks out of the loop if we have reached the end of the sheet
@@ -192,8 +192,34 @@ def post_games():
                 if age_index == 0:
                     current_row = initial_row
                 count += 1
+    old_games = db.session.query(Game).all()
+    for old_game in old_games:
+        if old_game.name not in game_info_dict[old_game.system]:
+            old_game_dict = old_game.to_dict()
+            old_game_dict["id"] = id
+            old_game_dict["current"] = False
+            id = id + 1
+            game_info_dict[old_game.system][old_game.name] = {
+                "ages": [
+                    age[0]
+                    for age in db.session.query(Ranking.age)
+                    .distinct(Ranking.age)
+                    .filter(Ranking.game_id == old_game.id)
+                    .all()
+                ],
+                "symptoms": [
+                    symptom[0]
+                    for symptom in db.session.query(Ranking.symptom)
+                    .distinct(Ranking.symptom)
+                    .filter(Ranking.game_id == old_game.id)
+                    .all()
+                ],
+            }
+            g = Game(old_game_dict)
+            db.session.add(g)
+    db.session.query(Ranking).delete()
+    db.session.query(Game).delete()
     db.session.flush()
-
     # Entering the rankings into the database
     id = 0
     for sheet in book.sheets():
@@ -234,17 +260,30 @@ def post_games():
                             ).value
                         ).strip()
                         if len(name) != 0:
-                            game_id = game_id_dict[system][name]
-                            ranking_id = id
-                            id = id + 1
+                            game_id = game_info_dict[system][name]["id"]
                             ranking = {}
-                            ranking["id"] = ranking_id
+                            ranking["id"] = id
                             ranking["age"] = age
                             ranking["symptom"] = symptom
                             ranking["game_id"] = game_id
                             ranking["rank"] = rank
                             r = Ranking(ranking)
                             db.session.add(r)
+                            id = id + 1
+    old_games = db.session.query(Game).filter(Game.current == False).all()
+    for old_game in old_games:
+        old_game_dict = old_game.to_dict()
+        for age in game_info_dict[old_game.system][old_game.name]["ages"]:
+            for symptom in game_info_dict[old_game.system][old_game.name]["symptoms"]:
+                ranking = {}
+                ranking["id"] = id
+                ranking["age"] = age
+                ranking["symptom"] = symptom
+                ranking["game_id"] = old_game_dict["id"]
+                ranking["rank"] = 26
+                r = Ranking(ranking)
+                db.session.add(r)
+                id = id + 1
     db.session.commit()
     return create_response(status=201, message="Database updated.")
 
