@@ -1,8 +1,15 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+
+import { Redirect } from 'react-router-dom'
 import Dropzone from 'react-dropzone'
 import '../styles/styles.scss'
 import { Button } from 'reactstrap'
 import { sendFile } from '../utils/ApiWrapper'
+
+const mapStateToProps = state => ({
+  authenticated: state.auth.authenticated
+})
 
 class Update extends Component {
   constructor(props) {
@@ -17,7 +24,7 @@ class Update extends Component {
   }
 
   render() {
-    return (
+    return this.props.authenticated ? (
       <div className="dropPageBackground">
         <div className="dropPage">
           <section className="droppedBox">
@@ -43,8 +50,10 @@ class Update extends Component {
           </section>
         </div>
       </div>
+    ) : (
+      <Redirect to="/directorPage" />
     )
   }
 }
 
-export default Update
+export default connect(mapStateToProps)(Update)
