@@ -92,8 +92,11 @@ def authenticate(f):
 
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        if request.method == "POST" or request.method == "DELETE":
-            data = request.get_json()
+        if (request.method == "POST" 
+            or request.method == "DELETE"
+            or request.method == "PUT"
+        ):
+            data = request.form
         else:
             data = request.args
         if data.get("key") is None or data["key"] != auth_key:

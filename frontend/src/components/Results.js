@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { DropdownButton } from './'
 import Card from './Card'
 import {
   TabContent,
@@ -38,11 +39,7 @@ import {
 
 const mapStateToProps = state => ({
   results: state.results.games,
-  tags: [state.searchpage.ageRange, state.searchpage.symptoms],
-  system: state.searchpage.consoles,
-  age: state.searchpage.ageRange,
-  symptom: state.searchpage.symptoms,
-  gender: state.searchpage.genders
+  tags: [state.searchpage.ageRange, state.searchpage.symptoms]
 })
 
 const mapDispatchToProps = dispatch => {
@@ -127,6 +124,7 @@ class Results extends Component {
                     </NavItem>
                   ))}
                 </Nav>
+                {/* <DropdownButton title="" */}
                 <TabContent activeTab={this.state.activeTab}>
                   {Object.getOwnPropertyNames(this.props.results).map((x, index) => (
                     <TabPane tabId={(index + 1).toString()}>
@@ -159,16 +157,7 @@ class Results extends Component {
                   <Button
                     className="resultButtons"
                     onClick={() => {
-                      let resultsAndQuery = {
-                        query: {
-                          age: this.props.age,
-                          system: this.props.consoles,
-                          symptom: this.props.symptom,
-                          gender: this.props.gender
-                        },
-                        results: this.props.results
-                      }
-                      this.props.saveSearch(this.state.saveName, resultsAndQuery)
+                      this.saveSearch(this.state.saveName, this.props.results)
                     }}
                   >
                     Save Search
