@@ -97,10 +97,10 @@ def authenticate(f):
             or request.method == "DELETE"
             or request.method == "PUT"
         ):
-            data = request.get_json()
+            data = request.form
         else:
             data = request.args
-        if data.get("key") is None or data["key"] != auth_key:
+        if data.get("key") is None or data.get("key") != auth_key:
             return create_response(status=400, message="No/Wrong key provided")
         return f(*args, **kwargs)
 
