@@ -7,7 +7,8 @@ import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap
 import '../styles/styles.scss'
 
 const mapStateToProps = state => ({
-  savedSearches: state.results.searches
+  savedSearches: state.results.searches,
+  results: state.results.games
 })
 
 const mapDispatchToProps = dispatch => {
@@ -34,7 +35,11 @@ class DropdownButton extends Component {
   determineDropdownItems = fieldName => {
     if (fieldName === 'selectedSaveSearch') {
       return this.props.savedSearches
-    } else {
+    }
+    else if (fieldName == 'consoleNames') {
+      return Object.keys(this.props.results)
+    } 
+    else {
       return Constants[fieldName]
     }
   }

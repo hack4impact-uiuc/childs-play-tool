@@ -104,10 +104,11 @@ class Results extends Component {
       <div className="results-background">
         <div className="resultsBox">
           <h3 className="resultsText">Results found:</h3>
+          <DropdownButton title="hi" fieldName="consoleNames" />
           {this.props.results ? (
             <div>
               <div className="cardBox">
-                <Nav className="navbar" tabs fill>
+                {/* <Nav className="navbar" tabs fill>
                   {Object.getOwnPropertyNames(this.props.results).map((x, index) => (
                     <NavItem key={index}>
                       <NavLink
@@ -123,8 +124,7 @@ class Results extends Component {
                       </NavLink>
                     </NavItem>
                   ))}
-                </Nav>
-                {/* <DropdownButton title="" */}
+                </Nav> */}
                 <TabContent activeTab={this.state.activeTab}>
                   {Object.getOwnPropertyNames(this.props.results).map((x, index) => (
                     <TabPane tabId={(index + 1).toString()}>
