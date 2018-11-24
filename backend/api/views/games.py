@@ -1,5 +1,5 @@
 from api.models import db, Game, Ranking
-from api.core import create_response, Mixin, authenticate
+from api.core import create_response, Mixin, Auth
 from flask import Blueprint, request, current_app as app
 import xlrd
 import math
@@ -23,7 +23,7 @@ NUMBER_RANKINGS = 25
 
 
 @games_page.route(GAMES_URL, methods=["GET"])
-@authenticate
+@Auth.authenticate
 def get_games():
 
     # age, symptom required
@@ -114,7 +114,7 @@ def get_games():
 
 
 @games_page.route(GAMES_ID_URL, methods=["GET"])
-@authenticate
+@Auth.authenticate
 def get_game_specific(game_id):
     game = Game.query.filter(Game.id == game_id)
     if game.count() == 0:
@@ -124,7 +124,7 @@ def get_game_specific(game_id):
 
 
 @games_page.route(GAMES_ALL_URL, methods=["GET"])
-@authenticate
+@Auth.authenticate
 def get_games_all():
     systems = {}
     for system in Game.system.type.enums:
@@ -136,7 +136,7 @@ def get_games_all():
 
 
 @games_page.route(GAMES_URL, methods=["POST"])
-@authenticate
+@Auth.authenticate
 def post_games():
     if "file" not in request.files:
         return create_response(status=400, message="File not provided.")
