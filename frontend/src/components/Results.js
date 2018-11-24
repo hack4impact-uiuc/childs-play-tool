@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { DropdownButton } from './'
+import DropdownButton from './DropdownButton'
 import Card from './Card'
 import {
   TabContent,
@@ -111,28 +111,29 @@ class Results extends Component {
       <div className="results-background">
         <div className="resultsBox">
           <h3 className="resultsText">Results found:</h3>
-          <DropdownButton title={Object.keys(Object.getOwnPropertyNames(this.props.results))[0]} fieldName="consoleNames" />
+          <DropdownButton title="Consoles" items={Object.keys(this.props.results)} />
           {this.props.results ? (
             <div>
               <div className="cardBox">
-              {this.props.results}
-                <Nav className="navbar" tabs fill>
-                  {Object.getOwnPropertyNames(this.props.results).map((x, index) => (
-                    <NavItem key={index}>
-                      <NavLink
-                        className={classnames({
-                          active: this.state.activeTab === (index + 1).toString()
-                        })}
-                        onClick={() => {
-                          this.toggle((index + 1).toString())
-                        }}
-                        style={{ backgroundColor: '#ffffff' }}
-                      >
-                        {x} {this.chooseImage(x)}
-                      </NavLink>
-                    </NavItem>
-                  ))}
-                </Nav>
+                {
+                  <Nav className="navbar" tabs fill>
+                    {Object.getOwnPropertyNames(this.props.results).map((x, index) => (
+                      <NavItem key={index}>
+                        <NavLink
+                          className={classnames({
+                            active: this.state.activeTab === (index + 1).toString()
+                          })}
+                          onClick={() => {
+                            this.toggle((index + 1).toString())
+                          }}
+                          style={{ backgroundColor: '#ffffff' }}
+                        >
+                          {x} {this.chooseImage(x)}
+                        </NavLink>
+                      </NavItem>
+                    ))}
+                  </Nav>
+                }
                 <TabContent activeTab={this.state.activeTab}>
                   {Object.getOwnPropertyNames(this.props.results).map((x, index) => (
                     <TabPane tabId={(index + 1).toString()}>
