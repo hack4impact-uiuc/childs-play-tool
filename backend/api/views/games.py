@@ -397,8 +397,8 @@ def get_game_dict(game):
     return game_dict
 
 
-@authenticate
 @games_page.route(GAMES_ID_URL, methods=["PUT"])
+@Auth.authenticate
 def edit_game(game_id):
     game = Game.query.get(game_id)
     if game is None:
