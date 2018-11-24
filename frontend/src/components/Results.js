@@ -74,6 +74,13 @@ class Results extends Component {
       })
     }
   }
+  updateTab = tab => {
+    if (this.state.activeTab !== tab) {
+      this.setState({
+        activeTab: tab
+      })
+    }
+  }
   buildCards = (games, tags) =>
     games
       ? games.map(c => (
@@ -104,11 +111,12 @@ class Results extends Component {
       <div className="results-background">
         <div className="resultsBox">
           <h3 className="resultsText">Results found:</h3>
-          <DropdownButton title="hi" fieldName="consoleNames" />
+          <DropdownButton title={Object.keys(Object.getOwnPropertyNames(this.props.results))[0]} fieldName="consoleNames" />
           {this.props.results ? (
             <div>
               <div className="cardBox">
-                {/* <Nav className="navbar" tabs fill>
+              {this.props.results}
+                <Nav className="navbar" tabs fill>
                   {Object.getOwnPropertyNames(this.props.results).map((x, index) => (
                     <NavItem key={index}>
                       <NavLink
@@ -124,7 +132,7 @@ class Results extends Component {
                       </NavLink>
                     </NavItem>
                   ))}
-                </Nav> */}
+                </Nav>
                 <TabContent activeTab={this.state.activeTab}>
                   {Object.getOwnPropertyNames(this.props.results).map((x, index) => (
                     <TabPane tabId={(index + 1).toString()}>
