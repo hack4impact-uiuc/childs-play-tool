@@ -89,8 +89,13 @@ class DropdownButton extends Component {
                     this.props.results[item].length > 0 ? (
                       <DropdownItem
                         onClick={e => {
-                          this.setState({ selectedVal: item.value })
-                          this.props.updateField(this.props.fieldName, item.value)
+                          this.setState({
+                            selectedVal: (
+                              <inline-div>
+                                {item} {this.chooseImage(item)}
+                              </inline-div>
+                            )
+                          })
                         }}
                       >
                         {item} {this.chooseImage(item)}
