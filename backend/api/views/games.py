@@ -33,8 +33,8 @@ def get_games():
     if data.get("age") is None or data.get("symptom") is None:
         return create_response(status=400, message="Age and symptom are required.")
 
-    age = data["age"]
-    symptom = data["symptom"]
+    age = data.get("age")
+    symptom = data.get("symptom")
 
     ranked_games = (
         db.session.query(
@@ -58,11 +58,11 @@ def get_games():
             status=400, message="No matching games for the specified age and symptom."
         )
 
-    if "system" in data:
-        system = data["system"]
+    if data.get("system") is not None:
+        system = data.get("system")
         ranked_games = ranked_games.filter(Game.system == system)
-        if "gender" in data:
-            gender = data["gender"]
+        if data.get("gender") is not None:
+            gender = data.get("gender")
             if gender == "Male" or gender == "Female":
                 ranked_games = ranked_games.filter(
                     (Game.gender == gender) | (Game.gender == "Both")
@@ -85,8 +85,8 @@ def get_games():
         return create_response(status=200, data={"games": {system: ranked_games_dict}})
 
     else:
-        if "gender" in data:
-            gender = data["gender"]
+        if data.get("gender") is not None:
+            gender = data.get("gender")
             if gender == "Male" or gender == "Female":
                 ranked_games = ranked_games.filter(
                     (Game.gender == gender) | (Game.gender == "Both")
@@ -138,7 +138,7 @@ def get_games_all():
 @games_page.route(GAMES_URL, methods=["POST"])
 @Auth.authenticate
 def post_games():
-    if "file" not in request.files:
+    if request.files.get("file") is None:
         return create_response(status=400, message="File not provided.")
     file = request.files["file"]
     book = xlrd.open_workbook(file_contents=file.read())
@@ -403,7 +403,7 @@ def edit_game(game_id):
     game = Game.query.get(game_id)
     if game is None:
         return create_response(status=400, message="Game not found")
-    data = request.get_json()
+    data = request.form
 
     if data is None:
         return create_response(status=400, message="No changes made")
