@@ -88,24 +88,21 @@ class DropdownButton extends Component {
           </DropdownToggle>
           <DropdownMenu right>
             {this.props.items
-              ? this.props.items.map(
-                  item =>
-                    this.props.results[item].length > 0 ? (
-                      <DropdownItem
-                        onClick={e => {
-                          this.setState({
-                            selectedVal: (
-                              <inline-div>
-                                {item} {this.chooseImage(item)}
-                              </inline-div>
-                            )
-                          })
-                        }}
-                      >
-                        {item} {this.chooseImage(item)}
-                      </DropdownItem>
-                    ) : null
-                )
+              ? this.props.items.map(item => (
+                  <DropdownItem
+                    onClick={e => {
+                      this.setState({
+                        selectedVal: (
+                          <div>
+                            {item} {this.chooseImage(item)}
+                          </div>
+                        )
+                      })
+                    }}
+                  >
+                    {item} {this.chooseImage(item)}
+                  </DropdownItem>
+                ))
               : this.dropdownItems.length > 0
                 ? this.dropdownItems.map(item => (
                     <DropdownItem

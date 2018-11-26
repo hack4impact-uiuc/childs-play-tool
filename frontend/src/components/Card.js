@@ -21,13 +21,8 @@ class Card extends Component {
         onMouseOver={e => this.setState({ hover: 'cardStyleHover' })}
         onMouseLeave={e => this.setState({ hover: 'cardStyle' })}
       >
-        <div className="cardName" align="left">
-          {this.props.game.name}
-        </div>
-        <img className="image" src={this.props.game.image} />
-        <br />
-        <br />
-        <div align="center">
+        <div className="cardLeft">
+          <div className="cardName">{this.props.game.name}</div>
           {this.props.game.gender && this.props.game.gender != 'No Discernable Gender' ? (
             <Tag type={'gender'} tag={this.props.game.gender} />
           ) : null}
@@ -42,6 +37,13 @@ class Card extends Component {
             ? this.props.game.tags.symptoms.map(t => <Tag type={'symptom'} tag={t} />)
             : null}
         </div>
+        <div className="cardRight">
+          Image here
+          <br />
+          <img className="image" src={this.props.game.image} />
+        </div>
+        <br />
+        <br />
         <p>{this.state.description ? this.state.description : null}</p>
       </p>
     )
