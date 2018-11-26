@@ -9,12 +9,30 @@ const titleStyle = {
 }
 
 class Description extends Component {
+constructor(props) {
+  super(props)
+  this.state = {
+    editing: false,
+    updateTitle: ''
+  }
+}
   render() {
     return (
       <div>
         <div className="description-background">
           <div className="white-box">
-            <div className="description-cardName">{this.props.location.state.game.name}</div>
+
+
+            <div className="description-cardName" contentEditable={this.state.editing}
+            onBlur={e => {
+                    console.log(e.target.innerHTML)
+                    this.setState({ updateTitle: e.target.innerHTML })
+            }}
+            >
+            {this.props.location.state.game.name}
+            </div>
+
+
             <img className="image" src={this.props.location.state.game.image} />
             <br />
             <br />
@@ -40,6 +58,18 @@ class Description extends Component {
             <br />
             {this.props.location.state.game.description}
             <br />
+            <Button color="info" disabled={this.state.editing} onClick={() => {
+                this.setState({ editing: true })
+                console.log(this.state.editing)
+              }}>
+              Edit
+            </Button>
+            <Button color="info" disabled={!this.state.editing} onClick={() => {
+                this.setState({ editing: false })
+                console.log(this.state.editing)
+              }}>
+              Save
+            </Button>
             <br />
             <Link to={{ pathname: './results' }}>
               <Button outline color="success">
