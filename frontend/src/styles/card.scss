@@ -3,24 +3,27 @@
     font-family: Arial;
     border: 2px solid #00cc99;
     display: inline-table;
-    text-align: center;
     padding: .1%;
     background: white;
     width: 100%;
 }
 .cardStyleHover {
-    color: black;
-    font-family: Arial;
-    border: 2px solid #00cc99;
-    display: inline-table;
+    @extend .cardStyle;
     background: #d8ddd8;
-    text-align: center;
-    padding: .1%;
-    width: 100%;
+}
+.cardLeft {
+    width: 50%;
+    text-align: left;
+    display: inline-block;
+}
+.cardRight {
+    width: 50%;
+    text-align: right;
+    display: inline-block;
 }
 .cardName {
     font-size: 30px;
-    text-align: center;
+    text-align: left;
 }
 .tag{
     color: white;
@@ -28,6 +31,7 @@
     border-radius: 25px;
     margin: 1.5%;
     display: inline-block;
+    text-align: center;
 }
 .tag_gender_male {
     @extend .tag;

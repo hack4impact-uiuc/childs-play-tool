@@ -61,8 +61,14 @@ class Results extends Component {
     this.state = {
       activeTab: '1',
       saveName: '',
-      modal: false
+      modal: false,
+      consoles: this.determineConsoles(this.props.results)
     }
+  }
+  determineConsoles = results => {
+    let ret = []
+    Object.getOwnPropertyNames(results).map(x => (results[x].length > 0 ? ret.push(x) : null))
+    return ret
   }
   saveSearch = (name, res) => {
     this.props.saveSearch(name, res)
@@ -111,31 +117,28 @@ class Results extends Component {
           {this.props.results ? (
             <div>
               <div className="cardBox">
-                <DropdownButton title="Consoles" items={Object.keys(this.props.results)} />
+                <DropdownButton title="Consoles" items={this.state.consoles} />
                 {
                   <Nav className="navbar" tabs fill>
-                    {Object.getOwnPropertyNames(this.props.results).map(
-                      (x, index) =>
-                        this.props.results[x].length > 0 ? (
-                          <NavItem key={index}>
-                            <NavLink
-                              className={classnames({
-                                active: this.state.activeTab === (index + 1).toString()
-                              })}
-                              onClick={() => {
-                                this.toggle((index + 1).toString())
-                              }}
-                              style={{ backgroundColor: '#ffffff' }}
-                            >
-                              {x} {this.chooseImage(x)}
-                            </NavLink>
-                          </NavItem>
-                        ) : null
-                    )}
+                    {this.state.consoles.map((x, index) => (
+                      <NavItem key={index}>
+                        <NavLink
+                          className={classnames({
+                            active: this.state.activeTab === (index + 1).toString()
+                          })}
+                          onClick={() => {
+                            this.toggle((index + 1).toString())
+                          }}
+                          style={{ backgroundColor: '#ffffff' }}
+                        >
+                          {x} {this.chooseImage(x)}
+                        </NavLink>
+                      </NavItem>
+                    ))}
                   </Nav>
                 }
                 <TabContent activeTab={this.state.activeTab}>
-                  {Object.getOwnPropertyNames(this.props.results).map((x, index) => (
+                  {this.state.consoles.map((x, index) => (
                     <TabPane tabId={(index + 1).toString()}>
                       <Col>{this.buildCards(this.props.results[x])}</Col>
                     </TabPane>
