@@ -39,7 +39,11 @@ import {
 
 const mapStateToProps = state => ({
   results: state.results.games,
-  tags: [state.searchpage.ageRange, state.searchpage.symptoms]
+  tags: [state.searchpage.ageRange, state.searchpage.symptoms],
+  system: state.searchpage.consoles,
+  age: state.searchpage.ageRange,
+  symptom: state.searchpage.symptoms,
+  gender: state.searchpage.genders
 })
 
 const mapDispatchToProps = dispatch => {
@@ -74,14 +78,7 @@ class Results extends Component {
       })
     }
   }
-  updateTab = tab => {
-    if (this.state.activeTab !== tab) {
-      this.setState({
-        activeTab: tab
-      })
-    }
-  }
-  buildCards = (games, tags) =>
+  buildCards = games =>
     games
       ? games.map(c => (
           <Link to={{ pathname: './description', state: { game: c } }}>
@@ -111,27 +108,30 @@ class Results extends Component {
       <div className="results-background">
         <div className="resultsBox">
           <h3 className="resultsText">Results found:</h3>
-          <DropdownButton title="Consoles" items={Object.keys(this.props.results)} />
           {this.props.results ? (
             <div>
               <div className="cardBox">
+                <DropdownButton title="Consoles" items={Object.keys(this.props.results)} />
                 {
                   <Nav className="navbar" tabs fill>
-                    {Object.getOwnPropertyNames(this.props.results).map((x, index) => (
-                      <NavItem key={index}>
-                        <NavLink
-                          className={classnames({
-                            active: this.state.activeTab === (index + 1).toString()
-                          })}
-                          onClick={() => {
-                            this.toggle((index + 1).toString())
-                          }}
-                          style={{ backgroundColor: '#ffffff' }}
-                        >
-                          {x} {this.chooseImage(x)}
-                        </NavLink>
-                      </NavItem>
-                    ))}
+                    {Object.getOwnPropertyNames(this.props.results).map(
+                      (x, index) =>
+                        this.props.results[x].length > 0 ? (
+                          <NavItem key={index}>
+                            <NavLink
+                              className={classnames({
+                                active: this.state.activeTab === (index + 1).toString()
+                              })}
+                              onClick={() => {
+                                this.toggle((index + 1).toString())
+                              }}
+                              style={{ backgroundColor: '#ffffff' }}
+                            >
+                              {x} {this.chooseImage(x)}
+                            </NavLink>
+                          </NavItem>
+                        ) : null
+                    )}
                   </Nav>
                 }
                 <TabContent activeTab={this.state.activeTab}>
@@ -166,7 +166,16 @@ class Results extends Component {
                   <Button
                     className="resultButtons"
                     onClick={() => {
-                      this.saveSearch(this.state.saveName, this.props.results)
+                      let resultsAndQuery = {
+                        query: {
+                          age: this.props.age,
+                          system: this.props.consoles,
+                          symptom: this.props.symptom,
+                          gender: this.props.gender
+                        },
+                        results: this.props.results
+                      }
+                      this.props.saveSearch(this.state.saveName, resultsAndQuery)
                     }}
                   >
                     Save Search

@@ -7,7 +7,11 @@ class Card extends Component {
     super(props)
 
     this.state = {
-      hover: 'cardStyle'
+      hover: 'cardStyle',
+      description:
+        this.props.game.description && this.props.game.description.length > 100
+          ? this.props.game.description.substring(0, 99) + '...'
+          : this.props.game.description
     }
   }
   render() {
@@ -38,7 +42,7 @@ class Card extends Component {
             ? this.props.game.tags.symptoms.map(t => <Tag type={'symptom'} tag={t} />)
             : null}
         </div>
-        <p>{this.props.game.description ? this.props.game.description : null}</p>
+        <p>{this.state.description ? this.state.description : null}</p>
       </p>
     )
   }

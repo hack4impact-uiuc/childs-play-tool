@@ -57,6 +57,10 @@ class DropdownButton extends Component {
     }))
   }
 
+  updateTab = (tab) => {
+    this.setState({activeTab: tab})
+  }
+
   chooseImage = system => {
     if (system === Constants.consoles[0].value) return <FontAwesomeIcon icon={faAndroid} />
     else if (system === Constants.consoles[1].value) return <FontAwesomeIcon icon={faApple} />
@@ -84,16 +88,24 @@ class DropdownButton extends Component {
           </DropdownToggle>
           <DropdownMenu right>
             {this.props.items
-              ? this.props.items.map(item => (
-                  <DropdownItem
-                    onClick={e => {
-                      this.setState({ selectedVal: item.value })
-                      this.props.updateField(this.props.fieldName, item.value)
-                    }}
-                  >
-                    {item} {this.chooseImage(item)}
-                  </DropdownItem>
-                ))
+              ? this.props.items.map(
+                  item =>
+                    this.props.results[item].length > 0 ? (
+                      <DropdownItem
+                        onClick={e => {
+                          this.setState({
+                            selectedVal: (
+                              <inline-div>
+                                {item} {this.chooseImage(item)}
+                              </inline-div>
+                            )
+                          })
+                        }}
+                      >
+                        {item} {this.chooseImage(item)}
+                      </DropdownItem>
+                    ) : null
+                )
               : this.dropdownItems.length > 0
                 ? this.dropdownItems.map(item => (
                     <DropdownItem
