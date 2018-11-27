@@ -44,7 +44,7 @@ class Card extends Component {
         </table>
         <br />
         <br />
-        <p>{this.state.description ? this.state.description : null}</p>
+        <p className="cardDescription">{this.state.description ? this.state.description : null}</p>
       </html>
     )
   }

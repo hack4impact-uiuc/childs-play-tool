@@ -1,19 +1,6 @@
-@media only screen and (max-width: 750px) {
-    .results-background {
-        background-image: url("childs_play_dark.png");
-        background-size: cover;
-        background-attachment: fixed;
-        padding-left: 20%;
-        padding-right: 20%;
-        padding-bottom: 1%;
-        padding-top: 1%;
-        text-align: center;
-        font-family: 'Poppins', sans-serif;
-    }
-}
 .cardStyle {
     width: 30%;
-    height: 350px;
+    height: 300px;
     display: inline-table;
     color: black;
     font-family: Arial;
@@ -26,25 +13,35 @@
     @extend .cardStyle;
     background: #d8ddd8;
 }
+.cardName {
+    font-size: 130%;
+    text-align: left;
+}
 .cardLeft {
     width: 50%;
+    height: 200px;
     text-align: left;
     display: inline-table;
 }
 .cardRight {
     width: 50%;
+    height: 200px;
     text-align: right;
     display: inline-table;
 }
-.cardName {
-    font-size: 125%;
-    text-align: left;
+.cardDescription {
+    height: 10px;
+    font-size: 85%;
+}
+.imageCard {
+    width: 150px;
+    height: 150px;
 }
 .tag{
     color: white;
     width: 160px;
     border-radius: 25px;
-    margin: 1.5%;
+    margin: 1%;
     display: inline-block;
 }
 .tag_gender_male {
@@ -94,8 +91,4 @@
 .tag_symptom_cognitive {
     @extend .tag;
     background: #ccd7c2;
-}
-.imageCard {
-    width: 150px;
-    height: 150px;
 }
