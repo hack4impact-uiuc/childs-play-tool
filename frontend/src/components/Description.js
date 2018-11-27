@@ -127,11 +127,6 @@ class Description extends Component {
             </Link>
           </div>
           <br />
-          <Link to={{ pathname: './results' }}>
-            <Button outline color="success">
-              Return to results
-            </Button>
-          </Link>
         </div>
       </div>
     )
