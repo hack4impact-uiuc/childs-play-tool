@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Tag from './Tag'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Card from './Card'
@@ -107,6 +108,15 @@ class Results extends Component {
       <div className="results-background">
         <div className="resultsBox">
           <h3 className="resultsText">Results found:</h3>
+          <div align="center">
+            <Tag type={'age'} tag={this.props.age} />
+            <Tag type={'symptom'} tag={this.props.symptom} />
+            {this.props.gender &&
+            this.props.gender != 'No Discernable Gender' &&
+            this.props.gender != 'Character Gender' ? (
+              <Tag type={'gender'} tag={this.props.gender} />
+            ) : null}
+          </div>
           {this.props.results ? (
             <div>
               <div className="cardBox">
