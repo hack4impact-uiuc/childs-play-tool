@@ -1,7 +1,7 @@
 .cardStyle {
     width: 30%;
-    height: 400px;
-    display: inline-block;
+    height: 350px;
+    display: inline-table;
     color: black;
     font-family: Arial;
     border: 2px solid #00cc99;
@@ -16,12 +16,12 @@
 .cardLeft {
     width: 50%;
     text-align: left;
-    display: inline-block;
+    display: inline-table;
 }
 .cardRight {
     width: 50%;
     text-align: right;
-    display: inline-block;
+    display: inline-table;
 }
 .cardName {
     font-size: 125%;
@@ -32,7 +32,7 @@
     font-size: 67%;
     width: 120px;
     border-radius: 25px;
-    margin: 1.5%;
+    margin: .01%;
     display: inline-block;
     text-align: center;
 }
@@ -85,8 +85,6 @@
     background: #ccd7c2;
 }
 .imageCard {
-    max-width: 150px;
-    max-height: 150px;
-    width: auto;
-    height: auto;
+    width: 150px;
+    height: 150px;
 }

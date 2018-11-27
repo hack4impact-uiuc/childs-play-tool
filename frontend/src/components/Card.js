@@ -16,12 +16,12 @@ class Card extends Component {
   }
   render() {
     return (
-      <p
+      <html
         className={this.state.hover}
         onMouseOver={e => this.setState({ hover: 'cardStyleHover' })}
         onMouseLeave={e => this.setState({ hover: 'cardStyle' })}
       >
-        <table>
+        <table display="flex">
           <tr className="cardLeft">
             <div className="cardName">{this.props.game.name}</div>
             {this.props.game.gender && this.props.game.gender !== 'No Discernable Gender' ? (
@@ -45,7 +45,7 @@ class Card extends Component {
         <br />
         <br />
         <p>{this.state.description ? this.state.description : null}</p>
-      </p>
+      </html>
     )
   }
 }
