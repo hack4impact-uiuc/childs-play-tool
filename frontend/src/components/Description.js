@@ -13,27 +13,44 @@ constructor(props) {
   super(props)
   this.state = {
     editing: false,
-    updateTitle: ''
+    updateDescription: ''
   }
 }
+
   render() {
+  let descriptionRender;
+  if (this.state.editing) {
+  descriptionRender = <div className="editing-card-description"
+  contentEditable={this.state.editing}
+  onBlur={e => {
+          this.setState({ updateDescription: e.target.innerHTML })
+  }}
+  >
+  {this.props.location.state.game.description}
+  </div> }
+  else {
+         descriptionRender = <div className="card-description"
+          contentEditable={this.state.editing}
+          onBlur={e => {
+                  this.setState({ updateDescription: e.target.innerHTML })
+          }}
+          >
+          {this.props.location.state.game.description}
+          </div>
+  }
     return (
       <div>
         <div className="description-background">
           <div className="white-box">
 
 
-            <div className="description-cardName" contentEditable={this.state.editing}
-            onBlur={e => {
-                    console.log(e.target.innerHTML)
-                    this.setState({ updateTitle: e.target.innerHTML })
-            }}
-            >
+            <div className="description-cardName">
             {this.props.location.state.game.name}
             </div>
 
 
             <img className="image" src={this.props.location.state.game.image} />
+
             <br />
             <br />
             <div align="center">
@@ -56,17 +73,19 @@ constructor(props) {
               <br />
             </div>
             <br />
-            {this.props.location.state.game.description}
+
+            {descriptionRender}
+
+
+
             <br />
             <Button color="info" disabled={this.state.editing} onClick={() => {
                 this.setState({ editing: true })
-                console.log(this.state.editing)
               }}>
               Edit
             </Button>
             <Button color="info" disabled={!this.state.editing} onClick={() => {
                 this.setState({ editing: false })
-                console.log(this.state.editing)
               }}>
               Save
             </Button>
