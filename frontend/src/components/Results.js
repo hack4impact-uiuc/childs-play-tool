@@ -36,7 +36,7 @@ import {
   faApple,
   faAndroid
 } from '@fortawesome/free-brands-svg-icons'
-import { runInThisContext } from 'vm';
+import { runInThisContext } from 'vm'
 
 const mapStateToProps = state => ({
   results: state.results.games,
@@ -62,7 +62,7 @@ class Results extends Component {
     this.state = {
       activeTab: '1',
       saveName: '',
-      modal: false,
+      modal: false
     }
     this.updateTab = this.updateTab
   }
@@ -98,12 +98,16 @@ class Results extends Component {
     return (
       <div className="results-background">
         <div className="resultsBox">
-          <h3 className="resultsText">  Results found:</h3>
+          <h3 className="resultsText"> Results found:</h3>
           {this.props.results ? (
             <div>
               <div className="cardBox">
                 <div align="right">
-                <DropdownButton title={this.determineConsoles(this.props.results)[0]} items={this.determineConsoles(this.props.results)} updateTabConsole={this.updateTab}/>
+                  <DropdownButton
+                    title={this.determineConsoles(this.props.results)[0]}
+                    items={this.determineConsoles(this.props.results)}
+                    updateTabConsole={this.updateTab}
+                  />
                 </div>
                 <TabContent activeTab={this.state.activeTab}>
                   {this.determineConsoles(this.props.results).map((x, index) => (
