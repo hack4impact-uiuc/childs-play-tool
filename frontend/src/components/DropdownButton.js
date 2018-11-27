@@ -33,6 +33,7 @@ class DropdownButton extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      consoleSelectedVal: null,
       selectedVal: this.props.title,
       dropdownOpen: false
     }
@@ -79,7 +80,7 @@ class DropdownButton extends Component {
       <div>
         <Dropdown className="dropdown" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
           <DropdownToggle color="success" caret>
-            {this.props.items ? this.props.items[0] : this.state.selectedVal}
+            {this.state.consoleSelectedVal ? this.state.consoleSelectedVal : (this.props.items ? this.props.items[0] : this.state.selectedVal)}
           </DropdownToggle>
           <DropdownMenu right>
             {this.props.items
@@ -88,9 +89,9 @@ class DropdownButton extends Component {
                     onClick={e => {
                       this.setState({
                         consoleSelectedVal: (
-                          <div>
+                          <html>
                             {item} {this.chooseImage(item)}
-                          </div>
+                          </html>
                         )
                       })
                       this.props.updateTabConsole((index + 1).toString())
