@@ -1,11 +1,26 @@
+@media only screen and (max-width: 750px) {
+    .results-background {
+        background-image: url("childs_play_dark.png");
+        background-size: cover;
+        background-attachment: fixed;
+        padding-left: 20%;
+        padding-right: 20%;
+        padding-bottom: 1%;
+        padding-top: 1%;
+        text-align: center;
+        font-family: 'Poppins', sans-serif;
+    }
+}
 .cardStyle {
+    width: 30%;
+    height: 350px;
+    display: inline-table;
     color: black;
     font-family: Arial;
     border: 2px solid #00cc99;
-    display: inline-table;
-    padding: .1%;
+    padding: .5%;
     background: white;
-    width: 100%;
+    margin: 1%;
 }
 .cardStyleHover {
     @extend .cardStyle;
@@ -14,22 +29,23 @@
 .cardLeft {
     width: 50%;
     text-align: left;
-    display: inline-block;
+    display: inline-table;
 }
 .cardRight {
     width: 50%;
     text-align: right;
-    display: inline-block;
+    display: inline-table;
 }
 .cardName {
-    font-size: 30px;
+    font-size: 125%;
     text-align: left;
 }
 .tag{
     color: white;
-    width: 160px;
+    font-size: 67%;
+    width: 120px;
     border-radius: 25px;
-    margin: 1.5%;
+    margin: .01%;
     display: inline-block;
     text-align: center;
 }
@@ -81,10 +97,7 @@
     @extend .tag;
     background: #ccd7c2;
 }
-
-.image{
-    max-width: 200px;
-    max-height: 200px;
-    width: auto;
-    height: auto;
+.imageCard {
+    width: 150px;
+    height: 150px;
 }
