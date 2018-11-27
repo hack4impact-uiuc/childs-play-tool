@@ -74,6 +74,7 @@ class Description extends Component {
             <div className="description-cardName">{this.props.location.state.game.name}</div>
 
             {imageRender}
+            {descriptionRender}
 
             <br />
             <br />
@@ -97,9 +98,6 @@ class Description extends Component {
               <br />
             </div>
             <br />
-
-            {descriptionRender}
-
             <br />
             <Button
               className="editing-button"
@@ -128,6 +126,12 @@ class Description extends Component {
               </Button>
             </Link>
           </div>
+          <br />
+          <Link to={{ pathname: './results' }}>
+            <Button outline color="success">
+              Return to results
+            </Button>
+          </Link>
         </div>
       </div>
     )
