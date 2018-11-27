@@ -301,5 +301,6 @@ def test_post_games(client, **kwargs):
     for old_game in old_games:
         assert "Test" in old_game.name
         old_game_rankings = Ranking.query.filter(Ranking.game_id == old_game.id)
+        assert old_game_rankings.count() == 1
         for old_game_ranking in old_game_rankings:
             assert old_game_ranking.rank == 26
