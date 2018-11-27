@@ -80,7 +80,11 @@ class DropdownButton extends Component {
       <div>
         <Dropdown className="dropdown" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
           <DropdownToggle color="success" caret>
-            {this.state.consoleSelectedVal ? this.state.consoleSelectedVal : (this.props.items ? this.props.items[0] : this.state.selectedVal)}
+            {this.state.consoleSelectedVal
+              ? this.state.consoleSelectedVal
+              : this.props.items
+                ? this.props.items[0]
+                : this.state.selectedVal}
           </DropdownToggle>
           <DropdownMenu right>
             {this.props.items
