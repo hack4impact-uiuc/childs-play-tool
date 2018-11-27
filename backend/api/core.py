@@ -8,6 +8,7 @@ from functools import wraps
 
 # logger object for all views to use
 logger = LocalProxy(lambda: current_app.logger)
+auth_key = None
 
 
 class Mixin:
@@ -77,27 +78,42 @@ def get_api_keys(file: str = "creds.ini") -> str:
         return None
 
 
-def authenticate(f):
-    try:
-        config = configparser.ConfigParser()
-        config.read("creds.ini")
-        auth_key = config["SECURITY-KEY"]["KEY"]
-    except:
+class Auth:
+
+    auth_key = ""
+
+    @classmethod
+    def set_key(cls):
+        try:
+            config = configparser.ConfigParser()
+            config.read("creds.ini")
+            cls.auth_key = config["SECURITY-KEY"]["KEY"]
+        except:
+            return
+
+    @classmethod
+    def authenticate(cls, f):
+        if cls.auth_key == "":
+
+            @wraps(f)
+            def decorated_function(*args, **kwargs):
+                return f(*args, **kwargs)
+
+            return decorated_function
 
         @wraps(f)
         def decorated_function(*args, **kwargs):
+            if (
+                request.method == "POST"
+                or request.method == "DELETE"
+                or request.method == "PUT"
+            ):
+                data = request.form
+            else:
+                data = request.args
+            key = data.get("key")
+            if key is None or key != cls.auth_key:
+                return create_response(status=400, message="No/Wrong key provided")
             return f(*args, **kwargs)
 
         return decorated_function
-
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        if request.method == "POST" or request.method == "DELETE":
-            data = request.get_json()
-        else:
-            data = request.args
-        if data.get("key") is None or data["key"] != auth_key:
-            return create_response(status=400, message="No/Wrong key provided")
-        return f(*args, **kwargs)
-
-    return decorated_function

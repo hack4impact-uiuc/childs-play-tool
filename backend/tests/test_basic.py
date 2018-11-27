@@ -250,6 +250,8 @@ def test_get_games_all(client):
 
 @requests_mock.Mocker(kw="mock")
 def test_post_games(client, **kwargs):
+    db.session.query(Ranking).delete()
+    db.session.query(Game).delete()
     kwargs["mock"].get(
         "http://www.giantbomb.com/api/search/?",
         json={
@@ -268,7 +270,7 @@ def test_post_games(client, **kwargs):
     ret_dict = json.loads(rs.data)
     assert ret_dict["message"] == "File not provided."
 
-    input_file = open("tests/Sept2018.xlsx", "rb")
+    input_file = open("tests/Sept2018Mod.xlsx", "rb")
     rs = client.post(
         "/games", content_type="multipart/form-data", data={"file": input_file}
     )
@@ -288,3 +290,17 @@ def test_post_games(client, **kwargs):
         "PlayStation Vita",
         "Xbox One",
     ]
+
+    input_file = open("tests/Sept2018.xlsx", "rb")
+    rs = client.post(
+        "/games", content_type="multipart/form-data", data={"file": input_file}
+    )
+    assert rs.status_code == 201
+    old_games = Game.query.filter(Game.current == False).all()
+    assert len(old_games) == 4
+    for old_game in old_games:
+        assert "Test" in old_game.name
+        old_game_rankings = Ranking.query.filter(Ranking.game_id == old_game.id)
+        assert old_game_rankings.count() == 1
+        for old_game_ranking in old_game_rankings:
+            assert old_game_ranking.rank == 26
