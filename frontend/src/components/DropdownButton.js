@@ -34,7 +34,6 @@ class DropdownButton extends Component {
     super(props)
     this.state = {
       selectedVal: this.props.title,
-      title: this.props.title,
       dropdownOpen: false
     }
 
@@ -55,10 +54,6 @@ class DropdownButton extends Component {
     this.setState(prevState => ({
       dropdownOpen: !prevState.dropdownOpen
     }))
-  }
-
-  updateTab = (tab) => {
-    this.setState({activeTab: tab})
   }
 
   chooseImage = system => {
@@ -84,20 +79,21 @@ class DropdownButton extends Component {
       <div>
         <Dropdown className="dropdown" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
           <DropdownToggle color="success" caret>
-            {this.state.selectedVal}
+            {this.props.items ? this.props.items[0] : this.state.selectedVal}
           </DropdownToggle>
           <DropdownMenu right>
             {this.props.items
-              ? this.props.items.map(item => (
+              ? this.props.items.map((item, index) => (
                   <DropdownItem
                     onClick={e => {
                       this.setState({
-                        selectedVal: (
+                        consoleSelectedVal: (
                           <div>
                             {item} {this.chooseImage(item)}
                           </div>
                         )
                       })
+                      this.props.updateTabConsole((index + 1).toString())
                     }}
                   >
                     {item} {this.chooseImage(item)}
