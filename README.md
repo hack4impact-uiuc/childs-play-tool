@@ -1,6 +1,6 @@
-# Theraputic Video Game Guide
+# Therapeutic Video Game Guide
 
-This is a digital version of the Theraputic Video Game Guide found here: http://childsplaycharity.org/assets/downloads/booklet.pdf
+This is a digital version of the Therapeutic Video Game Guide found here: http://childsplaycharity.org/assets/downloads/booklet.pdf
 
 The purpose of this guide is to recommend therapeutic video games for children based on their symptoms. The games recommended in this guide were curated by researchers at EEDAR, a market-leading video game research firm, in collaboration with mental health researchers at UCSD. Game recommendations have been categorized into six symptom categories:
 
