@@ -30,11 +30,11 @@ def get_games():
     # system optional
     data = request.args
 
-    if data.get("age") is None or data.get("symptom") is None:
-        return create_response(status=400, message="Age and symptom are required.")
-
     age = data.get("age")
     symptom = data.get("symptom")
+
+    if age is None or symptom is None:
+        return create_response(status=400, message="Age and symptom are required.")
 
     ranked_games = (
         db.session.query(
@@ -58,11 +58,11 @@ def get_games():
             status=400, message="No matching games for the specified age and symptom."
         )
 
-    if data.get("system") is not None:
-        system = data.get("system")
+    system = data.get("system")
+    if system is not None:
         ranked_games = ranked_games.filter(Game.system == system)
-        if data.get("gender") is not None:
-            gender = data.get("gender")
+        gender = data.get("gender")
+        if gender is not None:
             if gender == "Male" or gender == "Female":
                 ranked_games = ranked_games.filter(
                     (Game.gender == gender) | (Game.gender == "Both")
@@ -85,8 +85,8 @@ def get_games():
         return create_response(status=200, data={"games": {system: ranked_games_dict}})
 
     else:
-        if data.get("gender") is not None:
-            gender = data.get("gender")
+        gender = data.get("gender")
+        if gender is not None:
             if gender == "Male" or gender == "Female":
                 ranked_games = ranked_games.filter(
                     (Game.gender == gender) | (Game.gender == "Both")
@@ -138,9 +138,9 @@ def get_games_all():
 @games_page.route(GAMES_URL, methods=["POST"])
 @Auth.authenticate
 def post_games():
-    if request.files.get("file") is None:
+    file = request.files.get("file")
+    if file is None:
         return create_response(status=400, message="File not provided.")
-    file = request.files["file"]
     book = xlrd.open_workbook(file_contents=file.read())
     # Entering the games into database
     id = 0
@@ -409,16 +409,20 @@ def edit_game(game_id):
         return create_response(status=400, message="No changes made")
 
     # Edit the description, image, and thumbnail
-    if data.get("description") is not None:
-        game.description = data["description"]
+    description = data.get("description")
+    image = data.get("image")
+    thumbnail = data.get("thumbnail")
+
+    if description is not None:
+        game.description = description
         db.session.commit()
 
-    if data.get("image") is not None:
-        game.image = data["image"]
+    if image is not None:
+        game.image = image
         db.session.commit()
 
-    if data.get("thumbnail") is not None:
-        game.thumbnail = data["thumbnail"]
+    if thumbnail is not None:
+        game.thumbnail = thumbnail
         db.session.commit()
     # DO NOT REMOVE PRINT STATEMENT
     print(game)
