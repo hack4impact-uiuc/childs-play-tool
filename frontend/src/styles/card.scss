@@ -42,12 +42,10 @@
 }
 .tag{
     color: white;
-    font-size: 67%;
-    width: 120px;
+    width: 160px;
     border-radius: 25px;
-    margin: .01%;
+    margin: 1.5%;
     display: inline-block;
-    text-align: center;
 }
 .tag_gender_male {
     @extend .tag;

@@ -50,6 +50,7 @@ def client():
         game["name"] = game_names[i]
         game["system"] = game_systems[i]
         game["gender"] = game_genders[i]
+        game["current"] = True
         g = Game(game)
         db.session.add(g)
     db.session.commit()
