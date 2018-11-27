@@ -111,7 +111,8 @@ class Auth:
                 data = request.form
             else:
                 data = request.args
-            if data.get("key") is None or data.get("key") != auth_key:
+            key = data.get("key")
+            if key is None or key != cls.auth_key:
                 return create_response(status=400, message="No/Wrong key provided")
             return f(*args, **kwargs)
 
