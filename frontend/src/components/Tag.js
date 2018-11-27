@@ -33,7 +33,7 @@ class Tag extends Component {
   render() {
     return (
       <div className={this.state.style}>
-        {this.props.type == 'age' || this.props.type == 'gender'
+        {this.props.type === 'age' || this.props.type === 'gender'
           ? this.display(this.props.tag)
           : this.props.tag}
       </div>

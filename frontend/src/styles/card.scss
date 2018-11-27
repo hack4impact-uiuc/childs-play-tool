@@ -1,11 +1,13 @@
 .cardStyle {
+    width: 30%;
+    height: 400px;
+    display: inline-block;
     color: black;
     font-family: Arial;
     border: 2px solid #00cc99;
-    display: inline-table;
-    padding: .1%;
+    padding: .5%;
     background: white;
-    width: 100%;
+    margin: 1%;
 }
 .cardStyleHover {
     @extend .cardStyle;
@@ -22,12 +24,13 @@
     display: inline-block;
 }
 .cardName {
-    font-size: 30px;
+    font-size: 125%;
     text-align: left;
 }
 .tag{
     color: white;
-    width: 160px;
+    font-size: 67%;
+    width: 120px;
     border-radius: 25px;
     margin: 1.5%;
     display: inline-block;
@@ -81,10 +84,9 @@
     @extend .tag;
     background: #ccd7c2;
 }
-
-.image{
-    max-width: 200px;
-    max-height: 200px;
+.imageCard {
+    max-width: 150px;
+    max-height: 150px;
     width: auto;
     height: auto;
 }
