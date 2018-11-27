@@ -41,9 +41,10 @@ const mapStateToProps = state => ({
   results: state.results.games,
   tags: [state.searchpage.ageRange, state.searchpage.symptoms],
   system: state.searchpage.consoles,
-  age: state.searchpage.ageRange,
-  symptom: state.searchpage.symptoms,
-  gender: state.searchpage.genders
+  age: state.results.query.age,
+  symptom: state.results.query.symptom,
+  gender: state.results.query.gender,
+  search: state.results.query.search
 })
 
 const mapDispatchToProps = dispatch => {
@@ -109,12 +110,19 @@ class Results extends Component {
         <div className="resultsBox">
           <h3 className="resultsText">Results found:</h3>
           <div align="center">
-            <Tag type={'age'} tag={this.props.age} />
-            <Tag type={'symptom'} tag={this.props.symptom} />
+            {this.props.age && this.props.age != 'Age*' ? (
+              <Tag type={'age'} tag={this.props.age} />
+            ) : null}
+            {this.props.symptom && this.props.symptom != 'Symptom*' ? (
+              <Tag type={'symptom'} tag={this.props.symptom} />
+            ) : null}
             {this.props.gender &&
             this.props.gender != 'No Discernable Gender' &&
             this.props.gender != 'Character Gender' ? (
               <Tag type={'gender'} tag={this.props.gender} />
+            ) : null}
+            {this.props.search && this.props.search != '' ? (
+              <h4> You searched for: {this.props.search} </h4>
             ) : null}
           </div>
           {this.props.results ? (
