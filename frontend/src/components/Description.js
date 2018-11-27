@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { Button } from 'reactstrap'
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
 import Tag from './Tag'
+import Update from './Update'
 import '../styles/description.scss'
 
 const titleStyle = {
@@ -9,47 +10,70 @@ const titleStyle = {
 }
 
 class Description extends Component {
-constructor(props) {
-  super(props)
-  this.state = {
-    editing: false,
-    updateDescription: ''
+  constructor(props) {
+    super(props)
+    this.state = {
+      editing: false,
+      imageUploadURL: '',
+      updateDescription: ''
+    }
   }
-}
 
   render() {
-  let descriptionRender;
-  if (this.state.editing) {
-  descriptionRender = <div className="editing-card-description"
-  contentEditable={this.state.editing}
-  onBlur={e => {
-          this.setState({ updateDescription: e.target.innerHTML })
-  }}
-  >
-  {this.props.location.state.game.description}
-  </div> }
-  else {
-         descriptionRender = <div className="card-description"
+    let descriptionRender
+    let imageRender
+    if (this.state.editing) {
+      descriptionRender = (
+        <div
+          className="editing-card-description"
           contentEditable={this.state.editing}
           onBlur={e => {
-                  this.setState({ updateDescription: e.target.innerHTML })
+            this.setState({ updateDescription: e.target.innerHTML })
           }}
-          >
+        >
           {this.props.location.state.game.description}
-          </div>
-  }
+        </div>
+      )
+
+      imageRender = (
+        <Form className="search">
+          <FormGroup>
+            <Label for="exampleSearch">Image URL</Label>
+            <Input
+              type="textarea"
+              name="imageURL"
+              id="imageURL"
+              placeholder="Type URL here..."
+              onChange={e => {
+                this.setState({ imageUploadURL: e.target.value })
+              }}
+            />
+          </FormGroup>
+        </Form>
+      )
+    } else {
+      descriptionRender = (
+        <div
+          className="card-description"
+          contentEditable={this.state.editing}
+          onBlur={e => {
+            this.setState({ updateDescription: e.target.innerHTML })
+          }}
+        >
+          {this.props.location.state.game.description}
+        </div>
+      )
+
+      imageRender = <img className="image" src={this.props.location.state.game.image} />
+    }
+
     return (
       <div>
         <div className="description-background">
           <div className="white-box">
+            <div className="description-cardName">{this.props.location.state.game.name}</div>
 
-
-            <div className="description-cardName">
-            {this.props.location.state.game.name}
-            </div>
-
-
-            <img className="image" src={this.props.location.state.game.image} />
+            {imageRender}
 
             <br />
             <br />
@@ -76,17 +100,25 @@ constructor(props) {
 
             {descriptionRender}
 
-
-
             <br />
-            <Button color="info" disabled={this.state.editing} onClick={() => {
+            <Button
+              className="editing-button"
+              color="info"
+              disabled={this.state.editing}
+              onClick={() => {
                 this.setState({ editing: true })
-              }}>
+              }}
+            >
               Edit
             </Button>
-            <Button color="info" disabled={!this.state.editing} onClick={() => {
+            <Button
+              className="editing-button"
+              color="info"
+              disabled={!this.state.editing}
+              onClick={() => {
                 this.setState({ editing: false })
-              }}>
+              }}
+            >
               Save
             </Button>
             <br />
