@@ -19,12 +19,12 @@ class Tag extends Component {
     else return '_' + tag.toLowerCase()
   }
   display = tag => {
-    if (this.props.type === 'age') {
+    if (this.props.type == 'age') {
       if (tag === Constants.ageRange[0].value) return '12-'
       else if (tag === Constants.ageRange[1].value) return '13+'
       else return this.props.tag
     }
-    if (this.props.type === 'gender') {
+    if (this.props.type == 'gender') {
       if (tag === 'Male') return '♂'
       else if (tag === 'Female') return '♀'
       else return '♂/♀'
@@ -33,7 +33,7 @@ class Tag extends Component {
   render() {
     return (
       <div className={this.state.style}>
-        {this.props.type === 'age' || this.props.type === 'gender'
+        {this.props.type == 'age' || this.props.type == 'gender'
           ? this.display(this.props.tag)
           : this.props.tag}
       </div>
