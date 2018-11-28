@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Tag from './Tag'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import DropdownButton from './DropdownButton'
 import Card from './Card'
 import {
   TabContent,
@@ -36,6 +37,7 @@ import {
   faApple,
   faAndroid
 } from '@fortawesome/free-brands-svg-icons'
+import { runInThisContext } from 'vm'
 
 const mapStateToProps = state => ({
   results: state.results.games,
@@ -64,6 +66,12 @@ class Results extends Component {
       saveName: '',
       modal: false
     }
+    this.updateTab = this.updateTab
+  }
+  determineConsoles = results => {
+    let ret = []
+    Object.getOwnPropertyNames(results).map(x => (results[x].length > 0 ? ret.push(x) : null))
+    return ret
   }
   saveSearch = (name, res) => {
     this.props.saveSearch(name, res)
@@ -72,14 +80,14 @@ class Results extends Component {
   toggleModal = () => {
     this.setState({ modal: !this.state.modal })
   }
-  toggle = tab => {
+  updateTab = tab => {
     if (this.state.activeTab !== tab) {
       this.setState({
         activeTab: tab
       })
     }
   }
-  buildCards = (games, tags) =>
+  buildCards = games =>
     games
       ? games.map(c => (
           <Link to={{ pathname: './description', state: { game: c } }}>
@@ -87,23 +95,7 @@ class Results extends Component {
           </Link>
         ))
       : null
-  chooseImage = system => {
-    if (system === Constants.consoles[0].value) return <FontAwesomeIcon icon={faAndroid} />
-    else if (system === Constants.consoles[1].value) return <FontAwesomeIcon icon={faApple} />
-    else if (system === Constants.consoles[2].value)
-      return <img src={require('../styles/htc.png')} />
-    else if (system === Constants.consoles[3].value)
-      return <img src={require('../styles/3ds.png')} />
-    else if (system === Constants.consoles[4].value)
-      return <FontAwesomeIcon icon={faNintendoSwitch} />
-    else if (system === Constants.consoles[5].value) return <FontAwesomeIcon icon={faVrCardboard} />
-    else if (system === Constants.consoles[6].value) return <FontAwesomeIcon icon={faPlaystation} />
-    else if (system === Constants.consoles[7].value) return <FontAwesomeIcon icon={faGamepad} />
-    else if (system === Constants.consoles[8].value)
-      return <img src={require('../styles/psvr.png')} />
-    else if (system === Constants.consoles[9].value) return <FontAwesomeIcon icon={faXbox} />
-    else return
-  }
+
   render() {
     return (
       <div className="results-background">
@@ -128,25 +120,15 @@ class Results extends Component {
           {this.props.results ? (
             <div>
               <div className="cardBox">
-                <Nav className="navbar" tabs fill>
-                  {Object.getOwnPropertyNames(this.props.results).map((x, index) => (
-                    <NavItem key={index}>
-                      <NavLink
-                        className={classnames({
-                          active: this.state.activeTab === (index + 1).toString()
-                        })}
-                        onClick={() => {
-                          this.toggle((index + 1).toString())
-                        }}
-                        style={{ backgroundColor: '#ffffff' }}
-                      >
-                        {x} {this.chooseImage(x)}
-                      </NavLink>
-                    </NavItem>
-                  ))}
-                </Nav>
+                <div align="right">
+                  <DropdownButton
+                    title={this.determineConsoles(this.props.results)[0]}
+                    items={this.determineConsoles(this.props.results)}
+                    updateTabConsole={this.updateTab}
+                  />
+                </div>
                 <TabContent activeTab={this.state.activeTab}>
-                  {Object.getOwnPropertyNames(this.props.results).map((x, index) => (
+                  {this.determineConsoles(this.props.results).map((x, index) => (
                     <TabPane tabId={(index + 1).toString()}>
                       <Col>{this.buildCards(this.props.results[x])}</Col>
                     </TabPane>

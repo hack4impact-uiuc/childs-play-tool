@@ -7,39 +7,45 @@ class Card extends Component {
     super(props)
 
     this.state = {
-      hover: 'cardStyle'
+      hover: 'cardStyle',
+      description:
+        this.props.game.description && this.props.game.description.length > 100
+          ? this.props.game.description.substring(0, 99) + '...'
+          : this.props.game.description
     }
   }
   render() {
     return (
-      <p
+      <html
         className={this.state.hover}
         onMouseOver={e => this.setState({ hover: 'cardStyleHover' })}
         onMouseLeave={e => this.setState({ hover: 'cardStyle' })}
       >
-        <div className="cardName" align="left">
-          {this.props.game.name}
-        </div>
-        <img className="image" src={this.props.game.image} />
+        <table display="flex">
+          <tr className="cardLeft">
+            <div className="cardName">{this.props.game.name}</div>
+            {this.props.game.gender && this.props.game.gender !== 'No Discernable Gender' ? (
+              <Tag type={'gender'} tag={this.props.game.gender} />
+            ) : null}
+            {this.props.game.tags ? (
+              this.props.game.tags.ages.length === 2 ? (
+                <Tag type={'age'} tag={'All Ages'} />
+              ) : (
+                <Tag type={'age'} tag={this.props.game.tags.ages[0]} />
+              )
+            ) : null}
+            {this.props.game.tags
+              ? this.props.game.tags.symptoms.map(t => <Tag type={'symptom'} tag={t} />)
+              : null}
+          </tr>
+          <tr className="cardRight">
+            <img className="imageCard" src={this.props.game.image} />
+          </tr>
+        </table>
         <br />
         <br />
-        <div align="center">
-          {this.props.game.gender && this.props.game.gender != 'No Discernable Gender' ? (
-            <Tag type={'gender'} tag={this.props.game.gender} />
-          ) : null}
-          {this.props.game.tags ? (
-            this.props.game.tags.ages.length == 2 ? (
-              <Tag type={'age'} tag={'All Ages'} />
-            ) : (
-              <Tag type={'age'} tag={this.props.game.tags.ages[0]} />
-            )
-          ) : null}
-          {this.props.game.tags
-            ? this.props.game.tags.symptoms.map(t => <Tag type={'symptom'} tag={t} />)
-            : null}
-        </div>
-        <p>{this.props.game.description ? this.props.game.description : null}</p>
-      </p>
+        <p className="cardDescription">{this.state.description ? this.state.description : null}</p>
+      </html>
     )
   }
 }
