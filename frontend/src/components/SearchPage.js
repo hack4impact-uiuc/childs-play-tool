@@ -106,7 +106,9 @@ class SearchPage extends Component {
               <Button
                 color="blue"
                 onClick={e => {
-                  this.props.updateResults(this.props.getSavedSearch(this.props.selectedVal))
+                  this.props.updateResults(
+                    this.props.getSavedSearch(this.props.selectedVal).results
+                  )
                   console.log(this.props.getSavedSearch(this.props.selectedVal))
                 }}
               >
