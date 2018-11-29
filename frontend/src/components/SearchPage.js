@@ -53,7 +53,10 @@ class SearchPage extends Component {
                 className="right"
                 onClick={e =>
                   getGamesByName(this.props.nameSearchField).then(results =>
-                    this.props.updateResults(results)
+                    this.props.updateResults({
+                      games: results,
+                      query: { search: this.props.nameSearchField }
+                    })
                   )
                 }
               >
@@ -87,7 +90,16 @@ class SearchPage extends Component {
                   this.props.symptom,
                   this.props.system,
                   this.props.gender
-                ).then(results => this.props.updateResults(results))
+                ).then(results =>
+                  this.props.updateResults({
+                    games: results,
+                    query: {
+                      age: this.props.age,
+                      symptom: this.props.symptom,
+                      gender: this.props.gender
+                    }
+                  })
+                )
               }
             >
               Search
@@ -106,10 +118,7 @@ class SearchPage extends Component {
               <Button
                 color="blue"
                 onClick={e => {
-                  this.props.updateResults(
-                    this.props.getSavedSearch(this.props.selectedVal).results
-                  )
-                  console.log(this.props.getSavedSearch(this.props.selectedVal))
+                  this.props.getSavedSearch(this.props.selectedVal)
                 }}
               >
                 Load saved search
