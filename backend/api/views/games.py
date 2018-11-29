@@ -1,5 +1,5 @@
 from api.models import db, Game, Ranking
-from api.core import create_response, Mixin
+from api.core import create_response, Mixin, Auth
 from flask import Blueprint, request, current_app as app
 import xlrd
 import math
@@ -23,27 +23,29 @@ NUMBER_RANKINGS = 25
 
 
 @games_page.route(GAMES_URL, methods=["GET"])
+@Auth.authenticate
 def get_games():
 
     # age, symptom required
     # system optional
     data = request.args
 
-    if data.get("age") is None or data.get("symptom") is None:
-        return create_response(status=400, message="Age and symptom are required.")
+    age = data.get("age")
+    symptom = data.get("symptom")
 
-    age = data["age"]
-    symptom = data["symptom"]
+    if age is None or symptom is None:
+        return create_response(status=400, message="Age and symptom are required.")
 
     ranked_games = (
         db.session.query(
-            Game.name,
             Game.id,
+            Game.name,
+            Game.system,
+            Game.gender,
             Game.description,
             Game.thumbnail,
             Game.image,
-            Game.gender,
-            Game.system,
+            Game.current,
             Ranking.rank,
         )
         .join(Ranking)
@@ -56,11 +58,11 @@ def get_games():
             status=400, message="No matching games for the specified age and symptom."
         )
 
-    if "system" in data:
-        system = data["system"]
+    system = data.get("system")
+    if system is not None:
         ranked_games = ranked_games.filter(Game.system == system)
-        if "gender" in data:
-            gender = data["gender"]
+        gender = data.get("gender")
+        if gender is not None:
             if gender == "Male" or gender == "Female":
                 ranked_games = ranked_games.filter(
                     (Game.gender == gender) | (Game.gender == "Both")
@@ -83,8 +85,8 @@ def get_games():
         return create_response(status=200, data={"games": {system: ranked_games_dict}})
 
     else:
-        if "gender" in data:
-            gender = data["gender"]
+        gender = data.get("gender")
+        if gender is not None:
             if gender == "Male" or gender == "Female":
                 ranked_games = ranked_games.filter(
                     (Game.gender == gender) | (Game.gender == "Both")
@@ -104,14 +106,16 @@ def get_games():
         systems = {}
         for system in Game.system.type.enums:
             ranked_games_by_system = ranked_games.filter(Game.system == system)
-            systems[system] = [
-                get_game_dict(ranked_game)
-                for ranked_game in ranked_games_by_system.all()
-            ]
+            if ranked_games_by_system.count() > 0:
+                systems[system] = [
+                    get_game_dict(ranked_game)
+                    for ranked_game in ranked_games_by_system.all()
+                ]
         return create_response(status=200, data={"games": systems})
 
 
 @games_page.route(GAMES_ID_URL, methods=["GET"])
+@Auth.authenticate
 def get_game_specific(game_id):
     game = Game.query.filter(Game.id == game_id)
     if game.count() == 0:
@@ -121,6 +125,7 @@ def get_game_specific(game_id):
 
 
 @games_page.route(GAMES_ALL_URL, methods=["GET"])
+@Auth.authenticate
 def get_games_all():
     systems = {}
     for system in Game.system.type.enums:
@@ -132,18 +137,20 @@ def get_games_all():
 
 
 @games_page.route(GAMES_URL, methods=["POST"])
+@Auth.authenticate
 def post_games():
-    if "file" not in request.files:
+    file = request.files.get("file")
+    if file is None:
         return create_response(status=400, message="File not provided.")
-    Ranking.query.delete()
-    Game.query.delete()
-    file = request.files["file"]
     book = xlrd.open_workbook(file_contents=file.read())
     # Entering the games into database
     id = 0
+    # dictionary to store ids of current games and tags of old games
+    game_info_dict = {}
     for sheet in book.sheets():
         # Each sheet has the system name at the top
         system = str(sheet.cell(0, 1).value).strip()
+        game_info_dict[system] = {}
         count = 0
         current_row = 0
         # Exit out of the while loop when it has iterated through all categories on the page
@@ -159,11 +166,8 @@ def post_games():
                 name = str(sheet.cell(current_row, 2 * age_index + 1).value).strip()
                 # Iterates through the rankings of a specific symptom and category until the end
                 while name != "":
-                    # Checks if the game has already been entered into the database
-                    same_game = Game.query.filter(
-                        Game.name == name, Game.system == system
-                    )
-                    if same_game.count() == 0:
+                    # Checks if the game has already been found
+                    if name not in game_info_dict[system]:
                         game = {}
                         game["system"] = system
                         game["name"] = name
@@ -171,14 +175,16 @@ def post_games():
                             sheet.cell(current_row, 2 * age_index + 2).value
                         ).strip()
                         game["id"] = id
-                        id = id + 1
                         # API extra information stuff
                         extra_data = get_giantbomb_data(name)
                         game["thumbnail"] = extra_data["thumbnail"]
                         game["image"] = extra_data["image"]
                         game["description"] = extra_data["description"]
+                        game["current"] = True
                         g = Game(game)
                         db.session.add(g)
+                        game_info_dict[system][name] = {"id": id}
+                        id = id + 1
                     current_row += 1
                     # Breaks out of the loop if we have reached the end of the sheet
                     if current_row == sheet.nrows:
@@ -187,14 +193,44 @@ def post_games():
                 # If the sheet only has one age category
                 if sheet.ncols < FULL_COLUMN_NUMBER:
                     count += 2
-                    db.session.commit()
                     break
                 # If we are on the first age category, reset row to beginning row of the age category
                 if age_index == 0:
                     current_row = initial_row
                 count += 1
-                db.session.commit()
-
+    # query returns previous state
+    old_games = db.session.query(Game).all()
+    for old_game in old_games:
+        # if game has not been found in new spreadsheet
+        if old_game.name not in game_info_dict[old_game.system]:
+            old_game_dict = old_game.to_dict()
+            old_game_dict["id"] = id
+            old_game_dict["current"] = False
+            id = id + 1
+            # define tags for ranking purposes
+            game_info_dict[old_game.system][old_game.name] = {
+                "ages": [
+                    age[0]
+                    for age in db.session.query(Ranking.age)
+                    .distinct(Ranking.age)
+                    .filter(Ranking.game_id == old_game.id)
+                    .all()
+                ],
+                "symptoms": [
+                    symptom[0]
+                    for symptom in db.session.query(Ranking.symptom)
+                    .distinct(Ranking.symptom)
+                    .filter(Ranking.game_id == old_game.id)
+                    .all()
+                ],
+            }
+            g = Game(old_game_dict)
+            db.session.add(g)
+    # delete before flushing
+    db.session.query(Ranking).delete()
+    db.session.query(Game).delete()
+    # flushing pushes changes to database but does not persist them
+    db.session.flush()
     # Entering the rankings into the database
     id = 0
     for sheet in book.sheets():
@@ -235,23 +271,33 @@ def post_games():
                             ).value
                         ).strip()
                         if len(name) != 0:
-                            game_id = (
-                                Game.query.filter(
-                                    Game.name == name, Game.system == system
-                                )
-                                .first()
-                                .id
-                            )
-                            ranking_id = id
-                            id = id + 1
+                            # fetch id from dict
+                            game_id = game_info_dict[system][name]["id"]
                             ranking = {}
-                            ranking["id"] = ranking_id
+                            ranking["id"] = id
                             ranking["age"] = age
                             ranking["symptom"] = symptom
                             ranking["game_id"] = game_id
                             ranking["rank"] = rank
                             r = Ranking(ranking)
                             db.session.add(r)
+                            id = id + 1
+    # iterate through all games defined as "old" (not current)
+    old_games = db.session.query(Game).filter(Game.current == False).all()
+    for old_game in old_games:
+        old_game_dict = old_game.to_dict()
+        # create rankings behind all other for all age/symptom combinations
+        for age in game_info_dict[old_game.system][old_game.name]["ages"]:
+            for symptom in game_info_dict[old_game.system][old_game.name]["symptoms"]:
+                ranking = {}
+                ranking["id"] = id
+                ranking["age"] = age
+                ranking["symptom"] = symptom
+                ranking["game_id"] = old_game_dict["id"]
+                ranking["rank"] = 26
+                r = Ranking(ranking)
+                db.session.add(r)
+                id = id + 1
     db.session.commit()
     return create_response(status=201, message="Database updated.")
 
@@ -350,3 +396,38 @@ def get_game_dict(game):
     tags["symptoms"] = symptoms
     game_dict["tags"] = tags
     return game_dict
+
+
+@games_page.route(GAMES_ID_URL, methods=["PUT"])
+@Auth.authenticate
+def edit_game(game_id):
+    game = Game.query.get(game_id)
+    if game is None:
+        return create_response(status=400, message="Game not found")
+    data = request.form
+
+    if data is None:
+        return create_response(status=400, message="No changes made")
+
+    # Edit the description, image, and thumbnail
+    description = data.get("description")
+    image = data.get("image")
+    thumbnail = data.get("thumbnail")
+
+    if description is not None:
+        game.description = description
+        db.session.commit()
+
+    if image is not None:
+        game.image = image
+        db.session.commit()
+
+    if thumbnail is not None:
+        game.thumbnail = thumbnail
+        db.session.commit()
+    # DO NOT REMOVE PRINT STATEMENT
+    print(game)
+
+    return create_response(
+        data={"game": get_game_dict(game)}, message="Game successfully edited"
+    )

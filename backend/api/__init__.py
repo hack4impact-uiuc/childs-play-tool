@@ -7,7 +7,7 @@ from flask_migrate import Migrate
 from sqlalchemy_utils import create_database, database_exists
 
 from api.config import config
-from api.core import all_exception_handler
+from api.core import all_exception_handler, Auth
 
 
 class RequestFormatter(logging.Formatter):
@@ -29,6 +29,7 @@ def create_app(test_config=None):
         app.config.from_mapping(**test_config)
     else:
         app.config.from_object(config[env])
+        Auth.set_key()
 
     # logging
     formatter = RequestFormatter(

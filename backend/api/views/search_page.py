@@ -1,5 +1,5 @@
 from api.models import db, Game, Ranking
-from api.core import create_response, serialize_list, Mixin, logger
+from api.core import create_response, serialize_list, Mixin, logger, Auth
 from .games import get_game_dict
 from flask import Blueprint, request, jsonify
 import json
@@ -14,6 +14,7 @@ SEARCH_GAMES_URL = "/search/games"
 
 
 @search_page.route(SEARCH_GAMES_URL, methods=["GET"])
+@Auth.authenticate
 def search_game_by_name():
     data = request.args
     all_empty = True

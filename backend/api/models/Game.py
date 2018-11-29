@@ -15,6 +15,7 @@ class Game(Mixin, db.Model):
     description = db.Column(db.String, nullable=False)
     thumbnail = db.Column(db.String, nullable=False)
     image = db.Column(db.String, nullable=False)
+    current = db.Column(db.Boolean, nullable=False)
 
     def __init__(self, data):
         self.id = data["id"]
@@ -30,6 +31,7 @@ class Game(Mixin, db.Model):
             self.thumbnail = data["thumbnail"]
         if "image" in data:
             self.image = data["image"]
+        self.current = data["current"]
 
     def __repr__(self):
         return "<name {}>".format(self.name)
