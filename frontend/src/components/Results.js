@@ -43,7 +43,6 @@ import * as html2canvas from 'html2canvas'
 import * as jsPDF from 'jspdf'
 import ReactDOMServer from 'react-dom/server'
 
-
 const mapStateToProps = state => ({
   results: state.results.games,
   tags: [state.searchpage.ageRange, state.searchpage.symptoms],
@@ -102,21 +101,19 @@ class Results extends Component {
       : null
 
   printDocument() {
-    
-    const input = document.getElementById('divToPrint');
-    html2canvas(input).then((canvas) => {
-        var wid: number
-        var hgt: number
-          const imgData = canvas.toDataURL('image/png', wid = canvas.width, hgt = canvas.height);
-        const pdf = new jsPDF({format: 'letter'});
-        var width = pdf.internal.pageSize.getWidth();
-        var height = width * (hgt / wid);
-        pdf.addImage(imgData, 'JPEG', 0, 0, width, height);
-        // pdf.output('dataurlnewwindow');
-        pdf.save("childsplaydownload.pdf");
-      })
-      ;
-    
+    const input = document.getElementById('divToPrint')
+    html2canvas(input).then(canvas => {
+      var wid: number
+      var hgt: number
+      const imgData = canvas.toDataURL('image/png', (wid = canvas.width), (hgt = canvas.height))
+      const pdf = new jsPDF({ format: 'letter' })
+      var width = pdf.internal.pageSize.getWidth()
+      var height = width * (hgt / wid)
+      pdf.addImage(imgData, 'JPEG', 0, 0, width, height)
+      // pdf.output('dataurlnewwindow');
+      pdf.save('childsplaydownload.pdf')
+    })
+
     /*
     var doc = new jsPDF();
     doc.fromHTML(ReactDOMServer.renderToStaticMarkup(this.render()));
@@ -125,10 +122,11 @@ class Results extends Component {
   }
 
   render() {
-    return <div id='divToPrint' className="results-background">
-      <div className="mb5">
-        <button onClick={this.printDocument}>Print</button>
-      </div>
+    return (
+      <div id="divToPrint" className="results-background">
+        <div className="mb5">
+          <button onClick={this.printDocument}>Print</button>
+        </div>
         <div className="resultsBox">
           <h3 className="resultsText">Results found:</h3>
           <div align="center">
@@ -151,7 +149,11 @@ class Results extends Component {
             <div>
               <div className="cardBox">
                 <div align="right">
-                  <DropdownButton title={this.determineConsoles(this.props.results)[0]} items={this.determineConsoles(this.props.results)} updateTabConsole={this.updateTab} />
+                  <DropdownButton
+                    title={this.determineConsoles(this.props.results)[0]}
+                    items={this.determineConsoles(this.props.results)}
+                    updateTabConsole={this.updateTab}
+                  />
                 </div>
                 <TabContent activeTab={this.state.activeTab}>
                   {this.determineConsoles(this.props.results).map((x, index) => (
@@ -171,15 +173,32 @@ class Results extends Component {
                           <FontAwesomeIcon icon={faSave} />
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input type="text" name="saveName" id="saveName" placeholder="Input Name" onChange={e => {
+                      <Input
+                        type="text"
+                        name="saveName"
+                        id="saveName"
+                        placeholder="Input Name"
+                        onChange={e => {
                           this.setState({ saveName: e.target.value })
-                        }} />
+                        }}
+                      />
                     </InputGroup>
                   </FormGroup>
-                  <Button className="resultButtons" onClick={() => {
-                      let resultsAndQuery = { query: { age: this.props.age, system: this.props.consoles, symptom: this.props.symptom, gender: this.props.gender }, results: this.props.results }
+                  <Button
+                    className="resultButtons"
+                    onClick={() => {
+                      let resultsAndQuery = {
+                        query: {
+                          age: this.props.age,
+                          system: this.props.consoles,
+                          symptom: this.props.symptom,
+                          gender: this.props.gender
+                        },
+                        results: this.props.results
+                      }
                       this.props.saveSearch(this.state.saveName, resultsAndQuery)
-                    }}>
+                    }}
+                  >
                     Save Search
                   </Button>
                   <Modal isOpen={this.state.modal}>
@@ -193,7 +212,10 @@ class Results extends Component {
                 </Form>
               </div>
               <hr />
-            </div> : <div>No matching results :(</div>}
+            </div>
+          ) : (
+            <div>No matching results :(</div>
+          )}
           <Link to={{ pathname: './' }}>
             <Button className="homeButton">
               <FontAwesomeIcon icon={faHome} /> Go Home
@@ -201,6 +223,7 @@ class Results extends Component {
           </Link>
         </div>
       </div>
+    )
   }
 }
 
