@@ -106,10 +106,11 @@ def get_games():
         systems = {}
         for system in Game.system.type.enums:
             ranked_games_by_system = ranked_games.filter(Game.system == system)
-            systems[system] = [
-                get_game_dict(ranked_game)
-                for ranked_game in ranked_games_by_system.all()
-            ]
+            if ranked_games_by_system.count() > 0:
+                systems[system] = [
+                    get_game_dict(ranked_game)
+                    for ranked_game in ranked_games_by_system.all()
+                ]
         return create_response(status=200, data={"games": systems})
 
 
