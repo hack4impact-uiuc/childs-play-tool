@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
 import Tag from './Tag'
 import Update from './Update'
+import { editGame } from '../utils/ApiWrapper'
 import '../styles/description.scss'
 
 const titleStyle = {
@@ -14,8 +15,8 @@ class Description extends Component {
     super(props)
     this.state = {
       editing: false,
-      imageUploadURL: '',
-      updateDescription: ''
+      imageUploadURL: this.props.location.state.game.image,
+      updateDescription: this.props.location.state.game.description
     }
   }
 
@@ -29,6 +30,7 @@ class Description extends Component {
           contentEditable={this.state.editing}
           onBlur={e => {
             this.setState({ updateDescription: e.target.innerHTML })
+            console.log(this.state.updateDescription)
           }}
         >
           {this.props.location.state.game.description}
@@ -43,28 +45,18 @@ class Description extends Component {
               type="textarea"
               name="imageURL"
               id="imageURL"
-              placeholder="Type URL here..."
+              defaultValue={this.props.location.state.game.image}
               onChange={e => {
                 this.setState({ imageUploadURL: e.target.value })
+                console.log(this.state.imageUploadURL)
               }}
             />
           </FormGroup>
         </Form>
       )
     } else {
-      descriptionRender = (
-        <div
-          className="card-description"
-          contentEditable={this.state.editing}
-          onBlur={e => {
-            this.setState({ updateDescription: e.target.innerHTML })
-          }}
-        >
-          {this.props.location.state.game.description}
-        </div>
-      )
-
-      imageRender = <img className="image" src={this.props.location.state.game.image} />
+      descriptionRender = <div>{this.state.updateDescription}</div>
+      imageRender = <img className="image" src={this.state.imageUploadURL} />
     }
 
     return (
@@ -115,6 +107,11 @@ class Description extends Component {
               disabled={!this.state.editing}
               onClick={() => {
                 this.setState({ editing: false })
+                editGame(
+                  this.props.location.state.game.id,
+                  this.state.updateDescription,
+                  this.state.imageUploadURL
+                )
               }}
             >
               Save
