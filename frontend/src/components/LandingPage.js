@@ -57,8 +57,8 @@ class LandingPage extends Component {
           <Row>
             <Col>
               <p>
-                To search for a game recommendation, select the age category and symptom of
-                the child. You can select a game console or leave it unselected to recieve game
+                To search for a game recommendation, select the age category and symptom of the
+                child. You can select a game console or leave it unselected to recieve game
                 recommendations for all consoles. You can also select a gender for the main
                 character of the game.
               </p>
@@ -83,8 +83,8 @@ class LandingPage extends Component {
               <p>
                 Tap on the vertical ellipsis (three dots) button on the right to reveal more
                 options. Select "Add to Home Screen." A pop up will appear, tap on "Add" to proceed.
-                Confirm the website's addition to your home screen, and it will show you a preview
-                of its shortcut icon. You can select the location now or move it later.
+                Confirm the website&#39;s addition to your home screen, and it will show you a
+                preview of its shortcut icon. You can select the location now or move it later.
               </p>
             </Col>
             <Col>
@@ -105,8 +105,8 @@ class LandingPage extends Component {
               <h3> About Child's Play</h3>
               <img src={require('../styles/cp-logo.png')} alt="Child's Play logo" height="100px" />
               <p>
-                Child's Play is a game industry charity dedicated to improving the lives of children
-                with toys and games in a network of over 150 hospitals worldwide.
+                Child&#39;s Play is a game industry charity dedicated to improving the lives of
+                children with toys and games in a network of over 150 hospitals worldwide.
               </p>
               <a href="http://childsplaycharity.org"> More </a>
             </Col>
