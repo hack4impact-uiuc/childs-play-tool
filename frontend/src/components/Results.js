@@ -29,7 +29,14 @@ import { saveSearch } from '../redux/modules/results'
 import { bindActionCreators } from 'redux'
 import Constants from '../utils/Constants.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGamepad, faVrCardboard, faSave, faHome, faClipboard, faClipboardCheck } from '@fortawesome/free-solid-svg-icons'
+import {
+  faGamepad,
+  faVrCardboard,
+  faSave,
+  faHome,
+  faClipboard,
+  faClipboardCheck
+} from '@fortawesome/free-solid-svg-icons'
 import {
   faNintendoSwitch,
   faXbox,
@@ -37,7 +44,7 @@ import {
   faApple,
   faAndroid
 } from '@fortawesome/free-brands-svg-icons'
-import {CopyToClipboard} from 'react-copy-to-clipboard'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 const mapStateToProps = state => ({
   results: state.results.games,
@@ -98,20 +105,19 @@ class Results extends Component {
       : null
   resultsURL = (name, age, symptom, gender, system) => {
     let url = window.location.protocol + '//' + window.location.hostname
-    if(url === 'http://localhost') url += ':3000'
-    url += "/resultsLink?"
-    if(name && name !== '') return url + "name=" + name
-    else{
-      url = url + "age=" + age + "&symptom=" + symptom
-      if(gender && gender !== 'No Discernable Gender' && gender !== 'Character Gender')
-        url = url + "&gender=" + gender
-      if(system && system !== '' && system !== 'Console Type')
-        url = url + "&system=" + system
+    if (url === 'http://localhost') url += ':3000'
+    url += '/resultsLink?'
+    if (name && name !== '') return url + 'name=' + name
+    else {
+      url = url + 'age=' + age + '&symptom=' + symptom
+      if (gender && gender !== 'No Discernable Gender' && gender !== 'Character Gender')
+        url = url + '&gender=' + gender
+      if (system && system !== '' && system !== 'Console Type') url = url + '&system=' + system
       return url
     }
   }
   toggleClipboard = () => {
-    this.setState({copied: true})
+    this.setState({ copied: true })
   }
   render() {
     return (
@@ -181,11 +187,25 @@ class Results extends Component {
                   >
                     Save Search
                   </Button>
-                  <br/><br/>
-                  <CopyToClipboard text={this.resultsURL(this.props.search, this.props.age, this.props.symptom, this.props.gender, this.props.system)}>
-                  <Button className="resultButtons" onClick={this.toggleClipboard}>
-                  {this.state.copied ? <FontAwesomeIcon icon={faClipboardCheck} /> : <FontAwesomeIcon icon={faClipboard} />} Copy Search URL
-                  </Button>
+                  <br />
+                  <br />
+                  <CopyToClipboard
+                    text={this.resultsURL(
+                      this.props.search,
+                      this.props.age,
+                      this.props.symptom,
+                      this.props.gender,
+                      this.props.system
+                    )}
+                  >
+                    <Button className="resultButtons" onClick={this.toggleClipboard}>
+                      {this.state.copied ? (
+                        <FontAwesomeIcon icon={faClipboardCheck} />
+                      ) : (
+                        <FontAwesomeIcon icon={faClipboard} />
+                      )}{' '}
+                      Copy Search URL
+                    </Button>
                   </CopyToClipboard>
                   <Modal isOpen={this.state.modal}>
                     <ModalBody>Search saved successfully!</ModalBody>

@@ -19,5 +19,5 @@ export {
   Results,
   Password,
   Update,
-  ResultsLink,
+  ResultsLink
 }

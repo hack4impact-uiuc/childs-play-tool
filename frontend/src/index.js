@@ -12,7 +12,7 @@ import {
   Update,
   Results,
   Description,
-  ResultsLink,
+  ResultsLink
 } from './components'
 import registerServiceWorker from './registerServiceWorker'
 import configureStore, { history } from './redux/configureStore'
