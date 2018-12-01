@@ -169,6 +169,7 @@ class Results extends Component {
                         results: this.props.results
                       }
                       this.props.saveSearch(this.state.saveName, resultsAndQuery)
+                      this.toggleModal()
                     }}
                   >
                     Save Search
