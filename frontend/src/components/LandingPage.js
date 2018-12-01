@@ -57,8 +57,7 @@ class LandingPage extends Component {
           <Row>
             <Col>
               <p>
-                Select a . You can also select a gender for the main
-                character of the game. The search will return all games that match the specifications.
+                It is optional to select a game console and the gender of the main character. The search will return all games that match the specifications.
               </p>
               <img src={require('../styles/searchimage.png')} alt="Search page" height="200px" />
             </Col>
