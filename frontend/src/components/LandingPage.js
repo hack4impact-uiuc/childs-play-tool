@@ -38,7 +38,10 @@ class LandingPage extends Component {
           <h3 className="homeText2L">How to Use</h3>
           <Row>
             <Col>
-              <p>To search for game recommendations, you must select one of the six symptom categories:</p>
+              <p>
+                To search for game recommendations, you must select one of the six symptom
+                categories:
+              </p>
               <img
                 src={require('../styles/symptoms1.png')}
                 alt="Anxiety/Hyperactivity, Bored (Long Term), Bored (Short Term), Cognitive Impairment, Pain, Sadness"
@@ -57,7 +60,8 @@ class LandingPage extends Component {
           <Row>
             <Col>
               <p>
-                It is optional to select a game console and the gender of the main character. The search will return all games that match the specifications.
+                It is optional to select a game console and the gender of the main character. The
+                search will return all games that match the specifications.
               </p>
               <img src={require('../styles/searchimage.png')} alt="Search page" height="200px" />
             </Col>
