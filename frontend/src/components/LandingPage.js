@@ -57,11 +57,10 @@ class LandingPage extends Component {
           <Row>
             <Col>
               <p>
-                To search for a game recommendation, you must select the age category and symptom of
+                To search for a game recommendation, select the age category and symptom of
                 the child. You can select a game console or leave it unselected to recieve game
                 recommendations for all consoles. You can also select a gender for the main
-                character of the game. The search will return game recommendations to fit the
-                specifications.
+                character of the game.
               </p>
               <img src={require('../styles/searchimage.png')} alt="Search page" height="200px" />
             </Col>
