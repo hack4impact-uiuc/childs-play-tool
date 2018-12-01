@@ -188,7 +188,7 @@ class Results extends Component {
           ) : (
             <div>No matching results :(</div>
           )}
-          <Link to={{ pathname: './' }}>
+          <Link to={{ pathname: './search' }}>
             <Button className="homeButton">
               <FontAwesomeIcon icon={faHome} /> Go Home
             </Button>
