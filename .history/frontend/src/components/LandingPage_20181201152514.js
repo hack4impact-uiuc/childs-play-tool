@@ -14,6 +14,15 @@ class LandingPage extends Component {
           href="https://fonts.googleapis.com/css?family=Poppins|Source+Sans+Pro"
           rel="stylesheet"
         />
+        <ul>
+            <li><a href="http://childsplaycharity.org" className="cp" >Child's Play</a></li>
+            <li><a href="/admin" className="rest">Admin</a></li>
+            <li><a href="#Contact" className="rest">Contacts</a></li>
+            <li><a href="#HowToUse" className="rest">How to Use</a></li>
+            <li><a href="/search" className="rest">Search</a></li>
+        </ul>
+
+        <div className="part1">
             <h3 className="homeTextL">
             Child&#39;s Play Therapeutic Video Game Guide
             </h3>
@@ -29,6 +38,7 @@ class LandingPage extends Component {
                 <br></br>
                 <a href="http://childsplaycharity.org/assets/downloads/booklet.pdf"> Click here for Spanish pdf Guide</a>
             </div>
+        </div>
         <div className="line"></div>
 
         <Container id="HowToUse" className="separator">

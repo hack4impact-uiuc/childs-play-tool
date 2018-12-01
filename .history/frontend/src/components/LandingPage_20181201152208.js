@@ -14,6 +14,15 @@ class LandingPage extends Component {
           href="https://fonts.googleapis.com/css?family=Poppins|Source+Sans+Pro"
           rel="stylesheet"
         />
+        <ul>
+            <li><a href="http://childsplaycharity.org" className="cp" >Child's Play</a></li>
+            <li><a href="/admin" className="rest">Admin</a></li>
+            <li><a href="#Contact" className="rest">Contacts</a></li>
+            <li><a href="#HowToUse" className="rest">How to Use</a></li>
+            <li><a href="/search" className="rest">Search</a></li>
+        </ul>
+
+        <div className="part1">
             <h3 className="homeTextL">
             Child&#39;s Play Therapeutic Video Game Guide
             </h3>
@@ -29,6 +38,7 @@ class LandingPage extends Component {
                 <br></br>
                 <a href="http://childsplaycharity.org/assets/downloads/booklet.pdf"> Click here for Spanish pdf Guide</a>
             </div>
+        </div>
         <div className="line"></div>
 
         <Container id="HowToUse" className="separator">
@@ -52,15 +62,15 @@ class LandingPage extends Component {
                 <Row>
                     <Col>
                         <p>
-                            To search for a game recommendation, you must select the age category and symptom of the child. You can select a game console or leave it unselected to recieve game recommendations for all consoles. You can also select a gender for the main character of the game. The search will return game recommendations to fit the specifications.
+                            To search for a game recommendation, you must select the age category and symptom of the child. You can select a game console or leave it unselected to recieve game recommendations for all consoles. The search will return game recommendations to fit the specifications.
                         </p>
                         <img src={require("../styles/searchimage.png")} alt="Search page" height="200px"></img>
                     </Col>
                     <Col>
                         <p>
-                            Each game has labels that describe its intended age group, applicable symptoms, and gender of the main character.
+                            Each game has labels.
                         </p>
-                        <img src={require("../styles/result.png")} alt="Search page" height="110px"></img>
+                        <img src={require("../styles/results.png")} alt="Search page" height="200px"></img>
                     </Col>
                 </Row>
         </Container>
