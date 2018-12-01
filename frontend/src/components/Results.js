@@ -2,11 +2,7 @@ import React, { Component } from 'react'
 import Tag from './Tag'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-<<<<<<< HEAD
-import { DropdownButton } from './'
-=======
 import DropdownButton from './DropdownButton'
->>>>>>> 1751f865ba1eba4f1c5e5338e958ef5058ca570f
 import Card from './Card'
 import {
   TabContent,
@@ -42,19 +38,16 @@ import {
   faAndroid
 } from '@fortawesome/free-brands-svg-icons'
 import { runInThisContext } from 'vm'
+import {CopyToClipboard} from 'react-copy-to-clipboard'
 
 const mapStateToProps = state => ({
   results: state.results.games,
-<<<<<<< HEAD
-  tags: [state.searchpage.ageRange, state.searchpage.symptoms]
-=======
   tags: [state.searchpage.ageRange, state.searchpage.symptoms],
   system: state.searchpage.consoles,
   age: state.results.query.age,
   symptom: state.results.query.symptom,
   gender: state.results.query.gender,
   search: state.results.query.search
->>>>>>> 1751f865ba1eba4f1c5e5338e958ef5058ca570f
 })
 
 const mapDispatchToProps = dispatch => {
@@ -103,7 +96,18 @@ class Results extends Component {
           </Link>
         ))
       : null
-
+  resultsURL = (name, age, symptom, gender, system) => {
+    let url = "/resultsLink?"
+    if(name && name != '') return url + "name=" + name
+    else{
+      url = url + "age=" + age + "&symptom=" + symptom
+      if(gender && gender !== 'No Discernable Gender' && gender !== 'Character Gender')
+        url = url + "&gender=" + gender
+      if(system && system !== '' && system !== 'Console Type')
+        url = url + "&system=" + system
+      return url
+    }
+  }
   render() {
     return (
       <div className="results-background">
@@ -124,6 +128,9 @@ class Results extends Component {
             {this.props.search && this.props.search != '' ? (
               <h4> You searched for: {this.props.search} </h4>
             ) : null}
+            <CopyToClipboard text={this.resultsURL(this.props.search, this.props.age, this.props.symptom, this.props.gender, this.props.system)}>
+            <Button>Click</Button>
+            </CopyToClipboard>
           </div>
           {this.props.results ? (
             <div>
