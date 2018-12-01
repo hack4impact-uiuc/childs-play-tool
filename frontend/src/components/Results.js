@@ -29,7 +29,7 @@ import { saveSearch } from '../redux/modules/results'
 import { bindActionCreators } from 'redux'
 import Constants from '../utils/Constants.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGamepad, faVrCardboard, faSave, faHome } from '@fortawesome/free-solid-svg-icons'
+import { faGamepad, faVrCardboard, faSave, faHome, faClipboard, faClipboardCheck } from '@fortawesome/free-solid-svg-icons'
 import {
   faNintendoSwitch,
   faXbox,
@@ -37,7 +37,6 @@ import {
   faApple,
   faAndroid
 } from '@fortawesome/free-brands-svg-icons'
-import { runInThisContext } from 'vm'
 import {CopyToClipboard} from 'react-copy-to-clipboard'
 
 const mapStateToProps = state => ({
@@ -65,7 +64,8 @@ class Results extends Component {
     this.state = {
       activeTab: '1',
       saveName: '',
-      modal: false
+      modal: false,
+      copied: false
     }
     this.updateTab = this.updateTab
   }
@@ -97,8 +97,10 @@ class Results extends Component {
         ))
       : null
   resultsURL = (name, age, symptom, gender, system) => {
-    let url = "/resultsLink?"
-    if(name && name != '') return url + "name=" + name
+    let url = window.location.protocol + '//' + window.location.hostname
+    if(url === 'http://localhost') url += ':3000'
+    url += "/resultsLink?"
+    if(name && name !== '') return url + "name=" + name
     else{
       url = url + "age=" + age + "&symptom=" + symptom
       if(gender && gender !== 'No Discernable Gender' && gender !== 'Character Gender')
@@ -107,6 +109,9 @@ class Results extends Component {
         url = url + "&system=" + system
       return url
     }
+  }
+  toggleClipboard = () => {
+    this.setState({copied: true})
   }
   render() {
     return (
@@ -128,9 +133,6 @@ class Results extends Component {
             {this.props.search && this.props.search != '' ? (
               <h4> You searched for: {this.props.search} </h4>
             ) : null}
-            <CopyToClipboard text={this.resultsURL(this.props.search, this.props.age, this.props.symptom, this.props.gender, this.props.system)}>
-            <Button>Click</Button>
-            </CopyToClipboard>
           </div>
           {this.props.results ? (
             <div>
@@ -179,6 +181,12 @@ class Results extends Component {
                   >
                     Save Search
                   </Button>
+                  <br/><br/>
+                  <CopyToClipboard text={this.resultsURL(this.props.search, this.props.age, this.props.symptom, this.props.gender, this.props.system)}>
+                  <Button className="resultButtons" onClick={this.toggleClipboard}>
+                  {this.state.copied ? <FontAwesomeIcon icon={faClipboardCheck} /> : <FontAwesomeIcon icon={faClipboard} />} Copy Search URL
+                  </Button>
+                  </CopyToClipboard>
                   <Modal isOpen={this.state.modal}>
                     <ModalBody>Search saved successfully!</ModalBody>
                     <ModalFooter>
