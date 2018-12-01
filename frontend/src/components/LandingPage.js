@@ -38,7 +38,7 @@ class LandingPage extends Component {
           <h3 className="homeText2L">How to Use</h3>
           <Row>
             <Col>
-              <p>Game recommendations have been categorized into six symptom categories:</p>
+              <p>To search for game recommendations, you must select one of the six symptom categories:</p>
               <img
                 src={require('../styles/symptoms1.png')}
                 alt="Anxiety/Hyperactivity, Bored (Long Term), Bored (Short Term), Cognitive Impairment, Pain, Sadness"
@@ -46,7 +46,7 @@ class LandingPage extends Component {
               />
             </Col>
             <Col>
-              <p>And two age categories:</p>
+              <p>You must also select one of the age groups:</p>
               <img
                 src={require('../styles/agecategories.png')}
                 alt="12 and under, 13 and older"
@@ -57,10 +57,8 @@ class LandingPage extends Component {
           <Row>
             <Col>
               <p>
-                To search for a game recommendation, select the age category and symptom of the
-                child. You can select a game console or leave it unselected to recieve game
-                recommendations for all consoles. You can also select a gender for the main
-                character of the game.
+                Select a . You can also select a gender for the main
+                character of the game. The search will return all games that match the specifications.
               </p>
               <img src={require('../styles/searchimage.png')} alt="Search page" height="200px" />
             </Col>
@@ -102,7 +100,7 @@ class LandingPage extends Component {
         <Container id="Contacts" className="separator">
           <Row>
             <Col>
-              <h3> About Child's Play</h3>
+              <h3> About Child&#39;s Play</h3>
               <img src={require('../styles/cp-logo.png')} alt="Child's Play logo" height="100px" />
               <p>
                 Child&#39;s Play is a game industry charity dedicated to improving the lives of
