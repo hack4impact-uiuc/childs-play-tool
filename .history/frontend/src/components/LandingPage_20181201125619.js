@@ -20,6 +20,7 @@ class LandingPage extends Component {
             <li><a href="#Contact" className="rest">Contacts</a></li>
             <li><a href="#HowToUse" className="rest">How to Use</a></li>
             <li><a href="/search" className="rest">Search</a></li>
+
         </ul>
 
         <div className="part1">
@@ -39,8 +40,6 @@ class LandingPage extends Component {
                 <a href="http://childsplaycharity.org/assets/downloads/booklet.pdf"> Click here for Spanish pdf Guide</a>
             </div>
         </div>
-        <div className="line"></div>
-
         <Container id="HowToUse" className="separator">
         <h3 className="homeText2L">
             How to Use
@@ -61,7 +60,6 @@ class LandingPage extends Component {
                 </Col>
             </Row>
         </Container>
-        <div className="line"></div>
 
         <Container id="Contacts" className="separator">
             <Row>

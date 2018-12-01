@@ -15,33 +15,30 @@ class LandingPage extends Component {
           rel="stylesheet"
         />
         <ul>
-            <li><a href="http://childsplaycharity.org" className="cp" >Child's Play</a></li>
-            <li><a href="/admin" className="rest">Admin</a></li>
-            <li><a href="#Contact" className="rest">Contacts</a></li>
-            <li><a href="#HowToUse" className="rest">How to Use</a></li>
+            <li><a href="/admin" className="cp" >Child's Play</a></li>
             <li><a href="/search" className="rest">Search</a></li>
+            <li><a href="/admin" className="rest">Admin</a></li>
+            <li><a href="/admin" className="rest">How to Use</a></li>
+            <li><a href="" className="rest">Contacts</a></li>
         </ul>
-
-        <div className="part1">
-            <h3 className="homeTextL">
-            Child&#39;s Play Therapeutic Video Game Guide
-            </h3>
-            <p>
-            The purpose of this guide is to recommend therapeutic video games for children based on their symptoms. 
-            The games recommended in this guide were curated by researchers at EEDAR, a market-leading video game research firm.
-            </p>
-            <Button href="/search">
-                Search Games
-            </Button>
-            <div>
-                <a href="http://childsplaycharity.org/assets/downloads/booklet.pdf"> Click here for English pdf Guide</a> 
-                <br></br>
-                <a href="http://childsplaycharity.org/assets/downloads/booklet.pdf"> Click here for Spanish pdf Guide</a>
-            </div>
+        <h3 className="homeTextL">
+          Child&#39;s Play Therapeutic Video Game Guide
+        </h3>
+        <p>
+        The purpose of this guide is to recommend therapeutic video games for children based on their symptoms. 
+        The games recommended in this guide were curated by researchers at EEDAR, a market-leading video game research firm.
+        </p>
+        <div className="blocks">
+        <Button>
+            Search Games
+        </Button>
         </div>
-        <div className="line"></div>
-
-        <Container id="HowToUse" className="separator">
+        <div>
+            <a> Click here for English pdf Guide</a> 
+            <br></br>
+            <a> Click here for Spanish pdf Guide</a>
+        </div>
+        <Container className="seperator">
         <h3 className="homeText2L">
             How to Use
         </h3>
@@ -61,13 +58,11 @@ class LandingPage extends Component {
                 </Col>
             </Row>
         </Container>
-        <div className="line"></div>
 
-        <Container id="Contacts" className="separator">
+        <Container className="separator">
             <Row>
                 <Col>
                 <h3> About Child's Play</h3>
-                <img src={require("../styles/cp-logo.png")} alt="Child's Play logo" height="100px"></img>
                     <p>
                     Child's Play is a game industry charity dedicated to improving the lives of children with toys and games in a network of over 150 hospitals worldwide. 
                     </p>
@@ -82,8 +77,8 @@ class LandingPage extends Component {
                         PMB #418<br></br>
                         Redmond, WA 98052 <br></br>
                         <br></br>
-                        Facebook: <a href="https://www.facebook.com/ChildsPlayCharity/">ChildsPlayCharity</a><br></br>
-                        Twitter: <a href="https://twitter.com/CPCharity/">@CPCharity</a>
+                        Facebook: ChildsPlayCharity 
+                        Twitter: @CPCharity
                     </p>
                 </Col>
             </Row>

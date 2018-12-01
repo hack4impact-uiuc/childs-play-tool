@@ -40,7 +40,7 @@ class LandingPage extends Component {
             </div>
         </div>
         <div className="line"></div>
-
+        
         <Container id="HowToUse" className="separator">
         <h3 className="homeText2L">
             How to Use
@@ -61,7 +61,6 @@ class LandingPage extends Component {
                 </Col>
             </Row>
         </Container>
-        <div className="line"></div>
 
         <Container id="Contacts" className="separator">
             <Row>

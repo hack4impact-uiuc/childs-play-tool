@@ -20,6 +20,7 @@ class LandingPage extends Component {
             <li><a href="#Contact" className="rest">Contacts</a></li>
             <li><a href="#HowToUse" className="rest">How to Use</a></li>
             <li><a href="/search" className="rest">Search</a></li>
+
         </ul>
 
         <div className="part1">
@@ -30,18 +31,18 @@ class LandingPage extends Component {
             The purpose of this guide is to recommend therapeutic video games for children based on their symptoms. 
             The games recommended in this guide were curated by researchers at EEDAR, a market-leading video game research firm.
             </p>
+            <div className="blocks">
             <Button href="/search">
                 Search Games
             </Button>
+            </div>
             <div>
                 <a href="http://childsplaycharity.org/assets/downloads/booklet.pdf"> Click here for English pdf Guide</a> 
                 <br></br>
                 <a href="http://childsplaycharity.org/assets/downloads/booklet.pdf"> Click here for Spanish pdf Guide</a>
             </div>
         </div>
-        <div className="line"></div>
-
-        <Container id="HowToUse" className="separator">
+        <Container id="HowToUse" className="seperator">
         <h3 className="homeText2L">
             How to Use
         </h3>
@@ -61,7 +62,6 @@ class LandingPage extends Component {
                 </Col>
             </Row>
         </Container>
-        <div className="line"></div>
 
         <Container id="Contacts" className="separator">
             <Row>
