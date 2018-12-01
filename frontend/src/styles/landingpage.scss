@@ -79,7 +79,8 @@ li a:hover {
 }
 
 p {
-    padding: 2%;
+    padding-left: 2%;
+    padding-right: 2%;
 }
 
 .subtitles{
@@ -90,4 +91,8 @@ p {
     margin-right: auto;
     min-width: 225px;
     font-family: 'Poppins', sans-serif;
+}
+
+.mspace{
+    margin-bottom: 10%;
 }
