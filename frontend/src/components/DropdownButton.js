@@ -16,8 +16,7 @@ import {
 } from '@fortawesome/free-brands-svg-icons'
 
 const mapStateToProps = state => ({
-  savedSearches: state.results.searches,
-  results: state.results.games
+  savedSearches: state.results.searches
 })
 
 const mapDispatchToProps = dispatch => {
