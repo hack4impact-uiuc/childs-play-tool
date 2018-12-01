@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import { Redirect } from 'react-router'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { DropdownButton, SearchBarCustom } from './'
@@ -34,7 +35,8 @@ class SearchPage extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      modal: false
+      modal: false,
+      redirect: false
     }
   }
 
@@ -44,7 +46,20 @@ class SearchPage extends Component {
     })
   }
 
+  handleSubmit = () => {
+    getGamesByName(this.props.nameSearchField).then(results =>
+      this.props.updateResults({
+        games: results,
+        query: { search: this.props.nameSearchField }
+      })
+    )
+    this.setState({ redirect: true })
+  }
+
   render() {
+    if (this.state.redirect) {
+      return <Redirect push to="./Results" />
+    }
     return (
       <div className="background">
         <link
@@ -57,9 +72,9 @@ class SearchPage extends Component {
           Therapeutic Video Game Guide
         </h3>
         <div className="searchPage">
-          <Label for="nameSearch">Search By Name</Label> <br/>
+          <Label for="nameSearch">Search By Name</Label> <br />
           <div className="nameSearch">
-            <SearchBarCustom fieldName="nameSearchField" />
+            <SearchBarCustom fieldName="nameSearchField" onSubmit={this.handleSubmit} />
           </div>
           <div className="nameSearch">
             <Link to={{ pathname: './Results' }}>
