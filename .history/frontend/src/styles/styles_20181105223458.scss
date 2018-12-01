@@ -1,0 +1,209 @@
+
+.cardStyle {
+  color: black;
+  font-family: Arial;
+  border: 2px solid #00cc99;
+  margin: 0.5%;
+  padding: 2%;
+  display: inline-table;
+  height: 300px;
+  width: 300px;
+  text-align: center;
+}
+.cardStyleHover {
+  color: black;
+  font-family: Arial;
+  border: 2px solid #00cc99;
+  margin: 0.5%;
+  padding: 2%;
+  display: inline-table;
+  height: 300px;
+  width: 300px;
+  background: #d8ddd8;
+  text-align: center;
+}
+.cardName {
+  font-size: 30px;
+  text-align: center;
+}
+.tag_age_12under {
+  margin-top: 2%;
+  background: #9fc972;
+  color: white;
+  width: 160px;
+}
+
+.tags{
+  margin: 12%;
+}
+
+.tag_age_13over {
+  margin-top: 2%;
+  background: #4b563a;
+  color: white;
+  width: 160px;
+}
+.tag_symptom_pain {
+  background: #eb9ea1;
+  color: white;
+  width: 160px;
+}
+.tag_symptom_bored_short {
+  background: #f3d26a;
+  color: white;
+  width: 160px;
+}
+.tag_symptom_bored_long {
+  background: #c2bfde;
+  color: white;
+  width: 160px;
+}
+.tag_symptom_anxiety {
+  background: #a1d6ee;
+  color: white;
+  width: 160px;
+}
+.tag_symptom_sadness {
+  background: #fab169;
+  color: white;
+  width: 160px;
+}
+.tag_symptom_cognitive {
+  background: #ccd7c2;
+  color: white;
+  width: 160px;
+}
+.right {
+  margin: 5%;
+  margin-top: 0%;
+  margin-bottom: 2%;
+  color: green;
+  background: white;
+}
+
+.search {
+  margin: 5%;
+  margin-bottom: 1%;
+}
+
+.dropdown {
+  margin: 5%;
+  margin-bottom: 1%;
+  margin-top: 1%;
+}
+
+.searchButton {
+  margin: 5%;
+  margin-bottom: 5%;
+  margin-top: 1%;
+  color: green;
+  background: white;
+  border: 1px;
+  border-style: solid;
+  border-color: black;
+}
+
+.homeButton {
+  color: cornflowerblue;
+  background: white;
+  margin: 0.5%;
+  border: 1px;
+  border-style: solid;
+  border-color: black;
+}
+.adminButton {
+  color: cornflowerblue;
+  background: white;
+  border: 1px;
+  border-style: solid;
+  border-color: black;
+}
+
+.loginLink{
+  margin: 5%;
+}
+
+.passwordPage{
+  padding: 10%;
+  padding-left: 20%;
+  padding-right: 20%;
+  text-align: center;
+  background: white;
+  border: 2px solid #73AD21;
+  border-radius: 25px;
+}
+
+.passwordPageBackground{
+  padding: 30%;  
+  text-align: center;
+  margin: 0%;
+  background: url("childs_play_light.png");
+  height: 100%; 
+  background-size: cover;
+  background-position: center;
+}
+
+.passwordEnter{
+  display: inline;
+  padding: 5%;
+  margin-bottom: 5%;
+}
+
+.inputKey{
+  width: 70%;
+  margin-right: 0%;
+  margin-left: 0%;
+}
+
+.droppedBox{
+  margin-top: 10%;
+  text-align: center;
+
+}
+
+.dropZone{
+  margin-left: 39%;
+  margin-top: 3%;
+  margin-bottom: 3%;
+}
+
+.dropBox{
+  position: relative;
+  width: 300px;
+  height: 300px;
+  border-width: 2px;
+  border-color: rgb(102, 102, 102);
+  border-style: dashed;
+  border-radius: 5px;
+}
+.dropdownButton {
+  color: cornflowerblue;
+  background: white;
+  border: 1px;
+  border-style: solid;
+  border-color: black;
+}
+
+.loginLink {
+  margin: 5%;
+}
+
+.homePage {
+  opacity: 1;
+}
+
+.homeText{
+  padding: 5%;
+}
+
+.background {
+  margin: 0%;
+  background: url("childs_play_light.png");
+  height: 100%; 
+  background-size: cover;
+  background-position: center;
+}
+
+.centered{
+  text-align: center;
+}
