@@ -27,7 +27,7 @@ manager.add_command("db", MigrateCommand)
 
 @manager.command
 def runserver():
-    app.run(debug=True, host="0.0.0.0", port=8080)
+    app.run(debug=True, host="0.0.0.0", port=8080, threaded=True)
 
 
 @manager.command
@@ -52,6 +52,7 @@ def recreate_db():
         game["description"] = game_descriptions[i]
         game["image"] = game_images[i]
         game["thumbnail"] = game_thumbnails[i]
+        game["current"] = True
         g = Game(game)
         db.session.add(g)
     db.session.commit()
