@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 import { DropdownButton, SearchBarCustom } from './'
 import { updateField } from '../redux/modules/searchpage'
 import { updateResults, getSavedSearch } from '../redux/modules/results'
-import { Button } from 'reactstrap'
+import { Button, Label } from 'reactstrap'
 import { getGames, getGamesByName } from '../utils/ApiWrapper'
 // import '../styles/styles.scss'
 import '../styles/searchpage.scss'
@@ -44,6 +44,7 @@ class SearchPage extends Component {
           Therapeutic Video Game Guide
         </h3>
         <div className="searchPage">
+          <Label for="nameSearch">Search By Name</Label> <br/>
           <div className="nameSearch">
             <SearchBarCustom fieldName="nameSearchField" />
           </div>
