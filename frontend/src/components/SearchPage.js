@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 import { DropdownButton, SearchBarCustom } from './'
 import { updateField } from '../redux/modules/searchpage'
 import { updateResults, getSavedSearch } from '../redux/modules/results'
-import { Button } from 'reactstrap'
+import { Button, Label, Modal, ModalBody, ModalFooter } from 'reactstrap'
 import { getGames, getGamesByName } from '../utils/ApiWrapper'
 // import '../styles/styles.scss'
 import '../styles/searchpage.scss'
@@ -31,6 +31,19 @@ const mapDispatchToProps = dispatch => {
   )
 }
 class SearchPage extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      modal: false
+    }
+  }
+
+  toggle = () => {
+    this.setState({
+      modal: !this.state.modal
+    })
+  }
+
   render() {
     return (
       <div className="background">
@@ -44,6 +57,7 @@ class SearchPage extends Component {
           Therapeutic Video Game Guide
         </h3>
         <div className="searchPage">
+          <Label for="nameSearch">Search By Name</Label> <br/>
           <div className="nameSearch">
             <SearchBarCustom fieldName="nameSearchField" />
           </div>
@@ -80,31 +94,48 @@ class SearchPage extends Component {
             <DropdownButton title="Character Gender" fieldName="genders" />
           </div>
           <br />
-          <Link to={{ pathname: './Results' }}>
+          <Link
+            to={
+              this.props.age != 'Age*' && this.props.symptom != 'Symptom*'
+                ? { pathname: './Results' }
+                : ''
+            }
+          >
             <Button
               className="searchButton"
               color="blue"
-              onClick={e =>
-                getGames(
-                  this.props.age,
-                  this.props.symptom,
-                  this.props.system,
-                  this.props.gender
-                ).then(results =>
-                  this.props.updateResults({
-                    games: results,
-                    query: {
-                      age: this.props.age,
-                      symptom: this.props.symptom,
-                      gender: this.props.gender
-                    }
-                  })
-                )
+              onClick={
+                this.props.age != 'Age*' && this.props.symptom != 'Symptom*'
+                  ? e =>
+                      getGames(
+                        this.props.age,
+                        this.props.symptom,
+                        this.props.system,
+                        this.props.gender
+                      ).then(results =>
+                        this.props.updateResults({
+                          games: results,
+                          query: {
+                            age: this.props.age,
+                            symptom: this.props.symptom,
+                            gender: this.props.gender
+                          }
+                        })
+                      )
+                  : this.toggle
               }
             >
               Search
             </Button>
           </Link>
+          <Modal isOpen={this.state.modal} toggle={this.toggle}>
+            <ModalBody>Invalid Search! Age and Symptom are required fields.</ModalBody>
+            <ModalFooter>
+              <Button className="invalidSearchButton" onClick={this.toggle}>
+                Return
+              </Button>
+            </ModalFooter>
+          </Modal>
           <br />
           <div className="tinyText">* = required field</div>
           <hr />
