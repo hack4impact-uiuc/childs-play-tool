@@ -41,7 +41,14 @@ class Card extends Component {
               : null}
           </tr>
           <tr className="cardRight">
-            <img className="imageCard" src={this.props.game.image} />
+            <img
+              className="imageCard"
+              src={
+                this.props.game.image == ''
+                  ? require('../styles/placeholderimage.png')
+                  : this.props.game.image
+              }
+            />
           </tr>
         </table>
         <br />
