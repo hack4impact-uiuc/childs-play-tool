@@ -9,9 +9,11 @@ class Card extends Component {
     this.state = {
       hover: 'cardStyle',
       description:
-        this.props.game.description && this.props.game.description.length > 100
-          ? this.props.game.description.substring(0, 99) + '...'
-          : this.props.game.description
+        !this.props.game.description || this.props.game.description.length == 0
+          ? 'No description found.'
+          : this.props.game.description && this.props.game.description.length > 100
+            ? this.props.game.description.substring(0, 99) + '...'
+            : this.props.game.description
     }
   }
   render() {
