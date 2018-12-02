@@ -169,6 +169,7 @@ class Results extends Component {
                         results: this.props.results
                       }
                       this.props.saveSearch(this.state.saveName, resultsAndQuery)
+                      this.toggleModal()
                     }}
                   >
                     Save Search
@@ -188,7 +189,7 @@ class Results extends Component {
           ) : (
             <div>No matching results :(</div>
           )}
-          <Link to={{ pathname: './' }}>
+          <Link to={{ pathname: './search' }}>
             <Button className="homeButton">
               <FontAwesomeIcon icon={faHome} /> Go Home
             </Button>
