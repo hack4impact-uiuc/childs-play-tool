@@ -183,6 +183,7 @@ class Results extends Component {
                     className="resultButtons"
                     onClick={() => {
                       this.saveSearch(this.state.saveName, this.props.results)
+                      this.toggleModal()
                     }}
                   >
                     Save Search
