@@ -74,7 +74,6 @@ class Results extends Component {
   determineConsoles = results => {
     let ret = []
     Object.getOwnPropertyNames(results).map(x => (results[x].length > 0 ? ret.push(x) : null))
-    console.log(ret)
     return ret
   }
   saveSearch = (name, res) => {
@@ -124,6 +123,9 @@ class Results extends Component {
               <div className="cardBox">
                 <div align="right">
                   <DropdownButton
+                    title={
+                      this.determineConsoles(this.props.results)[parseInt(this.props.activeTab) - 1]
+                    }
                     items={this.determineConsoles(this.props.results)}
                     updateTabConsole={this.updateTab}
                   />
