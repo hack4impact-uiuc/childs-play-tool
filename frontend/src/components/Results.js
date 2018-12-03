@@ -38,6 +38,7 @@ import {
   faAndroid
 } from '@fortawesome/free-brands-svg-icons'
 import { runInThisContext } from 'vm'
+import { updateTab } from '../redux/modules/results'
 
 const mapStateToProps = state => ({
   results: state.results.games,
@@ -46,13 +47,15 @@ const mapStateToProps = state => ({
   age: state.results.query.age,
   symptom: state.results.query.symptom,
   gender: state.results.query.gender,
-  search: state.results.query.search
+  search: state.results.query.search,
+  activeTab: state.results.activeTab
 })
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      saveSearch
+      saveSearch,
+      updateTab
     },
     dispatch
   )
@@ -62,7 +65,7 @@ class Results extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      activeTab: '1',
+      activeTab: this.props.activeTab,
       saveName: '',
       modal: false
     }
@@ -71,6 +74,7 @@ class Results extends Component {
   determineConsoles = results => {
     let ret = []
     Object.getOwnPropertyNames(results).map(x => (results[x].length > 0 ? ret.push(x) : null))
+    console.log(ret)
     return ret
   }
   saveSearch = (name, res) => {
@@ -81,10 +85,8 @@ class Results extends Component {
     this.setState({ modal: !this.state.modal })
   }
   updateTab = tab => {
-    if (this.state.activeTab !== tab) {
-      this.setState({
-        activeTab: tab
-      })
+    if (this.props.activeTab !== tab) {
+      this.props.updateTab({ activeTab: tab })
     }
   }
   buildCards = games =>
@@ -122,12 +124,11 @@ class Results extends Component {
               <div className="cardBox">
                 <div align="right">
                   <DropdownButton
-                    title={this.determineConsoles(this.props.results)[0]}
                     items={this.determineConsoles(this.props.results)}
                     updateTabConsole={this.updateTab}
                   />
                 </div>
-                <TabContent activeTab={this.state.activeTab}>
+                <TabContent activeTab={this.props.activeTab}>
                   {this.determineConsoles(this.props.results).map((x, index) => (
                     <TabPane tabId={(index + 1).toString()}>
                       <Col>{this.buildCards(this.props.results[x])}</Col>
