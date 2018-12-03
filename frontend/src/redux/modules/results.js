@@ -7,8 +7,8 @@ const UPDATE_TAB = 'results/UPDATE_TAB'
 export const resultsState = {
   searches: [],
   games: {},
-  query: {}
-  //activeTab: '1'
+  query: {},
+  activeTab: '1'
 }
 
 export default function reducer(state = resultsState, action) {
