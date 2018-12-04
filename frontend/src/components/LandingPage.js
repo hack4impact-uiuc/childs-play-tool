@@ -14,6 +14,11 @@ class LandingPage extends Component {
           href="https://fonts.googleapis.com/css?family=Poppins|Source+Sans+Pro"
           rel="stylesheet"
         />
+        <img className="cleared2"
+              src={require('../styles/cplogogreen.png')}
+              alt="Child's Play logo"
+              height="200px"
+            />
         <h3 className="homeTextL">Welcome!</h3>
         <h3 className="subtitles">Therapeutic Video Game Guide</h3>
         <p className="padded">
