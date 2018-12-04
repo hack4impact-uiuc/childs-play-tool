@@ -39,13 +39,13 @@ class LandingPage extends Component {
           <h3 className="homeText2L">How to Use</h3>
           <Row className="mspace imageCentered">
               <p>
-                Searching for game recommendations by name will simply return ALL games that contain the given name. 
+                Searching for game recommendations by name will return all games that contain the given name. 
                 Type the name into the following input field:
               </p>
               <img
                 src={require('../styles/searchbyname.png')}
                 alt="Search by name field"
-                height="110px"
+                height="60px"
                />
           </Row>
           <Row>
