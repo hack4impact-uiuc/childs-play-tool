@@ -15,10 +15,11 @@ class LandingPage extends Component {
           rel="stylesheet"
         />
         <h3 className="homeTextL">Child&#39;s Play Therapeutic Video Game Guide</h3>
-        <p>
-          The purpose of this guide is to recommend therapeutic video games for children based on
-          their symptoms. The games recommended in this guide were curated by researchers at EEDAR,
-          a market-leading video game research firm.
+        <p className="padded">
+          This guide was designed as a quick reference to help caretakers quickly select games for
+their patients. Caretakers can reference the category that best fits the symptoms of the
+patient and select one of the games listed. The games recommended in this guide were curated by researchers at EEDAR,
+          a market-leading video game research firm. 
         </p>
         <Button href="/search">Search Games</Button>
         <div>
@@ -120,7 +121,7 @@ class LandingPage extends Component {
           <Row>
             <Col>
               <h3> About Child&#39;s Play</h3>
-              <img src={require('../styles/cp-logo.png')} alt="Child's Play logo" height="100px" />
+              <img className="cleared" src={require('../styles/cp-logo.png')} alt="Child's Play logo" height="100px" />
               <p>
                 Child&#39;s Play is a game industry charity dedicated to improving the lives of
                 children with toys and games in a network of over 150 hospitals worldwide.
