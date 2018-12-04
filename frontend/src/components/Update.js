@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import { Redirect } from 'react-router-dom'
 import Dropzone from 'react-dropzone'
-import '../styles/styles.scss'
+import '../styles/update.scss'
 import { Button } from 'reactstrap'
 import { sendFile } from '../utils/ApiWrapper'
 

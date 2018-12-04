@@ -34,6 +34,19 @@ export const getGames = (age, symptom, system, gender) => {
     })
 }
 
+export const getAllGames = () => {
+  let requestString = BACKEND_URL + '/games/all?key=' + BACKEND_KEY
+  return axios
+    .get(requestString)
+    .then(response => {
+      return response.data.result.games
+    })
+    .catch(error => {
+      console.log('ERROR: ', error)
+      return null
+    })
+}
+
 export const sendFile = file => {
   let data = new FormData()
   data.append('file', file)
@@ -41,6 +54,28 @@ export const sendFile = file => {
 
   return axios
     .post(BACKEND_URL + '/games', data)
+    .then(response => {
+      return {
+        type: 'UPLOAD_FILE_SUCCESS',
+        response
+      }
+    })
+    .catch(error => {
+      return {
+        type: 'UPLOAD_FILE_FAIL',
+        error
+      }
+    })
+}
+
+export const editGame = (gameId, description, image) => {
+  let data = new FormData()
+  data.set('key', BACKEND_KEY)
+  data.append('description', description)
+  data.append('image', image)
+  let requestString = BACKEND_URL + '/games/' + gameId
+  return axios
+    .put(requestString, data)
     .then(response => {
       return {
         type: 'UPLOAD_FILE_SUCCESS',
