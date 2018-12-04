@@ -7,7 +7,6 @@ import { updateField } from '../redux/modules/searchpage'
 import { updateResults, getSavedSearch } from '../redux/modules/results'
 import { Button, Label, Modal, ModalBody, ModalFooter } from 'reactstrap'
 import { getGames, getGamesByName } from '../utils/ApiWrapper'
-// import '../styles/styles.scss'
 import '../styles/searchpage.scss'
 
 const mapStateToProps = state => ({
@@ -97,7 +96,7 @@ class SearchPage extends Component {
           <Link
             to={
               this.props.age != 'Age*' && this.props.symptom != 'Symptom*'
-                ? { pathname: './Results' }
+                ? { pathname: './results' }
                 : ''
             }
           >
