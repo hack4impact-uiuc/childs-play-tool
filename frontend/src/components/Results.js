@@ -125,6 +125,7 @@ class Results extends Component {
   render() {
     return (
       <div className="results-background">
+        <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" />
         <div className="resultsBox">
           <h3 className="resultsText">Results found:</h3>
           <div align="center">
