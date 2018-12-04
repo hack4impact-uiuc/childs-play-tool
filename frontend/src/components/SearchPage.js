@@ -53,7 +53,6 @@ class SearchPage extends Component {
         query: { search: this.props.nameSearchField }
       })
     )
-    this.setState({ redirect: true })
   }
 
   render() {
@@ -74,21 +73,17 @@ class SearchPage extends Component {
         <div className="searchPage">
           <Label for="nameSearch">Search By Name</Label> <br />
           <div className="nameSearch">
-            <SearchBarCustom fieldName="nameSearchField" onSubmit={this.handleSubmit} />
+            <SearchBarCustom
+              fieldName="nameSearchField"
+              onSubmit={() => {
+                this.handleSubmit()
+                this.setState({ redirect: true })
+              }}
+            />
           </div>
           <div className="nameSearch">
             <Link to={{ pathname: './Results' }}>
-              <Button
-                className="right"
-                onClick={e =>
-                  getGamesByName(this.props.nameSearchField).then(results =>
-                    this.props.updateResults({
-                      games: results,
-                      query: { search: this.props.nameSearchField }
-                    })
-                  )
-                }
-              >
+              <Button className="right" onClick={this.handleSubmit}>
                 Search
               </Button>
             </Link>
