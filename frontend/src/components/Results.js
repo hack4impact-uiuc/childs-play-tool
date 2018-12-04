@@ -99,8 +99,12 @@ class Results extends Component {
   render() {
     return (
       <div className="results-background">
+      <link
+          href="https://fonts.googleapis.com/css?family=Poppins|Source+Sans+Pro"
+          rel="stylesheet"
+        />
         <div className="resultsBox">
-          <h3 className="resultsText">Results found:</h3>
+          <div className="resultsText">Results found:</div>
           <div align="center">
             {this.props.age && this.props.age != 'Age*' ? (
               <Tag type={'age'} tag={this.props.age} />
@@ -119,14 +123,26 @@ class Results extends Component {
           </div>
           {this.props.results ? (
             <div>
-              <div className="cardBox">
-                <div align="right">
+              <div>
+                <div style={{float: 'right'}}>
                   <DropdownButton
                     title={this.determineConsoles(this.props.results)[0]}
                     items={this.determineConsoles(this.props.results)}
                     updateTabConsole={this.updateTab}
                   />
                 </div>
+                <div style={{float: 'left'}}>
+                  <Link to={{ pathname: './search' }}>
+                    <Button className="homeButton">
+                      <FontAwesomeIcon icon={faHome} /> Go Home
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+              <br/>
+              <br/>
+              <hr style={{clear: 'both'}}/>
+              <div>
                 <TabContent activeTab={this.state.activeTab}>
                   {this.determineConsoles(this.props.results).map((x, index) => (
                     <TabPane tabId={(index + 1).toString()}>
