@@ -37,7 +37,9 @@ class DropdownButton extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      consoleSelectedVal: this.props.items ? this.props.items[0] : '',
+      consoleSelectedVal: this.props.items
+        ? this.props.items[parseInt(this.props.activeTab) - 1]
+        : '',
       selectedVal: this.props.title,
       dropdownOpen: false
     }
