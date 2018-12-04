@@ -14,7 +14,10 @@ const titleStyle = {
   fontSize: '30px'
 }
 
-const mapStateToProps = state => ({})
+const mapStateToProps = state => ({
+  auth: state.auth.authenticated,
+  currentConsole: state.results.currentConsole
+})
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
@@ -38,6 +41,8 @@ class Description extends Component {
   render() {
     let descriptionRender
     let imageRender
+    let editButton
+    let saveButton
     if (this.state.editing) {
       descriptionRender = (
         <div
@@ -83,6 +88,47 @@ class Description extends Component {
       )
     }
 
+    if (this.props.auth) {
+      editButton = (
+        <Button
+          className="editing-button"
+          color="info"
+          disabled={this.state.editing}
+          onClick={() => {
+            this.setState({ editing: true })
+          }}
+        >
+          Edit
+        </Button>
+      )
+      saveButton = (
+        <Button
+          className="editing-button"
+          color="info"
+          disabled={!this.state.editing}
+          onClick={() => {
+            this.setState({ editing: false })
+            this.props.editGameState(
+              this.props.currentConsole,
+              this.props.location.state.game.id,
+              this.state.updateDescription,
+              this.state.imageUploadURL
+            )
+            editGame(
+              this.props.location.state.game.id,
+              this.state.updateDescription,
+              this.state.imageUploadURL
+            )
+          }}
+        >
+          Save
+        </Button>
+      )
+    } else {
+      editButton = null
+      saveButton = null
+    }
+
     return (
       <div>
         <div className="description-background">
@@ -115,40 +161,10 @@ class Description extends Component {
             </div>
             <br />
             <br />
-            <Button
-              className="editing-button"
-              color="info"
-              disabled={this.state.editing}
-              onClick={() => {
-                this.setState({ editing: true })
-              }}
-            >
-              Edit
-            </Button>
-            <Button
-              className="editing-button"
-              color="info"
-              disabled={!this.state.editing}
-              onClick={() => {
-                this.setState({ editing: false })
 
-                this.props.editGameState(
-                  'PlayStation Vita',
-                  this.props.location.state.game.id,
-                  this.state.updateDescription,
-                  this.state.imageUploadURL
-                )
+            {editButton}
+            {saveButton}
 
-                editGame(
-                  this.props.location.state.game.id,
-                  this.state.updateDescription,
-                  this.state.imageUploadURL
-                )
-              }}
-            >
-              Save
-            </Button>
-            <br />
             <Link to={{ pathname: './results' }}>
               <Button outline color="success">
                 Return to results

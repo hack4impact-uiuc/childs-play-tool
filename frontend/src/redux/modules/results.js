@@ -40,7 +40,10 @@ export default function reducer(state = resultsState, action) {
       return {
         ...state,
         games: state.searches.find(({ value }) => value === action.value).searchResults.results,
-        query: state.searches.find(({ value }) => value === action.value).searchResults.query
+        query: state.searches.find(({ value }) => value === action.value).searchResults.query,
+        currentConsole: Object.keys(
+          state.searches.find(({ value }) => value === action.value).searchResults.results
+        )[0]
       }
 
     case EDIT_GAME_STATE:

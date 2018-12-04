@@ -49,12 +49,13 @@ class SearchPage extends Component {
   }
 
   handleSubmit = () => {
-    getGamesByName(this.props.nameSearchField).then(results =>
+    getGamesByName(this.props.nameSearchField).then(results => {
       this.props.updateResults({
         games: results,
         query: { search: this.props.nameSearchField }
       })
-    )
+      this.props.updateConsole(Object.keys(results)[0])
+    })
   }
 
   render() {
