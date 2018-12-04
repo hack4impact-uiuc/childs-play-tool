@@ -70,6 +70,7 @@ class SearchPage extends Component {
           <br />
           Therapeutic Video Game Guide
         </h3>
+        <hr />
         <div className="searchPage">
           <Label for="nameSearch">Search By Name</Label> <br />
           <div className="nameSearch">

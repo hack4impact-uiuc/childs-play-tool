@@ -1,3 +1,4 @@
+$color-background: white;
 
 .homeTextL{
     font-size: 175%;
@@ -23,6 +24,7 @@
 
   .backgroundL {
     text-align: center;
+    background-color: $color-background;
     font-family: 'Cabin', sans-serif;
 }
 

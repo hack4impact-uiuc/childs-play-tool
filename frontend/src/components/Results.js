@@ -151,8 +151,8 @@ class Results extends Component {
           </div>
           {this.props.results ? (
             <div>
-              <div className="cardBox">
-                <div align="right">
+              <div>
+                <div style={{ float: 'right' }}>
                   <DropdownButton
                     title={
                       this.determineConsoles(this.props.results)[parseInt(this.props.activeTab) - 1]
@@ -161,7 +161,19 @@ class Results extends Component {
                     updateTabConsole={this.updateTab}
                   />
                 </div>
-                <TabContent activeTab={this.props.activeTab}>
+                <div style={{ float: 'left' }}>
+                  <Link to={{ pathname: './search' }}>
+                    <Button className="homeButton">
+                      <FontAwesomeIcon icon={faHome} /> Search Again
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+              <br />
+              <br />
+              <hr style={{ clear: 'both' }} />
+              <div>
+                <TabContent activeTab={this.state.activeTab}>
                   {this.determineConsoles(this.props.results).map((x, index) => (
                     <TabPane tabId={(index + 1).toString()}>
                       <Col>{this.buildCards(this.props.results[x])}</Col>
