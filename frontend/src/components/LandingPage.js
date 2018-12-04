@@ -10,10 +10,7 @@ class LandingPage extends Component {
   render() {
     return (
       <div className="backgroundL">
-        <link
-          href="https://fonts.googleapis.com/css?family=Poppins|Source+Sans+Pro"
-          rel="stylesheet"
-        />
+        <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet"/>
         <h3 className="homeTextL">Child&#39;s Play Therapeutic Video Game Guide</h3>
         <p>
           The purpose of this guide is to recommend therapeutic video games for children based on
