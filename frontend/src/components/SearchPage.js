@@ -96,7 +96,7 @@ class SearchPage extends Component {
           <Link
             to={
               this.props.age != 'Age*' && this.props.symptom != 'Symptom*'
-                ? { pathname: './Results' }
+                ? { pathname: './results' }
                 : ''
             }
           >
