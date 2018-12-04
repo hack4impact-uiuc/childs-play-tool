@@ -44,9 +44,9 @@ class Card extends Component {
             <img
               className="imageCard"
               src={
-                this.props.game.thumbnail == ''
+                this.props.game.image == ''
                   ? require('../styles/placeholderimage.png')
-                  : this.props.game.thumbnail
+                  : this.props.game.image
               }
             />
           </tr>

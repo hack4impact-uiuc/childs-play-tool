@@ -17,9 +17,9 @@ class Description extends Component {
           <img
             className="image"
             src={
-              this.props.location.state.game.thumbnail == ''
+              this.props.location.state.game.image == ''
                 ? require('../styles/placeholderimage.png')
-                : this.props.location.state.game.thumbnail
+                : this.props.location.state.game.image
             }
           />
           <br />
