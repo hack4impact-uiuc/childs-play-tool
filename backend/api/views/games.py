@@ -15,6 +15,7 @@ GLOBAL_POST_URL = "/"
 GAMES_URL = "/games"
 GAMES_ID_URL = "/games/<int:game_id>"
 GAMES_ALL_URL = "/games/all"
+GAMES_INCOMPLETE_URL = "/games/incomplete"
 
 SYMPTOM_NUMBER = 6
 AGE_NUMBER = 2
@@ -433,3 +434,19 @@ def edit_game(game_id):
     return create_response(
         data={"game": get_game_dict(game)}, message="Game successfully edited"
     )
+
+
+@games_page.route(GAMES_INCOMPLETE_URL, methods=["GET"])
+@Auth.authenticate
+def get_incomplete_games():
+    systems = {}
+    for system in Game.system.type.enums:
+        games_by_system = (
+            Game.query.filter(
+                Game.system == system and (Game.description == "" or Game.image == "")
+            )
+            .order_by(Game.name)
+            .all()
+        )
+        systems[system] = [get_game_dict(game) for game in games_by_system]
+    return create_response(status=200, data={"games": systems})
