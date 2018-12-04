@@ -15,16 +15,16 @@ class LandingPage extends Component {
           rel="stylesheet"
         />
         <h3 className="homeTextL">Welcome!</h3>
-        <h3 className="homeTextL2">Therapeutic Video Game Guide</h3>
+        <h3 className="subtitles">Therapeutic Video Game Guide</h3>
         <p className="padded">
           This guide was designed as a quick reference to help caretakers quickly select games for
           their patients. Caretakers can reference the category that best fits the symptoms of the
           patient and select one of the games listed. The games recommended in this guide were
           curated by researchers at EEDAR, a market-leading video game research firm.
         </p>
-        <Button className="buttonpad" href="/search">
-          Search Games
-        </Button>
+        <Link to="/search">
+          <Button className="buttonpad">Search Games</Button>
+        </Link>
         <div>
           <a href="http://childsplaycharity.org/assets/downloads/booklet.pdf">
             {' '}
