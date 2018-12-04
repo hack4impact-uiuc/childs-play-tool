@@ -21,7 +21,7 @@ class LandingPage extends Component {
           patient and select one of the games listed. The games recommended in this guide were
           curated by researchers at EEDAR, a market-leading video game research firm.
         </p>
-        <Button href="/search">Search Games</Button>
+        <Button className="buttonpad" href="/search">Search Games</Button>
         <div>
           <a href="http://childsplaycharity.org/assets/downloads/booklet.pdf">
             {' '}
@@ -38,7 +38,7 @@ class LandingPage extends Component {
         <Container id="HowToUse" className="separator">
           <h3 className="homeText2L">How to Use</h3>
           <Row className="mspace imageCentered">
-            <p>
+            <p className="padded">
               Searching for game recommendations by name will return all games that contain the
               given name. Type the name into the following input field:
             </p>
