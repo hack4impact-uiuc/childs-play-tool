@@ -29,7 +29,14 @@ import { saveSearch, updateConsole } from '../redux/modules/results'
 import { bindActionCreators } from 'redux'
 import Constants from '../utils/Constants.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGamepad, faVrCardboard, faSave, faHome } from '@fortawesome/free-solid-svg-icons'
+import {
+  faGamepad,
+  faVrCardboard,
+  faSave,
+  faHome,
+  faClipboard,
+  faClipboardCheck
+} from '@fortawesome/free-solid-svg-icons'
 import {
   faNintendoSwitch,
   faXbox,
@@ -38,6 +45,8 @@ import {
   faAndroid
 } from '@fortawesome/free-brands-svg-icons'
 import { runInThisContext } from 'vm'
+import { updateTab } from '../redux/modules/results'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 const mapStateToProps = state => ({
   results: state.results.games,
@@ -47,13 +56,14 @@ const mapStateToProps = state => ({
   symptom: state.results.query.symptom,
   gender: state.results.query.gender,
   search: state.results.query.search,
-  currentConsole: state.results.currentConsole
+  activeTab: state.results.activeTab
 })
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       saveSearch,
+      updateTab,
       updateConsole
     },
     dispatch
@@ -64,9 +74,10 @@ class Results extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      activeTab: '1',
+      activeTab: this.props.activeTab,
       saveName: '',
-      modal: false
+      modal: false,
+      copied: false
     }
     this.updateTab = this.updateTab
   }
@@ -84,10 +95,8 @@ class Results extends Component {
     this.setState({ modal: !this.state.modal })
   }
   updateTab = tab => {
-    if (this.state.activeTab !== tab) {
-      this.setState({
-        activeTab: tab
-      })
+    if (this.props.activeTab !== tab) {
+      this.props.updateTab({ activeTab: tab })
     }
   }
   buildCards = games =>
@@ -98,7 +107,22 @@ class Results extends Component {
           </Link>
         ))
       : null
-
+  resultsURL = (name, age, symptom, gender, system) => {
+    let url = window.location.protocol + '//' + window.location.hostname
+    if (url === 'http://localhost') url += ':3000'
+    url += '/resultsLink?'
+    if (name && name !== '') return url + 'name=' + name
+    else {
+      url = url + 'age=' + age + '&symptom=' + symptom
+      if (gender && gender !== 'No Discernable Gender' && gender !== 'Character Gender')
+        url = url + '&gender=' + gender
+      if (system && system !== '' && system !== 'Console Type') url = url + '&system=' + system
+      return url
+    }
+  }
+  toggleClipboard = () => {
+    this.setState({ copied: true })
+  }
   render() {
     return (
       <div className="results-background">
@@ -125,12 +149,14 @@ class Results extends Component {
               <div className="cardBox">
                 <div align="right">
                   <DropdownButton
-                    title={this.determineConsoles(this.props.results)[0]}
+                    title={
+                      this.determineConsoles(this.props.results)[parseInt(this.props.activeTab) - 1]
+                    }
                     items={this.determineConsoles(this.props.results)}
                     updateTabConsole={this.updateTab}
                   />
                 </div>
-                <TabContent activeTab={this.state.activeTab}>
+                <TabContent activeTab={this.props.activeTab}>
                   {this.determineConsoles(this.props.results).map((x, index) => (
                     <TabPane tabId={(index + 1).toString()}>
                       <Col>{this.buildCards(this.props.results[x])}</Col>
@@ -163,7 +189,7 @@ class Results extends Component {
                     className="resultButtons"
                     onClick={() => {
                       let resultsAndQuery = {
-                        query: {
+                          query: {
                           age: this.props.age,
                           system: this.props.consoles,
                           symptom: this.props.symptom,
@@ -172,10 +198,31 @@ class Results extends Component {
                         results: this.props.results
                       }
                       this.props.saveSearch(this.state.saveName, resultsAndQuery)
+                      this.toggleModal()
                     }}
                   >
                     Save Search
                   </Button>
+                  <br />
+                  <br />
+                  <CopyToClipboard
+                    text={this.resultsURL(
+                      this.props.search,
+                      this.props.age,
+                      this.props.symptom,
+                      this.props.gender,
+                      this.props.system
+                    )}
+                  >
+                    <Button className="resultButtons" onClick={this.toggleClipboard}>
+                      {this.state.copied ? (
+                        <FontAwesomeIcon icon={faClipboardCheck} />
+                      ) : (
+                        <FontAwesomeIcon icon={faClipboard} />
+                      )}{' '}
+                      Copy Search URL
+                    </Button>
+                  </CopyToClipboard>
                   <Modal isOpen={this.state.modal}>
                     <ModalBody>Search saved successfully!</ModalBody>
                     <ModalFooter>
@@ -191,7 +238,7 @@ class Results extends Component {
           ) : (
             <div>No matching results :(</div>
           )}
-          <Link to={{ pathname: './' }}>
+          <Link to={{ pathname: './search' }}>
             <Button className="homeButton">
               <FontAwesomeIcon icon={faHome} /> Go Home
             </Button>

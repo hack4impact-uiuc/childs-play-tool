@@ -4,12 +4,14 @@ const UPDATE_RESULTS = 'results/UPDATE_RESULTS'
 const GET_SAVED_SEARCH = 'results/GET_SAVED_SEARCH'
 const EDIT_GAME_STATE = 'results/EDIT_GAME_STATE'
 const UPDATE_CONSOLE = 'results/UPDATE_CONSOLE'
+const UPDATE_TAB = 'results/UPDATE_TAB'
 
 export const resultsState = {
   currentConsole: '',
   searches: [],
   games: {},
-  query: {}
+  query: {},
+  activeTab: '1'
 }
 
 export default function reducer(state = resultsState, action) {
@@ -23,7 +25,8 @@ export default function reducer(state = resultsState, action) {
       return {
         ...state,
         games: action.value.games,
-        query: action.value.query
+        query: action.value.query,
+        activeTab: '1'
       }
     case SAVE_SEARCH:
       return {
@@ -57,6 +60,10 @@ export default function reducer(state = resultsState, action) {
           )
         }
       }
+        case UPDATE_TAB:
+        return {
+          ...state,
+          activeTab: action.value.activeTab
     default:
       return state
   }
@@ -92,5 +99,9 @@ export const editGameState = (gameConsole, gameId, newDescription, newImageURL) 
 
 export const updateConsole = value => ({
   type: UPDATE_CONSOLE,
+  value
+})
+export const updateTab = value => ({
+  type: UPDATE_TAB,
   value
 })

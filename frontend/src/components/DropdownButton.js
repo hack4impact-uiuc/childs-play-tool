@@ -19,7 +19,8 @@ import {
 const mapStateToProps = state => ({
   savedSearches: state.results.searches,
   results: state.results.games,
-  currentConsole: state.results.currentConsole
+  currentConsole: state.results.currentConsole,
+  activeTab: state.results.activeTab
 })
 
 const mapDispatchToProps = dispatch => {
@@ -47,6 +48,8 @@ class DropdownButton extends Component {
   determineDropdownItems = fieldName => {
     if (fieldName === 'selectedSaveSearch') {
       return this.props.savedSearches
+    } else if (fieldName == 'consoleNames') {
+      return Object.keys(this.props.results)
     } else {
       return Constants[fieldName]
     }
@@ -79,19 +82,15 @@ class DropdownButton extends Component {
   }
 
   render() {
-    let dropdownTitle
-    if (this.state.consoleSelectedVal) {
-      dropdownTitle = this.state.consoleSelectedVal
-    } else if (this.props.items) {
-      dropdownTitle = this.props.items[0]
-    } else {
-      dropdownTitle = this.state.selectedVal
-    }
     return (
       <div>
         <Dropdown className="dropdown" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
           <DropdownToggle color="success" caret>
-            {dropdownTitle}
+            {this.state.consoleSelectedVal
+              ? this.state.consoleSelectedVal
+              : this.props.items
+                ? this.props.items[parseInt(this.props.activeTab) - 1]
+                : this.state.selectedVal}
           </DropdownToggle>
           <DropdownMenu right>
             {this.props.items
@@ -124,6 +123,19 @@ class DropdownButton extends Component {
                     </DropdownItem>
                   ))
                 : null}
+            {(this.props.title === 'Console Type' || this.props.title === 'Character Gender') && (
+              <>
+                <DropdownItem divider />
+                <DropdownItem
+                  onClick={e => {
+                    this.setState({ selectedVal: this.props.title })
+                    this.props.updateField(this.props.fieldName, this.props.title)
+                  }}
+                >
+                  None
+                </DropdownItem>
+              </>
+            )}
           </DropdownMenu>
         </Dropdown>
       </div>

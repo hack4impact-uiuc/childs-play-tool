@@ -71,7 +71,9 @@ class Description extends Component {
       )
     } else {
       descriptionRender = <div>{this.state.updateDescription}</div>
-      imageRender = <img className="image" src={this.state.imageUploadURL} />
+      imageRender = this.props.location.state.game.image == ''
+        ? require('../styles/placeholderimage.png')
+        : this.props.location.state.game.image
     }
 
     return (
