@@ -37,6 +37,17 @@ class LandingPage extends Component {
 
         <Container id="HowToUse" className="separator">
           <h3 className="homeText2L">How to Use</h3>
+          <Row className="mspace imageCentered">
+              <p>
+                Searching for game recommendations by name will simply return ALL games that contain the given name. 
+                Type the name into the following input field:
+              </p>
+              <img
+                src={require('../styles/searchbyname.png')}
+                alt="Search by name field"
+                height="110px"
+               />
+          </Row>
           <Row>
             <Col className="mspace">
               <p>
@@ -77,8 +88,8 @@ class LandingPage extends Component {
           <Row>
             <Col>
               <p>
-                You can save a search at the bottom of the game recommendation results page to save
-                game recommendations for offline viewing and to come back to them later.
+                After performing a search, there is the option to save its results at the bottom of the results page. 
+                Be sure to provide a descriptive name that will help you identify it for later viewing.
               </p>
               <img src={require('../styles/inputsave.png')} alt="Search page" height="140px" />
             </Col>
