@@ -95,21 +95,3 @@ class NavBar extends Component {
 }
 
 export default NavBar
-
-/*
-	return (
-      <div className="backgroundL">
-        <link
-          href="https://fonts.googleapis.com/css?family=Poppins|Source+Sans+Pro"
-          rel="stylesheet"
-        />
-        <ul>
-            <li><a href="/" className="cp" >Home</a></li>
-            <li><a href="/directorPage" className="rest">Admin</a></li>
-            <li><a href="/#Contacts" className="rest">Contact Us</a></li>
-            <li><a href="/#HowToUse" className="rest">How to Use</a></li>
-            <li><a href="/search" className="rest">Search</a></li>
-        </ul>
-      </div>
-    )
-*/
