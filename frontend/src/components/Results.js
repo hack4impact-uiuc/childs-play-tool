@@ -35,7 +35,8 @@ import {
   faSave,
   faHome,
   faClipboard,
-  faClipboardCheck
+  faClipboardCheck,
+  faSmile
 } from '@fortawesome/free-solid-svg-icons'
 import {
   faNintendoSwitch,
@@ -81,7 +82,8 @@ class Results extends Component {
       saveName: '',
       modal: false,
       copied: false,
-      incompleteGames: false
+      incompleteGamesView: false,
+      noIncompleteGames: false
     }
     this.updateTab = this.updateTab
   }
@@ -141,8 +143,11 @@ class Results extends Component {
         query: {}
       })
       this.props.updateConsole(Object.keys(results)[0])
+      this.setState({
+        incompleteGamesView: true,
+        noIncompleteGames: results.length == 0
+      })
     })
-    this.setState({ incompleteGames: true })
   }
 
   displayAllGames = () => {
@@ -152,8 +157,8 @@ class Results extends Component {
         query: {}
       })
       this.props.updateConsole(Object.keys(results)[0])
+      this.setState({ incompleteGamesView: false })
     })
-    this.setState({ incompleteGames: false })
   }
 
   render() {
@@ -162,7 +167,7 @@ class Results extends Component {
         <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" />
         <div className="resultsBox">
           {this.props.allGames ? (
-            this.state.incompleteGames ? (
+            this.state.incompleteGamesView ? (
               <h3 className="resultsText">Incomplete Games</h3>
             ) : (
               <h3 className="resultsText">All Games</h3>
@@ -189,24 +194,31 @@ class Results extends Component {
           {this.props.results ? (
             <div>
               <div>
-                <div style={{ float: 'right' }}>
-                  <DropdownButton
-                    title={
-                      this.determineConsoles(this.props.results)[parseInt(this.props.activeTab) - 1]
-                    }
-                    items={this.determineConsoles(this.props.results)}
-                    updateTabConsole={this.updateTab}
-                  />
-                </div>
+                {this.state.incompleteGamesView && this.state.noIncompleteGames ? null : (
+                  <div style={{ float: 'right' }}>
+                    <DropdownButton
+                      title={
+                        this.determineConsoles(this.props.results)[
+                          parseInt(this.props.activeTab) - 1
+                        ]
+                      }
+                      items={this.determineConsoles(this.props.results)}
+                      updateTabConsole={this.updateTab}
+                    />
+                  </div>
+                )}
                 <div style={{ float: 'left' }}>
                   {this.props.allGames ? (
                     this.props.authenticated ? (
-                      this.state.incompleteGames ? (
-                        <Button className="homeButton" onClick={this.displayAllGames}>
+                      this.state.incompleteGamesView ? (
+                        <Button className="allGamesButton" onClick={this.displayAllGames}>
                           <FontAwesomeIcon icon={faGamepad} /> See All Games
                         </Button>
                       ) : (
-                        <Button className="homeButton" onClick={this.displayIncompleteGames}>
+                        <Button
+                          className="incompleteGamesButton"
+                          onClick={this.displayIncompleteGames}
+                        >
                           <FontAwesomeIcon icon={faGamepad} /> See Incomplete Games
                         </Button>
                       )
@@ -232,6 +244,11 @@ class Results extends Component {
                   ))}
                 </TabContent>
               </div>
+              {this.state.incompleteGamesView && this.state.noIncompleteGames ? (
+                <h4 className="noIncompleteGamesText">
+                  No Incomplete Games <FontAwesomeIcon icon={faSmile} />
+                </h4>
+              ) : null}
               {this.props.allGames ? null : (
                 <div className="saveSearch">
                   <Form>
