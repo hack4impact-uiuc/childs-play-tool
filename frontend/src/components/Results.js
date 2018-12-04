@@ -173,7 +173,7 @@ class Results extends Component {
               <br />
               <hr style={{ clear: 'both' }} />
               <div>
-                <TabContent activeTab={this.state.activeTab}>
+                <TabContent activeTab={this.props.activeTab}>
                   {this.determineConsoles(this.props.results).map((x, index) => (
                     <TabPane tabId={(index + 1).toString()}>
                       <Col>{this.buildCards(this.props.results[x])}</Col>
