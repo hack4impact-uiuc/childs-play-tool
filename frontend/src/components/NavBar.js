@@ -17,7 +17,11 @@ import {
 } from 'reactstrap'
 
 import '../styles/landingpage.scss'
+import { getAllGames } from '../utils/ApiWrapper'
 
+const mapStateToProps = state => ({
+  results: state.results.games,
+})
 class NavBar extends Component {
   constructor(props) {
     super(props)
@@ -28,6 +32,15 @@ class NavBar extends Component {
     }
   }
 
+  loadAllGames = () => {
+    getAllGames().then(results =>
+      this.props.updateResults({
+        games: results,
+        query: {}
+      })
+    )
+  }
+
   toggleNavbar() {
     this.setState({
       collapsed: !this.state.collapsed
@@ -35,8 +48,7 @@ class NavBar extends Component {
   }
   render() {
     if (window.innerWidth >= 550) {
-      return (
-        <div>
+      return <div>
           <Navbar color="dark" expand>
             <NavbarBrand href="/">Home</NavbarBrand>
             <NavbarToggler onClick={this.toggleNavbar} />
@@ -54,18 +66,16 @@ class NavBar extends Component {
                 <NavItem>
                   <NavLink href="/search">Search</NavLink>
                 </NavItem>
+                <NavItem>
+                  <NavLink href="/results" onClick={this.loadAllGames}>All Games</NavLink>
+                </NavItem>
               </Nav>
             </Collapse>
           </Navbar>
         </div>
-      )
     } else {
-      return (
-        <div>
-          <link
-            href="https://fonts.googleapis.com/css?family=Poppins|Source+Sans+Pro"
-            rel="stylesheet"
-          />
+      return <div>
+          <link href="https://fonts.googleapis.com/css?family=Poppins|Source+Sans+Pro" rel="stylesheet" />
           <Navbar className="navbar-dark bg-dark">
             <Link to="/">
               <NavbarBrand>Home</NavbarBrand>
@@ -85,11 +95,13 @@ class NavBar extends Component {
                 <NavItem>
                   <NavLink href="/search">Search</NavLink>
                 </NavItem>
+                <NavItem>
+                  <NavLink href="/results" onClick={this.loadAllGames}>All Games</NavLink>
+                </NavItem>
               </Nav>
             </Collapse>
           </Navbar>
         </div>
-      )
     }
   }
 }

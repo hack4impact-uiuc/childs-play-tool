@@ -34,6 +34,19 @@ export const getGames = (age, symptom, system, gender) => {
     })
 }
 
+export const getAllGames = () => {
+  let requestString = BACKEND_URL + '/games/all?key=' + BACKEND_KEY
+  return axios
+    .get(requestString)
+    .then(response => {
+      return response.data.result.games
+    })
+    .catch(error => {
+      console.log('ERROR: ', error)
+      return null
+    })
+}
+
 export const sendFile = file => {
   let data = new FormData()
   data.append('file', file)
