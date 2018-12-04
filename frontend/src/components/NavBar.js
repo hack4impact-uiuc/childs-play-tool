@@ -22,13 +22,12 @@ class NavBar extends Component {
   constructor(props) {
     super(props)
 
-    this.toggleNavbar = this.toggleNavbar.bind(this)
     this.state = {
       collapsed: true
     }
   }
 
-  toggleNavbar() {
+  toggleNavbar = () => {
     this.setState({
       collapsed: !this.state.collapsed
     })
@@ -36,7 +35,8 @@ class NavBar extends Component {
   render() {
     if (window.innerWidth >= 550) {
       return (
-        <div>
+        <div className="font">
+          <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" />
           <Navbar color="dark" expand>
             <NavbarBrand href="/">Home</NavbarBrand>
             <NavbarToggler onClick={this.toggleNavbar} />
@@ -61,7 +61,7 @@ class NavBar extends Component {
       )
     } else {
       return (
-        <div>
+        <div className="font">
           <link
             href="https://fonts.googleapis.com/css?family=Poppins|Source+Sans+Pro"
             rel="stylesheet"
