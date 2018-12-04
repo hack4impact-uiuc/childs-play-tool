@@ -1,3 +1,4 @@
+$color-background: white;
 
 .homeTextL{
     font-size: 175%;
@@ -24,7 +25,9 @@
   .backgroundL {
     text-align: center;
     font-family: 'Poppins', sans-serif;
-    background-color:#bce8b4;
+    // background-color:#bce8b4;
+    background-color: $color-background;
+
 }
 
 ul {
