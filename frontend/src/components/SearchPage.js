@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import { Redirect } from 'react-router'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { DropdownButton, SearchBarCustom } from './'
@@ -33,7 +34,8 @@ class SearchPage extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      modal: false
+      modal: false,
+      redirect: false
     }
   }
 
@@ -43,7 +45,19 @@ class SearchPage extends Component {
     })
   }
 
+  handleSubmit = () => {
+    getGamesByName(this.props.nameSearchField).then(results =>
+      this.props.updateResults({
+        games: results,
+        query: { search: this.props.nameSearchField }
+      })
+    )
+  }
+
   render() {
+    if (this.state.redirect) {
+      return <Redirect push to="./Results" />
+    }
     return (
       <div className="background">
         <link
@@ -58,21 +72,17 @@ class SearchPage extends Component {
         <div className="searchPage">
           <Label for="nameSearch">Search By Name</Label> <br />
           <div className="nameSearch">
-            <SearchBarCustom fieldName="nameSearchField" />
+            <SearchBarCustom
+              fieldName="nameSearchField"
+              onSubmit={() => {
+                this.handleSubmit()
+                this.setState({ redirect: true })
+              }}
+            />
           </div>
           <div className="nameSearch">
             <Link to={{ pathname: './Results' }}>
-              <Button
-                className="right"
-                onClick={e =>
-                  getGamesByName(this.props.nameSearchField).then(results =>
-                    this.props.updateResults({
-                      games: results,
-                      query: { search: this.props.nameSearchField }
-                    })
-                  )
-                }
-              >
+              <Button className="right" onClick={this.handleSubmit}>
                 Search
               </Button>
             </Link>
@@ -155,10 +165,6 @@ class SearchPage extends Component {
               </Button>
             </Link>
           </div>
-          <hr />
-          <Link className="loginLink" to={{ pathname: './directorPage' }}>
-            <Button className="adminButton">Admin Login</Button>
-          </Link>
         </div>
       </div>
     )
