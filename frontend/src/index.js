@@ -12,7 +12,8 @@ import {
   Update,
   Results,
   Description,
-  LandingPage
+  LandingPage,
+  NavBar
 } from './components'
 import registerServiceWorker from './registerServiceWorker'
 import configureStore, { history } from './redux/configureStore'
@@ -25,6 +26,7 @@ ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <div className="heightDef">
+        <NavBar />
         <Route exact path="/" component={LandingPage} />
         <Route path="/search" component={SearchPage} />
         <Route path="/results" component={Results} />

@@ -10,17 +10,6 @@ class LandingPage extends Component {
   render() {
     return (
       <div className="backgroundL">
-        <link
-          href="https://fonts.googleapis.com/css?family=Poppins|Source+Sans+Pro"
-          rel="stylesheet"
-        />
-        <ul>
-            <li><a href="http://childsplaycharity.org" className="cp" >Child's Play</a></li>
-            <li><a href="/admin" className="rest">Admin</a></li>
-            <li><a href="#Contact" className="rest">Contacts</a></li>
-            <li><a href="#HowToUse" className="rest">How to Use</a></li>
-            <li><a href="/search" className="rest">Search</a></li>
-        </ul>
 
         <div className="part1">
             <h3 className="homeTextL">
