@@ -14,7 +14,14 @@ class Description extends Component {
       <div>
         <div className="description-background">
           <div className="description-cardName">{this.props.location.state.game.name}</div>
-          <img className="image" src={this.props.location.state.game.image} />
+          <img
+            className="image"
+            src={
+              this.props.location.state.game.image == ''
+                ? require('../styles/placeholderimage.png')
+                : this.props.location.state.game.image
+            }
+          />
           <br />
           <br />
           {this.props.location.state.game.description}
