@@ -126,6 +126,7 @@ class Results extends Component {
   render() {
     return (
       <div className="results-background">
+        <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" />
         <div className="resultsBox">
           {this.props.allGames ? (
             <h3 className="resultsText">All Games</h3>
@@ -247,7 +248,7 @@ class Results extends Component {
           {this.props.allGames ? null : (
             <Link to={{ pathname: './search' }}>
               <Button className="homeButton">
-                <FontAwesomeIcon icon={faHome} /> Go Home
+                <FontAwesomeIcon icon={faHome} /> Search Again
               </Button>
             </Link>
           )}
