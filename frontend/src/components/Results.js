@@ -194,7 +194,7 @@ class Results extends Component {
           {this.props.results ? (
             <div>
               <div>
-                {this.state.incompleteGamesView && this.state.noIncompleteGames ? null : (
+                {this.props.allGames && this.state.incompleteGamesView && this.state.noIncompleteGames ? null : (
                   <div style={{ float: 'right' }}>
                     <DropdownButton
                       title={
@@ -244,7 +244,7 @@ class Results extends Component {
                   ))}
                 </TabContent>
               </div>
-              {this.state.incompleteGamesView && this.state.noIncompleteGames ? (
+              {this.props.allGames && this.state.incompleteGamesView && this.state.noIncompleteGames ? (
                 <h4 className="noIncompleteGamesText">
                   No Incomplete Games <FontAwesomeIcon icon={faSmile} />
                 </h4>
