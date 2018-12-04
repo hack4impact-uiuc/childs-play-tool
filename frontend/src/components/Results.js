@@ -188,7 +188,7 @@ class Results extends Component {
                     className="resultButtons"
                     onClick={() => {
                       let resultsAndQuery = {
-                          query: {
+                        query: {
                           age: this.props.age,
                           system: this.props.consoles,
                           symptom: this.props.symptom,

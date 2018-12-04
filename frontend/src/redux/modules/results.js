@@ -60,11 +60,11 @@ export default function reducer(state = resultsState, action) {
           )
         }
       }
-case UPDATE_TAB:
-        return {
-          ...state,
-          activeTab: action.value.activeTab
-  }
+    case UPDATE_TAB:
+      return {
+        ...state,
+        activeTab: action.value.activeTab
+      }
     default:
       return state
   }
