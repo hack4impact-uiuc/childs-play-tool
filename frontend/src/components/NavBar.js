@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, NavLink as RRNavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {
@@ -18,14 +18,21 @@ import {
 
 import '../styles/landingpage.scss'
 import { getAllGames } from '../utils/ApiWrapper'
+import { updateResultsAll } from '../redux/modules/results'
 
-const mapStateToProps = state => ({
-  results: state.results.games,
-})
+const mapStateToProps = state => {}
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      updateResultsAll
+    },
+    dispatch
+  )
+}
 class NavBar extends Component {
   constructor(props) {
     super(props)
-
     this.toggleNavbar = this.toggleNavbar.bind(this)
     this.state = {
       collapsed: true
@@ -34,9 +41,9 @@ class NavBar extends Component {
 
   loadAllGames = () => {
     getAllGames().then(results =>
-      this.props.updateResults({
+      this.props.updateResultsAll({
         games: results,
-        query: {}
+        query: { search: '' }
       })
     )
   }
@@ -48,7 +55,8 @@ class NavBar extends Component {
   }
   render() {
     if (window.innerWidth >= 550) {
-      return <div>
+      return (
+        <div>
           <Navbar color="dark" expand>
             <NavbarBrand href="/">Home</NavbarBrand>
             <NavbarToggler onClick={this.toggleNavbar} />
@@ -67,15 +75,22 @@ class NavBar extends Component {
                   <NavLink href="/search">Search</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="/results" onClick={this.loadAllGames}>All Games</NavLink>
+                  <NavLink to="/results" tag={RRNavLink} onClick={this.loadAllGames}>
+                    All Games
+                  </NavLink>
                 </NavItem>
               </Nav>
             </Collapse>
           </Navbar>
         </div>
+      )
     } else {
-      return <div>
-          <link href="https://fonts.googleapis.com/css?family=Poppins|Source+Sans+Pro" rel="stylesheet" />
+      return (
+        <div>
+          <link
+            href="https://fonts.googleapis.com/css?family=Poppins|Source+Sans+Pro"
+            rel="stylesheet"
+          />
           <Navbar className="navbar-dark bg-dark">
             <Link to="/">
               <NavbarBrand>Home</NavbarBrand>
@@ -96,14 +111,20 @@ class NavBar extends Component {
                   <NavLink href="/search">Search</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="/results" onClick={this.loadAllGames}>All Games</NavLink>
+                  <NavLink to="/results" tag={RRNavLink} onClick={this.loadAllGames}>
+                    All Games
+                  </NavLink>
                 </NavItem>
               </Nav>
             </Collapse>
           </Navbar>
         </div>
+      )
     }
   }
 }
 
-export default NavBar
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NavBar)

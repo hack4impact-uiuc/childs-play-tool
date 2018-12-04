@@ -56,7 +56,8 @@ const mapStateToProps = state => ({
   symptom: state.results.query.symptom,
   gender: state.results.query.gender,
   search: state.results.query.search,
-  activeTab: state.results.activeTab
+  activeTab: state.results.activeTab,
+  allGames: state.results.allGames
 })
 
 const mapDispatchToProps = dispatch => {
@@ -125,7 +126,11 @@ class Results extends Component {
     return (
       <div className="results-background">
         <div className="resultsBox">
-          <h3 className="resultsText">Results found:</h3>
+          {this.props.allGames ? (
+            <h3 className="resultsText">All Games</h3>
+          ) : (
+            <h3 className="resultsText">Results found:</h3>
+          )}
           <div align="center">
             {this.props.age && this.props.age != 'Age*' ? (
               <Tag type={'age'} tag={this.props.age} />
@@ -162,85 +167,89 @@ class Results extends Component {
                   ))}
                 </TabContent>
               </div>
-              <div className="saveSearch">
-                <Form>
-                  <FormGroup>
-                    <Label for="exampleSearch">Save Search</Label>
-                    <InputGroup>
-                      <InputGroupAddon addonType="prepend">
-                        <InputGroupText>
-                          <FontAwesomeIcon icon={faSave} />
-                        </InputGroupText>
-                      </InputGroupAddon>
-                      <Input
-                        type="text"
-                        name="saveName"
-                        id="saveName"
-                        placeholder="Input Name"
-                        onChange={e => {
-                          this.setState({ saveName: e.target.value })
-                        }}
-                      />
-                    </InputGroup>
-                  </FormGroup>
-                  <Button
-                    className="resultButtons"
-                    onClick={() => {
-                      let resultsAndQuery = {
-                          query: {	
-                          age: this.props.age,	
-                          system: this.props.consoles,	
-                          symptom: this.props.symptom,	
-                          gender: this.props.gender	
-                        },	
-                        results: this.props.results	
-                      }	
-                      this.props.saveSearch(this.state.saveName, resultsAndQuery)
-                      this.toggleModal()
-                    }}
-                  >
-                    Save Search
-                  </Button>
-                  <br />
-                  <br />
-                  <CopyToClipboard
-                    text={this.resultsURL(
-                      this.props.search,
-                      this.props.age,
-                      this.props.symptom,
-                      this.props.gender,
-                      this.props.system
-                    )}
-                  >
-                    <Button className="resultButtons" onClick={this.toggleClipboard}>
-                      {this.state.copied ? (
-                        <FontAwesomeIcon icon={faClipboardCheck} />
-                      ) : (
-                        <FontAwesomeIcon icon={faClipboard} />
-                      )}{' '}
-                      Copy Search URL
+              {this.props.allGames ? null : (
+                <div className="saveSearch">
+                  <Form>
+                    <FormGroup>
+                      <Label for="exampleSearch">Save Search</Label>
+                      <InputGroup>
+                        <InputGroupAddon addonType="prepend">
+                          <InputGroupText>
+                            <FontAwesomeIcon icon={faSave} />
+                          </InputGroupText>
+                        </InputGroupAddon>
+                        <Input
+                          type="text"
+                          name="saveName"
+                          id="saveName"
+                          placeholder="Input Name"
+                          onChange={e => {
+                            this.setState({ saveName: e.target.value })
+                          }}
+                        />
+                      </InputGroup>
+                    </FormGroup>
+                    <Button
+                      className="resultButtons"
+                      onClick={() => {
+                        let resultsAndQuery = {
+                          query: {
+                            age: this.props.age,
+                            system: this.props.consoles,
+                            symptom: this.props.symptom,
+                            gender: this.props.gender
+                          },
+                          results: this.props.results
+                        }
+                        this.props.saveSearch(this.state.saveName, resultsAndQuery)
+                        this.toggleModal()
+                      }}
+                    >
+                      Save Search
                     </Button>
-                  </CopyToClipboard>
-                  <Modal isOpen={this.state.modal}>
-                    <ModalBody>Search saved successfully!</ModalBody>
-                    <ModalFooter>
-                      <Button color="primary" onClick={this.toggleModal}>
-                        Dismiss
+                    <br />
+                    <br />
+                    <CopyToClipboard
+                      text={this.resultsURL(
+                        this.props.search,
+                        this.props.age,
+                        this.props.symptom,
+                        this.props.gender,
+                        this.props.system
+                      )}
+                    >
+                      <Button className="resultButtons" onClick={this.toggleClipboard}>
+                        {this.state.copied ? (
+                          <FontAwesomeIcon icon={faClipboardCheck} />
+                        ) : (
+                          <FontAwesomeIcon icon={faClipboard} />
+                        )}{' '}
+                        Copy Search URL
                       </Button>
-                    </ModalFooter>
-                  </Modal>
-                </Form>
-              </div>
+                    </CopyToClipboard>
+                    <Modal isOpen={this.state.modal}>
+                      <ModalBody>Search saved successfully!</ModalBody>
+                      <ModalFooter>
+                        <Button color="primary" onClick={this.toggleModal}>
+                          Dismiss
+                        </Button>
+                      </ModalFooter>
+                    </Modal>
+                  </Form>
+                </div>
+              )}
               <hr />
             </div>
           ) : (
             <div>No matching results :(</div>
           )}
-          <Link to={{ pathname: './search' }}>
-            <Button className="homeButton">
-              <FontAwesomeIcon icon={faHome} /> Go Home
-            </Button>
-          </Link>
+          {this.props.allGames ? null : (
+            <Link to={{ pathname: './search' }}>
+              <Button className="homeButton">
+                <FontAwesomeIcon icon={faHome} /> Go Home
+              </Button>
+            </Link>
+          )}
         </div>
       </div>
     )
