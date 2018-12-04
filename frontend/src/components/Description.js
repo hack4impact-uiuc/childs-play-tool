@@ -13,7 +13,7 @@ class Description extends Component {
     return (
       <div>
         <div className="description-background">
-        <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet"/>
+          <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" />
           <div className="description-cardName">{this.props.location.state.game.name}</div>
           <img
             className="image"

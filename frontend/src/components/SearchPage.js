@@ -60,7 +60,7 @@ class SearchPage extends Component {
     }
     return (
       <div className="background">
-        <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" />
         <h3 className="homeText">
           Child&#39;s Play
           <br />

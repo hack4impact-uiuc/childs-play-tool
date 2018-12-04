@@ -124,7 +124,7 @@ class Results extends Component {
   render() {
     return (
       <div className="results-background">
-      <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" />
         <div className="resultsBox">
           <h3 className="resultsText">Results found:</h3>
           <div align="center">
@@ -188,14 +188,14 @@ class Results extends Component {
                     className="resultButtons"
                     onClick={() => {
                       let resultsAndQuery = {
-                          query: {	
-                          age: this.props.age,	
-                          system: this.props.consoles,	
-                          symptom: this.props.symptom,	
-                          gender: this.props.gender	
-                        },	
-                        results: this.props.results	
-                      }	
+                        query: {
+                          age: this.props.age,
+                          system: this.props.consoles,
+                          symptom: this.props.symptom,
+                          gender: this.props.gender
+                        },
+                        results: this.props.results
+                      }
                       this.props.saveSearch(this.state.saveName, resultsAndQuery)
                       this.toggleModal()
                     }}

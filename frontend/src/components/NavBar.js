@@ -37,7 +37,7 @@ class NavBar extends Component {
     if (window.innerWidth >= 550) {
       return (
         <div className="font">
-          <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet"/>
+          <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" />
           <Navbar color="dark" expand>
             <NavbarBrand href="/">Home</NavbarBrand>
             <NavbarToggler onClick={this.toggleNavbar} />
