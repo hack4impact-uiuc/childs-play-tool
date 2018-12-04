@@ -441,12 +441,12 @@ def edit_game(game_id):
 def get_incomplete_games():
     systems = {}
     for system in Game.system.type.enums:
+        missing_description = Game.query.filter(
+            Game.system == system, Game.description == ""
+        )
+        missing_image = Game.query.filter(Game.system == system, Game.image == "")
         games_by_system = (
-            Game.query.filter(
-                Game.system == system and (Game.description == "" or Game.image == "")
-            )
-            .order_by(Game.name)
-            .all()
+            missing_description.union(missing_image).order_by(Game.name).all()
         )
         systems[system] = [get_game_dict(game) for game in games_by_system]
     return create_response(status=200, data={"games": systems})
