@@ -124,7 +124,7 @@ class Results extends Component {
   render() {
     return (
       <div className="results-background">
-      <link
+        <link
           href="https://fonts.googleapis.com/css?family=Poppins|Source+Sans+Pro"
           rel="stylesheet"
         />
@@ -149,7 +149,7 @@ class Results extends Component {
           {this.props.results ? (
             <div>
               <div>
-                <div style={{float: 'right'}}>
+                <div style={{ float: 'right' }}>
                   <DropdownButton
                     title={
                       this.determineConsoles(this.props.results)[parseInt(this.props.activeTab) - 1]
@@ -158,7 +158,7 @@ class Results extends Component {
                     updateTabConsole={this.updateTab}
                   />
                 </div>
-                <div style={{float: 'left'}}>
+                <div style={{ float: 'left' }}>
                   <Link to={{ pathname: './search' }}>
                     <Button className="homeButton">
                       <FontAwesomeIcon icon={faHome} /> Go Home
@@ -166,9 +166,9 @@ class Results extends Component {
                   </Link>
                 </div>
               </div>
-              <br/>
-              <br/>
-              <hr style={{clear: 'both'}}/>
+              <br />
+              <br />
+              <hr style={{ clear: 'both' }} />
               <div>
                 <TabContent activeTab={this.state.activeTab}>
                   {this.determineConsoles(this.props.results).map((x, index) => (
