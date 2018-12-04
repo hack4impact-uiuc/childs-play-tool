@@ -12,6 +12,7 @@ import {
   Update,
   Results,
   Description,
+  ResultsLink,
   LandingPage
 } from './components'
 import registerServiceWorker from './registerServiceWorker'
@@ -31,6 +32,7 @@ ReactDOM.render(
         <Route path="/description" component={Description} />
         <Route path="/directorPage" component={Password} />
         <Route path="/uploadPage" component={Update} />
+        <Route path="/resultsLink" component={ResultsLink} />
         <br />
       </div>
     </ConnectedRouter>

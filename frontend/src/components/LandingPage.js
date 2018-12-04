@@ -15,11 +15,18 @@ class LandingPage extends Component {
           rel="stylesheet"
         />
         <h3 className="homeTextL">Child&#39;s Play Therapeutic Video Game Guide</h3>
+<<<<<<< HEAD
         <p className="padded">
           This guide was designed as a quick reference to help caretakers quickly select games for
 their patients. Caretakers can reference the category that best fits the symptoms of the
 patient and select one of the games listed. The games recommended in this guide were curated by researchers at EEDAR,
           a market-leading video game research firm. 
+=======
+        <p>
+          The purpose of this guide is to recommend therapeutic video games for children based on
+          their symptoms. The games recommended in this guide were curated by researchers at EEDAR,
+          a market-leading video game research firm.
+>>>>>>> c1ba2545d71aad022eaefd779d5e9080bb6a0612
         </p>
         <Button href="/search">Search Games</Button>
         <div>
@@ -38,7 +45,11 @@ patient and select one of the games listed. The games recommended in this guide 
         <Container id="HowToUse" className="separator">
           <h3 className="homeText2L">How to Use</h3>
           <Row>
+<<<<<<< HEAD
             <Col className="mspace">
+=======
+            <Col>
+>>>>>>> c1ba2545d71aad022eaefd779d5e9080bb6a0612
               <p>
                 To search for game recommendations, you must select one of the six symptom
                 categories:
@@ -49,7 +60,11 @@ patient and select one of the games listed. The games recommended in this guide 
                 height="200px"
               />
             </Col>
+<<<<<<< HEAD
             <Col className="mspace">
+=======
+            <Col>
+>>>>>>> c1ba2545d71aad022eaefd779d5e9080bb6a0612
               <p>You must also select one of the age groups:</p>
               <img
                 src={require('../styles/agecategories.png')}
@@ -59,14 +74,22 @@ patient and select one of the games listed. The games recommended in this guide 
             </Col>
           </Row>
           <Row>
+<<<<<<< HEAD
             <Col className="mspace">
+=======
+            <Col>
+>>>>>>> c1ba2545d71aad022eaefd779d5e9080bb6a0612
               <p>
                 It is optional to select a game console and the gender of the main character. The
                 search will return all games that match the specifications.
               </p>
               <img src={require('../styles/searchimage.png')} alt="Search page" height="200px" />
             </Col>
+<<<<<<< HEAD
             <Col className="mspace">
+=======
+            <Col>
+>>>>>>> c1ba2545d71aad022eaefd779d5e9080bb6a0612
               <p>
                 Each game has labels that describe its intended age group, applicable symptoms, and
                 gender of the main character.
@@ -74,6 +97,7 @@ patient and select one of the games listed. The games recommended in this guide 
               <img src={require('../styles/result.png')} alt="Search page" height="110px" />
             </Col>
           </Row>
+<<<<<<< HEAD
           <Row>
             <Col>
               <p>
@@ -90,6 +114,8 @@ patient and select one of the games listed. The games recommended in this guide 
               <img src={require('../styles/loadsave.png')} alt="Search page" height="110px" />
             </Col>
           </Row>
+=======
+>>>>>>> c1ba2545d71aad022eaefd779d5e9080bb6a0612
         </Container>
         <div className="line" />
 
@@ -121,12 +147,20 @@ patient and select one of the games listed. The games recommended in this guide 
           <Row>
             <Col>
               <h3> About Child&#39;s Play</h3>
+<<<<<<< HEAD
               <img className="cleared" src={require('../styles/cp-logo.png')} alt="Child's Play logo" height="100px" />
+=======
+              <img src={require('../styles/cp-logo.png')} alt="Child's Play logo" height="100px" />
+>>>>>>> c1ba2545d71aad022eaefd779d5e9080bb6a0612
               <p>
                 Child&#39;s Play is a game industry charity dedicated to improving the lives of
                 children with toys and games in a network of over 150 hospitals worldwide.
               </p>
+<<<<<<< HEAD
               <a href="http://childsplaycharity.org"> Learn More </a>
+=======
+              <a href="http://childsplaycharity.org"> More </a>
+>>>>>>> c1ba2545d71aad022eaefd779d5e9080bb6a0612
             </Col>
             <Col>
               <h3>Contact Information</h3>
@@ -142,8 +176,12 @@ patient and select one of the games listed. The games recommended in this guide 
                 Facebook:{' '}
                 <a href="https://www.facebook.com/ChildsPlayCharity/">ChildsPlayCharity</a>
                 <br />
+<<<<<<< HEAD
                 Twitter: <a href="https://twitter.com/CPCharity/">@CPCharity</a> <br />
                 <a href="https://childsplaycharity.org/about#contact"> More Contact Information </a>
+=======
+                Twitter: <a href="https://twitter.com/CPCharity/">@CPCharity</a>
+>>>>>>> c1ba2545d71aad022eaefd779d5e9080bb6a0612
               </p>
             </Col>
           </Row>
