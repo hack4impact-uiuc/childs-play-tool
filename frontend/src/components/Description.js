@@ -4,10 +4,25 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
 import Tag from './Tag'
 import Update from './Update'
 import { editGame } from '../utils/ApiWrapper'
+import { editGameState } from '../redux/modules/results'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+
 import '../styles/description.scss'
 
 const titleStyle = {
   fontSize: '30px'
+}
+
+const mapStateToProps = state => ({})
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      editGameState
+    },
+    dispatch
+  )
 }
 
 class Description extends Component {
@@ -107,6 +122,14 @@ class Description extends Component {
               disabled={!this.state.editing}
               onClick={() => {
                 this.setState({ editing: false })
+
+                this.props.editGameState(
+                  'PlayStation Vita',
+                  this.props.location.state.game.id,
+                  this.state.updateDescription,
+                  this.state.imageUploadURL
+                )
+
                 editGame(
                   this.props.location.state.game.id,
                   this.state.updateDescription,
@@ -130,4 +153,7 @@ class Description extends Component {
   }
 }
 
-export default Description
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Description)

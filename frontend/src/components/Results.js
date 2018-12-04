@@ -25,7 +25,7 @@ import {
 } from 'reactstrap'
 import classnames from 'classnames'
 import '../styles/results.scss'
-import { saveSearch } from '../redux/modules/results'
+import { saveSearch, updateConsole } from '../redux/modules/results'
 import { bindActionCreators } from 'redux'
 import Constants from '../utils/Constants.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -46,13 +46,15 @@ const mapStateToProps = state => ({
   age: state.results.query.age,
   symptom: state.results.query.symptom,
   gender: state.results.query.gender,
-  search: state.results.query.search
+  search: state.results.query.search,
+  currentConsole: state.results.currentConsole
 })
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      saveSearch
+      saveSearch,
+      updateConsole
     },
     dispatch
   )
@@ -68,6 +70,7 @@ class Results extends Component {
     }
     this.updateTab = this.updateTab
   }
+
   determineConsoles = results => {
     let ret = []
     Object.getOwnPropertyNames(results).map(x => (results[x].length > 0 ? ret.push(x) : null))

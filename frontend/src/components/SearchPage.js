@@ -7,6 +7,7 @@ import { updateField } from '../redux/modules/searchpage'
 import { updateResults, getSavedSearch } from '../redux/modules/results'
 import { Button } from 'reactstrap'
 import { getGames, getGamesByName } from '../utils/ApiWrapper'
+import { updateConsole } from '../redux/modules/results'
 // import '../styles/styles.scss'
 import '../styles/searchpage.scss'
 
@@ -25,6 +26,7 @@ const mapDispatchToProps = dispatch => {
     {
       updateField,
       updateResults,
+      updateConsole,
       getSavedSearch
     },
     dispatch
@@ -90,7 +92,7 @@ class SearchPage extends Component {
                   this.props.symptom,
                   this.props.system,
                   this.props.gender
-                ).then(results =>
+                ).then(results => {
                   this.props.updateResults({
                     games: results,
                     query: {
@@ -99,7 +101,8 @@ class SearchPage extends Component {
                       gender: this.props.gender
                     }
                   })
-                )
+                  this.props.updateConsole(Object.keys(results)[0])
+                })
               }
             >
               Search

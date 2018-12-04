@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Constants from '../utils/Constants'
 import { updateField } from '../redux/modules/searchpage'
+import { updateConsole } from '../redux/modules/results'
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
 import '../styles/styles.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -17,13 +18,15 @@ import {
 
 const mapStateToProps = state => ({
   savedSearches: state.results.searches,
-  results: state.results.games
+  results: state.results.games,
+  currentConsole: state.results.currentConsole
 })
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      updateField
+      updateField,
+      updateConsole
     },
     dispatch
   )
@@ -33,7 +36,7 @@ class DropdownButton extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      consoleSelectedVal: null,
+      consoleSelectedVal: this.props.items ? this.props.items[0] : '',
       selectedVal: this.props.title,
       dropdownOpen: false
     }
@@ -76,15 +79,19 @@ class DropdownButton extends Component {
   }
 
   render() {
+    let dropdownTitle
+    if (this.state.consoleSelectedVal) {
+      dropdownTitle = this.state.consoleSelectedVal
+    } else if (this.props.items) {
+      dropdownTitle = this.props.items[0]
+    } else {
+      dropdownTitle = this.state.selectedVal
+    }
     return (
       <div>
         <Dropdown className="dropdown" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
           <DropdownToggle color="success" caret>
-            {this.state.consoleSelectedVal
-              ? this.state.consoleSelectedVal
-              : this.props.items
-                ? this.props.items[0]
-                : this.state.selectedVal}
+            {dropdownTitle}
           </DropdownToggle>
           <DropdownMenu right>
             {this.props.items
@@ -99,6 +106,7 @@ class DropdownButton extends Component {
                         )
                       })
                       this.props.updateTabConsole((index + 1).toString())
+                      this.props.updateConsole(item)
                     }}
                   >
                     {item} {this.chooseImage(item)}
