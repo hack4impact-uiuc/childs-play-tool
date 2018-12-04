@@ -16,7 +16,8 @@ import {
 } from '@fortawesome/free-brands-svg-icons'
 
 const mapStateToProps = state => ({
-  savedSearches: state.results.searches
+  savedSearches: state.results.searches,
+  activeTab: state.results.activeTab
 })
 
 const mapDispatchToProps = dispatch => {
@@ -84,7 +85,7 @@ class DropdownButton extends Component {
             {this.state.consoleSelectedVal
               ? this.state.consoleSelectedVal
               : this.props.items
-                ? this.props.items[0]
+                ? this.props.items[parseInt(this.props.activeTab) - 1]
                 : this.state.selectedVal}
           </DropdownToggle>
           <DropdownMenu right>

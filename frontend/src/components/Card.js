@@ -9,9 +9,11 @@ class Card extends Component {
     this.state = {
       hover: 'cardStyle',
       description:
-        this.props.game.description && this.props.game.description.length > 100
-          ? this.props.game.description.substring(0, 99) + '...'
-          : this.props.game.description
+        !this.props.game.description || this.props.game.description.length == 0
+          ? 'No description found.'
+          : this.props.game.description && this.props.game.description.length > 100
+            ? this.props.game.description.substring(0, 99) + '...'
+            : this.props.game.description
     }
   }
   render() {
@@ -39,7 +41,14 @@ class Card extends Component {
               : null}
           </tr>
           <tr className="cardRight">
-            <img className="imageCard" src={this.props.game.image} />
+            <img
+              className="imageCard"
+              src={
+                this.props.game.image == ''
+                  ? require('../styles/placeholderimage.png')
+                  : this.props.game.image
+              }
+            />
           </tr>
         </table>
         <br />
