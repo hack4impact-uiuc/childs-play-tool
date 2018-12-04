@@ -345,10 +345,10 @@ def get_giantbomb_data(game_name):
                     best_similarity = similarity
             if best_match["deck"] is not None:
                 gb_dict["description"] = best_match["deck"]
-            if best_match["image"]["icon_url"] is not None:
-                gb_dict["thumbnail"] = best_match["image"]["icon_url"]
             if best_match["image"]["small_url"] is not None:
-                gb_dict["image"] = best_match["image"]["small_url"]
+                image_url = best_match["image"]["small_url"]
+                gb_dict["image"] = image_url
+                gb_dict["thumbnail"] = image_url.replace("small", "tiny", 1)
         should_remove = True
     return gb_dict
 
