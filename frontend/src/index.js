@@ -12,6 +12,7 @@ import {
   Update,
   Results,
   Description,
+  NavBar,
   ResultsLink,
   LandingPage
 } from './components'
@@ -26,6 +27,7 @@ ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <div className="heightDef">
+        <NavBar />
         <Route exact path="/" component={LandingPage} />
         <Route path="/search" component={SearchPage} />
         <Route path="/results" component={Results} />

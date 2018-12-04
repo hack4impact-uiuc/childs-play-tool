@@ -10,17 +10,18 @@ class LandingPage extends Component {
   render() {
     return (
       <div className="backgroundL">
-        <link
-          href="https://fonts.googleapis.com/css?family=Poppins|Source+Sans+Pro"
-          rel="stylesheet"
-        />
-        <h3 className="homeTextL">Child&#39;s Play Therapeutic Video Game Guide</h3>
-        <p>
-          The purpose of this guide is to recommend therapeutic video games for children based on
-          their symptoms. The games recommended in this guide were curated by researchers at EEDAR,
-          a market-leading video game research firm.
+        <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" />
+        <h3 className="homeTextL">Welcome!</h3>
+        <h3 className="subtitles">Therapeutic Video Game Guide</h3>
+        <p className="padded">
+          This guide was designed as a quick reference to help caretakers quickly select games for
+          their patients. Caretakers can reference the category that best fits the symptoms of the
+          patient and select one of the games listed. The games recommended in this guide were
+          curated by researchers at EEDAR, a market-leading video game research firm.
         </p>
-        <Button href="/search">Search Games</Button>
+        <Link to="/search">
+          <Button className="buttonpad">Search Games</Button>
+        </Link>
         <div>
           <a href="http://childsplaycharity.org/assets/downloads/booklet.pdf">
             {' '}
@@ -36,8 +37,19 @@ class LandingPage extends Component {
 
         <Container id="HowToUse" className="separator">
           <h3 className="homeText2L">How to Use</h3>
+          <Row className="mspace imageCentered">
+            <p className="padded">
+              Searching for game recommendations by name will return all games that contain the
+              given name. Type the name into the following input field:
+            </p>
+            <img
+              src={require('../styles/searchbyname.png')}
+              alt="Search by name field"
+              height="60px"
+            />
+          </Row>
           <Row>
-            <Col>
+            <Col className="mspace">
               <p>
                 To search for game recommendations, you must select one of the six symptom
                 categories:
@@ -48,7 +60,7 @@ class LandingPage extends Component {
                 height="200px"
               />
             </Col>
-            <Col>
+            <Col className="mspace">
               <p>You must also select one of the age groups:</p>
               <img
                 src={require('../styles/agecategories.png')}
@@ -58,19 +70,36 @@ class LandingPage extends Component {
             </Col>
           </Row>
           <Row>
-            <Col>
+            <Col className="mspace">
               <p>
                 It is optional to select a game console and the gender of the main character. The
                 search will return all games that match the specifications.
               </p>
               <img src={require('../styles/searchimage.png')} alt="Search page" height="200px" />
             </Col>
-            <Col>
+            <Col className="mspace">
               <p>
                 Each game has labels that describe its intended age group, applicable symptoms, and
                 gender of the main character.
               </p>
               <img src={require('../styles/result.png')} alt="Search page" height="110px" />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <p>
+                After performing a search, there is the option to save its results at the bottom of
+                the results page. Be sure to provide a descriptive name that will help you identify
+                it for later viewing.
+              </p>
+              <img src={require('../styles/inputsave.png')} alt="Search page" height="140px" />
+            </Col>
+            <Col>
+              <p>
+                Load a saved search at the bottom of the search page to view the previously saved
+                game recommendations.
+              </p>
+              <img src={require('../styles/loadsave.png')} alt="Search page" height="110px" />
             </Col>
           </Row>
         </Container>
@@ -104,12 +133,17 @@ class LandingPage extends Component {
           <Row>
             <Col>
               <h3> About Child&#39;s Play</h3>
-              <img src={require('../styles/cp-logo.png')} alt="Child's Play logo" height="100px" />
+              <img
+                className="cleared"
+                src={require('../styles/cp-logo.png')}
+                alt="Child's Play logo"
+                height="100px"
+              />
               <p>
                 Child&#39;s Play is a game industry charity dedicated to improving the lives of
                 children with toys and games in a network of over 150 hospitals worldwide.
               </p>
-              <a href="http://childsplaycharity.org"> More </a>
+              <a href="http://childsplaycharity.org"> Learn More </a>
             </Col>
             <Col>
               <h3>Contact Information</h3>
@@ -125,7 +159,8 @@ class LandingPage extends Component {
                 Facebook:{' '}
                 <a href="https://www.facebook.com/ChildsPlayCharity/">ChildsPlayCharity</a>
                 <br />
-                Twitter: <a href="https://twitter.com/CPCharity/">@CPCharity</a>
+                Twitter: <a href="https://twitter.com/CPCharity/">@CPCharity</a> <br />
+                <a href="https://childsplaycharity.org/about#contact"> More Contact Information </a>
               </p>
             </Col>
           </Row>

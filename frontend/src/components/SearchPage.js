@@ -8,6 +8,8 @@ import { updateField } from '../redux/modules/searchpage'
 import { updateResults, getSavedSearch } from '../redux/modules/results'
 import { Button, Label, Modal, ModalBody, ModalFooter } from 'reactstrap'
 import { getGames, getGamesByName } from '../utils/ApiWrapper'
+import { updateConsole } from '../redux/modules/results'
+// import '../styles/styles.scss'
 import '../styles/searchpage.scss'
 
 const mapStateToProps = state => ({
@@ -25,6 +27,7 @@ const mapDispatchToProps = dispatch => {
     {
       updateField,
       updateResults,
+      updateConsole,
       getSavedSearch
     },
     dispatch
@@ -46,12 +49,13 @@ class SearchPage extends Component {
   }
 
   handleSubmit = () => {
-    getGamesByName(this.props.nameSearchField).then(results =>
+    getGamesByName(this.props.nameSearchField).then(results => {
       this.props.updateResults({
         games: results,
         query: { search: this.props.nameSearchField }
       })
-    )
+      this.props.updateConsole(Object.keys(results)[0])
+    })
   }
 
   render() {
@@ -60,10 +64,7 @@ class SearchPage extends Component {
     }
     return (
       <div className="background">
-        <link
-          href="https://fonts.googleapis.com/css?family=Poppins|Source+Sans+Pro"
-          rel="stylesheet"
-        />
+        <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" />
         <h3 className="homeText">
           Child&#39;s Play
           <br />
@@ -107,8 +108,8 @@ class SearchPage extends Component {
           <Link
             to={
               this.props.age != 'Age*' && this.props.symptom != 'Symptom*'
-                ? { pathname: './results' }
-                : ''
+                ? { pathname: '/results' }
+                : { pathname: '/search' }
             }
           >
             <Button
@@ -122,7 +123,7 @@ class SearchPage extends Component {
                         this.props.symptom,
                         this.props.system,
                         this.props.gender
-                      ).then(results =>
+                      ).then(results => {
                         this.props.updateResults({
                           games: results,
                           query: {
@@ -131,7 +132,8 @@ class SearchPage extends Component {
                             gender: this.props.gender
                           }
                         })
-                      )
+                        this.props.updateConsole(Object.keys(results)[0])
+                      })
                   : this.toggle
               }
             >
@@ -166,10 +168,6 @@ class SearchPage extends Component {
               </Button>
             </Link>
           </div>
-          <hr />
-          <Link className="loginLink" to={{ pathname: './directorPage' }}>
-            <Button className="adminButton">Admin Login</Button>
-          </Link>
         </div>
       </div>
     )

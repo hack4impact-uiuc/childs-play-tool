@@ -33,6 +33,7 @@ $color-background: white;
     padding-top: 2%;
     text-align: center;
     background-color: $color-background;
+    font-family: 'Cabin', sans-serif;
 }
 
 @media only screen and (max-width: 750px) {
@@ -63,6 +64,7 @@ $color-background: white;
     background: white;
     min-width: 225px;
     background-color: $color-background;
+    font-family: 'Cabin', sans-serif;
 }
 
 .cardBox{
@@ -70,6 +72,7 @@ $color-background: white;
     min-width: 225px;
     display: inline;
     max-width: 100%;
+    font-family: 'Cabin', sans-serif;
 }
 .resultsText{
     text-align: center;
@@ -79,8 +82,7 @@ $color-background: white;
     color: gray;
     border-radius: 25px;
     background-color: $color-background;
-    font-family: 'Poppins', sans-serif;
-
+    font-family: 'Cabin', sans-serif;
 }
 .navbar{
     width: 100%;
