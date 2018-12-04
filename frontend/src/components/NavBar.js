@@ -53,74 +53,51 @@ class NavBar extends Component {
     })
   }
   render() {
-    if (window.innerWidth >= 550) {
-      return (
-        <div className="font">
-          <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" />
-          <Navbar color="dark" expand>
-            <NavbarBrand href="/">Home</NavbarBrand>
-            <NavbarToggler onClick={this.toggleNavbar} />
-            <Collapse isOpen={!this.state.collapsed} navbar>
-              <Nav className="bg-dark ml-auto" navbar>
-                <NavItem>
-                  <NavLink href="/directorPage">Admin</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink href="/#Contacts">Contact Us</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink href="/#HowToUse">How to Use</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink href="/search">Search</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink to="/results" tag={RRNavLink} onClick={this.loadAllGames}>
-                    All Games
-                  </NavLink>
-                </NavItem>
-              </Nav>
-            </Collapse>
-          </Navbar>
-        </div>
-      )
-    } else {
-      return (
-        <div className="font">
-          <link
-            href="https://fonts.googleapis.com/css?family=Poppins|Source+Sans+Pro"
-            rel="stylesheet"
-          />
-          <Navbar className="navbar-dark bg-dark">
-            <Link to="/">
-              <NavbarBrand>Home</NavbarBrand>
-            </Link>
-            <NavbarToggler onClick={this.toggleNavbar} />
-            <Collapse isOpen={!this.state.collapsed} navbar>
-              <Nav className="bg-dark mr-auto navbar-dark" navbar>
-                <NavItem>
-                  <NavLink href="/directorPage">Admin</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink href="/#Contacts">Contact Us</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink href="/#HowToUse">How to Use</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink href="/search">Search</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink to="/results" tag={RRNavLink} onClick={this.loadAllGames}>
-                    All Games
-                  </NavLink>
-                </NavItem>
-              </Nav>
-            </Collapse>
-          </Navbar>
-        </div>
-      )
-    }
+    return (
+      <div className="font">
+        <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" />
+        <Navbar
+          color={window.innerWidth >= 550 ? 'dark' : false}
+          className={window.innerWidth >= 550 ? false : 'navbar-dark bg-dark'}
+          expand={window.innerWidth >= 550}
+        >
+          <NavbarBrand to="/" tag={RRNavLink}>
+            Home
+          </NavbarBrand>
+          <NavbarToggler onClick={this.toggleNavbar} />
+          <Collapse isOpen={!this.state.collapsed} navbar>
+            <Nav
+              className={
+                window.innerWidth >= 550 ? 'bg-dark ml-auto' : 'bg-dark mr-auto navbar-dark'
+              }
+              navbar
+            >
+              <NavItem>
+                <NavLink to="/directorPage" tag={RRNavLink}>
+                  Admin
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="/#Contacts">Contact Us</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="/#HowToUse">How to Use</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink to="/search" tag={RRNavLink}>
+                  Search
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink to="/results" tag={RRNavLink} onClick={this.loadAllGames}>
+                  All Games
+                </NavLink>
+              </NavItem>
+            </Nav>
+          </Collapse>
+        </Navbar>
+      </div>
+    )
   }
 }
 
