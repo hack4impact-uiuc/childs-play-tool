@@ -18,14 +18,15 @@ import {
 
 import '../styles/landingpage.scss'
 import { getAllGames } from '../utils/ApiWrapper'
-import { updateResultsAll } from '../redux/modules/results'
+import { updateResultsAll, updateConsole } from '../redux/modules/results'
 
 const mapStateToProps = state => {}
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      updateResultsAll
+      updateResultsAll,
+      updateConsole
     },
     dispatch
   )
@@ -39,12 +40,13 @@ class NavBar extends Component {
   }
 
   loadAllGames = () => {
-    getAllGames().then(results =>
+    getAllGames().then(results => {
       this.props.updateResultsAll({
         games: results,
-        query: { search: '' }
+        query: {}
       })
-    )
+      this.props.updateConsole(Object.keys(results)[0])
+    })
   }
 
   toggleNavbar = () => {
