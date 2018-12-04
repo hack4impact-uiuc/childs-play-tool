@@ -125,7 +125,6 @@ class SearchPage extends Component {
               </Button>
             </Link>
           </div>
-          <hr />
         </div>
       </div>
     )
