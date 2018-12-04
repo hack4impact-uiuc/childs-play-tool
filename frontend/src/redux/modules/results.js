@@ -1,6 +1,7 @@
 // @flow
 const SAVE_SEARCH = 'results/SAVE_SEARCH'
 const UPDATE_RESULTS = 'results/UPDATE_RESULTS'
+const UPDATE_RESULTS_ALL = 'results/UPDATE_RESULTS_ALL'
 const GET_SAVED_SEARCH = 'results/GET_SAVED_SEARCH'
 const EDIT_GAME_STATE = 'results/EDIT_GAME_STATE'
 const UPDATE_CONSOLE = 'results/UPDATE_CONSOLE'
@@ -11,7 +12,8 @@ export const resultsState = {
   searches: [],
   games: {},
   query: {},
-  activeTab: '1'
+  activeTab: '1',
+  allGames: false
 }
 
 export default function reducer(state = resultsState, action) {
@@ -26,7 +28,16 @@ export default function reducer(state = resultsState, action) {
         ...state,
         games: action.value.games,
         query: action.value.query,
-        activeTab: '1'
+        activeTab: '1',
+        allGames: false
+      }
+    case UPDATE_RESULTS_ALL:
+      return {
+        ...state,
+        games: action.value.games,
+        query: action.value.query,
+        activeTab: '1',
+        allGames: true
       }
     case SAVE_SEARCH:
       return {
@@ -83,6 +94,11 @@ export const saveSearch = (value, searchResults) => ({
 
 export const updateResults = value => ({
   type: UPDATE_RESULTS,
+  value
+})
+
+export const updateResultsAll = value => ({
+  type: UPDATE_RESULTS_ALL,
   value
 })
 

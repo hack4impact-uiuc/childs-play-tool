@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, NavLink as RRNavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {
@@ -17,17 +17,37 @@ import {
 } from 'reactstrap'
 
 import '../styles/landingpage.scss'
+import { getAllGames } from '../utils/ApiWrapper'
+import { updateResultsAll } from '../redux/modules/results'
 
+const mapStateToProps = state => {}
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      updateResultsAll
+    },
+    dispatch
+  )
+}
 class NavBar extends Component {
   constructor(props) {
     super(props)
-
     this.state = {
       collapsed: true
     }
   }
 
-  toggleNavbar = () => {
+  loadAllGames = () => {
+    getAllGames().then(results =>
+      this.props.updateResultsAll({
+        games: results,
+        query: { search: '' }
+      })
+    )
+  }
+
+  toggleNavbar() {
     this.setState({
       collapsed: !this.state.collapsed
     })
@@ -53,6 +73,11 @@ class NavBar extends Component {
                 </NavItem>
                 <NavItem>
                   <NavLink href="/search">Search</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink to="/results" tag={RRNavLink} onClick={this.loadAllGames}>
+                    All Games
+                  </NavLink>
                 </NavItem>
               </Nav>
             </Collapse>
@@ -85,6 +110,11 @@ class NavBar extends Component {
                 <NavItem>
                   <NavLink href="/search">Search</NavLink>
                 </NavItem>
+                <NavItem>
+                  <NavLink to="/results" tag={RRNavLink} onClick={this.loadAllGames}>
+                    All Games
+                  </NavLink>
+                </NavItem>
               </Nav>
             </Collapse>
           </Navbar>
@@ -94,4 +124,7 @@ class NavBar extends Component {
   }
 }
 
-export default NavBar
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NavBar)
