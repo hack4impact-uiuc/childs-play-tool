@@ -1,6 +1,42 @@
+.white-box{
+        width: 100%;
+        border-radius: 25px;
+        border: 2px solid green;
+        padding-bottom: 2%;
+        padding-top: 2%;
+        background: white;
+        color: black;
+        text-align: center;
+        margin:0px auto;
+        display: table;
+        margin-top: 5%;
+}
+
 .description-cardName{
         font-size: 30px;
         align: center;
+}
+
+.card-description {
+        font-size: 15px;
+        align: center;
+        padding-left: 5%;
+        padding-right: 5%;
+}
+
+.editing-card-description {
+        font-size: 15px;
+        align: center;
+        padding-left: 5%;
+        padding-right: 5%;
+        color: gray;
+        border: 2px solid #bfd2f2;
+}
+
+.editing-button {
+        margin-left: 5%;
+        margin-right: 5%;
+        margin-bottom: 5%;
 }
 
 .description-background {
@@ -9,11 +45,7 @@
     padding-bottom: 10%;
     padding-top: 1%;
     text-align: center;
-    background-attachment: fixed;
-    margin: 0%;
-    background-size: cover;
-    height: 100vh;
-    width: 100hw;
+    background:  #bce8b4;
   }
 
 .image {

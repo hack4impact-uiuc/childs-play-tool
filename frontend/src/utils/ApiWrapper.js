@@ -67,3 +67,25 @@ export const sendFile = file => {
       }
     })
 }
+
+export const editGame = (gameId, description, image) => {
+  let data = new FormData()
+  data.set('key', BACKEND_KEY)
+  data.append('description', description)
+  data.append('image', image)
+  let requestString = BACKEND_URL + '/games/' + gameId
+  return axios
+    .put(requestString, data)
+    .then(response => {
+      return {
+        type: 'UPLOAD_FILE_SUCCESS',
+        response
+      }
+    })
+    .catch(error => {
+      return {
+        type: 'UPLOAD_FILE_FAIL',
+        error
+      }
+    })
+}
