@@ -24,7 +24,9 @@ class Description extends Component {
           />
           <br />
           <br />
-          {this.props.location.state.game.description}
+          {this.props.location.state.game.description == ''
+            ? 'No description found.'
+            : this.props.location.state.game.description}
           <br />
           <br />
           <div>
