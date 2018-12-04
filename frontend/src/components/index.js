@@ -22,6 +22,6 @@ export {
   Password,
   Update,
   LandingPage,
-  NavBar
-  ResultsLink,
+  NavBar,
+  ResultsLink
 }
