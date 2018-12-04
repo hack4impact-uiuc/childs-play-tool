@@ -12,7 +12,7 @@ import {
   Update,
   Results,
   Description,
-  ResultsLink
+  ResultsLink,
   LandingPage
 } from './components'
 import registerServiceWorker from './registerServiceWorker'
