@@ -17,7 +17,7 @@ import {
 
 const mapStateToProps = state => ({
   savedSearches: state.results.searches,
-  results: state.results.games
+  activeTab: state.results.activeTab
 })
 
 const mapDispatchToProps = dispatch => {
@@ -44,6 +44,8 @@ class DropdownButton extends Component {
   determineDropdownItems = fieldName => {
     if (fieldName === 'selectedSaveSearch') {
       return this.props.savedSearches
+    } else if (fieldName == 'consoleNames') {
+      return Object.keys(this.props.results)
     } else {
       return Constants[fieldName]
     }
@@ -83,7 +85,7 @@ class DropdownButton extends Component {
             {this.state.consoleSelectedVal
               ? this.state.consoleSelectedVal
               : this.props.items
-                ? this.props.items[0]
+                ? this.props.items[parseInt(this.props.activeTab) - 1]
                 : this.state.selectedVal}
           </DropdownToggle>
           <DropdownMenu right>
@@ -116,6 +118,19 @@ class DropdownButton extends Component {
                     </DropdownItem>
                   ))
                 : null}
+            {(this.props.title === 'Console Type' || this.props.title === 'Character Gender') && (
+              <>
+                <DropdownItem divider />
+                <DropdownItem
+                  onClick={e => {
+                    this.setState({ selectedVal: this.props.title })
+                    this.props.updateField(this.props.fieldName, this.props.title)
+                  }}
+                >
+                  None
+                </DropdownItem>
+              </>
+            )}
           </DropdownMenu>
         </Dropdown>
       </div>

@@ -9,6 +9,7 @@ import DropdownButton from './DropdownButton'
 import SearchBarCustom from './SearchBarCustom'
 import LandingPage from './LandingPage'
 import NavBar from './NavBar'
+import ResultsLink from './ResultsLink'
 
 export {
   Counter,
@@ -22,4 +23,5 @@ export {
   Update,
   LandingPage,
   NavBar
+  ResultsLink,
 }
