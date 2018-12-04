@@ -40,7 +40,7 @@ class Password extends Component {
       <div className="passwordPageBackground">
         <div className="passwordPage">
           <p> Welcome Administrators. Enter your key to continue: </p>
-          <form>
+          <form onSubmit={this.authenticate}>
             <label className="passwordEnter">
               <span> Key: </span>
               <input className="inputKey" onChange={this.changedKey} />

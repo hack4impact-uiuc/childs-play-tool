@@ -12,8 +12,9 @@ import {
   Update,
   Results,
   Description,
-  LandingPage,
-  NavBar
+  NavBar,
+  ResultsLink,
+  LandingPage
 } from './components'
 import registerServiceWorker from './registerServiceWorker'
 import configureStore, { history } from './redux/configureStore'
@@ -33,6 +34,7 @@ ReactDOM.render(
         <Route path="/description" component={Description} />
         <Route path="/directorPage" component={Password} />
         <Route path="/uploadPage" component={Update} />
+        <Route path="/resultsLink" component={ResultsLink} />
         <br />
       </div>
     </ConnectedRouter>

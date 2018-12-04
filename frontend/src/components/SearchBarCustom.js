@@ -26,9 +26,8 @@ class SearchBarCustom extends Component {
   render() {
     return (
       <div>
-        <Form className="search">
+        <Form className="search" onSubmit={this.props.onSubmit}>
           <FormGroup>
-            <Label for="exampleSearch">Search By Name</Label>
             <Input
               type="search"
               name="search"
