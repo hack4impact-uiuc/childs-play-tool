@@ -39,7 +39,7 @@ class Card extends Component {
               : null}
           </tr>
           <tr className="cardRight">
-            <img className="imageCard" src={this.props.game.image} />
+            <img className="imageCard" src={this.props.game.thumbnail} />
           </tr>
         </table>
         <br />
