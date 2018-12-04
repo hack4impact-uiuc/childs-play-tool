@@ -164,7 +164,7 @@ class Results extends Component {
                 <div style={{ float: 'left' }}>
                   <Link to={{ pathname: './search' }}>
                     <Button className="homeButton">
-                      <FontAwesomeIcon icon={faHome} /> Go Home
+                      <FontAwesomeIcon icon={faHome} /> Search Again
                     </Button>
                   </Link>
                 </div>
