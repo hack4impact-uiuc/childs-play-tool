@@ -16,8 +16,7 @@ import {
 } from '@fortawesome/free-brands-svg-icons'
 
 const mapStateToProps = state => ({
-  savedSearches: state.results.searches,
-  results: state.results.games
+  savedSearches: state.results.searches
 })
 
 const mapDispatchToProps = dispatch => {
@@ -120,6 +119,19 @@ class DropdownButton extends Component {
                     </DropdownItem>
                   ))
                 : null}
+            {(this.props.title === 'Console Type' || this.props.title === 'Character Gender') && (
+              <>
+                <DropdownItem divider />
+                <DropdownItem
+                  onClick={e => {
+                    this.setState({ selectedVal: this.props.title })
+                    this.props.updateField(this.props.fieldName, this.props.title)
+                  }}
+                >
+                  None
+                </DropdownItem>
+              </>
+            )}
           </DropdownMenu>
         </Dropdown>
       </div>

@@ -7,6 +7,8 @@ import Results from './Results'
 import SearchPage from './SearchPage'
 import DropdownButton from './DropdownButton'
 import SearchBarCustom from './SearchBarCustom'
+import ResultsLink from './ResultsLink'
+import LandingPage from './LandingPage'
 
 export {
   Counter,
@@ -17,5 +19,7 @@ export {
   Description,
   Results,
   Password,
-  Update
+  Update,
+  ResultsLink,
+  LandingPage
 }

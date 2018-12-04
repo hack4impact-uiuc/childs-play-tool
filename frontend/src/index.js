@@ -11,7 +11,9 @@ import {
   Dropdown,
   Update,
   Results,
-  Description
+  Description,
+  ResultsLink,
+  LandingPage
 } from './components'
 import registerServiceWorker from './registerServiceWorker'
 import configureStore, { history } from './redux/configureStore'
@@ -24,11 +26,13 @@ ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <div className="heightDef">
-        <Route exact path="/" component={SearchPage} />
+        <Route exact path="/" component={LandingPage} />
+        <Route path="/search" component={SearchPage} />
         <Route path="/results" component={Results} />
         <Route path="/description" component={Description} />
         <Route path="/directorPage" component={Password} />
         <Route path="/uploadPage" component={Update} />
+        <Route path="/resultsLink" component={ResultsLink} />
         <br />
       </div>
     </ConnectedRouter>
