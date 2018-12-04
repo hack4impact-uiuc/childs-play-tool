@@ -38,15 +38,15 @@ class LandingPage extends Component {
         <Container id="HowToUse" className="separator">
           <h3 className="homeText2L">How to Use</h3>
           <Row className="mspace imageCentered">
-              <p>
-                Searching for game recommendations by name will return all games that contain the given name. 
-                Type the name into the following input field:
-              </p>
-              <img
-                src={require('../styles/searchbyname.png')}
-                alt="Search by name field"
-                height="60px"
-               />
+            <p>
+              Searching for game recommendations by name will return all games that contain the
+              given name. Type the name into the following input field:
+            </p>
+            <img
+              src={require('../styles/searchbyname.png')}
+              alt="Search by name field"
+              height="60px"
+            />
           </Row>
           <Row>
             <Col className="mspace">
@@ -88,8 +88,9 @@ class LandingPage extends Component {
           <Row>
             <Col>
               <p>
-                After performing a search, there is the option to save its results at the bottom of the results page. 
-                Be sure to provide a descriptive name that will help you identify it for later viewing.
+                After performing a search, there is the option to save its results at the bottom of
+                the results page. Be sure to provide a descriptive name that will help you identify
+                it for later viewing.
               </p>
               <img src={require('../styles/inputsave.png')} alt="Search page" height="140px" />
             </Col>

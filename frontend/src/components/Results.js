@@ -187,14 +187,14 @@ class Results extends Component {
                     className="resultButtons"
                     onClick={() => {
                       let resultsAndQuery = {
-                          query: {	
-                          age: this.props.age,	
-                          system: this.props.consoles,	
-                          symptom: this.props.symptom,	
-                          gender: this.props.gender	
-                        },	
-                        results: this.props.results	
-                      }	
+                        query: {
+                          age: this.props.age,
+                          system: this.props.consoles,
+                          symptom: this.props.symptom,
+                          gender: this.props.gender
+                        },
+                        results: this.props.results
+                      }
                       this.props.saveSearch(this.state.saveName, resultsAndQuery)
                       this.toggleModal()
                     }}
