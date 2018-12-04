@@ -129,7 +129,7 @@ class Results extends Component {
           rel="stylesheet"
         />
         <div className="resultsBox">
-          <div className="resultsText">Results found:</div>
+          <div className="resultsText">Results</div>
           <div align="center">
             {this.props.age && this.props.age != 'Age*' ? (
               <Tag type={'age'} tag={this.props.age} />
