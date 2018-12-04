@@ -124,7 +124,7 @@ class SearchPage extends Component {
                         this.props.symptom,
                         this.props.system,
                         this.props.gender
-                      ).then(results =>
+                ).then(results => {
                         this.props.updateResults({
                           games: results,
                           query: {
@@ -132,8 +132,9 @@ class SearchPage extends Component {
                             symptom: this.props.symptom,
                             gender: this.props.gender
                           }
-                        })
-                        this.props.updateConsole(Object.keys(results)[0])
+                  });
+                        this.props.updateConsole(Object.keys(results)[0]);
+                }
                       )
                   : this.toggle
               }

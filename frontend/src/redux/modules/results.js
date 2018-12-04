@@ -60,10 +60,11 @@ export default function reducer(state = resultsState, action) {
           )
         }
       }
-        case UPDATE_TAB:
+case UPDATE_TAB:
         return {
           ...state,
           activeTab: action.value.activeTab
+  }
     default:
       return state
   }
@@ -101,6 +102,7 @@ export const updateConsole = value => ({
   type: UPDATE_CONSOLE,
   value
 })
+
 export const updateTab = value => ({
   type: UPDATE_TAB,
   value

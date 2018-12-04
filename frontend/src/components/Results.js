@@ -25,7 +25,7 @@ import {
 } from 'reactstrap'
 import classnames from 'classnames'
 import '../styles/results.scss'
-import { saveSearch, updateConsole } from '../redux/modules/results'
+import { saveSearch, updateConsole, updateTab } from '../redux/modules/results'
 import { bindActionCreators } from 'redux'
 import Constants from '../utils/Constants.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -45,7 +45,6 @@ import {
   faAndroid
 } from '@fortawesome/free-brands-svg-icons'
 import { runInThisContext } from 'vm'
-import { updateTab } from '../redux/modules/results'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 const mapStateToProps = state => ({
