@@ -78,10 +78,6 @@ li a:hover {
     text-align: left;
 }
 
-p {
-    padding: 2%;
-}
-
 .subtitles{
     font-size: 150%;
     padding: 2%;
@@ -89,6 +85,36 @@ p {
     margin-left: auto;
     margin-right: auto;
     min-width: 225px;
+    font-family: 'Cabin', sans-serif;
+}
+
+.mspace{
+    margin-bottom: 10%;
+}
+
+img{
+    border-radius: 10px;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.cleared{
+    border: 0px;
+    padding-bottom: 20px;
+    box-shadow: None;
+}
+
+.padded{
+    padding-right: 10%;
+    padding-left: 10%;
+}
+
+.imageCentered {
+    text-align: center;
+    display: inline-table;
+}
+
+.buttonpad{
+    margin: 2%;
     font-family: 'Cabin', sans-serif;
 }
 
