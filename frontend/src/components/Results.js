@@ -25,7 +25,7 @@ import {
 } from 'reactstrap'
 import classnames from 'classnames'
 import '../styles/results.scss'
-import { saveSearch } from '../redux/modules/results'
+import { saveSearch, updateConsole, updateTab } from '../redux/modules/results'
 import { bindActionCreators } from 'redux'
 import Constants from '../utils/Constants.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -45,7 +45,6 @@ import {
   faAndroid
 } from '@fortawesome/free-brands-svg-icons'
 import { runInThisContext } from 'vm'
-import { updateTab } from '../redux/modules/results'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 const mapStateToProps = state => ({
@@ -63,7 +62,8 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       saveSearch,
-      updateTab
+      updateTab,
+      updateConsole
     },
     dispatch
   )
@@ -80,6 +80,7 @@ class Results extends Component {
     }
     this.updateTab = this.updateTab
   }
+
   determineConsoles = results => {
     let ret = []
     Object.getOwnPropertyNames(results).map(x => (results[x].length > 0 ? ret.push(x) : null))
@@ -124,6 +125,7 @@ class Results extends Component {
   render() {
     return (
       <div className="results-background">
+        <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" />
         <div className="resultsBox">
           <h3 className="resultsText">Results found:</h3>
           <div align="center">

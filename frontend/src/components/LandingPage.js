@@ -10,10 +10,7 @@ class LandingPage extends Component {
   render() {
     return (
       <div className="backgroundL">
-        <link
-          href="https://fonts.googleapis.com/css?family=Poppins|Source+Sans+Pro"
-          rel="stylesheet"
-        />
+        <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" />
         <img className="cleared2"
               src={require('../styles/cplogogreen.png')}
               alt="Child's Play logo"
