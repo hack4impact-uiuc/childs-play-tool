@@ -25,7 +25,7 @@ def search_game_by_name():
     games = Game.query.filter(func.lower(Game.name).contains(name.lower()))
     systems = {}
     for system in Game.system.type.enums:
-        games_by_system = games.filter(Game.system == system).all()
+        games_by_system = games.filter(Game.system == system).order_by(Game.name).all()
         if len(games_by_system) != 0:
             systems[system] = [get_game_dict(game) for game in games_by_system]
             all_empty = False

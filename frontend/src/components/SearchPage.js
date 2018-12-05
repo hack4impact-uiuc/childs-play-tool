@@ -5,9 +5,11 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { DropdownButton, SearchBarCustom } from './'
 import { updateField } from '../redux/modules/searchpage'
-import { updateResults, getSavedSearch } from '../redux/modules/results'
+import { updateResults, getSavedSearch, endLoading, beginLoading } from '../redux/modules/results'
 import { Button, Label, Modal, ModalBody, ModalFooter } from 'reactstrap'
 import { getGames, getGamesByName } from '../utils/ApiWrapper'
+import { updateConsole } from '../redux/modules/results'
+// import '../styles/styles.scss'
 import '../styles/searchpage.scss'
 
 const mapStateToProps = state => ({
@@ -25,7 +27,10 @@ const mapDispatchToProps = dispatch => {
     {
       updateField,
       updateResults,
-      getSavedSearch
+      updateConsole,
+      getSavedSearch,
+      beginLoading,
+      endLoading
     },
     dispatch
   )
@@ -46,12 +51,21 @@ class SearchPage extends Component {
   }
 
   handleSubmit = () => {
-    getGamesByName(this.props.nameSearchField).then(results =>
+    this.props.beginLoading()
+    getGamesByName(this.props.nameSearchField).then(results => {
       this.props.updateResults({
         games: results,
         query: { search: this.props.nameSearchField }
       })
-    )
+      if (results && Object.keys(results).length > 0) {
+        this.props.updateConsole(Object.keys(results)[0])
+      }
+      this.props.endLoading()
+    })
+  }
+
+  componentDidMount() {
+    this.props.updateField('nameSearchField', '')
   }
 
   render() {
@@ -60,29 +74,34 @@ class SearchPage extends Component {
     }
     return (
       <div className="background">
-        <link
-          href="https://fonts.googleapis.com/css?family=Poppins|Source+Sans+Pro"
-          rel="stylesheet"
-        />
+        <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" />
         <h3 className="homeText">
           Child&#39;s Play
           <br />
           Therapeutic Video Game Guide
         </h3>
+        <hr />
         <div className="searchPage">
           <Label for="nameSearch">Search By Name</Label> <br />
           <div className="nameSearch">
             <SearchBarCustom
               fieldName="nameSearchField"
-              onSubmit={() => {
-                this.handleSubmit()
-                this.setState({ redirect: true })
+              onSubmit={e => {
+                e.preventDefault()
+                if (this.props.nameSearchField !== '') {
+                  this.handleSubmit()
+                  this.setState({ redirect: true })
+                }
               }}
             />
           </div>
           <div className="nameSearch">
             <Link to={{ pathname: './Results' }}>
-              <Button className="right" onClick={this.handleSubmit}>
+              <Button
+                className="right"
+                onClick={this.handleSubmit}
+                disabled={this.props.nameSearchField === ''}
+              >
                 Search
               </Button>
             </Link>
@@ -106,8 +125,8 @@ class SearchPage extends Component {
           <Link
             to={
               this.props.age != 'Age*' && this.props.symptom != 'Symptom*'
-                ? { pathname: './results' }
-                : ''
+                ? { pathname: '/results' }
+                : { pathname: '/search' }
             }
           >
             <Button
@@ -115,13 +134,14 @@ class SearchPage extends Component {
               color="blue"
               onClick={
                 this.props.age != 'Age*' && this.props.symptom != 'Symptom*'
-                  ? e =>
+                  ? e => {
+                      this.props.beginLoading()
                       getGames(
                         this.props.age,
                         this.props.symptom,
                         this.props.system,
                         this.props.gender
-                      ).then(results =>
+                      ).then(results => {
                         this.props.updateResults({
                           games: results,
                           query: {
@@ -130,7 +150,12 @@ class SearchPage extends Component {
                             gender: this.props.gender
                           }
                         })
-                      )
+                        if (results && Object.keys(results).length > 0) {
+                          this.props.updateConsole(Object.keys(results)[0])
+                        }
+                        this.props.endLoading()
+                      })
+                    }
                   : this.toggle
               }
             >
@@ -165,10 +190,6 @@ class SearchPage extends Component {
               </Button>
             </Link>
           </div>
-          <hr />
-          <Link className="loginLink" to={{ pathname: './directorPage' }}>
-            <Button className="adminButton">Admin Login</Button>
-          </Link>
         </div>
       </div>
     )

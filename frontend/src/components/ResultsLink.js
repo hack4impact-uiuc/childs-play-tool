@@ -2,7 +2,7 @@ import queryString from 'query-string'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { updateResults } from '../redux/modules/results'
+import { updateResults, beginLoading, endLoading } from '../redux/modules/results'
 import { getGames, getGamesByName } from '../utils/ApiWrapper'
 import { Redirect } from 'react-router'
 
@@ -17,7 +17,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      updateResults
+      updateResults,
+      beginLoading,
+      endLoading
     },
     dispatch
   )
@@ -25,16 +27,19 @@ const mapDispatchToProps = dispatch => {
 class ResultsLink extends Component {
   vals = queryString.parse(this.props.location.search)
   nameSearch = () => {
-    getGamesByName(this.vals.name).then(results =>
+    this.props.beginLoading()
+    getGamesByName(this.vals.name).then(results => {
       this.props.updateResults({
         games: results,
         query: { search: this.vals.name }
       })
-    )
+      this.props.endLoading()
+    })
     return <Redirect to="/Results" />
   }
   filterSearch = () => {
-    getGames(this.vals.age, this.vals.symptom, this.vals.system, this.vals.gender).then(results =>
+    this.props.beginLoading()
+    getGames(this.vals.age, this.vals.symptom, this.vals.system, this.vals.gender).then(results => {
       this.props.updateResults({
         games: results,
         query: {
@@ -43,7 +48,8 @@ class ResultsLink extends Component {
           gender: this.vals.gender
         }
       })
-    )
+      this.props.endLoading()
+    })
     return <Redirect to="/Results" />
   }
   render() {
