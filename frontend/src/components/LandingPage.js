@@ -7,6 +7,30 @@ import { Button, Container, Col, Row, Media } from 'reactstrap'
 import '../styles/landingpage.scss'
 
 class LandingPage extends Component {
+  constructor(props) {
+    super(props)
+
+    // this.contactRef = React.createRef()
+    // this.howtoRef = React.createRef()
+  }
+
+  componentDidMount() {
+    // if (this.props.location.hash === '#Contacts') {
+    //   window.scrollTo({
+    //     top: this.contactRef.current.offsetTop,
+    //     behavior: "auto"
+    //   })
+    // } else if (this.props.location.hash === '#HowToUse') {
+    //   window.scrollTo({
+    //     top: this.howtoRef.current.offsetTop,
+    //     behavior: "auto"
+    //   })
+    // }
+    if (this.props.location.hash) {
+      document.querySelector(this.props.location.hash).scrollIntoView()
+    }
+  }
+
   render() {
     return (
       <div className="backgroundL">
@@ -35,7 +59,7 @@ class LandingPage extends Component {
         </div>
         <div className="line" />
 
-        <Container id="HowToUse" className="separator">
+        <Container id="HowToUse" className="separator" ref={this.howtoRef}>
           <h3 className="homeText2L">How to Use</h3>
           <Row className="mspace imageCentered">
             <p className="padded">
@@ -129,7 +153,7 @@ class LandingPage extends Component {
         </Container>
         <div className="line" />
 
-        <Container id="Contacts" className="separator">
+        <Container id="Contacts" className="separator" ref={this.contactRef}>
           <Row>
             <Col>
               <h3> About Child&#39;s Play</h3>

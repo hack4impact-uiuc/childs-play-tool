@@ -56,7 +56,8 @@ const mapStateToProps = state => ({
   gender: state.results.query.gender,
   search: state.results.query.search,
   activeTab: state.results.activeTab,
-  allGames: state.results.allGames
+  allGames: state.results.allGames,
+  loading: state.results.loading
 })
 
 const mapDispatchToProps = dispatch => {
@@ -124,6 +125,9 @@ class Results extends Component {
     this.setState({ copied: true })
   }
   render() {
+    if (this.props.loading) {
+      return <div>Loading</div>
+    }
     return (
       <div className="results-background">
         <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" />
