@@ -34,7 +34,8 @@ import {
   faHome,
   faClipboard,
   faClipboardCheck,
-  faSearch
+  faSearch,
+  faSpinner
 } from '@fortawesome/free-solid-svg-icons'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
@@ -117,7 +118,11 @@ class Results extends Component {
   }
   render() {
     if (this.props.loading) {
-      return <div>Loading</div>
+      return (
+        <div>
+          <FontAwesomeIcon icon={faSpinner} /> Loading...
+        </div>
+      )
     }
     return (
       <div className="results-background">
@@ -182,7 +187,7 @@ class Results extends Component {
                 <div className="saveSearch">
                   <Form>
                     <FormGroup>
-                      <Label for="exampleSearch">Save Search</Label>
+                      <Label for="exampleSearch">Save/Share Search</Label>
                       <InputGroup>
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText>
