@@ -25,7 +25,14 @@ import {
 } from 'reactstrap'
 import classnames from 'classnames'
 import '../styles/results.scss'
-import { saveSearch, updateConsole, updateTab, updateResultsAll } from '../redux/modules/results'
+import {
+  saveSearch,
+  updateConsole,
+  updateTab,
+  updateResultsAll,
+  beginLoading,
+  endLoading
+} from '../redux/modules/results'
 import { bindActionCreators } from 'redux'
 import Constants from '../utils/Constants.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -70,7 +77,9 @@ const mapDispatchToProps = dispatch => {
       saveSearch,
       updateTab,
       updateConsole,
-      updateResultsAll
+      updateResultsAll,
+      beginLoading,
+      endLoading
     },
     dispatch
   )
@@ -138,6 +147,7 @@ class Results extends Component {
   }
 
   displayIncompleteGames = () => {
+    this.props.beginLoading()
     getIncompleteGames().then(results => {
       this.props.updateResultsAll({
         games: results,
@@ -147,10 +157,12 @@ class Results extends Component {
       this.setState({
         incompleteGamesView: true
       })
+      this.props.endLoading()
     })
   }
 
   displayAllGames = () => {
+    this.props.beginLoading()
     getAllGames().then(results => {
       this.props.updateResultsAll({
         games: results,
@@ -158,6 +170,7 @@ class Results extends Component {
       })
       this.props.updateConsole(Object.keys(results)[0])
       this.setState({ incompleteGamesView: false })
+      this.props.endLoading()
     })
   }
 
