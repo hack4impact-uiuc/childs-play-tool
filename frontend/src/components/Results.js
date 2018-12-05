@@ -36,7 +36,8 @@ import {
   faHome,
   faClipboard,
   faClipboardCheck,
-  faSmile
+  faSmile,
+  faFrown
 } from '@fortawesome/free-solid-svg-icons'
 import {
   faNintendoSwitch,
@@ -250,13 +251,6 @@ class Results extends Component {
                   ))}
                 </TabContent>
               </div>
-              {this.props.allGames &&
-              this.state.incompleteGamesView &&
-              this.state.noIncompleteGames ? (
-                <h4 className="noIncompleteGamesText">
-                  No Incomplete Games <FontAwesomeIcon icon={faSmile} />
-                </h4>
-              ) : null}
               {this.props.allGames ? null : (
                 <div className="saveSearch">
                   <Form>
@@ -330,8 +324,14 @@ class Results extends Component {
               )}
               <hr />
             </div>
+          ) : this.props.allGames && this.state.noIncompleteGames ? (
+            <h4 className="noIncompleteGamesText">
+              No incomplete games <FontAwesomeIcon icon={faSmile} />
+            </h4>
           ) : (
-            <div>No matching results :(</div>
+            <h4 className="noIncompleteGamesText">
+              No results found <FontAwesomeIcon icon={faFrown} />
+            </h4>
           )}
           {this.props.allGames ? null : (
             <Link to={{ pathname: './search' }}>
