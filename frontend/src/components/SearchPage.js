@@ -124,7 +124,7 @@ class SearchPage extends Component {
           <br />
           <Link
             to={
-              this.props.age != 'Age*' && this.props.symptom != 'Symptom*'
+              this.props.age !== 'Age*' && this.props.symptom !== 'Symptom*'
                 ? { pathname: '/results' }
                 : { pathname: '/search' }
             }
@@ -132,7 +132,7 @@ class SearchPage extends Component {
             <Button
               className="searchButton"
               onClick={
-                this.props.age != 'Age*' && this.props.symptom != 'Symptom*'
+                this.props.age !== 'Age*' && this.props.symptom !== 'Symptom*'
                   ? e => {
                       this.props.beginLoading()
                       getGames(

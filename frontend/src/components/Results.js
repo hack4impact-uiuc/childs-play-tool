@@ -134,18 +134,18 @@ class Results extends Component {
             <h3 className="resultsText">Results found:</h3>
           )}
           <div align="center">
-            {this.props.age && this.props.age != 'Age*' ? (
+            {this.props.age && this.props.age !== 'Age*' ? (
               <Tag type={'age'} tag={this.props.age} />
             ) : null}
-            {this.props.symptom && this.props.symptom != 'Symptom*' ? (
+            {this.props.symptom && this.props.symptom !== 'Symptom*' ? (
               <Tag type={'symptom'} tag={this.props.symptom} />
             ) : null}
             {this.props.gender &&
-            this.props.gender != 'No Discernable Gender' &&
-            this.props.gender != 'Character Gender' ? (
+            this.props.gender !== 'No Discernable Gender' &&
+            this.props.gender !== 'Character Gender' ? (
               <Tag type={'gender'} tag={this.props.gender} />
             ) : null}
-            {this.props.search && this.props.search != '' ? (
+            {this.props.search && this.props.search !== '' ? (
               <h4> You searched for: {this.props.search} </h4>
             ) : null}
           </div>
