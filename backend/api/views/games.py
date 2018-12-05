@@ -133,7 +133,8 @@ def get_games_all():
         games_by_system = (
             Game.query.filter(Game.system == system).order_by(Game.name).all()
         )
-        systems[system] = [get_game_dict(game) for game in games_by_system]
+        if len(games_by_system) > 0:
+            systems[system] = [get_game_dict(game) for game in games_by_system]
     return create_response(status=200, data={"games": systems})
 
 
@@ -448,5 +449,6 @@ def get_incomplete_games():
         games_by_system = (
             missing_description.union(missing_image).order_by(Game.name).all()
         )
-        systems[system] = [get_game_dict(game) for game in games_by_system]
+        if len(games_by_system) > 0:
+            systems[system] = [get_game_dict(game) for game in games_by_system]
     return create_response(status=200, data={"games": systems})
