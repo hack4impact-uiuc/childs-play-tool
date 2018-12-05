@@ -132,7 +132,9 @@ class SearchPage extends Component {
                             gender: this.props.gender
                           }
                         })
-                        this.props.updateConsole(Object.keys(results)[0])
+                        if (results && Object.keys(results).length > 0) {
+                          this.props.updateConsole(Object.keys(results)[0])
+                        }
                       })
                   : this.toggle
               }

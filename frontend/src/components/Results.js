@@ -162,11 +162,13 @@ class Results extends Component {
                   />
                 </div>
                 <div style={{ float: 'left' }}>
-                  <Link to={{ pathname: './search' }}>
-                    <Button className="homeButton">
-                      <FontAwesomeIcon icon={faHome} /> Search Again
-                    </Button>
-                  </Link>
+                  {this.props.allGames ? null : (
+                    <Link to={{ pathname: './search' }}>
+                      <Button className="homeButton">
+                        <FontAwesomeIcon icon={faHome} /> Search Again
+                      </Button>
+                    </Link>
+                  )}
                 </div>
               </div>
               <br />
