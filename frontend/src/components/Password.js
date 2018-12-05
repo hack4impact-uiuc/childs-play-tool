@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
-import styles from '../styles/styles.scss'
+import styles from '../styles/password.scss'
 import { Button } from 'reactstrap'
 import { login } from '../redux/modules/auth'
 
@@ -38,9 +38,10 @@ class Password extends Component {
   render() {
     return (
       <div className="passwordPageBackground">
+        <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" />
         <div className="passwordPage">
           <p> Welcome Administrators. Enter your key to continue: </p>
-          <form>
+          <form onSubmit={this.authenticate}>
             <label className="passwordEnter">
               <span> Key: </span>
               <input className="inputKey" onChange={this.changedKey} />

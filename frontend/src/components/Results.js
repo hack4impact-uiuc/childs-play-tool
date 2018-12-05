@@ -25,7 +25,7 @@ import {
 } from 'reactstrap'
 import classnames from 'classnames'
 import '../styles/results.scss'
-import { saveSearch } from '../redux/modules/results'
+import { saveSearch, updateConsole, updateTab } from '../redux/modules/results'
 import { bindActionCreators } from 'redux'
 import Constants from '../utils/Constants.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -44,6 +44,7 @@ import {
   faApple,
   faAndroid
 } from '@fortawesome/free-brands-svg-icons'
+import { runInThisContext } from 'vm'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 const mapStateToProps = state => ({
@@ -53,13 +54,18 @@ const mapStateToProps = state => ({
   age: state.results.query.age,
   symptom: state.results.query.symptom,
   gender: state.results.query.gender,
-  search: state.results.query.search
+  search: state.results.query.search,
+  activeTab: state.results.activeTab,
+  allGames: state.results.allGames,
+  loading: state.results.loading
 })
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      saveSearch
+      saveSearch,
+      updateTab,
+      updateConsole
     },
     dispatch
   )
@@ -69,13 +75,14 @@ class Results extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      activeTab: '1',
+      activeTab: this.props.activeTab,
       saveName: '',
       modal: false,
       copied: false
     }
     this.updateTab = this.updateTab
   }
+
   determineConsoles = results => {
     let ret = []
     Object.getOwnPropertyNames(results).map(x => (results[x].length > 0 ? ret.push(x) : null))
@@ -89,10 +96,8 @@ class Results extends Component {
     this.setState({ modal: !this.state.modal })
   }
   updateTab = tab => {
-    if (this.state.activeTab !== tab) {
-      this.setState({
-        activeTab: tab
-      })
+    if (this.props.activeTab !== tab) {
+      this.props.updateTab({ activeTab: tab })
     }
   }
   buildCards = games =>
@@ -120,10 +125,18 @@ class Results extends Component {
     this.setState({ copied: true })
   }
   render() {
+    if (this.props.loading) {
+      return <div>Loading</div>
+    }
     return (
       <div className="results-background">
+        <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" />
         <div className="resultsBox">
-          <h3 className="resultsText">Results found:</h3>
+          {this.props.allGames ? (
+            <h3 className="resultsText">All Games</h3>
+          ) : (
+            <h3 className="resultsText">Results found:</h3>
+          )}
           <div align="center">
             {this.props.age && this.props.age != 'Age*' ? (
               <Tag type={'age'} tag={this.props.age} />
@@ -142,15 +155,31 @@ class Results extends Component {
           </div>
           {this.props.results ? (
             <div>
-              <div className="cardBox">
-                <div align="right">
+              <div>
+                <div style={{ float: 'right' }}>
                   <DropdownButton
-                    title={this.determineConsoles(this.props.results)[0]}
+                    title={
+                      this.determineConsoles(this.props.results)[parseInt(this.props.activeTab) - 1]
+                    }
                     items={this.determineConsoles(this.props.results)}
                     updateTabConsole={this.updateTab}
                   />
                 </div>
-                <TabContent activeTab={this.state.activeTab}>
+                <div style={{ float: 'left' }}>
+                  {this.props.allGames ? null : (
+                    <Link to={{ pathname: './search' }}>
+                      <Button className="homeButton">
+                        <FontAwesomeIcon icon={faHome} /> Search Again
+                      </Button>
+                    </Link>
+                  )}
+                </div>
+              </div>
+              <br />
+              <br />
+              <hr style={{ clear: 'both' }} />
+              <div>
+                <TabContent activeTab={this.props.activeTab}>
                   {this.determineConsoles(this.props.results).map((x, index) => (
                     <TabPane tabId={(index + 1).toString()}>
                       <Col>{this.buildCards(this.props.results[x])}</Col>
@@ -158,76 +187,89 @@ class Results extends Component {
                   ))}
                 </TabContent>
               </div>
-              <div className="saveSearch">
-                <Form>
-                  <FormGroup>
-                    <Label for="exampleSearch">Save Search</Label>
-                    <InputGroup>
-                      <InputGroupAddon addonType="prepend">
-                        <InputGroupText>
-                          <FontAwesomeIcon icon={faSave} />
-                        </InputGroupText>
-                      </InputGroupAddon>
-                      <Input
-                        type="text"
-                        name="saveName"
-                        id="saveName"
-                        placeholder="Input Name"
-                        onChange={e => {
-                          this.setState({ saveName: e.target.value })
-                        }}
-                      />
-                    </InputGroup>
-                  </FormGroup>
-                  <Button
-                    className="resultButtons"
-                    onClick={() => {
-                      this.saveSearch(this.state.saveName, this.props.results)
-                      this.toggleModal()
-                    }}
-                  >
-                    Save Search
-                  </Button>
-                  <br />
-                  <br />
-                  <CopyToClipboard
-                    text={this.resultsURL(
-                      this.props.search,
-                      this.props.age,
-                      this.props.symptom,
-                      this.props.gender,
-                      this.props.system
-                    )}
-                  >
-                    <Button className="resultButtons" onClick={this.toggleClipboard}>
-                      {this.state.copied ? (
-                        <FontAwesomeIcon icon={faClipboardCheck} />
-                      ) : (
-                        <FontAwesomeIcon icon={faClipboard} />
-                      )}{' '}
-                      Copy Search URL
+              {this.props.allGames ? null : (
+                <div className="saveSearch">
+                  <Form>
+                    <FormGroup>
+                      <Label for="exampleSearch">Save Search</Label>
+                      <InputGroup>
+                        <InputGroupAddon addonType="prepend">
+                          <InputGroupText>
+                            <FontAwesomeIcon icon={faSave} />
+                          </InputGroupText>
+                        </InputGroupAddon>
+                        <Input
+                          type="text"
+                          name="saveName"
+                          id="saveName"
+                          placeholder="Input Name"
+                          onChange={e => {
+                            this.setState({ saveName: e.target.value })
+                          }}
+                        />
+                      </InputGroup>
+                    </FormGroup>
+                    <Button
+                      className="resultButtons"
+                      onClick={() => {
+                        let resultsAndQuery = {
+                          query: {
+                            age: this.props.age,
+                            system: this.props.consoles,
+                            symptom: this.props.symptom,
+                            gender: this.props.gender
+                          },
+                          results: this.props.results
+                        }
+                        this.props.saveSearch(this.state.saveName, resultsAndQuery)
+                        this.toggleModal()
+                      }}
+                    >
+                      Save Search
                     </Button>
-                  </CopyToClipboard>
-                  <Modal isOpen={this.state.modal}>
-                    <ModalBody>Search saved successfully!</ModalBody>
-                    <ModalFooter>
-                      <Button color="primary" onClick={this.toggleModal}>
-                        Dismiss
+                    <br />
+                    <br />
+                    <CopyToClipboard
+                      text={this.resultsURL(
+                        this.props.search,
+                        this.props.age,
+                        this.props.symptom,
+                        this.props.gender,
+                        this.props.system
+                      )}
+                    >
+                      <Button className="resultButtons" onClick={this.toggleClipboard}>
+                        {this.state.copied ? (
+                          <FontAwesomeIcon icon={faClipboardCheck} />
+                        ) : (
+                          <FontAwesomeIcon icon={faClipboard} />
+                        )}{' '}
+                        Copy Search URL
                       </Button>
-                    </ModalFooter>
-                  </Modal>
-                </Form>
-              </div>
+                    </CopyToClipboard>
+                    <Modal isOpen={this.state.modal}>
+                      <ModalBody>Search saved successfully!</ModalBody>
+                      <ModalFooter>
+                        <Button color="primary" onClick={this.toggleModal}>
+                          Dismiss
+                        </Button>
+                      </ModalFooter>
+                    </Modal>
+                  </Form>
+                </div>
+              )}
               <hr />
             </div>
           ) : (
             <div>No matching results :(</div>
           )}
-          <Link to={{ pathname: './search' }}>
-            <Button className="homeButton">
-              <FontAwesomeIcon icon={faHome} /> Go Home
-            </Button>
-          </Link>
+          {this.props.allGames ? null : (
+            <Link to={{ pathname: './search' }}>
+              <Button className="homeButton">
+                <FontAwesomeIcon icon={faHome} /> Search Again
+              </Button>
+            </Link>
+          )}
         </div>
       </div>
     )

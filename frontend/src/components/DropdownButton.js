@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Constants from '../utils/Constants'
 import { updateField } from '../redux/modules/searchpage'
+import { updateConsole } from '../redux/modules/results'
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
 import '../styles/styles.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -16,13 +17,17 @@ import {
 } from '@fortawesome/free-brands-svg-icons'
 
 const mapStateToProps = state => ({
-  savedSearches: state.results.searches
+  savedSearches: state.results.searches,
+  results: state.results.games,
+  currentConsole: state.results.currentConsole,
+  activeTab: state.results.activeTab
 })
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      updateField
+      updateField,
+      updateConsole
     },
     dispatch
   )
@@ -32,7 +37,9 @@ class DropdownButton extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      consoleSelectedVal: null,
+      consoleSelectedVal: this.props.items
+        ? this.props.items[parseInt(this.props.activeTab) - 1]
+        : '',
       selectedVal: this.props.title,
       dropdownOpen: false
     }
@@ -86,7 +93,7 @@ class DropdownButton extends Component {
             {this.state.consoleSelectedVal
               ? this.state.consoleSelectedVal
               : this.props.items
-                ? this.props.items[0]
+                ? this.props.items[parseInt(this.props.activeTab) - 1]
                 : this.state.selectedVal}
           </DropdownToggle>
           <DropdownMenu right>
@@ -102,6 +109,7 @@ class DropdownButton extends Component {
                         )
                       })
                       this.props.updateTabConsole((index + 1).toString())
+                      this.props.updateConsole(item)
                     }}
                   >
                     {item} {this.chooseImage(item)}

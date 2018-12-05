@@ -167,7 +167,7 @@ def post_games():
                 # Iterates through the rankings of a specific symptom and category until the end
                 while name != "":
                     # Checks if the game has already been found
-                    if name not in game_info_dict[system]:
+                    if name.lower() not in game_info_dict[system]:
                         game = {}
                         game["system"] = system
                         game["name"] = name
@@ -183,7 +183,7 @@ def post_games():
                         game["current"] = True
                         g = Game(game)
                         db.session.add(g)
-                        game_info_dict[system][name] = {"id": id}
+                        game_info_dict[system][name.lower()] = {"id": id}
                         id = id + 1
                     current_row += 1
                     # Breaks out of the loop if we have reached the end of the sheet
@@ -202,13 +202,13 @@ def post_games():
     old_games = db.session.query(Game).all()
     for old_game in old_games:
         # if game has not been found in new spreadsheet
-        if old_game.name not in game_info_dict[old_game.system]:
+        if old_game.name.lower() not in game_info_dict[old_game.system]:
             old_game_dict = old_game.to_dict()
             old_game_dict["id"] = id
             old_game_dict["current"] = False
             id = id + 1
             # define tags for ranking purposes
-            game_info_dict[old_game.system][old_game.name] = {
+            game_info_dict[old_game.system][old_game.name.lower()] = {
                 "ages": [
                     age[0]
                     for age in db.session.query(Ranking.age)
@@ -272,7 +272,7 @@ def post_games():
                         ).strip()
                         if len(name) != 0:
                             # fetch id from dict
-                            game_id = game_info_dict[system][name]["id"]
+                            game_id = game_info_dict[system][name.lower()]["id"]
                             ranking = {}
                             ranking["id"] = id
                             ranking["age"] = age
@@ -287,8 +287,10 @@ def post_games():
     for old_game in old_games:
         old_game_dict = old_game.to_dict()
         # create rankings behind all other for all age/symptom combinations
-        for age in game_info_dict[old_game.system][old_game.name]["ages"]:
-            for symptom in game_info_dict[old_game.system][old_game.name]["symptoms"]:
+        for age in game_info_dict[old_game.system][old_game.name.lower()]["ages"]:
+            for symptom in game_info_dict[old_game.system][old_game.name.lower()][
+                "symptoms"
+            ]:
                 ranking = {}
                 ranking["id"] = id
                 ranking["age"] = age
@@ -345,10 +347,10 @@ def get_giantbomb_data(game_name):
                     best_similarity = similarity
             if best_match["deck"] is not None:
                 gb_dict["description"] = best_match["deck"]
-            if best_match["image"]["icon_url"] is not None:
-                gb_dict["thumbnail"] = best_match["image"]["icon_url"]
             if best_match["image"]["small_url"] is not None:
-                gb_dict["image"] = best_match["image"]["small_url"]
+                image_url = best_match["image"]["small_url"]
+                gb_dict["image"] = image_url
+                gb_dict["thumbnail"] = image_url.replace("small", "tiny", 1)
         should_remove = True
     return gb_dict
 
