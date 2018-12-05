@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Tag from './Tag'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { DropdownButton } from './DropdownButton'
+import { DropdownButton } from './'
 import Card from './Card'
 import {
   TabContent,
@@ -30,21 +30,12 @@ import { bindActionCreators } from 'redux'
 import Constants from '../utils/Constants.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
-  faGamepad,
-  faVrCardboard,
   faSave,
   faHome,
   faClipboard,
-  faClipboardCheck
+  faClipboardCheck,
+  faSearch
 } from '@fortawesome/free-solid-svg-icons'
-import {
-  faNintendoSwitch,
-  faXbox,
-  faPlaystation,
-  faApple,
-  faAndroid
-} from '@fortawesome/free-brands-svg-icons'
-import { runInThisContext } from 'vm'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 const mapStateToProps = state => ({
@@ -169,7 +160,7 @@ class Results extends Component {
                   {this.props.allGames ? null : (
                     <Link to={{ pathname: './search' }}>
                       <Button className="homeButton">
-                        <FontAwesomeIcon icon={faHome} /> Search Again
+                        <FontAwesomeIcon icon={faSearch} /> Search Again
                       </Button>
                     </Link>
                   )}
@@ -266,7 +257,7 @@ class Results extends Component {
           {this.props.allGames ? null : (
             <Link to={{ pathname: './search' }}>
               <Button className="homeButton">
-                <FontAwesomeIcon icon={faHome} /> Search Again
+                <FontAwesomeIcon icon={faSearch} /> Search Again
               </Button>
             </Link>
           )}
