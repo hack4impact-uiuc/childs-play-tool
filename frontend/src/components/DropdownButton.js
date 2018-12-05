@@ -37,9 +37,14 @@ class DropdownButton extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      consoleSelectedVal: this.props.items
-        ? <div style={{display: 'inline-block'}}>{this.props.items[parseInt(this.props.activeTab) - 1]} {this.chooseImage(this.props.items[parseInt(this.props.activeTab) - 1])}</div>
-        : '',
+      consoleSelectedVal: this.props.items ? (
+        <div style={{ display: 'inline-block' }}>
+          {this.props.items[parseInt(this.props.activeTab) - 1]}{' '}
+          {this.chooseImage(this.props.items[parseInt(this.props.activeTab) - 1])}
+        </div>
+      ) : (
+        ''
+      ),
       selectedVal: this.props.title,
       dropdownOpen: false
     }
@@ -88,9 +93,7 @@ class DropdownButton extends Component {
       <div>
         <Dropdown className="dropdown" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
           <DropdownToggle color="success" caret>
-            {this.state.consoleSelectedVal
-              ? this.state.consoleSelectedVal
-              : this.state.selectedVal}
+            {this.state.consoleSelectedVal ? this.state.consoleSelectedVal : this.state.selectedVal}
           </DropdownToggle>
           <DropdownMenu right>
             {this.props.items
@@ -99,7 +102,7 @@ class DropdownButton extends Component {
                     onClick={e => {
                       this.setState({
                         consoleSelectedVal: (
-                          <div style={{display: 'inline-block'}}>
+                          <div style={{ display: 'inline-block' }}>
                             {item} {this.chooseImage(item)}
                           </div>
                         )
