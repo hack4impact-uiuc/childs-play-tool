@@ -70,7 +70,7 @@ class SearchPage extends Component {
 
   render() {
     if (this.state.redirect) {
-      return <Redirect push to="./Results" />
+      return <Redirect push to="./results" />
     }
     return (
       <div className="background">
@@ -96,7 +96,7 @@ class SearchPage extends Component {
             />
           </div>
           <div className="nameSearch">
-            <Link to={{ pathname: './Results' }}>
+            <Link to={{ pathname: './results' }}>
               <Button
                 className="right"
                 onClick={this.handleSubmit}
@@ -131,7 +131,6 @@ class SearchPage extends Component {
           >
             <Button
               className="searchButton"
-              color="blue"
               onClick={
                 this.props.age != 'Age*' && this.props.symptom != 'Symptom*'
                   ? e => {
@@ -179,14 +178,14 @@ class SearchPage extends Component {
             <DropdownButton title="Saved Searches" fieldName="selectedSaveSearch" />
           </div>
           <div className="saveSearch">
-            <Link to={{ pathname: './Results' }}>
+            <Link to={{ pathname: './results' }}>
               <Button
-                color="blue"
+                className="searchButton"
                 onClick={e => {
                   this.props.getSavedSearch(this.props.selectedVal)
                 }}
               >
-                Load saved search
+                Load Saved Search
               </Button>
             </Link>
           </div>
