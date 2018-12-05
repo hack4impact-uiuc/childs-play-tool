@@ -59,7 +59,8 @@ const mapStateToProps = state => ({
   search: state.results.query.search,
   activeTab: state.results.activeTab,
   allGames: state.results.allGames,
-  authenticated: state.auth.authenticated
+  authenticated: state.auth.authenticated,
+  loading: state.results.loading
 })
 
 const mapDispatchToProps = dispatch => {
@@ -162,6 +163,9 @@ class Results extends Component {
   }
 
   render() {
+    if (this.props.loading) {
+      return <div>Loading</div>
+    }
     return (
       <div className="results-background">
         <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" />
