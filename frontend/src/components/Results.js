@@ -84,8 +84,7 @@ class Results extends Component {
       saveName: '',
       modal: false,
       copied: false,
-      incompleteGamesView: false,
-      noIncompleteGames: false
+      incompleteGamesView: false
     }
     this.updateTab = this.updateTab
   }
@@ -146,8 +145,7 @@ class Results extends Component {
       })
       this.props.updateConsole(Object.keys(results)[0])
       this.setState({
-        incompleteGamesView: true,
-        noIncompleteGames: results.length == 0
+        incompleteGamesView: true
       })
     })
   }
@@ -199,21 +197,15 @@ class Results extends Component {
           {this.props.results ? (
             <div>
               <div>
-                {this.props.allGames &&
-                this.state.incompleteGamesView &&
-                this.state.noIncompleteGames ? null : (
-                  <div style={{ float: 'right' }}>
-                    <DropdownButton
-                      title={
-                        this.determineConsoles(this.props.results)[
-                          parseInt(this.props.activeTab) - 1
-                        ]
-                      }
-                      items={this.determineConsoles(this.props.results)}
-                      updateTabConsole={this.updateTab}
-                    />
-                  </div>
-                )}
+                <div style={{ float: 'right' }}>
+                  <DropdownButton
+                    title={
+                      this.determineConsoles(this.props.results)[parseInt(this.props.activeTab) - 1]
+                    }
+                    items={this.determineConsoles(this.props.results)}
+                    updateTabConsole={this.updateTab}
+                  />
+                </div>
                 <div style={{ float: 'left' }}>
                   {this.props.allGames ? (
                     this.props.authenticated ? (
@@ -324,12 +316,12 @@ class Results extends Component {
               )}
               <hr />
             </div>
-          ) : this.props.allGames && this.state.noIncompleteGames ? (
+          ) : this.props.allGames && this.state.incompleteGamesView ? (
             <h4 className="noIncompleteGamesText">
               No incomplete games <FontAwesomeIcon icon={faSmile} />
             </h4>
           ) : (
-            <h4 className="noIncompleteGamesText">
+            <h4 className="noResultsFoundText">
               No results found <FontAwesomeIcon icon={faFrown} />
             </h4>
           )}
