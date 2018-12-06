@@ -6,9 +6,12 @@ import '../styles/update.scss'
 import { Button } from 'reactstrap'
 import { sendFile } from '../utils/ApiWrapper'
 import { UpdateStrings } from '../strings/english'
+import Loader from 'react-loader-spinner'
 
 const mapStateToProps = state => ({
-  authenticated: state.auth.authenticated
+  authenticated: state.auth.authenticated,
+  updates: state.auth.updates,
+  loading: state.auth.loading
 })
 
 class Update extends Component {
@@ -24,6 +27,17 @@ class Update extends Component {
   }
 
   render() {
+    if (this.props.loading) {
+      return (
+        <div
+          className="resultsText"
+          style={{ paddingTop: window.innerWidth >= 550 ? '10%' : '20%' }}
+        >
+          {UpdateStrings['loading']}
+          <Loader type="Puff" color="green" height="100" width="100" />
+        </div>
+      )
+    }
     return this.props.authenticated ? (
       <div
         className="dropPageBackground"
@@ -31,6 +45,23 @@ class Update extends Component {
       >
         <div className="dropPage">
           <section className="droppedBox">
+            {this.props.updates && this.props.updates.valid ? (
+              <text>
+                {UpdateStrings['lastUpdate']} {this.props.updates.valid.time}
+                <br />
+              </text>
+            ) : null}
+            {this.props.updates && this.props.updates.invalid ? (
+              <text>
+                {UpdateStrings['lastInvalidUpdate']} {this.props.updates.invalid.time}
+                <br />
+              </text>
+            ) : null}
+            {this.props.updates && (this.props.updates.valid || this.props.updates.invalid) ? (
+              <text>
+                <br />
+              </text>
+            ) : null}
             <h4>{UpdateStrings['purpose']}</h4>
             <div className="dropZone">
               <Dropzone onDrop={this.onDrop.bind(this)} className="dropBox">

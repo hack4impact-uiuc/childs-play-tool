@@ -143,6 +143,9 @@ export const UpdateStrings = {
   instructions: 'Drop excel file here or click to select files to upload',
   filesDropped: 'Files Dropped',
   uploadButton: 'Upload File',
+  loading: 'Loading',
+  lastUpdate: 'Database last updated at',
+  lastInvalidUpdate: 'Invalid attempt at',
   adminInstructions: 'Instructions',
   uploadInstructionsTitle: 'Uploading a File',
   uploadInstructions:

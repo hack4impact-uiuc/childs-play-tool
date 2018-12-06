@@ -5,17 +5,22 @@ import { Link } from 'react-router-dom'
 import '../styles/password.scss'
 import '../styles/styles.scss'
 import { Button } from 'reactstrap'
-import { login } from '../redux/modules/auth'
+import { login, loadUpdates, beginLoading, endLoading } from '../redux/modules/auth'
+import { getUpdates } from '../utils/ApiWrapper'
 import { PasswordStrings } from '../strings/english'
 
 const mapStateToProps = state => ({
-  authenticated: state.auth.authenticated
+  authenticated: state.auth.authenticated,
+  updates: state.auth.updates
 })
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      login
+      login,
+      loadUpdates,
+      beginLoading,
+      endLoading
     },
     dispatch
   )
@@ -35,6 +40,11 @@ class Password extends Component {
 
   authenticate = event => {
     this.props.login(this.state.key)
+    this.props.beginLoading()
+    getUpdates().then(results => {
+      this.props.loadUpdates(results)
+      this.props.endLoading()
+    })
   }
 
   render() {

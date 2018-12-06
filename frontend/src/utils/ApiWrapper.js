@@ -102,3 +102,16 @@ export const editGame = (gameId, description, image) => {
       }
     })
 }
+
+export const getUpdates = () => {
+  let requestString = BACKEND_URL + '/updates?key=' + BACKEND_KEY
+  return axios
+    .get(requestString)
+    .then(response => {
+      return response.data.result.updates
+    })
+    .catch(error => {
+      console.log('ERROR: ', error)
+      return null
+    })
+}

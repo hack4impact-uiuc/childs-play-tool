@@ -270,6 +270,14 @@ def test_post_games(client, **kwargs):
     ret_dict = json.loads(rs.data)
     assert ret_dict["message"] == "File not provided."
 
+    input_file = open("tests/conftest.py", "rb")
+    rs = client.post(
+        "/games", content_type="multipart/form-data", data={"file": input_file}
+    )
+    assert rs.status_code == 400
+    ret_dict = json.loads(rs.data)
+    assert ret_dict["message"] == "Invalid file format."
+
     input_file = open("tests/Sept2018Mod.xlsx", "rb")
     rs = client.post(
         "/games", content_type="multipart/form-data", data={"file": input_file}
@@ -304,3 +312,12 @@ def test_post_games(client, **kwargs):
         assert old_game_rankings.count() == 1
         for old_game_ranking in old_game_rankings:
             assert old_game_ranking.rank == 26
+
+    input_file = open("tests/Sept2018Invalid.xlsx", "rb")
+    rs = client.post(
+        "/games", content_type="multipart/form-data", data={"file": input_file}
+    )
+    assert rs.status_code == 400
+    ret_dict = json.loads(rs.data)
+    assert ret_dict["message"] == "Invalid file format."
+    assert Game.query.filter(Game.name == "FezFake").count() == 0
