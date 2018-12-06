@@ -50,7 +50,7 @@
 }
 .tagBox {
     width: 100%;
-    height: 60px;
+    height: 70px;
 }
 @media only screen and (max-width: 1000px) {
     .tagBox {
@@ -115,4 +115,8 @@
 .tag_symptom_cognitive {
     @extend .tag;
     background: #ccd7c2;
+}
+.tag_old_old {
+    @extend .tag;
+    background : sienna;
 }

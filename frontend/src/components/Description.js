@@ -158,6 +158,7 @@ class Description extends Component {
                   <Tag type={'symptom'} tag={t} />
                 ))
               : null}
+            {!this.props.location.state.game.current ? <Tag type={'old'} tag={'Old'} /> : null}
             <br />
           </div>
           <br />
