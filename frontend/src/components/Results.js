@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Tag from './Tag'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import DropdownButton from './DropdownButton'
+import { DropdownButton } from './'
 import Card from './Card'
 import {
   TabContent,
@@ -37,24 +37,18 @@ import { bindActionCreators } from 'redux'
 import Constants from '../utils/Constants.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
-  faGamepad,
-  faVrCardboard,
   faSave,
+  faGamepad,
   faHome,
+  faSmile,
+  faFrown,
   faClipboard,
   faClipboardCheck,
-  faSmile,
-  faFrown
+  faSearch,
+  faSpinner
 } from '@fortawesome/free-solid-svg-icons'
-import {
-  faNintendoSwitch,
-  faXbox,
-  faPlaystation,
-  faApple,
-  faAndroid
-} from '@fortawesome/free-brands-svg-icons'
-import { runInThisContext } from 'vm'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
+import Loader from 'react-loader-spinner'
 import { ResultsStrings } from '../strings/english'
 import { getAllGames, getIncompleteGames } from '../utils/ApiWrapper'
 
@@ -179,10 +173,21 @@ class Results extends Component {
 
   render() {
     if (this.props.loading) {
-      return <div>{ResultsStrings['loading']}</div>
+      return (
+        <div
+          className="resultsText"
+          style={{ paddingTop: window.innerWidth >= 550 ? '10%' : '20%' }}
+        >
+          {ResultsStrings['loading']}
+          <Loader type="Puff" color="green" height="100" width="100" />
+        </div>
+      )
     }
     return (
-      <div className="results-background">
+      <div
+        className="results-background"
+        style={{ paddingTop: window.innerWidth >= 550 ? '5%' : '20%' }}
+      >
         <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" />
         <div className="resultsBox">
           {this.props.allGames ? (
@@ -195,28 +200,38 @@ class Results extends Component {
             <h3 className="resultsText">{ResultsStrings['resultsFound']}</h3>
           )}
           <div align="center">
-            {this.props.age && this.props.age != ResultsStrings['age'] ? (
+            {this.props.age && this.props.age !== ResultsStrings['age'] ? (
               <Tag type={'age'} tag={this.props.age} />
             ) : null}
-            {this.props.symptom && this.props.symptom != ResultsStrings['symptom'] ? (
+            {this.props.symptom && this.props.symptom !== ResultsStrings['symptom'] ? (
               <Tag type={'symptom'} tag={this.props.symptom} />
             ) : null}
             {this.props.gender &&
-            this.props.gender != ResultsStrings['noGender'] &&
-            this.props.gender != ResultsStrings['gender'] ? (
+            this.props.gender !== ResultsStrings['noGender'] &&
+            this.props.gender !== ResultsStrings['gender'] ? (
               <Tag type={'gender'} tag={this.props.gender} />
             ) : null}
-            {this.props.search && this.props.search != '' ? (
+            {this.props.search && this.props.search !== '' ? (
               <h4>
                 {' '}
                 {ResultsStrings['resultsSearched']} {this.props.search}{' '}
               </h4>
             ) : null}
           </div>
+          <br />
           {this.props.results ? (
             <div>
               <div>
-                <div style={{ float: 'right' }}>
+                <div style={{ float: window.innerWidth >= 400 ? 'left' : '' }}>
+                  {this.props.allGames ? null : (
+                    <Link to={{ pathname: './search' }}>
+                      <Button className="homeButton">
+                        <FontAwesomeIcon icon={faSearch} /> Search Again
+                      </Button>
+                    </Link>
+                  )}
+                </div>
+                <div style={{ float: window.innerWidth >= 400 ? 'right' : '' }}>
                   <DropdownButton
                     title={
                       this.determineConsoles(this.props.results)[parseInt(this.props.activeTab) - 1]
@@ -344,7 +359,7 @@ class Results extends Component {
           {this.props.allGames ? null : (
             <Link to={{ pathname: './search' }}>
               <Button className="homeButton">
-                <FontAwesomeIcon icon={faHome} /> {ResultsStrings['searchAgain2']}
+                <FontAwesomeIcon icon={faSearch} /> {ResultsStrings['searchAgain2']}
               </Button>
             </Link>
           )}

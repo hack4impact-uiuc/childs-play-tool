@@ -9,7 +9,6 @@ import { updateResults, getSavedSearch, endLoading, beginLoading } from '../redu
 import { Button, FormGroup, Input, Label, Modal, ModalBody, ModalFooter } from 'reactstrap'
 import { getGames, getGamesByName } from '../utils/ApiWrapper'
 import { updateConsole } from '../redux/modules/results'
-// import '../styles/styles.scss'
 import '../styles/searchpage.scss'
 import { SearchPageStrings } from '../strings/english'
 
@@ -73,10 +72,10 @@ class SearchPage extends Component {
 
   render() {
     if (this.state.redirect) {
-      return <Redirect push to="./Results" />
+      return <Redirect push to="./results" />
     }
     return (
-      <div className="background">
+      <div className="background" style={{ paddingTop: window.innerWidth >= 550 ? '5%' : '20%' }}>
         <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" />
         <h3 className="homeText">
           {SearchPageStrings['title']}
@@ -99,7 +98,7 @@ class SearchPage extends Component {
             />
           </div>
           <div className="nameSearch">
-            <Link to={{ pathname: './Results' }}>
+            <Link to={{ pathname: './results' }}>
               <Button
                 className="right"
                 onClick={this.handleSubmit}
@@ -127,18 +126,17 @@ class SearchPage extends Component {
           <br />
           <Link
             to={
-              this.props.age != SearchPageStrings['age'] &&
-              this.props.symptom != SearchPageStrings['symptom']
+              this.props.age !== SearchPageStrings['age'] &&
+              this.props.symptom !== SearchPageStrings['symptom']
                 ? { pathname: '/results' }
                 : { pathname: '/search' }
             }
           >
             <Button
               className="searchButton"
-              color="blue"
               onClick={
-                this.props.age != SearchPageStrings['age'] &&
-                this.props.symptom != SearchPageStrings['symptom']
+                this.props.age !== SearchPageStrings['age'] &&
+                this.props.symptom !== SearchPageStrings['symptom']
                   ? e => {
                       this.props.beginLoading()
                       getGames(
@@ -187,9 +185,9 @@ class SearchPage extends Component {
             />
           </div>
           <div className="saveSearch">
-            <Link to={{ pathname: './Results' }}>
+            <Link to={{ pathname: './results' }}>
               <Button
-                color="blue"
+                className="searchButton"
                 onClick={e => {
                   this.props.getSavedSearch(this.props.selectedVal)
                 }}

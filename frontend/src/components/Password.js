@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
-import styles from '../styles/password.scss'
+import '../styles/password.scss'
+import '../styles/styles.scss'
 import { Button } from 'reactstrap'
 import { login } from '../redux/modules/auth'
 import { PasswordStrings } from '../strings/english'
@@ -38,7 +39,10 @@ class Password extends Component {
 
   render() {
     return (
-      <div className="passwordPageBackground">
+      <div
+        className="passwordPageBackground"
+        style={{ paddingTop: window.innerWidth >= 550 ? '5%' : '20%' }}
+      >
         <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" />
         <div className="passwordPage">
           <p> {PasswordStrings['greeting']} </p>

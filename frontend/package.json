@@ -15,6 +15,7 @@
     "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.5.2",
     "react-dropzone": "^6.2.3",
+    "react-loader-spinner": "^2.3.0",
     "react-redux": "^5.0.7",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",

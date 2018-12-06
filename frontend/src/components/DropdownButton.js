@@ -38,7 +38,13 @@ class DropdownButton extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      consoleSelectedVal: this.props.items ? this.props.currentConsole : '',
+      consoleSelectedVal: this.props.items ? (
+        <div style={{ display: 'inline-block' }}>
+          {this.props.currentConsole} {this.chooseImage(this.props.currentConsole)}
+        </div>
+      ) : (
+        ''
+      ),
       selectedVal: this.props.title,
       dropdownOpen: false
     }
@@ -49,7 +55,7 @@ class DropdownButton extends Component {
   determineDropdownItems = fieldName => {
     if (fieldName === 'selectedSaveSearch') {
       return this.props.savedSearches
-    } else if (fieldName == 'consoleNames') {
+    } else if (fieldName === 'consoleNames') {
       return Object.keys(this.props.results)
     } else {
       return Constants[fieldName]
@@ -87,7 +93,7 @@ class DropdownButton extends Component {
       <div>
         <Dropdown className="dropdown" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
           <DropdownToggle color="success" caret>
-            {this.props.items ? this.props.currentConsole : this.state.selectedVal}
+            {this.state.consoleSelectedVal ? this.state.consoleSelectedVal : this.state.selectedVal}
           </DropdownToggle>
           <DropdownMenu right>
             {this.props.items
@@ -96,9 +102,9 @@ class DropdownButton extends Component {
                     onClick={e => {
                       this.setState({
                         consoleSelectedVal: (
-                          <html>
+                          <div style={{ display: 'inline-block' }}>
                             {item} {this.chooseImage(item)}
-                          </html>
+                          </div>
                         )
                       })
                       this.props.updateTabConsole((index + 1).toString())

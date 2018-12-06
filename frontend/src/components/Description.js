@@ -2,17 +2,12 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
 import Tag from './Tag'
-import Update from './Update'
 import { editGame } from '../utils/ApiWrapper'
 import { editGameState } from '../redux/modules/results'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { DescriptionStrings } from '../strings/english'
 import '../styles/description.scss'
-
-const titleStyle = {
-  fontSize: '30px'
-}
 
 const mapStateToProps = state => ({
   auth: state.auth.authenticated,
@@ -139,15 +134,37 @@ class Description extends Component {
     }
 
     return (
-      <div>
-        <div className="description-background">
-          <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" />
-          <div className="white-box">
-            <div className="description-cardName">{this.props.location.state.game.name}</div>
+      <div
+        className="description-background"
+        style={{ paddingTop: window.innerWidth >= 550 ? '5%' : '20%' }}
+      >
+        <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" />
+        <div className="white-box">
+          <div className="description-cardName">{this.props.location.state.game.name}</div>
 
-            {imageRender}
-            {descriptionRender}
+          {imageRender}
+          {descriptionRender}
 
+          <br />
+          <br />
+          <div align="center">
+            {this.props.location.state.game.gender &&
+            this.props.location.state.game.gender != 'No Discernable Gender' ? (
+              <Tag type={'gender'} tag={this.props.location.state.game.gender} />
+            ) : null}
+            {this.props.location.state.game.tags.ages ? (
+              this.props.location.state.game.tags.ages.length == 2 ? (
+                <Tag type={'age'} tag={'All Ages'} />
+              ) : (
+                <Tag type={'age'} tag={this.props.location.state.game.tags.ages[0]} />
+              )
+            ) : null}
+            {this.props.location.state.game.tags.symptoms
+              ? this.props.location.state.game.tags.symptoms.map(t => (
+                  <Tag type={'symptom'} tag={t} />
+                ))
+              : null}
+            {!this.props.location.state.game.current ? <Tag type={'old'} tag={'Old'} /> : null}
             <br />
             <br />
             <div align="center">
@@ -182,7 +199,18 @@ class Description extends Component {
             </Link>
           </div>
           <br />
+          <br />
+
+          {editButton}
+          {saveButton}
+
+          <Link to={{ pathname: './results' }}>
+            <Button outline color="success">
+              Return to results
+            </Button>
+          </Link>
         </div>
+        <br />
       </div>
     )
   }
