@@ -145,6 +145,7 @@ def post_games():
     try:
         file = request.files.get("file")
         if file is None:
+            db.session.query(Update).filter(Update.valid == False).delete()
             update = {}
             update["time"] = datetime.now()
             update["valid"] = False
@@ -317,10 +318,17 @@ def post_games():
                     r = Ranking(ranking)
                     db.session.add(r)
                     id = id + 1
+        db.session.query(Update).filter(Update.valid == True).delete()
+        update = {}
+        update["time"] = datetime.now()
+        update["valid"] = True
+        u = Update(update)
+        db.session.add(u)
         db.session.commit()
         return create_response(status=201, message="Database updated.")
     except:
         db.session.rollback()
+        db.session.query(Update).filter(Update.valid == False).delete()
         update = {}
         update["time"] = datetime.now()
         update["valid"] = False
