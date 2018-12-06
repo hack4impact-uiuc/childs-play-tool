@@ -8,6 +8,7 @@ import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button } from 're
 import '../styles/styles.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGamepad, faVrCardboard, faSave, faHome } from '@fortawesome/free-solid-svg-icons'
+import { DropdownButtonStrings } from '../strings/english'
 import {
   faNintendoSwitch,
   faXbox,
@@ -39,7 +40,13 @@ class DropdownButton extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      consoleSelectedVal: this.props.items ? this.props.items[0] : '',
+      consoleSelectedVal: this.props.items ? (
+        <div style={{ display: 'inline-block' }}>
+          {this.props.currentConsole} {this.chooseImage(this.props.currentConsole)}
+        </div>
+      ) : (
+        ''
+      ),
       selectedVal: this.props.title,
       dropdownOpen: false
     }
@@ -56,7 +63,7 @@ class DropdownButton extends Component {
   determineDropdownItems = fieldName => {
     if (fieldName === 'selectedSaveSearch') {
       return this.props.savedSearches
-    } else if (fieldName == 'consoleNames') {
+    } else if (fieldName === 'consoleNames') {
       return Object.keys(this.props.results)
     } else {
       return Constants[fieldName]
@@ -97,11 +104,7 @@ class DropdownButton extends Component {
       <div>
         <Dropdown className="dropdown" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
           <DropdownToggle color="success" caret>
-            {this.state.consoleSelectedVal
-              ? this.state.consoleSelectedVal
-              : this.props.items
-                ? this.props.items[parseInt(this.props.activeTab) - 1]
-                : this.state.selectedVal}
+            {this.state.consoleSelectedVal ? this.state.consoleSelectedVal : this.state.selectedVal}
           </DropdownToggle>
           <DropdownMenu right>
             {this.props.fieldName === 'selectedSaveSearch'
@@ -158,7 +161,8 @@ class DropdownButton extends Component {
                       </DropdownItem>
                     ))
                   : null}
-            {(this.props.title === 'Console Type' || this.props.title === 'Character Gender') && (
+            {(this.props.title === DropdownButtonStrings['console'] ||
+              this.props.title === DropdownButtonStrings['gender']) && (
               <>
                 <DropdownItem divider />
                 <DropdownItem
@@ -167,7 +171,7 @@ class DropdownButton extends Component {
                     this.props.updateField(this.props.fieldName, this.props.title)
                   }}
                 >
-                  None
+                  {DropdownButtonStrings['none']}
                 </DropdownItem>
               </>
             )}

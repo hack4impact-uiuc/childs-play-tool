@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import { updateField } from '../redux/modules/searchpage'
 import { Form, FormGroup, Label, Input } from 'reactstrap'
 import '../styles/styles.scss'
+import { SearchBarCustomStrings } from '../strings/english'
 
 const mapStateToProps = state => ({
   nameSearchField: state.searchpage.nameSearchField
@@ -32,7 +33,7 @@ class SearchBarCustom extends Component {
               type="search"
               name="search"
               id="exampleSearch"
-              placeholder="Type name here... "
+              placeholder={SearchBarCustomStrings['placeholder']}
               onChange={e => {
                 this.props.updateField(this.props.fieldName, e.target.value)
               }}
