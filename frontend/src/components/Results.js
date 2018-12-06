@@ -67,6 +67,7 @@ const mapStateToProps = state => ({
   search: state.results.query.search,
   activeTab: state.results.activeTab,
   allGames: state.results.allGames,
+  noImage: state.searchpage.noImage,
   authenticated: state.auth.authenticated,
   loading: state.results.loading
 })
@@ -123,7 +124,7 @@ class Results extends Component {
     games
       ? games.map(c => (
           <Link to={{ pathname: './description', state: { game: c } }}>
-            <Card game={c} />
+            <Card game={c} noImage={this.props.noImage} />
           </Link>
         ))
       : null

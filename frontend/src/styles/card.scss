@@ -17,6 +17,27 @@
         width: 100%;
     }
 }
+
+.cardStyleNoImage {
+    width: 30%;
+    height: 100px;
+    display: inline-table;
+    color: black;
+    font-family: Arial;
+    border: 2px solid lightgray;
+    border-radius: 25px;
+    padding: 1%;
+    font-family: 'Cabin', sans-serif;
+    background: white;
+    margin: 1%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+@media only screen and (max-width: 1000px) {
+    .cardStyleNoImage {
+        width: 100%;
+    }
+}
+
 .cardStyleHover {
     @extend .cardStyle;
     background: #d8ddd8;
@@ -26,17 +47,10 @@
     text-align: center;
     height: 75px;
 }
-.cardLeft {
-    width: 50%;
-    height: 200px;
-    text-align: left;
-    display: inline-table;
-}
-.cardRight {
-    width: 50%;
-    height: 200px;
-    text-align: right;
-    display: inline-table;
+.cardNameNoImage {
+    font-size: 150%;
+    text-align: center;
+    height: 5px;
 }
 .cardDescription {
     height: .1%;
@@ -49,6 +63,11 @@
 .tagBox {
     width: 100%;
     height: 150px;
+}
+.tagBoxNoImage {
+    width: 100%;
+    height: 75px;
+    margin-bottom: 1%;
 }
 .tag{
     color: white;
