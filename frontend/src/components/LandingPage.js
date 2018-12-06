@@ -57,13 +57,23 @@ class LandingPage extends Component {
 
         <Container id="HowToUse" className="separator" ref={this.howtoRef}>
           <h3 className="homeText2L">{LandingPageStrings['tutorialHeader']}</h3>
-          <Row className="mspace imageCentered">
-            <p className="padded">{LandingPageStrings['tutorial1']}</p>
-            <img
-              src={require('../styles/searchbyname.png')}
-              alt="Search by name field"
-              height="60px"
-            />
+          <Row>
+            <Col className="mspace">
+              <p>{LandingPageStrings['tutorial0']}</p>
+              <img
+                src={require('../styles/searchbyname.png')}
+                alt="Search by name field"
+                height="100px"
+              />
+            </Col>
+            <Col className="mspace">
+              <p>{LandingPageStrings['tutorial1']}</p>
+              <img
+                src={require('../styles/copysearchurl.png')}
+                alt="Copy search URL field"
+                height="100px"
+              />
+            </Col>
           </Row>
           <Row>
             <Col className="mspace">
