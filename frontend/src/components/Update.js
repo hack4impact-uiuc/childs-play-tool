@@ -8,7 +8,8 @@ import { Button } from 'reactstrap'
 import { sendFile } from '../utils/ApiWrapper'
 
 const mapStateToProps = state => ({
-  authenticated: state.auth.authenticated
+  authenticated: state.auth.authenticated,
+  updates: state.auth.updates
 })
 
 class Update extends Component {
@@ -28,6 +29,23 @@ class Update extends Component {
       <div className="dropPageBackground">
         <div className="dropPage">
           <section className="droppedBox">
+            {this.props.updates && this.props.updates.valid ? (
+              <text>
+                Database last updated at {this.props.updates.valid.time}
+                <br />
+              </text>
+            ) : null}
+            {this.props.updates && this.props.updates.invalid ? (
+              <text>
+                Invalid attempt at {this.props.updates.invalid.time}
+                <br />
+              </text>
+            ) : null}
+            {this.props.updates && (this.props.updates.valid || this.props.updates.invalid) ? (
+              <text>
+                <br />
+              </text>
+            ) : null}
             <h4>Upload excel sheet with new game data</h4>
             <div className="dropZone">
               <Dropzone onDrop={this.onDrop.bind(this)} className="dropBox">

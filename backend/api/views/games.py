@@ -318,7 +318,7 @@ def post_games():
                     r = Ranking(ranking)
                     db.session.add(r)
                     id = id + 1
-        db.session.query(Update).filter(Update.valid == True).delete()
+        db.session.query(Update).delete()
         update = {}
         update["time"] = datetime.now()
         update["valid"] = True
