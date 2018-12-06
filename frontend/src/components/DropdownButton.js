@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Constants from '../utils/Constants'
 import { updateField } from '../redux/modules/searchpage'
-import { updateConsole } from '../redux/modules/results'
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
+import { updateConsole, deleteSearch } from '../redux/modules/results'
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button } from 'reactstrap'
 import '../styles/styles.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGamepad, faVrCardboard, faSave, faHome } from '@fortawesome/free-solid-svg-icons'
@@ -20,14 +20,16 @@ const mapStateToProps = state => ({
   savedSearches: state.results.searches,
   results: state.results.games,
   currentConsole: state.results.currentConsole,
-  activeTab: state.results.activeTab
+  activeTab: state.results.activeTab,
+  selectedSaveSearch: state.searchpage.selectedSaveSearch
 })
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       updateField,
-      updateConsole
+      updateConsole,
+      deleteSearch
     },
     dispatch
   )
@@ -37,9 +39,7 @@ class DropdownButton extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      consoleSelectedVal: this.props.items
-        ? this.props.items[parseInt(this.props.activeTab) - 1]
-        : '',
+      consoleSelectedVal: this.props.items ? this.props.items[0] : '',
       selectedVal: this.props.title,
       dropdownOpen: false
     }
@@ -95,7 +95,25 @@ class DropdownButton extends Component {
                 : this.state.selectedVal}
           </DropdownToggle>
           <DropdownMenu right>
-            {this.props.items
+            { this.props.fieldName === 'selectedSaveSearch' ?
+            this.dropdownItems.map(item => (
+            <DropdownItem
+              onClick={e => {
+                this.setState({ selectedVal: item.value})
+                this.props.updateField(this.props.fieldName, item.value)
+
+              }}
+            >
+              {item.value}
+              <Button outline color="secondary"
+              onClick={() => {
+                      console.log(item.value)
+                    this.props.deleteSearch(item.value)
+                    this.setState({ selectedVal: "Saved Searches", dropdownOpen: false })}}
+              >x</Button>
+            </DropdownItem> ))
+
+        : this.props.items
               ? this.props.items.map((item, index) => (
                   <DropdownItem
                     onClick={e => {
@@ -121,6 +139,7 @@ class DropdownButton extends Component {
                         this.props.updateField(this.props.fieldName, item.value)
                       }}
                     >
+
                       {item.value}
                     </DropdownItem>
                   ))
