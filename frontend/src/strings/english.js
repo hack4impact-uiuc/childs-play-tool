@@ -140,5 +140,8 @@ export const UpdateStrings = {
   purpose: 'Upload excel sheet with new game data',
   instructions: 'Drop excel file here or click to select files to upload',
   filesDropped: 'Files Dropped',
-  uploadButton: 'Upload File'
+  uploadButton: 'Upload File',
+  loading: 'Loading',
+  lastUpdate: 'Database last updated at',
+  lastInvalidUpdate: 'Invalid attempt at'
 }
