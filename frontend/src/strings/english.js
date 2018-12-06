@@ -35,7 +35,7 @@ export const LandingPageStrings = {
   tutorial1:
     'After completing a search, there will be the option to copy a shareable URL link that can bring anyone to the results page of this search:',
   tutorial2:
-    'To search for game recommendations, you must select one of the six symptom categories:',
+    'To search for game recommendations by filters, you must select one of the six symptom categories:',
   tutorial3: 'You must also select one of the age groups:',
   tutorial4:
     'It is optional to select a game console and the gender of the main character. The search will return all games that match the specifications.',
