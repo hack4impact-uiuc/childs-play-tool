@@ -184,9 +184,9 @@ class Results extends Component {
         <div className="resultsBox">
           {this.props.allGames ? (
             this.state.incompleteGamesView ? (
-              <h3 className="incompleteGamesText">Incomplete Games</h3>
+              <h3 className="resultsText">Incomplete Games</h3>
             ) : (
-              <h3 className="allGamesText">All Games</h3>
+              <h3 className="resultsText">All Games</h3>
             )
           ) : (
             <h3 className="resultsText">Results found:</h3>
@@ -223,14 +223,11 @@ class Results extends Component {
                   {this.props.allGames ? (
                     this.props.authenticated ? (
                       this.state.incompleteGamesView ? (
-                        <Button className="allGamesButton" onClick={this.displayAllGames}>
+                        <Button className="homeButton" onClick={this.displayAllGames}>
                           <FontAwesomeIcon icon={faGamepad} /> See All Games
                         </Button>
                       ) : (
-                        <Button
-                          className="incompleteGamesButton"
-                          onClick={this.displayIncompleteGames}
-                        >
+                        <Button className="homeButton" onClick={this.displayIncompleteGames}>
                           <FontAwesomeIcon icon={faGamepad} /> See Incomplete Games
                         </Button>
                       )
@@ -330,11 +327,11 @@ class Results extends Component {
               <hr />
             </div>
           ) : this.props.allGames && this.state.incompleteGamesView ? (
-            <h4 className="noIncompleteGamesText">
+            <h4 className="resultsText">
               No incomplete games <FontAwesomeIcon icon={faSmile} />
             </h4>
           ) : (
-            <h4 className="noResultsFoundText">
+            <h4 className="resultsText">
               No results found <FontAwesomeIcon icon={faFrown} />
             </h4>
           )}
