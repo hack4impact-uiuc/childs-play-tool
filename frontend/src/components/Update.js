@@ -6,6 +6,7 @@ import Dropzone from 'react-dropzone'
 import '../styles/update.scss'
 import { Button } from 'reactstrap'
 import { sendFile } from '../utils/ApiWrapper'
+import { UpdateStrings } from '../strings/english'
 
 const mapStateToProps = state => ({
   authenticated: state.auth.authenticated
@@ -28,14 +29,14 @@ class Update extends Component {
       <div className="dropPageBackground">
         <div className="dropPage">
           <section className="droppedBox">
-            <h4>Upload excel sheet with new game data</h4>
+            <h4>{UpdateStrings["purpose"]}</h4>
             <div className="dropZone">
               <Dropzone onDrop={this.onDrop.bind(this)} className="dropBox">
-                <p>Drop excel file here or click to select files to upload</p>
+                <p>{UpdateStrings["instructions"]}</p>
               </Dropzone>
             </div>
             <aside>
-              <h4>Files Dropped</h4>
+              <h4>{UpdateStrings["filesDropped"]}</h4>
               <ul>
                 {this.state.files.map(f => (
                   <li className="droppedBox" key={f.name}>
@@ -44,7 +45,7 @@ class Update extends Component {
                 ))}
               </ul>
               <Button className="right" onClick={e => sendFile(this.state.files[0])}>
-                Upload File
+                {UpdateStrings["uploadButton"]}
               </Button>
             </aside>
           </section>

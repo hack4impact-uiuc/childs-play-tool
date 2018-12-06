@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux'
 import { updateResults, beginLoading, endLoading } from '../redux/modules/results'
 import { getGames, getGamesByName } from '../utils/ApiWrapper'
 import { Redirect } from 'react-router'
+import { ResultsLinkStrings } from '../strings/english'
 
 const mapStateToProps = state => ({
   results: state.results.games,
@@ -56,7 +57,7 @@ class ResultsLink extends Component {
     return (
       <div>
         {this.vals.name ? this.nameSearch() : null}
-        {this.vals.age && this.vals.symptom ? this.filterSearch() : 'Invalid URL'}
+        {this.vals.age && this.vals.symptom ? this.filterSearch() : ResultsLinkStrings["invalidURL"] }
       </div>
     )
   }

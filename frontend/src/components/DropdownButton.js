@@ -8,6 +8,7 @@ import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap
 import '../styles/styles.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGamepad, faVrCardboard, faSave, faHome } from '@fortawesome/free-solid-svg-icons'
+import {DropdownButtonStrings } from "../strings/english"
 import {
   faNintendoSwitch,
   faXbox,
@@ -125,7 +126,7 @@ class DropdownButton extends Component {
                     </DropdownItem>
                   ))
                 : null}
-            {(this.props.title === 'Console Type' || this.props.title === 'Character Gender') && (
+            {(this.props.title === DropdownButtonStrings["console"] || this.props.title === DropdownButtonStrings["gender"]) && (
               <>
                 <DropdownItem divider />
                 <DropdownItem
@@ -134,7 +135,7 @@ class DropdownButton extends Component {
                     this.props.updateField(this.props.fieldName, this.props.title)
                   }}
                 >
-                  None
+                  {DropdownButtonStrings["none"]}
                 </DropdownItem>
               </>
             )}
