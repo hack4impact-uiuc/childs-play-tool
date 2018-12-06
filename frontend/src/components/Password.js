@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
-import styles from '../styles/password.scss'
+import '../styles/password.scss'
 import { Button } from 'reactstrap'
 import { login } from '../redux/modules/auth'
 

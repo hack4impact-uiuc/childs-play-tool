@@ -125,7 +125,7 @@ class Results extends Component {
       )
     }
     return (
-      <div className="results-background">
+      <div className="results-background" style={{paddingTop: "10%"}}>
         <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" />
         <div className="resultsBox">
           {this.props.allGames ? (
