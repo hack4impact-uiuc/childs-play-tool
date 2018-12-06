@@ -7,7 +7,7 @@ class Update(Mixin, db.Model):
 
     __tablename__ = "update"
 
-    time = db.Column(db.DateTime, unique=True, primary_key=True, nullable=False)
+    time = db.Column(db.DateTime(timezone=True), unique=True, primary_key=True, nullable=False)
     valid = db.Column(db.Boolean, nullable=False)
 
     def __init__(self, data):
