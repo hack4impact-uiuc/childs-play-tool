@@ -72,7 +72,7 @@ class SearchPage extends Component {
       return <Redirect push to="./results" />
     }
     return (
-      <div className="background" style={{ paddingTop: window.innerWidth >= 550 ? '10%' : '20%' }}>
+      <div className="background" style={{ paddingTop: window.innerWidth >= 550 ? '5%' : '20%' }}>
         <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" />
         <h3 className="homeText">
           Child&#39;s Play

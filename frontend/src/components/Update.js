@@ -26,7 +26,7 @@ class Update extends Component {
     return this.props.authenticated ? (
       <div
         className="dropPageBackground"
-        style={{ paddingTop: window.innerWidth >= 550 ? '10%' : '20%' }}
+        style={{ paddingTop: window.innerWidth >= 550 ? '5%' : '20%' }}
       >
         <div className="dropPage">
           <section className="droppedBox">

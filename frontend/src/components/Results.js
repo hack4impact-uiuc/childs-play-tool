@@ -131,7 +131,7 @@ class Results extends Component {
     return (
       <div
         className="results-background"
-        style={{ paddingTop: window.innerWidth >= 550 ? '10%' : '20%' }}
+        style={{ paddingTop: window.innerWidth >= 550 ? '5%' : '20%' }}
       >
         <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" />
         <div className="resultsBox">

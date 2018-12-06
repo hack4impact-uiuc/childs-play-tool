@@ -40,7 +40,7 @@ class Password extends Component {
     return (
       <div
         className="passwordPageBackground"
-        style={{ paddingTop: window.innerWidth >= 550 ? '10%' : '20%' }}
+        style={{ paddingTop: window.innerWidth >= 550 ? '5%' : '20%' }}
       >
         <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" />
         <div className="passwordPage">
