@@ -88,10 +88,11 @@ export default function reducer(state = resultsState, action) {
         loading: action.value
       }
     case DELETE_SEARCH:
-       return {
-             searches: state.searches.filter(( search ) => {
-                     return search.value !== action.value})
-       }
+      return {
+        searches: state.searches.filter(search => {
+          return search.value !== action.value
+        })
+      }
     default:
       return state
   }
@@ -151,6 +152,6 @@ export const endLoading = () => ({
 })
 
 export const deleteSearch = value => ({
-        type: DELETE_SEARCH,
-        value
+  type: DELETE_SEARCH,
+  value
 })

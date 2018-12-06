@@ -92,6 +92,13 @@
 }
 
 .deleteButton {
-        text-align: right;
-        height: 50%;
+        //display: inline-block;
+        float: right;
+        align-self: right;
+
+}
+
+.item {
+        //display: inline-block;
+        float: left;
 }
