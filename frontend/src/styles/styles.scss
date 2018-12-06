@@ -32,3 +32,15 @@
 .centered{
   text-align: center;
 }
+
+.deleteButton {
+        //display: inline-block;
+        float: right;
+        align-self: right;
+
+}
+
+.item {
+        //display: inline-block;
+        float: left;
+}

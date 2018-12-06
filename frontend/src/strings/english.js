@@ -30,10 +30,12 @@ export const LandingPageStrings = {
   englishPDF: 'Click here for English pdf Guide',
   spanishPDF: 'Click here for Spanish pdf Guide',
   tutorialHeader: 'How to Use',
-  tutorial1:
+  tutorial0:
     'Searching for game recommendations by name will simply return ALL games that contain the given name. Type the name into the following input field:',
+  tutorial1:
+    'After completing a search, there will be the option to copy a shareable URL link that can bring anyone to the results page of this search:',
   tutorial2:
-    'To search for game recommendations, you must select one of the six symptom categories:',
+    'To search for game recommendations by filters, you must select one of the six symptom categories:',
   tutorial3: 'You must also select one of the age groups:',
   tutorial4:
     'It is optional to select a game console and the gender of the main character. The search will return all games that match the specifications.',
@@ -143,5 +145,15 @@ export const UpdateStrings = {
   uploadButton: 'Upload File',
   loading: 'Loading',
   lastUpdate: 'Database last updated at',
-  lastInvalidUpdate: 'Invalid attempt at'
+  lastInvalidUpdate: 'Invalid attempt at',
+  adminInstructions: 'Instructions',
+  uploadInstructionsTitle: 'Uploading a File',
+  uploadInstructions:
+    'You can upload a spreadsheet to update the web application in two ways. Clicking the upload box will prompt you to select a file from your computer. You can also drag and drop a file into the box. When the file is successfully uploaded, you can confirm this by looking at the date and time of the last successful upload. If the file fails to upload, you can tell by looking at the last invalid upload date and time.',
+  editGameTitle: 'Editing a Game',
+  editGame:
+    'Once you have logged in to the administrator page, you are authorized to edit the games. On the description page of any given game, there is an edit button and a save button. Clicking the edit button will allow you to change the image by editing the image url and change the description by editing the description text. After you are done editing, clicking the save button will confirm your change.',
+  findIncompleteGamesTitle: 'Finding All Incomplete Games',
+  findIncompleteGames:
+    "You can also find all games that are missing either an image or description after you have logged in. First, in the navigation bar at the top of the screen, click the 'All Games' option. Then, select the 'See Incomplete Games' option in the top left to see the incomplete games sorted by console. You can return to the list of all the games by selecting the 'See All Games'."
 }

@@ -222,15 +222,6 @@ class Results extends Component {
           {this.props.results ? (
             <div>
               <div>
-                <div style={{ float: window.innerWidth >= 400 ? 'left' : '' }}>
-                  {this.props.allGames ? null : (
-                    <Link to={{ pathname: './search' }}>
-                      <Button className="homeButton">
-                        <FontAwesomeIcon icon={faSearch} /> Search Again
-                      </Button>
-                    </Link>
-                  )}
-                </div>
                 <div style={{ float: window.innerWidth >= 400 ? 'right' : '' }}>
                   <DropdownButton
                     title={

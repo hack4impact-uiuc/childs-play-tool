@@ -7,6 +7,7 @@ const EDIT_GAME_STATE = 'results/EDIT_GAME_STATE'
 const UPDATE_CONSOLE = 'results/UPDATE_CONSOLE'
 const UPDATE_TAB = 'results/UPDATE_TAB'
 const LOAD = 'results/LOAD'
+const DELETE_SEARCH = 'results/DELETE_SEARCH'
 
 export const resultsState = {
   currentConsole: '',
@@ -86,6 +87,12 @@ export default function reducer(state = resultsState, action) {
         ...state,
         loading: action.value
       }
+    case DELETE_SEARCH:
+      return {
+        searches: state.searches.filter(search => {
+          return search.value !== action.value
+        })
+      }
     default:
       return state
   }
@@ -142,4 +149,9 @@ export const beginLoading = () => ({
 export const endLoading = () => ({
   type: LOAD,
   value: false
+})
+
+export const deleteSearch = value => ({
+  type: DELETE_SEARCH,
+  value
 })

@@ -70,7 +70,7 @@ class Update extends Component {
             </div>
             <aside>
               <h4>{UpdateStrings['filesDropped']}</h4>
-              <ul>
+              <ul className="droppedFilesBackground">
                 {this.state.files.map(f => (
                   <li className="droppedBox" key={f.name}>
                     {f.name} - {f.size} bytes
@@ -82,6 +82,14 @@ class Update extends Component {
               </Button>
             </aside>
           </section>
+          <hr />
+          <h4>{UpdateStrings['adminInstructions']}</h4>
+          <h5 align="left">{UpdateStrings['uploadInstructionsTitle']}</h5>
+          <p align="left">{UpdateStrings['uploadInstructions']}</p>
+          <h5 align="left">{UpdateStrings['editGameTitle']}</h5>
+          <p align="left">{UpdateStrings['editGame']}</p>
+          <h5 align="left">{UpdateStrings['findIncompleteGamesTitle']}</h5>
+          <p align="left">{UpdateStrings['findIncompleteGames']}</p>
         </div>
       </div>
     ) : (

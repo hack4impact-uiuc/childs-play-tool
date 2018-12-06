@@ -192,6 +192,8 @@ class Description extends Component {
             {editButton}
             {saveButton}
 
+            <br />
+            <br />
             <Link to={{ pathname: './results' }}>
               <Button outline color="success">
                 {DescriptionStrings['return']}
