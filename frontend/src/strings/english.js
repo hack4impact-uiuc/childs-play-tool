@@ -155,5 +155,7 @@ export const UpdateStrings = {
     'Once you have logged in to the administrator page, you are authorized to edit the games. On the description page of any given game, there is an edit button and a save button. Clicking the edit button will allow you to change the image by editing the image url and change the description by editing the description text. After you are done editing, clicking the save button will confirm your change.',
   findIncompleteGamesTitle: 'Finding All Incomplete Games',
   findIncompleteGames:
-    "You can also find all games that are missing either an image or description after you have logged in. First, in the navigation bar at the top of the screen, click the 'All Games' option. Then, select the 'See Incomplete Games' option in the top left to see the incomplete games sorted by console. You can return to the list of all the games by selecting the 'See All Games'."
+    "You can also find all games that are missing either an image or description after you have logged in. First, in the navigation bar at the top of the screen, click the 'All Games' option. Then, select the 'See Incomplete Games' option in the top left to see the incomplete games sorted by console. You can return to the list of all the games by selecting the 'See All Games'.",
+  fileUploaded: 'File uploaded - your submission is being processed.',
+  return: 'Return'
 }

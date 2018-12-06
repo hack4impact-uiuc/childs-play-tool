@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import { Redirect } from 'react-router-dom'
 import Dropzone from 'react-dropzone'
 import '../styles/update.scss'
-import { Button } from 'reactstrap'
-import { sendFile } from '../utils/ApiWrapper'
+import { Button, Modal, ModalBody, ModalFooter } from 'reactstrap'
+import { loadUpdates, beginLoading, endLoading } from '../redux/modules/auth'
+import { sendFile, getUpdates } from '../utils/ApiWrapper'
 import { UpdateStrings } from '../strings/english'
 import Loader from 'react-loader-spinner'
 
@@ -14,15 +16,37 @@ const mapStateToProps = state => ({
   loading: state.auth.loading
 })
 
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      loadUpdates,
+      beginLoading,
+      endLoading
+    },
+    dispatch
+  )
+}
+
 class Update extends Component {
   constructor(props) {
     super(props)
-    this.state = { files: [] }
+    this.state = {
+      files: [],
+      modal: false,
+      submissionStatus: ''
+    }
   }
 
   onDrop(files) {
     this.setState({
       files
+    })
+  }
+
+  toggle = () => {
+    this.setState({
+      modal: !this.state.modal,
+      submissionStatus: UpdateStrings['fileUploaded']
     })
   }
 
@@ -77,9 +101,34 @@ class Update extends Component {
                   </li>
                 ))}
               </ul>
-              <Button className="right" onClick={e => sendFile(this.state.files[0])}>
+              <Button
+                disabled={this.state.files.length == 0}
+                className="right"
+                onClick={e => {
+                  sendFile(this.state.files[0])
+                  this.toggle()
+                }}
+              >
                 {UpdateStrings['uploadButton']}
               </Button>
+              <Modal isOpen={this.state.modal} toggle={this.toggle}>
+                <ModalBody>{UpdateStrings['fileUploaded']}</ModalBody>
+                <ModalFooter>
+                  <Button
+                    className="invalidSearchButton"
+                    onClick={e => {
+                      this.toggle()
+                      this.props.beginLoading()
+                      getUpdates().then(results => {
+                        this.props.loadUpdates(results)
+                        this.props.endLoading()
+                      })
+                    }}
+                  >
+                    {UpdateStrings['return']}
+                  </Button>
+                </ModalFooter>
+              </Modal>
             </aside>
           </section>
           <hr />
@@ -98,4 +147,7 @@ class Update extends Component {
   }
 }
 
-export default connect(mapStateToProps)(Update)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Update)
