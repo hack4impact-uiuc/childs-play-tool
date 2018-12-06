@@ -34,7 +34,8 @@ class ScrollToTop extends Component {
       !(
         this.props.location.pathname === '/description' &&
         prevProps.location.pathname === '/results'
-      )
+      ) &&
+      !(this.props.location.pathname === '/' && this.props.location.hash !== '')
     ) {
       window.scrollTo(0, 0)
     }

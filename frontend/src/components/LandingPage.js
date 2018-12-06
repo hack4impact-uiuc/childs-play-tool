@@ -8,25 +8,7 @@ import { LandingPageStrings } from '../strings/english'
 import '../styles/landingpage.scss'
 
 class LandingPage extends Component {
-  constructor(props) {
-    super(props)
-
-    // this.contactRef = React.createRef()
-    // this.howtoRef = React.createRef()
-  }
-
   componentDidMount() {
-    // if (this.props.location.hash === '#Contacts') {
-    //   window.scrollTo({
-    //     top: this.contactRef.current.offsetTop,
-    //     behavior: "auto"
-    //   })
-    // } else if (this.props.location.hash === '#HowToUse') {
-    //   window.scrollTo({
-    //     top: this.howtoRef.current.offsetTop,
-    //     behavior: "auto"
-    //   })
-    // }
     if (this.props.location.hash) {
       document.querySelector(this.props.location.hash).scrollIntoView()
     }
@@ -55,7 +37,7 @@ class LandingPage extends Component {
         </div>
         <div className="line" />
 
-        <Container id="HowToUse" className="separator" ref={this.howtoRef}>
+        <Container id="HowToUse" className="separator">
           <h3 className="homeText2L">{LandingPageStrings['tutorialHeader']}</h3>
           <Row>
             <Col className="mspace">
@@ -131,7 +113,7 @@ class LandingPage extends Component {
         </Container>
         <div className="line" />
 
-        <Container id="Contacts" className="separator" ref={this.contactRef}>
+        <Container id="Contacts" className="separator">
           <Row>
             <Col>
               <h3> {LandingPageStrings['aboutHeader']}</h3>
