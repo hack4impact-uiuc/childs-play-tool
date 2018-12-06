@@ -18,14 +18,18 @@ import {
 
 import '../styles/landingpage.scss'
 import { getAllGames } from '../utils/ApiWrapper'
-import { updateResultsAll } from '../redux/modules/results'
+import { updateResultsAll, updateConsole, beginLoading, endLoading } from '../redux/modules/results'
+import { NavBarStrings } from '../strings/english'
 
 const mapStateToProps = state => {}
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      updateResultsAll
+      updateResultsAll,
+      updateConsole,
+      beginLoading,
+      endLoading
     },
     dispatch
   )
@@ -39,12 +43,15 @@ class NavBar extends Component {
   }
 
   loadAllGames = () => {
-    getAllGames().then(results =>
+    this.props.beginLoading()
+    getAllGames().then(results => {
       this.props.updateResultsAll({
         games: results,
-        query: { search: '' }
+        query: {}
       })
-    )
+      this.props.updateConsole(Object.keys(results)[0])
+      this.props.endLoading()
+    })
   }
 
   toggleNavbar = () => {
@@ -62,7 +69,7 @@ class NavBar extends Component {
           expand={window.innerWidth >= 550}
         >
           <NavbarBrand to="/" tag={RRNavLink}>
-            Home
+            {NavBarStrings['homeButton']}
           </NavbarBrand>
           <NavbarToggler onClick={this.toggleNavbar} />
           <Collapse isOpen={!this.state.collapsed} navbar>
@@ -74,23 +81,35 @@ class NavBar extends Component {
             >
               <NavItem>
                 <NavLink to="/directorPage" tag={RRNavLink}>
-                  Admin
+                  {NavBarStrings['adminLink']}
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/#Contacts">Contact Us</NavLink>
+                {this.props.location.pathname === '/' ? (
+                  <NavLink href="/#Contacts">{NavBarStrings['contactLink']}</NavLink>
+                ) : (
+                  <NavLink to="/#Contacts" tag={RRNavLink}>
+                    {NavBarStrings['contactLink']}
+                  </NavLink>
+                )}
               </NavItem>
               <NavItem>
-                <NavLink href="/#HowToUse">How to Use</NavLink>
+                {this.props.location.pathname === '/' ? (
+                  <NavLink href="/#HowToUse">{NavBarStrings['tutorialLink']}</NavLink>
+                ) : (
+                  <NavLink to="/#HowToUse" tag={RRNavLink}>
+                    {NavBarStrings['tutorialLink']}
+                  </NavLink>
+                )}
               </NavItem>
               <NavItem>
                 <NavLink to="/search" tag={RRNavLink}>
-                  Search
+                  {NavBarStrings['searchLink']}
                 </NavLink>
               </NavItem>
               <NavItem>
                 <NavLink to="/results" tag={RRNavLink} onClick={this.loadAllGames}>
-                  All Games
+                  {NavBarStrings['gamesLink']}
                 </NavLink>
               </NavItem>
             </Nav>

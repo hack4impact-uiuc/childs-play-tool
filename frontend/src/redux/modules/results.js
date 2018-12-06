@@ -6,12 +6,14 @@ const GET_SAVED_SEARCH = 'results/GET_SAVED_SEARCH'
 const EDIT_GAME_STATE = 'results/EDIT_GAME_STATE'
 const UPDATE_CONSOLE = 'results/UPDATE_CONSOLE'
 const UPDATE_TAB = 'results/UPDATE_TAB'
+const LOAD = 'results/LOAD'
 
 export const resultsState = {
   currentConsole: '',
   searches: [],
   games: {},
   query: {},
+  loading: false,
   activeTab: '1',
   allGames: false
 }
@@ -79,6 +81,11 @@ export default function reducer(state = resultsState, action) {
         ...state,
         activeTab: action.value.activeTab
       }
+    case LOAD:
+      return {
+        ...state,
+        loading: action.value
+      }
     default:
       return state
   }
@@ -125,4 +132,14 @@ export const updateConsole = value => ({
 export const updateTab = value => ({
   type: UPDATE_TAB,
   value
+})
+
+export const beginLoading = () => ({
+  type: LOAD,
+  value: true
+})
+
+export const endLoading = () => ({
+  type: LOAD,
+  value: false
 })
