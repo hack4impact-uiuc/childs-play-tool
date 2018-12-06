@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome } from '@fortawesome/free-solid-svg-icons'
 import { getAllGames } from '../utils/ApiWrapper'
 import { updateResultsAll, beginLoading, endLoading } from '../redux/modules/results'
+import { NavBarStrings } from '../strings/english'
 
 const mapStateToProps = state => {}
 

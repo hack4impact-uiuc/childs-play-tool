@@ -40,8 +40,7 @@ class DropdownButton extends Component {
     this.state = {
       consoleSelectedVal: this.props.items ? (
         <div style={{ display: 'inline-block' }}>
-          {this.props.currentConsole}{' '}
-          {this.chooseImage(this.props.currentConsole)}
+          {this.props.currentConsole} {this.chooseImage(this.props.currentConsole)}
         </div>
       ) : (
         ''

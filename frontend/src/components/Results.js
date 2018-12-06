@@ -38,6 +38,10 @@ import Constants from '../utils/Constants.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faSave,
+  faGamepad,
+  faHome,
+  faSmile,
+  faFrown,
   faClipboard,
   faClipboardCheck,
   faSearch,
@@ -212,7 +216,7 @@ class Results extends Component {
                 {' '}
                 {ResultsStrings['resultsSearched']} {this.props.search}{' '}
               </h4>
-=            ) : null}
+            ) : null}
           </div>
           <br />
           {this.props.results ? (
