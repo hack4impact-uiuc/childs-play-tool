@@ -76,7 +76,11 @@ class Description extends Component {
         </Form>
       )
     } else {
-      descriptionRender = <div>{this.state.updateDescription}</div>
+      descriptionRender = (
+        <div>
+          {this.state.updateDescription ? this.state.updateDescription : 'No description found.'}
+        </div>
+      )
       imageRender = (
         <img
           className="image"

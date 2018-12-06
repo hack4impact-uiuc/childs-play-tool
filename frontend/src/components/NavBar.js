@@ -18,14 +18,17 @@ import {
 
 import '../styles/landingpage.scss'
 import { getAllGames } from '../utils/ApiWrapper'
-import { updateResultsAll } from '../redux/modules/results'
+import { updateResultsAll, updateConsole, beginLoading, endLoading } from '../redux/modules/results'
 
 const mapStateToProps = state => {}
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      updateResultsAll
+      updateResultsAll,
+      updateConsole,
+      beginLoading,
+      endLoading
     },
     dispatch
   )
@@ -39,12 +42,15 @@ class NavBar extends Component {
   }
 
   loadAllGames = () => {
-    getAllGames().then(results =>
+    this.props.beginLoading()
+    getAllGames().then(results => {
       this.props.updateResultsAll({
         games: results,
-        query: { search: '' }
+        query: {}
       })
-    )
+      this.props.updateConsole(Object.keys(results)[0])
+      this.props.endLoading()
+    })
   }
 
   toggleNavbar = () => {
@@ -78,10 +84,22 @@ class NavBar extends Component {
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/#Contacts">Contact Us</NavLink>
+                {this.props.location.pathname === '/' ? (
+                  <NavLink href="/#Contacts">Contact Us</NavLink>
+                ) : (
+                  <NavLink to="/#Contacts" tag={RRNavLink}>
+                    Contact Us
+                  </NavLink>
+                )}
               </NavItem>
               <NavItem>
-                <NavLink href="/#HowToUse">How to Use</NavLink>
+                {this.props.location.pathname === '/' ? (
+                  <NavLink href="/#HowToUse">How To Use</NavLink>
+                ) : (
+                  <NavLink to="/#HowToUse" tag={RRNavLink}>
+                    How To Use
+                  </NavLink>
+                )}
               </NavItem>
               <NavItem>
                 <NavLink to="/search" tag={RRNavLink}>
