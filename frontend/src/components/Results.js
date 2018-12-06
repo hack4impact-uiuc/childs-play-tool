@@ -25,7 +25,14 @@ import {
 } from 'reactstrap'
 import classnames from 'classnames'
 import '../styles/results.scss'
-import { saveSearch, updateConsole, updateTab } from '../redux/modules/results'
+import {
+  saveSearch,
+  updateConsole,
+  updateTab,
+  updateResultsAll,
+  beginLoading,
+  endLoading
+} from '../redux/modules/results'
 import { bindActionCreators } from 'redux'
 import Constants from '../utils/Constants.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -35,7 +42,9 @@ import {
   faSave,
   faHome,
   faClipboard,
-  faClipboardCheck
+  faClipboardCheck,
+  faSmile,
+  faFrown
 } from '@fortawesome/free-solid-svg-icons'
 import {
   faNintendoSwitch,
@@ -47,6 +56,7 @@ import {
 import { runInThisContext } from 'vm'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { ResultsStrings } from '../strings/english'
+import { getAllGames, getIncompleteGames } from '../utils/ApiWrapper'
 
 const mapStateToProps = state => ({
   results: state.results.games,
@@ -58,6 +68,8 @@ const mapStateToProps = state => ({
   search: state.results.query.search,
   activeTab: state.results.activeTab,
   allGames: state.results.allGames,
+  noImage: state.searchpage.noImage,
+  authenticated: state.auth.authenticated,
   loading: state.results.loading
 })
 
@@ -66,7 +78,10 @@ const mapDispatchToProps = dispatch => {
     {
       saveSearch,
       updateTab,
-      updateConsole
+      updateConsole,
+      updateResultsAll,
+      beginLoading,
+      endLoading
     },
     dispatch
   )
@@ -79,7 +94,8 @@ class Results extends Component {
       activeTab: this.props.activeTab,
       saveName: '',
       modal: false,
-      copied: false
+      copied: false,
+      incompleteGamesView: false
     }
     this.updateTab = this.updateTab
   }
@@ -89,26 +105,31 @@ class Results extends Component {
     Object.getOwnPropertyNames(results).map(x => (results[x].length > 0 ? ret.push(x) : null))
     return ret
   }
+
   saveSearch = (name, res) => {
     this.props.saveSearch(name, res)
     this.toggleModal()
   }
+
   toggleModal = () => {
     this.setState({ modal: !this.state.modal })
   }
+
   updateTab = tab => {
     if (this.props.activeTab !== tab) {
       this.props.updateTab({ activeTab: tab })
     }
   }
+
   buildCards = games =>
     games
       ? games.map(c => (
           <Link to={{ pathname: './description', state: { game: c } }}>
-            <Card game={c} />
+            <Card game={c} noImage={this.props.noImage} />
           </Link>
         ))
       : null
+
   resultsURL = (name, age, symptom, gender, system) => {
     let url = window.location.protocol + '//' + window.location.hostname
     if (url === 'http://localhost') url += ':3000'
@@ -123,9 +144,39 @@ class Results extends Component {
       return url
     }
   }
+
   toggleClipboard = () => {
     this.setState({ copied: true })
   }
+
+  displayIncompleteGames = () => {
+    this.props.beginLoading()
+    getIncompleteGames().then(results => {
+      this.props.updateResultsAll({
+        games: results,
+        query: {}
+      })
+      this.props.updateConsole(Object.keys(results)[0])
+      this.setState({
+        incompleteGamesView: true
+      })
+      this.props.endLoading()
+    })
+  }
+
+  displayAllGames = () => {
+    this.props.beginLoading()
+    getAllGames().then(results => {
+      this.props.updateResultsAll({
+        games: results,
+        query: {}
+      })
+      this.props.updateConsole(Object.keys(results)[0])
+      this.setState({ incompleteGamesView: false })
+      this.props.endLoading()
+    })
+  }
+
   render() {
     if (this.props.loading) {
       return <div>{ResultsStrings['loading']}</div>
@@ -135,7 +186,11 @@ class Results extends Component {
         <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" />
         <div className="resultsBox">
           {this.props.allGames ? (
-            <h3 className="resultsText">{ResultsStrings['resultsAll']}</h3>
+            this.state.incompleteGamesView ? (
+              <h3 className="resultsText">Incomplete Games</h3>
+            ) : (
+              <<h3 className="resultsText">{ResultsStrings['resultsAll']}</h3>
+            )
           ) : (
             <h3 className="resultsText">{ResultsStrings['resultsFound']}</h3>
           )}
@@ -171,7 +226,19 @@ class Results extends Component {
                   />
                 </div>
                 <div style={{ float: 'left' }}>
-                  {this.props.allGames ? null : (
+                  {this.props.allGames ? (
+                    this.props.authenticated ? (
+                      this.state.incompleteGamesView ? (
+                        <Button className="homeButton" onClick={this.displayAllGames}>
+                          <FontAwesomeIcon icon={faGamepad} /> See All Games
+                        </Button>
+                      ) : (
+                        <Button className="homeButton" onClick={this.displayIncompleteGames}>
+                          <FontAwesomeIcon icon={faGamepad} /> See Incomplete Games
+                        </Button>
+                      )
+                    ) : null
+                  ) : (
                     <Link to={{ pathname: './search' }}>
                       <Button className="homeButton">
                         <FontAwesomeIcon icon={faHome} /> {ResultsStrings['searchAgain']}
@@ -265,8 +332,14 @@ class Results extends Component {
               )}
               <hr />
             </div>
+          ) : this.props.allGames && this.state.incompleteGamesView ? (
+            <h4 className="resultsText">
+              No incomplete games <FontAwesomeIcon icon={faSmile} />
+            </h4>
           ) : (
-            <div>{ResultsStrings['noResults']}</div>
+            <h4 className="resultsText">
+              {ResultsStrings['noResults']} <FontAwesomeIcon icon={faFrown} />
+            </h4>
           )}
           {this.props.allGames ? null : (
             <Link to={{ pathname: './search' }}>

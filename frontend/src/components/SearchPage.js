@@ -4,9 +4,9 @@ import { Redirect } from 'react-router'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { DropdownButton, SearchBarCustom } from './'
-import { updateField } from '../redux/modules/searchpage'
+import { updateField, updateImageState } from '../redux/modules/searchpage'
 import { updateResults, getSavedSearch, endLoading, beginLoading } from '../redux/modules/results'
-import { Button, Label, Modal, ModalBody, ModalFooter } from 'reactstrap'
+import { Button, FormGroup, Input, Label, Modal, ModalBody, ModalFooter } from 'reactstrap'
 import { getGames, getGamesByName } from '../utils/ApiWrapper'
 import { updateConsole } from '../redux/modules/results'
 // import '../styles/styles.scss'
@@ -20,7 +20,8 @@ const mapStateToProps = state => ({
   gender: state.searchpage.genders,
   name: state.searchpage.nameSearchField,
   selectedVal: state.searchpage.selectedSaveSearch,
-  nameSearchField: state.searchpage.nameSearchField
+  nameSearchField: state.searchpage.nameSearchField,
+  noImage: state.searchpage.noImage
 })
 
 const mapDispatchToProps = dispatch => {
@@ -30,6 +31,7 @@ const mapDispatchToProps = dispatch => {
       updateResults,
       updateConsole,
       getSavedSearch,
+      updateImageState,
       beginLoading,
       endLoading
     },
@@ -196,6 +198,18 @@ class SearchPage extends Component {
               </Button>
             </Link>
           </div>
+          <FormGroup check>
+            <Label check>
+              <Input
+                type="checkbox"
+                onChange={e => {
+                  this.props.updateImageState()
+                }}
+                checked={this.props.noImage}
+              />
+              Search With No Images
+            </Label>
+          </FormGroup>
         </div>
       </div>
     )
