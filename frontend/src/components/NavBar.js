@@ -64,6 +64,7 @@ class NavBar extends Component {
           color={window.innerWidth >= 550 ? 'dark' : false}
           className={window.innerWidth >= 550 ? false : 'navbar-dark bg-dark'}
           expand={window.innerWidth >= 550}
+          fixed="top"
         >
           <NavbarBrand to="/" tag={RRNavLink}>
             Home
