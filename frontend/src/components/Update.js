@@ -36,13 +36,8 @@ class Update extends Component {
               </Dropzone>
             </div>
             <aside>
-<<<<<<< HEAD
-              <h4>Files Dropped</h4>
-              <ul className="droppedFilesBackground">
-=======
               <h4>{UpdateStrings['filesDropped']}</h4>
-              <ul>
->>>>>>> 8b61ff51742f09a4be4a739128928ed8af74a025
+              <ul className="droppedFilesBackground">
                 {this.state.files.map(f => (
                   <li className="droppedBox" key={f.name}>
                     {f.name} - {f.size} bytes
@@ -50,19 +45,18 @@ class Update extends Component {
                 ))}
               </ul>
               <Button className="right" onClick={e => sendFile(this.state.files[0])}>
-                {UpdateStrings['uploadButton']}
+              {UpdateStrings['uploadButton']}
               </Button>
             </aside>
           </section>
           <hr/>
-          <h4>Instructions</h4>
-          <h5 align="left">Uploading a File</h5>
-          <p align="left">You can upload a spreadsheet to update the web application in two ways. 
-          Clicking the upload box will prompt you to select a file from your computer. You can also drag and drop a file into the box. 
-          When the file is successfully uploaded, you can confirm this by looking at the date and time of the last successful upload. 
-          If the file fails to upload, you can tell by looking at the last invalid upload date and time.
-          </p>
-          <h6>Editing a Card</h6>
+          <h4>{UpdateStrings['adminInstructions']}</h4>
+          <h5 align="left">{UpdateStrings['uploadInstructionsTitle']}</h5>
+          <p align="left">{UpdateStrings['uploadInstructions']}</p>
+          <h5 align="left">{UpdateStrings['editGameTitle']}</h5>
+          <p align="left">{UpdateStrings['editGame']}</p>
+          <h5 align="left">{UpdateStrings['findIncompleteGamesTitle']}</h5>
+          <p align="left">{UpdateStrings['findIncompleteGames']}</p>
         </div>
       </div>
     ) : (
