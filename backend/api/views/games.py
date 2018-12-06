@@ -1,4 +1,4 @@
-from api.models import db, Game, Ranking
+from api.models import db, Game, Ranking, Update
 from api.core import create_response, Mixin, Auth
 from flask import Blueprint, request, current_app as app
 import xlrd
@@ -8,6 +8,7 @@ import requests
 import re
 from difflib import SequenceMatcher
 from collections import defaultdict
+from datetime import datetime
 
 games_page = Blueprint("games", __name__)
 
@@ -141,169 +142,192 @@ def get_games_all():
 @games_page.route(GAMES_URL, methods=["POST"])
 @Auth.authenticate
 def post_games():
-    file = request.files.get("file")
-    if file is None:
-        return create_response(status=400, message="File not provided.")
-    book = xlrd.open_workbook(file_contents=file.read())
-    # Entering the games into database
-    id = 0
-    # dictionary to store ids of current games and tags of old games
-    game_info_dict = {}
-    for sheet in book.sheets():
-        # Each sheet has the system name at the top
-        system = str(sheet.cell(0, 1).value).strip()
-        game_info_dict[system] = {}
-        count = 0
-        current_row = 0
-        # Exit out of the while loop when it has iterated through all categories on the page
-        # SYMPTOM_NUMBER = 6
-        while count != 2 * SYMPTOM_NUMBER:
-            # Iterate through white space to where the ranking begins, at ranking = 1
-            while sheet.cell(current_row, 0).value != 1:
-                current_row += 1
-            initial_row = current_row
-            # Iterates through the two age categories that are side by side in the spread sheet
-            # AGE_NUMBER = 2
-            for age_index in range(AGE_NUMBER):
-                name = str(sheet.cell(current_row, 2 * age_index + 1).value).strip()
-                # Iterates through the rankings of a specific symptom and category until the end
-                while name != "":
-                    # Checks if the game has already been found
-                    if name.lower() not in game_info_dict[system]:
-                        game = {}
-                        game["system"] = system
-                        game["name"] = name
-                        game["gender"] = str(
-                            sheet.cell(current_row, 2 * age_index + 2).value
-                        ).strip()
-                        game["id"] = id
-                        # API extra information stuff
-                        extra_data = get_giantbomb_data(name)
-                        game["thumbnail"] = extra_data["thumbnail"]
-                        game["image"] = extra_data["image"]
-                        game["description"] = extra_data["description"]
-                        game["current"] = True
-                        g = Game(game)
-                        db.session.add(g)
-                        game_info_dict[system][name.lower()] = {"id": id}
-                        id = id + 1
+    try:
+        file = request.files.get("file")
+        if file is None:
+            update = {}
+            update["time"] = datetime.now()
+            update["valid"] = False
+            u = Update(update)
+            db.session.add(u)
+            db.session.commit()
+            return create_response(status=400, message="File not provided.")
+        book = xlrd.open_workbook(file_contents=file.read())
+        # Entering the games into database
+        id = 0
+        # dictionary to store ids of current games and tags of old games
+        game_info_dict = {}
+        for sheet in book.sheets():
+            # Each sheet has the system name at the top
+            system = str(sheet.cell(0, 1).value).strip()
+            game_info_dict[system] = {}
+            count = 0
+            current_row = 0
+            # Exit out of the while loop when it has iterated through all categories on the page
+            # SYMPTOM_NUMBER = 6
+            while count != 2 * SYMPTOM_NUMBER:
+                # Iterate through white space to where the ranking begins, at ranking = 1
+                while sheet.cell(current_row, 0).value != 1:
                     current_row += 1
-                    # Breaks out of the loop if we have reached the end of the sheet
-                    if current_row == sheet.nrows:
-                        break
+                initial_row = current_row
+                # Iterates through the two age categories that are side by side in the spread sheet
+                # AGE_NUMBER = 2
+                for age_index in range(AGE_NUMBER):
                     name = str(sheet.cell(current_row, 2 * age_index + 1).value).strip()
-                # If the sheet only has one age category
-                if sheet.ncols < FULL_COLUMN_NUMBER:
-                    count += 2
-                    break
-                # If we are on the first age category, reset row to beginning row of the age category
-                if age_index == 0:
-                    current_row = initial_row
-                count += 1
-    # query returns previous state
-    old_games = db.session.query(Game).all()
-    for old_game in old_games:
-        # if game has not been found in new spreadsheet
-        if old_game.name.lower() not in game_info_dict[old_game.system]:
-            old_game_dict = old_game.to_dict()
-            old_game_dict["id"] = id
-            old_game_dict["current"] = False
-            id = id + 1
-            # define tags for ranking purposes
-            game_info_dict[old_game.system][old_game.name.lower()] = {
-                "ages": [
-                    age[0]
-                    for age in db.session.query(Ranking.age)
-                    .distinct(Ranking.age)
-                    .filter(Ranking.game_id == old_game.id)
-                    .all()
-                ],
-                "symptoms": [
-                    symptom[0]
-                    for symptom in db.session.query(Ranking.symptom)
-                    .distinct(Ranking.symptom)
-                    .filter(Ranking.game_id == old_game.id)
-                    .all()
-                ],
-            }
-            g = Game(old_game_dict)
-            db.session.add(g)
-    # delete before flushing
-    db.session.query(Ranking).delete()
-    db.session.query(Game).delete()
-    # flushing pushes changes to database but does not persist them
-    db.session.flush()
-    # Entering the rankings into the database
-    id = 0
-    for sheet in book.sheets():
-        system = sheet.cell(0, 1).value
-        start_row = 0
-        for symptom_index in range(SYMPTOM_NUMBER):
-            start_row = start_row + 1
-            while sheet.cell(start_row, 0).value != "Rank":
-                start_row = start_row + 1
-            for age_index in range(AGE_NUMBER):
-                if (
-                    1 + 2 * age_index < sheet.ncols
-                    and len(sheet.cell(start_row, 1 + 2 * age_index).value) != 0
-                ):
-                    system_symptom_age = sheet.cell(start_row, 1 + 2 * age_index).value
-                    if system_symptom_age == "Oculus Rift (Short Term) - 13 and Above":
-                        symptom = "Bored (Short Term)"
-                        age = "13 and Older"
-                    else:
-                        descriptors = system_symptom_age.split("-")
-                        symptom = descriptors[1].strip()
-                        if symptom == "Pain Management":
-                            symptom = "Pain"
-                        elif symptom == "Calming":
-                            symptom = "Anxiety/Hyperactivity"
-                        elif symptom == "Cheering":
-                            symptom = "Sadness"
-                        elif symptom == "Fuzzy":
-                            symptom = "Cognitive Impairment"
-                        age = descriptors[2].strip()
-                        if age == "13 and Above":
-                            age = "13 and Older"
-                    for game_index in range(NUMBER_RANKINGS):
-                        rank = int(sheet.cell(start_row + 1 + game_index, 0).value)
-                        name = str(
-                            sheet.cell(
-                                start_row + 1 + game_index, 1 + 2 * age_index
-                            ).value
-                        ).strip()
-                        if len(name) != 0:
-                            # fetch id from dict
-                            game_id = game_info_dict[system][name.lower()]["id"]
-                            ranking = {}
-                            ranking["id"] = id
-                            ranking["age"] = age
-                            ranking["symptom"] = symptom
-                            ranking["game_id"] = game_id
-                            ranking["rank"] = rank
-                            r = Ranking(ranking)
-                            db.session.add(r)
+                    # Iterates through the rankings of a specific symptom and category until the end
+                    while name != "":
+                        # Checks if the game has already been found
+                        if name.lower() not in game_info_dict[system]:
+                            game = {}
+                            game["system"] = system
+                            game["name"] = name
+                            game["gender"] = str(
+                                sheet.cell(current_row, 2 * age_index + 2).value
+                            ).strip()
+                            game["id"] = id
+                            # API extra information stuff
+                            extra_data = get_giantbomb_data(name)
+                            game["thumbnail"] = extra_data["thumbnail"]
+                            game["image"] = extra_data["image"]
+                            game["description"] = extra_data["description"]
+                            game["current"] = True
+                            g = Game(game)
+                            db.session.add(g)
+                            game_info_dict[system][name.lower()] = {"id": id}
                             id = id + 1
-    # iterate through all games defined as "old" (not current)
-    old_games = db.session.query(Game).filter(Game.current == False).all()
-    for old_game in old_games:
-        old_game_dict = old_game.to_dict()
-        # create rankings behind all other for all age/symptom combinations
-        for age in game_info_dict[old_game.system][old_game.name.lower()]["ages"]:
-            for symptom in game_info_dict[old_game.system][old_game.name.lower()][
-                "symptoms"
-            ]:
-                ranking = {}
-                ranking["id"] = id
-                ranking["age"] = age
-                ranking["symptom"] = symptom
-                ranking["game_id"] = old_game_dict["id"]
-                ranking["rank"] = 26
-                r = Ranking(ranking)
-                db.session.add(r)
+                        current_row += 1
+                        # Breaks out of the loop if we have reached the end of the sheet
+                        if current_row == sheet.nrows:
+                            break
+                        name = str(
+                            sheet.cell(current_row, 2 * age_index + 1).value
+                        ).strip()
+                    # If the sheet only has one age category
+                    if sheet.ncols < FULL_COLUMN_NUMBER:
+                        count += 2
+                        break
+                    # If we are on the first age category, reset row to beginning row of the age category
+                    if age_index == 0:
+                        current_row = initial_row
+                    count += 1
+        # query returns previous state
+        old_games = db.session.query(Game).all()
+        for old_game in old_games:
+            # if game has not been found in new spreadsheet
+            if old_game.name.lower() not in game_info_dict[old_game.system]:
+                old_game_dict = old_game.to_dict()
+                old_game_dict["id"] = id
+                old_game_dict["current"] = False
                 id = id + 1
-    db.session.commit()
-    return create_response(status=201, message="Database updated.")
+                # define tags for ranking purposes
+                game_info_dict[old_game.system][old_game.name.lower()] = {
+                    "ages": [
+                        age[0]
+                        for age in db.session.query(Ranking.age)
+                        .distinct(Ranking.age)
+                        .filter(Ranking.game_id == old_game.id)
+                        .all()
+                    ],
+                    "symptoms": [
+                        symptom[0]
+                        for symptom in db.session.query(Ranking.symptom)
+                        .distinct(Ranking.symptom)
+                        .filter(Ranking.game_id == old_game.id)
+                        .all()
+                    ],
+                }
+                g = Game(old_game_dict)
+                db.session.add(g)
+        # delete before flushing
+        db.session.query(Ranking).delete()
+        db.session.query(Game).delete()
+        # flushing pushes changes to database but does not persist them
+        db.session.flush()
+        # Entering the rankings into the database
+        id = 0
+        for sheet in book.sheets():
+            system = sheet.cell(0, 1).value
+            start_row = 0
+            for symptom_index in range(SYMPTOM_NUMBER):
+                start_row = start_row + 1
+                while sheet.cell(start_row, 0).value != "Rank":
+                    start_row = start_row + 1
+                for age_index in range(AGE_NUMBER):
+                    if (
+                        1 + 2 * age_index < sheet.ncols
+                        and len(sheet.cell(start_row, 1 + 2 * age_index).value) != 0
+                    ):
+                        system_symptom_age = sheet.cell(
+                            start_row, 1 + 2 * age_index
+                        ).value
+                        if (
+                            system_symptom_age
+                            == "Oculus Rift (Short Term) - 13 and Above"
+                        ):
+                            symptom = "Bored (Short Term)"
+                            age = "13 and Older"
+                        else:
+                            descriptors = system_symptom_age.split("-")
+                            symptom = descriptors[1].strip()
+                            if symptom == "Pain Management":
+                                symptom = "Pain"
+                            elif symptom == "Calming":
+                                symptom = "Anxiety/Hyperactivity"
+                            elif symptom == "Cheering":
+                                symptom = "Sadness"
+                            elif symptom == "Fuzzy":
+                                symptom = "Cognitive Impairment"
+                            age = descriptors[2].strip()
+                            if age == "13 and Above":
+                                age = "13 and Older"
+                        for game_index in range(NUMBER_RANKINGS):
+                            rank = int(sheet.cell(start_row + 1 + game_index, 0).value)
+                            name = str(
+                                sheet.cell(
+                                    start_row + 1 + game_index, 1 + 2 * age_index
+                                ).value
+                            ).strip()
+                            if len(name) != 0:
+                                # fetch id from dict
+                                game_id = game_info_dict[system][name.lower()]["id"]
+                                ranking = {}
+                                ranking["id"] = id
+                                ranking["age"] = age
+                                ranking["symptom"] = symptom
+                                ranking["game_id"] = game_id
+                                ranking["rank"] = rank
+                                r = Ranking(ranking)
+                                db.session.add(r)
+                                id = id + 1
+        # iterate through all games defined as "old" (not current)
+        old_games = db.session.query(Game).filter(Game.current == False).all()
+        for old_game in old_games:
+            old_game_dict = old_game.to_dict()
+            # create rankings behind all other for all age/symptom combinations
+            for age in game_info_dict[old_game.system][old_game.name.lower()]["ages"]:
+                for symptom in game_info_dict[old_game.system][old_game.name.lower()][
+                    "symptoms"
+                ]:
+                    ranking = {}
+                    ranking["id"] = id
+                    ranking["age"] = age
+                    ranking["symptom"] = symptom
+                    ranking["game_id"] = old_game_dict["id"]
+                    ranking["rank"] = 26
+                    r = Ranking(ranking)
+                    db.session.add(r)
+                    id = id + 1
+        db.session.commit()
+        return create_response(status=201, message="Database updated.")
+    except:
+        db.session.rollback()
+        update = {}
+        update["time"] = datetime.now()
+        update["valid"] = False
+        u = Update(update)
+        db.session.add(u)
+        db.session.commit()
+        return create_response(status=400, message="Invalid file format.")
 
 
 def get_giantbomb_data(game_name):
