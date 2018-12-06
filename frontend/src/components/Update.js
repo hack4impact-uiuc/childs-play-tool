@@ -47,13 +47,13 @@ class Update extends Component {
           <section className="droppedBox">
             {this.props.updates && this.props.updates.valid ? (
               <text>
-                {UpdateStrings['lastUpdate']} {' '} {this.props.updates.valid.time}
+                {UpdateStrings['lastUpdate']} {this.props.updates.valid.time}
                 <br />
               </text>
             ) : null}
             {this.props.updates && this.props.updates.invalid ? (
               <text>
-                {UpdateStrings['lastInvalidUpdate']} {' '} {this.props.updates.invalid.time}
+                {UpdateStrings['lastInvalidUpdate']} {this.props.updates.invalid.time}
                 <br />
               </text>
             ) : null}
