@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Constants from '../utils/Constants'
 import { updateField } from '../redux/modules/searchpage'
-import { updateConsole } from '../redux/modules/results'
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
+import { updateConsole, deleteSearch } from '../redux/modules/results'
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button } from 'reactstrap'
 import '../styles/styles.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGamepad, faVrCardboard, faSave, faHome } from '@fortawesome/free-solid-svg-icons'
@@ -21,14 +21,16 @@ const mapStateToProps = state => ({
   savedSearches: state.results.searches,
   results: state.results.games,
   currentConsole: state.results.currentConsole,
-  activeTab: state.results.activeTab
+  activeTab: state.results.activeTab,
+  selectedSaveSearch: state.searchpage.selectedSaveSearch
 })
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       updateField,
-      updateConsole
+      updateConsole,
+      deleteSearch
     },
     dispatch
   )
@@ -38,7 +40,13 @@ class DropdownButton extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      consoleSelectedVal: this.props.items ? this.props.currentConsole : '',
+      consoleSelectedVal: this.props.items ? (
+        <div style={{ display: 'inline-block' }}>
+          {this.props.currentConsole} {this.chooseImage(this.props.currentConsole)}
+        </div>
+      ) : (
+        ''
+      ),
       selectedVal: this.props.title,
       dropdownOpen: false
     }
@@ -46,10 +54,16 @@ class DropdownButton extends Component {
     this.props.updateField(this.props.fieldName, this.state.selectedVal)
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.fieldName === 'selectedSaveSearch') {
+      this.setState({ savedSearches: this.props.savedSearches })
+    }
+  }
+
   determineDropdownItems = fieldName => {
     if (fieldName === 'selectedSaveSearch') {
       return this.props.savedSearches
-    } else if (fieldName == 'consoleNames') {
+    } else if (fieldName === 'consoleNames') {
       return Object.keys(this.props.results)
     } else {
       return Constants[fieldName]
@@ -62,6 +76,9 @@ class DropdownButton extends Component {
     this.setState(prevState => ({
       dropdownOpen: !prevState.dropdownOpen
     }))
+    this.dropdownItems = this.props.fieldName
+      ? this.determineDropdownItems(this.props.fieldName)
+      : null
   }
 
   chooseImage = system => {
@@ -87,39 +104,63 @@ class DropdownButton extends Component {
       <div>
         <Dropdown className="dropdown" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
           <DropdownToggle color="success" caret>
-            {this.props.items ? this.props.currentConsole : this.state.selectedVal}
+            {this.state.consoleSelectedVal ? this.state.consoleSelectedVal : this.state.selectedVal}
           </DropdownToggle>
           <DropdownMenu right>
-            {this.props.items
-              ? this.props.items.map((item, index) => (
+            {this.props.fieldName === 'selectedSaveSearch'
+              ? this.dropdownItems.map(item => (
                   <DropdownItem
                     onClick={e => {
-                      this.setState({
-                        consoleSelectedVal: (
-                          <html>
-                            {item} {this.chooseImage(item)}
-                          </html>
-                        )
-                      })
-                      this.props.updateTabConsole((index + 1).toString())
-                      this.props.updateConsole(item)
+                      this.setState({ selectedVal: item.value })
+                      this.props.updateField(this.props.fieldName, item.value)
                     }}
                   >
-                    {item} {this.chooseImage(item)}
-                  </DropdownItem>
-                ))
-              : this.dropdownItems.length > 0
-                ? this.dropdownItems.map(item => (
-                    <DropdownItem
+                    {item.value}
+
+                    <Button
+                      close
+                      color="link"
                       onClick={e => {
-                        this.setState({ selectedVal: item.value })
-                        this.props.updateField(this.props.fieldName, item.value)
+                        e.stopPropagation()
+                        this.props.deleteSearch(item.value)
+                        this.setState({ selectedVal: 'Saved Searches' })
+                        this.toggle()
                       }}
                     >
-                      {item.value}
+                      x
+                    </Button>
+                  </DropdownItem>
+                ))
+              : this.props.items
+                ? this.props.items.map((item, index) => (
+                    <DropdownItem
+                      onClick={e => {
+                        this.setState({
+                          consoleSelectedVal: (
+                            <html>
+                              {item} {this.chooseImage(item)}
+                            </html>
+                          )
+                        })
+                        this.props.updateTabConsole((index + 1).toString())
+                        this.props.updateConsole(item)
+                      }}
+                    >
+                      {item} {this.chooseImage(item)}
                     </DropdownItem>
                   ))
-                : null}
+                : this.dropdownItems.length > 0
+                  ? this.dropdownItems.map(item => (
+                      <DropdownItem
+                        onClick={e => {
+                          this.setState({ selectedVal: item.value })
+                          this.props.updateField(this.props.fieldName, item.value)
+                        }}
+                      >
+                        {item.value}
+                      </DropdownItem>
+                    ))
+                  : null}
             {(this.props.title === DropdownButtonStrings['console'] ||
               this.props.title === DropdownButtonStrings['gender']) && (
               <>
