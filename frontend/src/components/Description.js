@@ -73,6 +73,7 @@ class Description extends Component {
     } else {
       descriptionRender = (
         <div>
+          <br />
           {this.state.updateDescription
             ? this.state.updateDescription
             : DescriptionStrings['noDesc']}
@@ -142,10 +143,11 @@ class Description extends Component {
         <div className="white-box">
           <div className="description-cardName">{this.props.location.state.game.name}</div>
 
+          <br />
+
           {imageRender}
           {descriptionRender}
 
-          <br />
           <br />
           <div align="center">
             {this.props.location.state.game.gender &&
@@ -168,21 +170,18 @@ class Description extends Component {
             <br />
           </div>
           <br />
-          <br />
 
           {editButton}
           {saveButton}
 
-          <br />
-          <br />
+          {this.props.auth ? <br /> : null}
+
           <Link to={{ pathname: './results' }}>
             <Button outline color="success">
               {DescriptionStrings['return']}
             </Button>
           </Link>
         </div>
-        <br />
-        <br />
       </div>
     )
   }
