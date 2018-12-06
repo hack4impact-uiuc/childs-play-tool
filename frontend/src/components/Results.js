@@ -31,13 +31,13 @@ import Constants from '../utils/Constants.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faSave,
-  faHome,
   faClipboard,
   faClipboardCheck,
   faSearch,
   faSpinner
 } from '@fortawesome/free-solid-svg-icons'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
+import Loader from 'react-loader-spinner'
 
 const mapStateToProps = state => ({
   results: state.results.games,
@@ -119,13 +119,20 @@ class Results extends Component {
   render() {
     if (this.props.loading) {
       return (
-        <div>
-          <FontAwesomeIcon icon={faSpinner} /> Loading...
+        <div
+          className="resultsText"
+          style={{ paddingTop: window.innerWidth >= 550 ? '10%' : '20%' }}
+        >
+          Loading
+          <Loader type="Puff" color="green" height="100" width="100" />
         </div>
       )
     }
     return (
-      <div className="results-background" style={{paddingTop: "10%"}}>
+      <div
+        className="results-background"
+        style={{ paddingTop: window.innerWidth >= 550 ? '10%' : '20%' }}
+      >
         <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" />
         <div className="resultsBox">
           {this.props.allGames ? (
@@ -149,19 +156,11 @@ class Results extends Component {
               <h4> You searched for: {this.props.search} </h4>
             ) : null}
           </div>
+          <br />
           {this.props.results ? (
             <div>
               <div>
-                <div style={{ float: 'right' }}>
-                  <DropdownButton
-                    title={
-                      this.determineConsoles(this.props.results)[parseInt(this.props.activeTab) - 1]
-                    }
-                    items={this.determineConsoles(this.props.results)}
-                    updateTabConsole={this.updateTab}
-                  />
-                </div>
-                <div style={{ float: 'left' }}>
+                <div style={{ float: window.innerWidth >= 400 ? 'left' : '' }}>
                   {this.props.allGames ? null : (
                     <Link to={{ pathname: './search' }}>
                       <Button className="homeButton">
@@ -169,6 +168,15 @@ class Results extends Component {
                       </Button>
                     </Link>
                   )}
+                </div>
+                <div style={{ float: window.innerWidth >= 400 ? 'right' : '' }}>
+                  <DropdownButton
+                    title={
+                      this.determineConsoles(this.props.results)[parseInt(this.props.activeTab) - 1]
+                    }
+                    items={this.determineConsoles(this.props.results)}
+                    updateTabConsole={this.updateTab}
+                  />
                 </div>
               </div>
               <br />

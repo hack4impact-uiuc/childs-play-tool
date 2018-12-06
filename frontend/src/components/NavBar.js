@@ -1,22 +1,11 @@
 import React, { Component } from 'react'
-import { Link, NavLink as RRNavLink } from 'react-router-dom'
+import { NavLink as RRNavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownItem,
-  DropdownToggle,
-  DropdownMenu
-} from 'reactstrap'
-
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap'
 import '../styles/landingpage.scss'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHome } from '@fortawesome/free-solid-svg-icons'
 import { getAllGames } from '../utils/ApiWrapper'
 import { updateResultsAll, beginLoading, endLoading } from '../redux/modules/results'
 
@@ -67,7 +56,7 @@ class NavBar extends Component {
           fixed="top"
         >
           <NavbarBrand to="/" tag={RRNavLink}>
-            Home
+            <FontAwesomeIcon icon={faHome} /> Home
           </NavbarBrand>
           <NavbarToggler onClick={this.toggleNavbar} />
           <Collapse isOpen={!this.state.collapsed} navbar>

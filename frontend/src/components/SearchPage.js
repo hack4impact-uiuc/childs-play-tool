@@ -9,7 +9,6 @@ import { updateResults, getSavedSearch, endLoading, beginLoading } from '../redu
 import { Button, Label, Modal, ModalBody, ModalFooter } from 'reactstrap'
 import { getGames, getGamesByName } from '../utils/ApiWrapper'
 import { updateConsole } from '../redux/modules/results'
-// import '../styles/styles.scss'
 import '../styles/searchpage.scss'
 
 const mapStateToProps = state => ({
@@ -73,7 +72,7 @@ class SearchPage extends Component {
       return <Redirect push to="./results" />
     }
     return (
-      <div className="background" style={{paddingTop: "10%"}}>
+      <div className="background" style={{ paddingTop: window.innerWidth >= 550 ? '10%' : '20%' }}>
         <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" />
         <h3 className="homeText">
           Child&#39;s Play

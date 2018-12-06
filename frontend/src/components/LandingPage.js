@@ -33,7 +33,7 @@ class LandingPage extends Component {
 
   render() {
     return (
-      <div className="backgroundL">
+      <div className="backgroundL" style={{ paddingTop: window.innerWidth >= 550 ? '10%' : '20%' }}>
         <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" />
         <h3 className="homeTextL">Welcome!</h3>
         <h3 className="subtitles">Therapeutic Video Game Guide</h3>

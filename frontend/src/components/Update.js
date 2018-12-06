@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
 import { Redirect } from 'react-router-dom'
 import Dropzone from 'react-dropzone'
 import '../styles/update.scss'
@@ -25,7 +24,10 @@ class Update extends Component {
 
   render() {
     return this.props.authenticated ? (
-      <div className="dropPageBackground">
+      <div
+        className="dropPageBackground"
+        style={{ paddingTop: window.innerWidth >= 550 ? '10%' : '20%' }}
+      >
         <div className="dropPage">
           <section className="droppedBox">
             <h4>Upload excel sheet with new game data</h4>
