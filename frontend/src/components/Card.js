@@ -43,8 +43,6 @@ class Card extends Component {
           ) : null}
           <br />
           <br />
-          <div className="tagBox">
-            {this.props.game.gender && this.props.game.gender !== CardStrings['noGender'] ? (
           <div className={this.props.noImage ? 'tagBoxNoImage' : 'tagBox'}>
             {this.props.game.gender && this.props.game.gender !== CardStrings['noGender'] ? (
               <Tag type={'gender'} tag={this.props.game.gender} card={true} />

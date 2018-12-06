@@ -187,7 +187,7 @@ class Results extends Component {
         <div className="resultsBox">
           {this.props.allGames ? (
             this.state.incompleteGamesView ? (
-              <h3 className="resultsText">{ResultsStrings["incompleteGames"]}</h3>
+              <h3 className="resultsText">{ResultsStrings['incompleteGames']}</h3>
             ) : (
               <h3 className="resultsText">{ResultsStrings['resultsAll']}</h3>
             )
