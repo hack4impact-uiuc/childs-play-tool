@@ -6,6 +6,7 @@ import '../styles/password.scss'
 import '../styles/styles.scss'
 import { Button } from 'reactstrap'
 import { login } from '../redux/modules/auth'
+import { PasswordStrings } from '../strings/english'
 
 const mapStateToProps = state => ({
   authenticated: state.auth.authenticated
@@ -44,15 +45,15 @@ class Password extends Component {
       >
         <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" />
         <div className="passwordPage">
-          <p> Welcome Administrators. Enter your key to continue: </p>
+          <p> {PasswordStrings['greeting']} </p>
           <form onSubmit={this.authenticate}>
             <label className="passwordEnter">
-              <span> Key: </span>
+              <span> {PasswordStrings['key']} </span>
               <input className="inputKey" onChange={this.changedKey} />
             </label>
             <Link to="/uploadPage">
               <Button className="searchButton" type="submit" onClick={this.authenticate}>
-                Submit
+                {PasswordStrings['submitButton']}
               </Button>
             </Link>
           </form>

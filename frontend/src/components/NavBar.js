@@ -68,35 +68,35 @@ class NavBar extends Component {
             >
               <NavItem>
                 <NavLink to="/directorPage" tag={RRNavLink}>
-                  Admin
+                  {NavBarStrings['adminLink']}
                 </NavLink>
               </NavItem>
               <NavItem>
                 {this.props.location.pathname === '/' ? (
-                  <NavLink href="/#Contacts">Contact Us</NavLink>
+                  <NavLink href="/#Contacts">{NavBarStrings['contactLink']}</NavLink>
                 ) : (
                   <NavLink to="/#Contacts" tag={RRNavLink}>
-                    Contact Us
+                    {NavBarStrings['contactLink']}
                   </NavLink>
                 )}
               </NavItem>
               <NavItem>
                 {this.props.location.pathname === '/' ? (
-                  <NavLink href="/#HowToUse">How To Use</NavLink>
+                  <NavLink href="/#HowToUse">{NavBarStrings['tutorialLink']}</NavLink>
                 ) : (
                   <NavLink to="/#HowToUse" tag={RRNavLink}>
-                    How To Use
+                    {NavBarStrings['tutorialLink']}
                   </NavLink>
                 )}
               </NavItem>
               <NavItem>
                 <NavLink to="/search" tag={RRNavLink}>
-                  Search
+                  {NavBarStrings['searchLink']}
                 </NavLink>
               </NavItem>
               <NavItem>
                 <NavLink to="/results" tag={RRNavLink} onClick={this.loadAllGames}>
-                  All Games
+                  {NavBarStrings['gamesLink']}
                 </NavLink>
               </NavItem>
             </Nav>

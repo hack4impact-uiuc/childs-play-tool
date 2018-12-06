@@ -8,6 +8,7 @@ import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap
 import '../styles/styles.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGamepad, faVrCardboard, faSave, faHome } from '@fortawesome/free-solid-svg-icons'
+import { DropdownButtonStrings } from '../strings/english'
 import {
   faNintendoSwitch,
   faXbox,
@@ -39,8 +40,8 @@ class DropdownButton extends Component {
     this.state = {
       consoleSelectedVal: this.props.items ? (
         <div style={{ display: 'inline-block' }}>
-          {this.props.items[parseInt(this.props.activeTab) - 1]}{' '}
-          {this.chooseImage(this.props.items[parseInt(this.props.activeTab) - 1])}
+          {this.props.currentConsole}{' '}
+          {this.chooseImage(this.props.currentConsole)}
         </div>
       ) : (
         ''
@@ -126,7 +127,8 @@ class DropdownButton extends Component {
                     </DropdownItem>
                   ))
                 : null}
-            {(this.props.title === 'Console Type' || this.props.title === 'Character Gender') && (
+            {(this.props.title === DropdownButtonStrings['console'] ||
+              this.props.title === DropdownButtonStrings['gender']) && (
               <>
                 <DropdownItem divider />
                 <DropdownItem
@@ -135,7 +137,7 @@ class DropdownButton extends Component {
                     this.props.updateField(this.props.fieldName, this.props.title)
                   }}
                 >
-                  None
+                  {DropdownButtonStrings['none']}
                 </DropdownItem>
               </>
             )}
