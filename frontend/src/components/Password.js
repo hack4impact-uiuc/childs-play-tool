@@ -41,15 +41,15 @@ class Password extends Component {
       <div className="passwordPageBackground">
         <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" />
         <div className="passwordPage">
-          <p> {PasswordStrings["greeting"]} </p>
+          <p> {PasswordStrings['greeting']} </p>
           <form onSubmit={this.authenticate}>
             <label className="passwordEnter">
-              <span> {PasswordStrings["key"]} </span>
+              <span> {PasswordStrings['key']} </span>
               <input className="inputKey" onChange={this.changedKey} />
             </label>
             <Link to="/uploadPage">
               <Button className="searchButton" type="submit" onClick={this.authenticate}>
-                {PasswordStrings["submitButton"]}
+                {PasswordStrings['submitButton']}
               </Button>
             </Link>
           </form>

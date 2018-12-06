@@ -77,13 +77,13 @@ class SearchPage extends Component {
       <div className="background">
         <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" />
         <h3 className="homeText">
-          {SearchPageStrings["title"]}
+          {SearchPageStrings['title']}
           <br />
-          {SearchPageStrings["subtitle"]}
+          {SearchPageStrings['subtitle']}
         </h3>
         <hr />
         <div className="searchPage">
-          <Label for="nameSearch">{SearchPageStrings["nameSearchHeader"]}</Label> <br />
+          <Label for="nameSearch">{SearchPageStrings['nameSearchHeader']}</Label> <br />
           <div className="nameSearch">
             <SearchBarCustom
               fieldName="nameSearchField"
@@ -103,29 +103,30 @@ class SearchPage extends Component {
                 onClick={this.handleSubmit}
                 disabled={this.props.nameSearchField === ''}
               >
-                {SearchPageStrings["nameSearchButton"]}
+                {SearchPageStrings['nameSearchButton']}
               </Button>
             </Link>
           </div>
           <hr />
-          <h>{SearchPageStrings["filterSearchHeader"]}</h>
+          <h>{SearchPageStrings['filterSearchHeader']}</h>
           <br />
           <div className="filterDropdown">
-            <DropdownButton title={SearchPageStrings["age"]} fieldName="ageRange" />
+            <DropdownButton title={SearchPageStrings['age']} fieldName="ageRange" />
           </div>
           <div className="filterDropdown">
-            <DropdownButton title={SearchPageStrings["symptom"]} fieldName="symptoms" />
+            <DropdownButton title={SearchPageStrings['symptom']} fieldName="symptoms" />
           </div>
           <div className="filterDropdown">
-            <DropdownButton title={SearchPageStrings["console"]} fieldName="consoles" />
+            <DropdownButton title={SearchPageStrings['console']} fieldName="consoles" />
           </div>
           <div className="filterDropdown">
-            <DropdownButton title={SearchPageStrings["gender"]} fieldName="genders" />
+            <DropdownButton title={SearchPageStrings['gender']} fieldName="genders" />
           </div>
           <br />
           <Link
             to={
-              this.props.age != SearchPageStrings["age"] && this.props.symptom != SearchPageStrings["symptom"]
+              this.props.age != SearchPageStrings['age'] &&
+              this.props.symptom != SearchPageStrings['symptom']
                 ? { pathname: '/results' }
                 : { pathname: '/search' }
             }
@@ -134,7 +135,8 @@ class SearchPage extends Component {
               className="searchButton"
               color="blue"
               onClick={
-                this.props.age != SearchPageStrings["age"] && this.props.symptom != SearchPageStrings["symptom"]
+                this.props.age != SearchPageStrings['age'] &&
+                this.props.symptom != SearchPageStrings['symptom']
                   ? e => {
                       this.props.beginLoading()
                       getGames(
@@ -160,24 +162,27 @@ class SearchPage extends Component {
                   : this.toggle
               }
             >
-              {SearchPageStrings["filterSearchButton"]}
+              {SearchPageStrings['filterSearchButton']}
             </Button>
           </Link>
           <Modal isOpen={this.state.modal} toggle={this.toggle}>
-            <ModalBody>{SearchPageStrings["invalidSearch"]}</ModalBody>
+            <ModalBody>{SearchPageStrings['invalidSearch']}</ModalBody>
             <ModalFooter>
               <Button className="invalidSearchButton" onClick={this.toggle}>
-                {SearchPageStrings["returnButton"]}
+                {SearchPageStrings['returnButton']}
               </Button>
             </ModalFooter>
           </Modal>
           <br />
-          <div className="tinyText">{SearchPageStrings["reminder"]}</div>
+          <div className="tinyText">{SearchPageStrings['reminder']}</div>
           <hr />
-          <h> {SearchPageStrings["loadPrevHeader"]} </h>
+          <h> {SearchPageStrings['loadPrevHeader']} </h>
           <br />
           <div className="saveSearch">
-            <DropdownButton title={SearchPageStrings["loadDropdown"]} fieldName="selectedSaveSearch" />
+            <DropdownButton
+              title={SearchPageStrings['loadDropdown']}
+              fieldName="selectedSaveSearch"
+            />
           </div>
           <div className="saveSearch">
             <Link to={{ pathname: './Results' }}>
@@ -187,7 +192,7 @@ class SearchPage extends Component {
                   this.props.getSavedSearch(this.props.selectedVal)
                 }}
               >
-                {SearchPageStrings["loadButton"]}
+                {SearchPageStrings['loadButton']}
               </Button>
             </Link>
           </div>

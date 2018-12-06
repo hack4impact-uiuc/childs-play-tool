@@ -60,7 +60,7 @@ class Description extends Component {
       imageRender = (
         <Form className="search">
           <FormGroup>
-            <Label for="exampleSearch">{DescriptionStrings["imageURL"]}</Label>
+            <Label for="exampleSearch">{DescriptionStrings['imageURL']}</Label>
             <Input
               type="textarea"
               name="imageURL"
@@ -77,7 +77,9 @@ class Description extends Component {
     } else {
       descriptionRender = (
         <div>
-          {this.state.updateDescription ? this.state.updateDescription : DescriptionStrings["noDesc"]}
+          {this.state.updateDescription
+            ? this.state.updateDescription
+            : DescriptionStrings['noDesc']}
         </div>
       )
       imageRender = (
@@ -102,7 +104,7 @@ class Description extends Component {
             this.setState({ editing: true })
           }}
         >
-          {DescriptionStrings["editButton"]}
+          {DescriptionStrings['editButton']}
         </Button>
       )
       saveButton = (
@@ -125,7 +127,7 @@ class Description extends Component {
             )
           }}
         >
-          {DescriptionStrings["saveButton"]}
+          {DescriptionStrings['saveButton']}
         </Button>
       )
     } else {
@@ -147,12 +149,12 @@ class Description extends Component {
             <br />
             <div align="center">
               {this.props.location.state.game.gender &&
-              this.props.location.state.game.gender != DescriptionStrings["noGender"] ? (
+              this.props.location.state.game.gender != DescriptionStrings['noGender'] ? (
                 <Tag type={'gender'} tag={this.props.location.state.game.gender} />
               ) : null}
               {this.props.location.state.game.tags.ages ? (
                 this.props.location.state.game.tags.ages.length == 2 ? (
-                  <Tag type={'age'} tag={DescriptionStrings["allAges"]} />
+                  <Tag type={'age'} tag={DescriptionStrings['allAges']} />
                 ) : (
                   <Tag type={'age'} tag={this.props.location.state.game.tags.ages[0]} />
                 )
@@ -172,7 +174,7 @@ class Description extends Component {
 
             <Link to={{ pathname: './results' }}>
               <Button outline color="success">
-                {DescriptionStrings["return"]}
+                {DescriptionStrings['return']}
               </Button>
             </Link>
           </div>

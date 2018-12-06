@@ -116,9 +116,10 @@ class Results extends Component {
     if (name && name !== '') return url + 'name=' + name
     else {
       url = url + 'age=' + age + '&symptom=' + symptom
-      if (gender && gender !== ResultsStrings["noGender"] && gender !== ResultsStrings["gender"])
+      if (gender && gender !== ResultsStrings['noGender'] && gender !== ResultsStrings['gender'])
         url = url + '&gender=' + gender
-      if (system && system !== '' && system !== ResultsStrings["console"]) url = url + '&system=' + system
+      if (system && system !== '' && system !== ResultsStrings['console'])
+        url = url + '&system=' + system
       return url
     }
   }
@@ -127,31 +128,34 @@ class Results extends Component {
   }
   render() {
     if (this.props.loading) {
-      return <div>{ResultsStrings["loading"]}</div>
+      return <div>{ResultsStrings['loading']}</div>
     }
     return (
       <div className="results-background">
         <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" />
         <div className="resultsBox">
           {this.props.allGames ? (
-            <h3 className="resultsText">{ResultsStrings["resultsAll"]}</h3>
+            <h3 className="resultsText">{ResultsStrings['resultsAll']}</h3>
           ) : (
-            <h3 className="resultsText">{ResultsStrings["resultsFound"]}</h3>
+            <h3 className="resultsText">{ResultsStrings['resultsFound']}</h3>
           )}
           <div align="center">
-            {this.props.age && this.props.age != ResultsStrings["age"] ? (
+            {this.props.age && this.props.age != ResultsStrings['age'] ? (
               <Tag type={'age'} tag={this.props.age} />
             ) : null}
-            {this.props.symptom && this.props.symptom != ResultsStrings["symptom"] ? (
+            {this.props.symptom && this.props.symptom != ResultsStrings['symptom'] ? (
               <Tag type={'symptom'} tag={this.props.symptom} />
             ) : null}
             {this.props.gender &&
-            this.props.gender != ResultsStrings["noGender"] &&
-            this.props.gender != ResultsStrings["gender"] ? (
+            this.props.gender != ResultsStrings['noGender'] &&
+            this.props.gender != ResultsStrings['gender'] ? (
               <Tag type={'gender'} tag={this.props.gender} />
             ) : null}
             {this.props.search && this.props.search != '' ? (
-              <h4> {ResultsStrings["resultsSearched"]} {this.props.search} </h4>
+              <h4>
+                {' '}
+                {ResultsStrings['resultsSearched']} {this.props.search}{' '}
+              </h4>
             ) : null}
           </div>
           {this.props.results ? (
@@ -170,7 +174,7 @@ class Results extends Component {
                   {this.props.allGames ? null : (
                     <Link to={{ pathname: './search' }}>
                       <Button className="homeButton">
-                        <FontAwesomeIcon icon={faHome} /> {ResultsStrings["searchAgain"]}
+                        <FontAwesomeIcon icon={faHome} /> {ResultsStrings['searchAgain']}
                       </Button>
                     </Link>
                   )}
@@ -192,7 +196,7 @@ class Results extends Component {
                 <div className="saveSearch">
                   <Form>
                     <FormGroup>
-                      <Label for="exampleSearch">{ResultsStrings["saveLabel"]}</Label>
+                      <Label for="exampleSearch">{ResultsStrings['saveLabel']}</Label>
                       <InputGroup>
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText>
@@ -203,7 +207,7 @@ class Results extends Component {
                           type="text"
                           name="saveName"
                           id="saveName"
-                          placeholder={ResultsStrings["placeholder"]}
+                          placeholder={ResultsStrings['placeholder']}
                           onChange={e => {
                             this.setState({ saveName: e.target.value })
                           }}
@@ -226,7 +230,7 @@ class Results extends Component {
                         this.toggleModal()
                       }}
                     >
-                      {ResultsStrings["saveButton"]}
+                      {ResultsStrings['saveButton']}
                     </Button>
                     <br />
                     <br />
@@ -245,14 +249,14 @@ class Results extends Component {
                         ) : (
                           <FontAwesomeIcon icon={faClipboard} />
                         )}{' '}
-                        {ResultsStrings["copyButton"]}
+                        {ResultsStrings['copyButton']}
                       </Button>
                     </CopyToClipboard>
                     <Modal isOpen={this.state.modal}>
-                      <ModalBody>{ResultsStrings["saved"]}</ModalBody>
+                      <ModalBody>{ResultsStrings['saved']}</ModalBody>
                       <ModalFooter>
                         <Button color="primary" onClick={this.toggleModal}>
-                          {ResultsStrings["dismiss"]}
+                          {ResultsStrings['dismiss']}
                         </Button>
                       </ModalFooter>
                     </Modal>
@@ -262,12 +266,12 @@ class Results extends Component {
               <hr />
             </div>
           ) : (
-            <div>{ResultsStrings["noResults"]}</div>
+            <div>{ResultsStrings['noResults']}</div>
           )}
           {this.props.allGames ? null : (
             <Link to={{ pathname: './search' }}>
               <Button className="homeButton">
-                <FontAwesomeIcon icon={faHome} /> {ResultsStrings["searchAgain2"]}
+                <FontAwesomeIcon icon={faHome} /> {ResultsStrings['searchAgain2']}
               </Button>
             </Link>
           )}

@@ -13,9 +13,9 @@ class Card extends Component {
       hover: 'cardStyle',
       description:
         !this.props.game.description || this.props.game.description.length == 0
-          ? CardStrings["noDesc"]
+          ? CardStrings['noDesc']
           : this.props.game.description && this.props.game.description.length > 100
-            ? this.props.game.description.substring(0, 99) + CardStrings["ellipsis"]
+            ? this.props.game.description.substring(0, 99) + CardStrings['ellipsis']
             : this.props.game.description
     }
   }
@@ -71,12 +71,12 @@ class Card extends Component {
           <br />
           <br />
           <div className="tagBox">
-            {this.props.game.gender && this.props.game.gender !== CardStrings["noGender"] ? (
+            {this.props.game.gender && this.props.game.gender !== CardStrings['noGender'] ? (
               <Tag type={'gender'} tag={this.props.game.gender} card={true} />
             ) : null}
             {this.props.game.tags ? (
               this.props.game.tags.ages.length === 2 ? (
-                <Tag type={'age'} tag={CardStrings["allAges"]} card={true} />
+                <Tag type={'age'} tag={CardStrings['allAges']} card={true} />
               ) : (
                 <Tag type={'age'} tag={this.props.game.tags.ages[0]} card={true} />
               )

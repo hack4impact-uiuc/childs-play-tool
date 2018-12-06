@@ -57,7 +57,9 @@ class ResultsLink extends Component {
     return (
       <div>
         {this.vals.name ? this.nameSearch() : null}
-        {this.vals.age && this.vals.symptom ? this.filterSearch() : ResultsLinkStrings["invalidURL"] }
+        {this.vals.age && this.vals.symptom
+          ? this.filterSearch()
+          : ResultsLinkStrings['invalidURL']}
       </div>
     )
   }

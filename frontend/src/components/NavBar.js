@@ -19,7 +19,7 @@ import {
 import '../styles/landingpage.scss'
 import { getAllGames } from '../utils/ApiWrapper'
 import { updateResultsAll, beginLoading, endLoading } from '../redux/modules/results'
-import { NavBarStrings } from "../strings/english"
+import { NavBarStrings } from '../strings/english'
 
 const mapStateToProps = state => {}
 
@@ -67,7 +67,7 @@ class NavBar extends Component {
           expand={window.innerWidth >= 550}
         >
           <NavbarBrand to="/" tag={RRNavLink}>
-            {NavBarStrings["homeButton"]}
+            {NavBarStrings['homeButton']}
           </NavbarBrand>
           <NavbarToggler onClick={this.toggleNavbar} />
           <Collapse isOpen={!this.state.collapsed} navbar>
@@ -79,35 +79,35 @@ class NavBar extends Component {
             >
               <NavItem>
                 <NavLink to="/directorPage" tag={RRNavLink}>
-                  {NavBarStrings["adminLink"]}
+                  {NavBarStrings['adminLink']}
                 </NavLink>
               </NavItem>
               <NavItem>
                 {this.props.location.pathname === '/' ? (
-                  <NavLink href="/#Contacts">{NavBarStrings["contactLink"]}</NavLink>
+                  <NavLink href="/#Contacts">{NavBarStrings['contactLink']}</NavLink>
                 ) : (
                   <NavLink to="/#Contacts" tag={RRNavLink}>
-                    {NavBarStrings["contactLink"]}
+                    {NavBarStrings['contactLink']}
                   </NavLink>
                 )}
               </NavItem>
               <NavItem>
                 {this.props.location.pathname === '/' ? (
-                  <NavLink href="/#HowToUse">{NavBarStrings["tutorialLink"]}</NavLink>
+                  <NavLink href="/#HowToUse">{NavBarStrings['tutorialLink']}</NavLink>
                 ) : (
                   <NavLink to="/#HowToUse" tag={RRNavLink}>
-                    {NavBarStrings["tutorialLink"]}
+                    {NavBarStrings['tutorialLink']}
                   </NavLink>
                 )}
               </NavItem>
               <NavItem>
                 <NavLink to="/search" tag={RRNavLink}>
-                  {NavBarStrings["searchLink"]}
+                  {NavBarStrings['searchLink']}
                 </NavLink>
               </NavItem>
               <NavItem>
                 <NavLink to="/results" tag={RRNavLink} onClick={this.loadAllGames}>
-                  {NavBarStrings["gamesLink"]}
+                  {NavBarStrings['gamesLink']}
                 </NavLink>
               </NavItem>
             </Nav>

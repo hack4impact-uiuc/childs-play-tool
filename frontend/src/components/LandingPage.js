@@ -36,33 +36,29 @@ class LandingPage extends Component {
     return (
       <div className="backgroundL">
         <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" />
-        <h3 className="homeTextL">{LandingPageStrings["greeting"]}</h3>
-        <h3 className="subtitles">{LandingPageStrings["subtitle"]}</h3>
-        <p className="padded">
-          {LandingPageStrings["purpose"]}
-        </p>
+        <h3 className="homeTextL">{LandingPageStrings['greeting']}</h3>
+        <h3 className="subtitles">{LandingPageStrings['subtitle']}</h3>
+        <p className="padded">{LandingPageStrings['purpose']}</p>
         <Link to="/search">
-          <Button className="buttonpad">{LandingPageStrings["searchButton"]}</Button>
+          <Button className="buttonpad">{LandingPageStrings['searchButton']}</Button>
         </Link>
         <div>
           <a href="http://childsplaycharity.org/assets/downloads/booklet.pdf">
             {' '}
-            {LandingPageStrings["englishPDF"]}
+            {LandingPageStrings['englishPDF']}
           </a>
           <br />
           <a href="http://childsplaycharity.org/assets/downloads/booklet.pdf">
             {' '}
-            {LandingPageStrings["spanishPDF"]}
+            {LandingPageStrings['spanishPDF']}
           </a>
         </div>
         <div className="line" />
 
         <Container id="HowToUse" className="separator" ref={this.howtoRef}>
-          <h3 className="homeText2L">{LandingPageStrings["tutorialHeader"]}</h3>
+          <h3 className="homeText2L">{LandingPageStrings['tutorialHeader']}</h3>
           <Row className="mspace imageCentered">
-            <p className="padded">
-              {LandingPageStrings["tutorial1"]}
-            </p>
+            <p className="padded">{LandingPageStrings['tutorial1']}</p>
             <img
               src={require('../styles/searchbyname.png')}
               alt="Search by name field"
@@ -71,9 +67,7 @@ class LandingPage extends Component {
           </Row>
           <Row>
             <Col className="mspace">
-              <p>
-                {LandingPageStrings["tutorial2"]}
-              </p>
+              <p>{LandingPageStrings['tutorial2']}</p>
               <img
                 src={require('../styles/symptoms1.png')}
                 alt="Anxiety/Hyperactivity, Bored (Long Term), Bored (Short Term), Cognitive Impairment, Pain, Sadness"
@@ -81,7 +75,7 @@ class LandingPage extends Component {
               />
             </Col>
             <Col className="mspace">
-              <p>{LandingPageStrings["tutorial3"]}</p>
+              <p>{LandingPageStrings['tutorial3']}</p>
               <img
                 src={require('../styles/agecategories.png')}
                 alt="12 and under, 13 and older"
@@ -91,29 +85,21 @@ class LandingPage extends Component {
           </Row>
           <Row>
             <Col className="mspace">
-              <p>
-                {LandingPageStrings["tutorial4"]}
-              </p>
+              <p>{LandingPageStrings['tutorial4']}</p>
               <img src={require('../styles/searchimage.png')} alt="Search page" height="200px" />
             </Col>
             <Col className="mspace">
-              <p>
-                {LandingPageStrings["tutorial5"]}
-              </p>
+              <p>{LandingPageStrings['tutorial5']}</p>
               <img src={require('../styles/result.png')} alt="Search page" height="110px" />
             </Col>
           </Row>
           <Row>
             <Col>
-              <p>
-                {LandingPageStrings["tutorial6"]}
-              </p>
+              <p>{LandingPageStrings['tutorial6']}</p>
               <img src={require('../styles/inputsave.png')} alt="Search page" height="140px" />
             </Col>
             <Col>
-              <p>
-                {LandingPageStrings["tutorial7"]}
-              </p>
+              <p>{LandingPageStrings['tutorial7']}</p>
               <img src={require('../styles/loadsave.png')} alt="Search page" height="110px" />
             </Col>
           </Row>
@@ -121,19 +107,15 @@ class LandingPage extends Component {
         <div className="line" />
 
         <Container className="separator">
-          <h3 className="homeText2L">{LandingPageStrings["mobileGuideHeader"]}</h3>
+          <h3 className="homeText2L">{LandingPageStrings['mobileGuideHeader']}</h3>
           <Row>
             <Col>
-              <h2 className="subtitles">{LandingPageStrings["android"]}</h2>
-              <p>
-                {LandingPageStrings["androidDesc"]}
-              </p>
+              <h2 className="subtitles">{LandingPageStrings['android']}</h2>
+              <p>{LandingPageStrings['androidDesc']}</p>
             </Col>
             <Col>
-              <h2 className="subtitles">{LandingPageStrings["iOS"]}</h2>
-              <p>
-                {LandingPageStrings["iOSDesc"]}
-              </p>
+              <h2 className="subtitles">{LandingPageStrings['iOS']}</h2>
+              <p>{LandingPageStrings['iOSDesc']}</p>
             </Col>
           </Row>
         </Container>
@@ -142,34 +124,40 @@ class LandingPage extends Component {
         <Container id="Contacts" className="separator" ref={this.contactRef}>
           <Row>
             <Col>
-              <h3> {LandingPageStrings["aboutHeader"]}</h3>
+              <h3> {LandingPageStrings['aboutHeader']}</h3>
               <img
                 className="cleared"
                 src={require('../styles/cp-logo.png')}
                 alt="Child's Play logo"
                 height="100px"
               />
-              <p>
-                {LandingPageStrings["aboutDesc"]}
-              </p>
-              <a href="http://childsplaycharity.org"> {LandingPageStrings["learnMore"]} </a>
+              <p>{LandingPageStrings['aboutDesc']}</p>
+              <a href="http://childsplaycharity.org"> {LandingPageStrings['learnMore']} </a>
             </Col>
             <Col>
-              <h3>{LandingPageStrings["contactHeader"]}</h3>
+              <h3>{LandingPageStrings['contactHeader']}</h3>
               <p className="address">
                 <br />
-                {LandingPageStrings["contactCompany"]} <br />
-                {LandingPageStrings["contactAddress"]}
+                {LandingPageStrings['contactCompany']} <br />
+                {LandingPageStrings['contactAddress']}
                 <br />
-                {LandingPageStrings["contactAddress2"]}
+                {LandingPageStrings['contactAddress2']}
                 <br />
-                {LandingPageStrings["contactAddress3"]}<br />
+                {LandingPageStrings['contactAddress3']}
                 <br />
-                {LandingPageStrings["facebook"]}{' '}
-                <a href="https://www.facebook.com/ChildsPlayCharity/">{LandingPageStrings["facebookName"]}</a>
                 <br />
-                {LandingPageStrings["twitter"]} <a href="https://twitter.com/CPCharity/">{LandingPageStrings["twitterHandle"]}</a> <br />
-                <a href="https://childsplaycharity.org/about#contact"> {LandingPageStrings["contactMore"]} </a>
+                {LandingPageStrings['facebook']}{' '}
+                <a href="https://www.facebook.com/ChildsPlayCharity/">
+                  {LandingPageStrings['facebookName']}
+                </a>
+                <br />
+                {LandingPageStrings['twitter']}{' '}
+                <a href="https://twitter.com/CPCharity/">{LandingPageStrings['twitterHandle']}</a>{' '}
+                <br />
+                <a href="https://childsplaycharity.org/about#contact">
+                  {' '}
+                  {LandingPageStrings['contactMore']}{' '}
+                </a>
               </p>
             </Col>
           </Row>

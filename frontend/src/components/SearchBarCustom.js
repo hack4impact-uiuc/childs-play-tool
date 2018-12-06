@@ -33,7 +33,7 @@ class SearchBarCustom extends Component {
               type="search"
               name="search"
               id="exampleSearch"
-              placeholder={SearchBarCustomStrings["placeholder"]}
+              placeholder={SearchBarCustomStrings['placeholder']}
               onChange={e => {
                 this.props.updateField(this.props.fieldName, e.target.value)
               }}
