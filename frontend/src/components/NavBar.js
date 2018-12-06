@@ -51,7 +51,7 @@ class NavBar extends Component {
         <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" />
         <Navbar
           color={window.innerWidth >= 550 ? 'dark' : false}
-          className={window.innerWidth >= 550 ? false : 'navbar-dark bg-dark'}
+          className={'navbar-dark bg-dark'}
           expand={window.innerWidth >= 550}
           fixed="top"
         >
