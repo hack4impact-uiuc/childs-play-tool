@@ -16,7 +16,8 @@ const titleStyle = {
 
 const mapStateToProps = state => ({
   auth: state.auth.authenticated,
-  currentConsole: state.results.currentConsole
+  currentConsole: state.results.currentConsole,
+  noImage: state.searchpage.noImage
 })
 
 const mapDispatchToProps = dispatch => {
@@ -84,9 +85,11 @@ class Description extends Component {
         <img
           className="image"
           src={
-            this.props.location.state.game.image == ''
-              ? require('../styles/placeholderimage.png')
-              : this.props.location.state.game.image
+            !this.props.noImage
+              ? this.props.location.state.game.image == ''
+                ? require('../styles/placeholderimage.png')
+                : this.props.location.state.game.image
+              : null
           }
         />
       )
