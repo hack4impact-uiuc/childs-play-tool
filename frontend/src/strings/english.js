@@ -88,6 +88,7 @@ export const ResultsStrings = {
   symptom: 'Symptom*',
   console: 'Console Type',
   loading: 'Loading',
+  incompleteGames: 'Incomplete Games',
   resultsAll: 'All Games',
   resultsFound: 'Results found:',
   resultsSearched: 'You searched for:',
