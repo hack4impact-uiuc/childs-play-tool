@@ -143,9 +143,12 @@ export const UpdateStrings = {
   uploadButton: 'Upload File',
   adminInstructions: 'Instructions',
   uploadInstructionsTitle: 'Uploading a File',
-  uploadInstructions: 'You can upload a spreadsheet to update the web application in two ways. Clicking the upload box will prompt you to select a file from your computer. You can also drag and drop a file into the box. When the file is successfully uploaded, you can confirm this by looking at the date and time of the last successful upload. If the file fails to upload, you can tell by looking at the last invalid upload date and time.',
+  uploadInstructions:
+    'You can upload a spreadsheet to update the web application in two ways. Clicking the upload box will prompt you to select a file from your computer. You can also drag and drop a file into the box. When the file is successfully uploaded, you can confirm this by looking at the date and time of the last successful upload. If the file fails to upload, you can tell by looking at the last invalid upload date and time.',
   editGameTitle: 'Editing a Game',
-  editGame: 'Once you have logged in to the administrator page, you are authorized to edit the games. On the description page of any given game, there is an edit button and a save button. Clicking the edit button will allow you to change the image by editing the image url and change the description by editing the description text. After you are done editing, clicking the save button will confirm your change.',
+  editGame:
+    'Once you have logged in to the administrator page, you are authorized to edit the games. On the description page of any given game, there is an edit button and a save button. Clicking the edit button will allow you to change the image by editing the image url and change the description by editing the description text. After you are done editing, clicking the save button will confirm your change.',
   findIncompleteGamesTitle: 'Finding All Incomplete Games',
-  findIncompleteGames: 'You can also find all games that are missing either an image or description after you have logged in. First, in the navigation bar at the top of the screen, click the \'All Games\' option. Then, select the \'See Incomplete Games\' option in the top left to see the incomplete games sorted by console. You can return to the list of all the games by selecting the \'See All Games\'.'
+  findIncompleteGames:
+    "You can also find all games that are missing either an image or description after you have logged in. First, in the navigation bar at the top of the screen, click the 'All Games' option. Then, select the 'See Incomplete Games' option in the top left to see the incomplete games sorted by console. You can return to the list of all the games by selecting the 'See All Games'."
 }

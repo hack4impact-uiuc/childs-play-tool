@@ -45,11 +45,11 @@ class Update extends Component {
                 ))}
               </ul>
               <Button className="right" onClick={e => sendFile(this.state.files[0])}>
-              {UpdateStrings['uploadButton']}
+                {UpdateStrings['uploadButton']}
               </Button>
             </aside>
           </section>
-          <hr/>
+          <hr />
           <h4>{UpdateStrings['adminInstructions']}</h4>
           <h5 align="left">{UpdateStrings['uploadInstructionsTitle']}</h5>
           <p align="left">{UpdateStrings['uploadInstructions']}</p>
