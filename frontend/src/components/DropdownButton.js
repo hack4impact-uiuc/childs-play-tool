@@ -114,20 +114,18 @@ class DropdownButton extends Component {
                   >
                     {item.value}
 
-                    <div className="deleteButton" style={{ float: 'right' }}>
-                      <Button
-                        close
-                        color="link"
-                        onClick={e => {
-                          e.stopPropagation()
-                          this.props.deleteSearch(item.value)
-                          this.setState({ selectedVal: 'Saved Searches' })
-                          this.toggle()
-                        }}
-                      >
-                        x
-                      </Button>
-                    </div>
+                    <Button
+                      close
+                      color="link"
+                      onClick={e => {
+                        e.stopPropagation()
+                        this.props.deleteSearch(item.value)
+                        this.setState({ selectedVal: 'Saved Searches' })
+                        this.toggle()
+                      }}
+                    >
+                      x
+                    </Button>
                   </DropdownItem>
                 ))
               : this.props.items
