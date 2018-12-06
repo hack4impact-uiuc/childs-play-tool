@@ -2,10 +2,12 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
-import styles from '../styles/password.scss'
+import '../styles/password.scss'
+import '../styles/styles.scss'
 import { Button } from 'reactstrap'
 import { login, loadUpdates } from '../redux/modules/auth'
 import { getUpdates } from '../utils/ApiWrapper'
+import { PasswordStrings } from '../strings/english'
 
 const mapStateToProps = state => ({
   authenticated: state.auth.authenticated,
@@ -43,18 +45,21 @@ class Password extends Component {
 
   render() {
     return (
-      <div className="passwordPageBackground">
+      <div
+        className="passwordPageBackground"
+        style={{ paddingTop: window.innerWidth >= 550 ? '5%' : '20%' }}
+      >
         <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" />
         <div className="passwordPage">
-          <p> Welcome Administrators. Enter your key to continue: </p>
+          <p> {PasswordStrings['greeting']} </p>
           <form onSubmit={this.authenticate}>
             <label className="passwordEnter">
-              <span> Key: </span>
+              <span> {PasswordStrings['key']} </span>
               <input className="inputKey" onChange={this.changedKey} />
             </label>
             <Link to="/uploadPage">
               <Button className="searchButton" type="submit" onClick={this.authenticate}>
-                Submit
+                {PasswordStrings['submitButton']}
               </Button>
             </Link>
           </form>

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Tag from './Tag'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import DropdownButton from './DropdownButton'
+import { DropdownButton } from './'
 import Card from './Card'
 import {
   TabContent,
@@ -37,24 +37,19 @@ import { bindActionCreators } from 'redux'
 import Constants from '../utils/Constants.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
-  faGamepad,
-  faVrCardboard,
   faSave,
+  faGamepad,
   faHome,
+  faSmile,
+  faFrown,
   faClipboard,
   faClipboardCheck,
-  faSmile,
-  faFrown
+  faSearch,
+  faSpinner
 } from '@fortawesome/free-solid-svg-icons'
-import {
-  faNintendoSwitch,
-  faXbox,
-  faPlaystation,
-  faApple,
-  faAndroid
-} from '@fortawesome/free-brands-svg-icons'
-import { runInThisContext } from 'vm'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
+import Loader from 'react-loader-spinner'
+import { ResultsStrings } from '../strings/english'
 import { getAllGames, getIncompleteGames } from '../utils/ApiWrapper'
 
 const mapStateToProps = state => ({
@@ -136,9 +131,10 @@ class Results extends Component {
     if (name && name !== '') return url + 'name=' + name
     else {
       url = url + 'age=' + age + '&symptom=' + symptom
-      if (gender && gender !== 'No Discernable Gender' && gender !== 'Character Gender')
+      if (gender && gender !== ResultsStrings['noGender'] && gender !== ResultsStrings['gender'])
         url = url + '&gender=' + gender
-      if (system && system !== '' && system !== 'Console Type') url = url + '&system=' + system
+      if (system && system !== '' && system !== ResultsStrings['console'])
+        url = url + '&system=' + system
       return url
     }
   }
@@ -177,41 +173,65 @@ class Results extends Component {
 
   render() {
     if (this.props.loading) {
-      return <div>Loading</div>
+      return (
+        <div
+          className="resultsText"
+          style={{ paddingTop: window.innerWidth >= 550 ? '10%' : '20%' }}
+        >
+          {ResultsStrings['loading']}
+          <Loader type="Puff" color="green" height="100" width="100" />
+        </div>
+      )
     }
     return (
-      <div className="results-background">
+      <div
+        className="results-background"
+        style={{ paddingTop: window.innerWidth >= 550 ? '5%' : '20%' }}
+      >
         <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" />
         <div className="resultsBox">
           {this.props.allGames ? (
             this.state.incompleteGamesView ? (
-              <h3 className="resultsText">Incomplete Games</h3>
+              <h3 className="resultsText">{ResultsStrings['incompleteGames']}</h3>
             ) : (
-              <h3 className="resultsText">All Games</h3>
+              <h3 className="resultsText">{ResultsStrings['resultsAll']}</h3>
             )
           ) : (
-            <h3 className="resultsText">Results found:</h3>
+            <h3 className="resultsText">{ResultsStrings['resultsFound']}</h3>
           )}
           <div align="center">
-            {this.props.age && this.props.age != 'Age*' ? (
+            {this.props.age && this.props.age !== ResultsStrings['age'] ? (
               <Tag type={'age'} tag={this.props.age} />
             ) : null}
-            {this.props.symptom && this.props.symptom != 'Symptom*' ? (
+            {this.props.symptom && this.props.symptom !== ResultsStrings['symptom'] ? (
               <Tag type={'symptom'} tag={this.props.symptom} />
             ) : null}
             {this.props.gender &&
-            this.props.gender != 'No Discernable Gender' &&
-            this.props.gender != 'Character Gender' ? (
+            this.props.gender !== ResultsStrings['noGender'] &&
+            this.props.gender !== ResultsStrings['gender'] ? (
               <Tag type={'gender'} tag={this.props.gender} />
             ) : null}
-            {this.props.search && this.props.search != '' ? (
-              <h4> You searched for: {this.props.search} </h4>
+            {this.props.search && this.props.search !== '' ? (
+              <h4>
+                {' '}
+                {ResultsStrings['resultsSearched']} {this.props.search}{' '}
+              </h4>
             ) : null}
           </div>
+          <br />
           {this.props.results ? (
             <div>
               <div>
-                <div style={{ float: 'right' }}>
+                <div style={{ float: window.innerWidth >= 400 ? 'left' : '' }}>
+                  {this.props.allGames ? null : (
+                    <Link to={{ pathname: './search' }}>
+                      <Button className="homeButton">
+                        <FontAwesomeIcon icon={faSearch} /> Search Again
+                      </Button>
+                    </Link>
+                  )}
+                </div>
+                <div style={{ float: window.innerWidth >= 400 ? 'right' : '' }}>
                   <DropdownButton
                     title={
                       this.determineConsoles(this.props.results)[parseInt(this.props.activeTab) - 1]
@@ -236,7 +256,7 @@ class Results extends Component {
                   ) : (
                     <Link to={{ pathname: './search' }}>
                       <Button className="homeButton">
-                        <FontAwesomeIcon icon={faHome} /> Search Again
+                        <FontAwesomeIcon icon={faHome} /> {ResultsStrings['searchAgain']}
                       </Button>
                     </Link>
                   )}
@@ -258,7 +278,7 @@ class Results extends Component {
                 <div className="saveSearch">
                   <Form>
                     <FormGroup>
-                      <Label for="exampleSearch">Save Search</Label>
+                      <Label for="exampleSearch">{ResultsStrings['saveLabel']}</Label>
                       <InputGroup>
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText>
@@ -269,7 +289,7 @@ class Results extends Component {
                           type="text"
                           name="saveName"
                           id="saveName"
-                          placeholder="Input Name"
+                          placeholder={ResultsStrings['placeholder']}
                           onChange={e => {
                             this.setState({ saveName: e.target.value })
                           }}
@@ -292,7 +312,7 @@ class Results extends Component {
                         this.toggleModal()
                       }}
                     >
-                      Save Search
+                      {ResultsStrings['saveButton']}
                     </Button>
                     <br />
                     <br />
@@ -311,14 +331,14 @@ class Results extends Component {
                         ) : (
                           <FontAwesomeIcon icon={faClipboard} />
                         )}{' '}
-                        Copy Search URL
+                        {ResultsStrings['copyButton']}
                       </Button>
                     </CopyToClipboard>
                     <Modal isOpen={this.state.modal}>
-                      <ModalBody>Search saved successfully!</ModalBody>
+                      <ModalBody>{ResultsStrings['saved']}</ModalBody>
                       <ModalFooter>
                         <Button color="primary" onClick={this.toggleModal}>
-                          Dismiss
+                          {ResultsStrings['dismiss']}
                         </Button>
                       </ModalFooter>
                     </Modal>
@@ -333,13 +353,13 @@ class Results extends Component {
             </h4>
           ) : (
             <h4 className="resultsText">
-              No results found <FontAwesomeIcon icon={faFrown} />
+              {ResultsStrings['noResults']} <FontAwesomeIcon icon={faFrown} />
             </h4>
           )}
           {this.props.allGames ? null : (
             <Link to={{ pathname: './search' }}>
               <Button className="homeButton">
-                <FontAwesomeIcon icon={faHome} /> Search Again
+                <FontAwesomeIcon icon={faSearch} /> {ResultsStrings['searchAgain2']}
               </Button>
             </Link>
           )}
