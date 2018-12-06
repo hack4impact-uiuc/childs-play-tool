@@ -9,6 +9,7 @@ import re
 from difflib import SequenceMatcher
 from collections import defaultdict
 from datetime import datetime
+import pytz
 
 games_page = Blueprint("games", __name__)
 
@@ -147,7 +148,7 @@ def post_games():
         if file is None:
             db.session.query(Update).filter(Update.valid == False).delete()
             update = {}
-            update["time"] = datetime.now()
+            update["time"] = datetime.now(pytz.timezone("US/Pacific"))
             update["valid"] = False
             u = Update(update)
             db.session.add(u)
@@ -320,7 +321,7 @@ def post_games():
                     id = id + 1
         db.session.query(Update).delete()
         update = {}
-        update["time"] = datetime.now()
+        update["time"] = datetime.now(pytz.timezone("US/Pacific"))
         update["valid"] = True
         u = Update(update)
         db.session.add(u)
@@ -330,7 +331,7 @@ def post_games():
         db.session.rollback()
         db.session.query(Update).filter(Update.valid == False).delete()
         update = {}
-        update["time"] = datetime.now()
+        update["time"] = datetime.now(pytz.timezone("US/Pacific"))
         update["valid"] = False
         u = Update(update)
         db.session.add(u)
