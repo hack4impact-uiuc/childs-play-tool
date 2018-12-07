@@ -56,15 +56,7 @@ class LandingPage extends Component {
               <img
                 src={require('../styles/searchbyname.png')}
                 alt="Search by name field"
-                height="100px"
-              />
-            </Col>
-            <Col className="mspace">
-              <p>{LandingPageStrings['tutorial1']}</p>
-              <img
-                src={require('../styles/copysearchurl.png')}
-                alt="Copy search URL field"
-                height="100px"
+                height="80px"
               />
             </Col>
           </Row>
@@ -97,13 +89,23 @@ class LandingPage extends Component {
             </Col>
           </Row>
           <Row>
-            <Col>
+            <Col className="mspace">
               <p>{LandingPageStrings['tutorial6']}</p>
               <img src={require('../styles/inputsave.png')} alt="Search page" height="140px" />
             </Col>
-            <Col>
+            <Col className="mspace">
               <p>{LandingPageStrings['tutorial7']}</p>
               <img src={require('../styles/loadsave.png')} alt="Search page" height="110px" />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <p>{LandingPageStrings['tutorial1']}</p>
+              <img
+                src={require('../styles/copysearchurl.png')}
+                alt="Copy search URL field"
+                height="80px"
+              />
             </Col>
           </Row>
         </Container>
