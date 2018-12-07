@@ -8,8 +8,7 @@ import requests
 import re
 from difflib import SequenceMatcher
 from collections import defaultdict
-import datetime
-import pytz
+from datetime import datetime
 
 games_page = Blueprint("games", __name__)
 
@@ -130,6 +129,8 @@ def get_game_specific(game_id):
 @games_page.route(GAMES_ALL_URL, methods=["GET"])
 @Auth.authenticate
 def get_games_all():
+    if Game.query.count() == 0:
+        return create_response(status=400, message="No games found.")
     systems = {}
     for system in Game.system.type.enums:
         games_by_system = (
@@ -148,7 +149,7 @@ def post_games():
         if file is None:
             db.session.query(Update).filter(Update.valid == False).delete()
             update = {}
-            update["time"] = datetime.datetime.utcnow()
+            update["time"] = datetime.now()
             update["valid"] = False
             u = Update(update)
             db.session.add(u)
@@ -321,7 +322,7 @@ def post_games():
                     id = id + 1
         db.session.query(Update).delete()
         update = {}
-        update["time"] = datetime.datetime.utcnow()
+        update["time"] = datetime.now()
         update["valid"] = True
         u = Update(update)
         db.session.add(u)
@@ -331,7 +332,8 @@ def post_games():
         db.session.rollback()
         db.session.query(Update).filter(Update.valid == False).delete()
         update = {}
-        update["time"] = datetime.datetime.utcnow()
+        # update["time"] = datetime.datetime.now(pytz.timezone('US/Pacific'))
+        update["time"] = datetime.now()
         update["valid"] = False
         u = Update(update)
         db.session.add(u)
@@ -473,6 +475,8 @@ def edit_game(game_id):
 @games_page.route(GAMES_INCOMPLETE_URL, methods=["GET"])
 @Auth.authenticate
 def get_incomplete_games():
+    if Game.query.filter(Game.current == False).count() == 0:
+        return create_response(status=400, message="No incomplete games found.")
     systems = {}
     for system in Game.system.type.enums:
         missing_description = Game.query.filter(

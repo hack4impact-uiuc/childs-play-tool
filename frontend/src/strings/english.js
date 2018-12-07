@@ -102,7 +102,7 @@ export const ResultsStrings = {
   searchAgain2: 'Search Again',
   saved: 'Search saved successfully!',
   dismiss: 'Dismiss',
-  noResults: 'No matching results :('
+  noResults: 'No matching results'
 }
 
 export const ResultsLinkStrings = {

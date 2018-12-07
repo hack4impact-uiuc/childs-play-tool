@@ -150,7 +150,11 @@ class Results extends Component {
         games: results,
         query: {}
       })
-      this.props.updateConsole(Object.keys(results)[0])
+      if (results) {
+        this.props.updateConsole(Object.keys(results)[0])
+      } else {
+        this.props.updateConsole('')
+      }
       this.setState({
         incompleteGamesView: true
       })
@@ -165,7 +169,11 @@ class Results extends Component {
         games: results,
         query: {}
       })
-      this.props.updateConsole(Object.keys(results)[0])
+      if (results) {
+        this.props.updateConsole(Object.keys(results)[0])
+      } else {
+        this.props.updateConsole('')
+      }
       this.setState({ incompleteGamesView: false })
       this.props.endLoading()
     })
