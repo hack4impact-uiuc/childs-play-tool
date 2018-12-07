@@ -3,29 +3,12 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Button, Container, Col, Row, Media } from 'reactstrap'
+import { LandingPageStrings } from '../strings/english'
 
 import '../styles/landingpage.scss'
 
 class LandingPage extends Component {
-  constructor(props) {
-    super(props)
-
-    // this.contactRef = React.createRef()
-    // this.howtoRef = React.createRef()
-  }
-
   componentDidMount() {
-    // if (this.props.location.hash === '#Contacts') {
-    //   window.scrollTo({
-    //     top: this.contactRef.current.offsetTop,
-    //     behavior: "auto"
-    //   })
-    // } else if (this.props.location.hash === '#HowToUse') {
-    //   window.scrollTo({
-    //     top: this.howtoRef.current.offsetTop,
-    //     behavior: "auto"
-    //   })
-    // }
     if (this.props.location.hash) {
       document.querySelector(this.props.location.hash).scrollIntoView()
     }
@@ -51,41 +34,45 @@ class LandingPage extends Component {
           with mental health researchers at UCSD.
         </p>
         <Link to="/search">
-          <Button className="buttonpad">Search Games</Button>
+          <Button className="buttonpad">{LandingPageStrings['searchButton']}</Button>
         </Link>
         <div>
           <a href="https://childsplaycharity.org/assets/downloads/booklet.pdf">
             {' '}
-            Click here for English pdf Guide
+            {LandingPageStrings['englishPDF']}
           </a>
           <br />
           <a href="https://childsplaycharity.org/tvgg-es">
             {' '}
-            Click here for Spanish pdf Guide
+            {LandingPageStrings['spanishPDF']}
           </a>
         </div>
         <div className="line" />
         </div>
 
-        <Container id="HowToUse" className="separator" ref={this.howtoRef}>
-          <h3 className="homeText2L">How to Use</h3>
-          <Row className="mspace imageCentered">
-            <p className="padded">
-              Searching for game recommendations by name will return all games that contain the
-              given name. Type the name into the following input field:
-            </p>
-            <img
-              src={require('../styles/searchbyname.png')}
-              alt="Search by name field"
-              height="60px"
-            />
+        <Container id="HowToUse" className="separator">
+          <h3 className="homeText2L">{LandingPageStrings['tutorialHeader']}</h3>
+          <Row>
+            <Col className="mspace">
+              <p>{LandingPageStrings['tutorial0']}</p>
+              <img
+                src={require('../styles/searchbyname.png')}
+                alt="Search by name field"
+                height="100px"
+              />
+            </Col>
+            <Col className="mspace">
+              <p>{LandingPageStrings['tutorial1']}</p>
+              <img
+                src={require('../styles/copysearchurl.png')}
+                alt="Copy search URL field"
+                height="100px"
+              />
+            </Col>
           </Row>
           <Row>
             <Col className="mspace">
-              <p>
-                To search for game recommendations, you must select one of the six symptom
-                categories:
-              </p>
+              <p>{LandingPageStrings['tutorial2']}</p>
               <img
                 src={require('../styles/symptoms1.png')}
                 alt="Anxiety/Hyperactivity, Bored (Long Term), Bored (Short Term), Cognitive Impairment, Pain, Sadness"
@@ -93,7 +80,7 @@ class LandingPage extends Component {
               />
             </Col>
             <Col className="mspace">
-              <p>You must also select one of the age groups:</p>
+              <p>{LandingPageStrings['tutorial3']}</p>
               <img
                 src={require('../styles/agecategories.png')}
                 alt="12 and under, 13 and older"
@@ -103,34 +90,21 @@ class LandingPage extends Component {
           </Row>
           <Row>
             <Col className="mspace">
-              <p>
-                It is optional to select a game console and the gender of the main character. The
-                search will return all games that match the specifications.
-              </p>
+              <p>{LandingPageStrings['tutorial4']}</p>
               <img src={require('../styles/searchimage.png')} alt="Search page" height="200px" />
             </Col>
             <Col className="mspace">
-              <p>
-                Each game has labels that describe its intended age group, applicable symptoms, and
-                gender of the main character.
-              </p>
+              <p>{LandingPageStrings['tutorial5']}</p>
               <img src={require('../styles/result.png')} alt="Search page" height="110px" />
             </Col>
           </Row>
           <Row>
             <Col>
-              <p>
-                After performing a search, there is the option to save its results at the bottom of
-                the results page. Be sure to provide a descriptive name that will help you identify
-                it for later viewing.
-              </p>
+              <p>{LandingPageStrings['tutorial6']}</p>
               <img src={require('../styles/inputsave.png')} alt="Search page" height="140px" />
             </Col>
             <Col>
-              <p>
-                Load a saved search at the bottom of the search page to view the previously saved
-                game recommendations.
-              </p>
+              <p>{LandingPageStrings['tutorial7']}</p>
               <img src={require('../styles/loadsave.png')} alt="Search page" height="110px" />
             </Col>
           </Row>
@@ -139,24 +113,15 @@ class LandingPage extends Component {
 
         <div className="rowcolor"> 
         <Container className="separator">
-          <h3 className="homeText2L">Saving this Guide as a Mobile App</h3>
+          <h3 className="homeText2L">{LandingPageStrings['mobileGuideHeader']}</h3>
           <Row>
             <Col>
-              <h2 className="subtitles">Android</h2>
-              <p>
-                Tap on the vertical ellipsis (three dots) button on the right to reveal more
-                options. Select "Add to Home Screen." A pop up will appear, tap on "Add" to proceed.
-                Confirm the website&#39;s addition to your home screen, and it will show you a
-                preview of its shortcut icon. You can select the location now or move it later.
-              </p>
+              <h2 className="subtitles">{LandingPageStrings['android']}</h2>
+              <p>{LandingPageStrings['androidDesc']}</p>
             </Col>
             <Col>
-              <h2 className="subtitles">iOS</h2>
-              <p>
-                Select the URL at the top to highlight it. At the bottom of the screen, tap the
-                share icon. Tap the icon labeled "Add to Home Screen." Tap Add in the upper-right
-                corner.
-              </p>
+              <h2 className="subtitles">{LandingPageStrings['iOS']}</h2>
+              <p>{LandingPageStrings['iOSDesc']}</p>
             </Col>
           </Row>
         </Container>
@@ -191,9 +156,11 @@ class LandingPage extends Component {
                 Child’s Play <br />
                 9660 153rd Ave NE
                 <br />
-                PMB #418
                 <br />
-                Redmond, WA 98052 <br />
+                {LandingPageStrings['facebook']}{' '}
+                <a href="https://www.facebook.com/ChildsPlayCharity/">
+                  {LandingPageStrings['facebookName']}
+                </a>
                 <br />
               </p>
             </Col>

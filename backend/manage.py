@@ -78,3 +78,6 @@ if __name__ == "__games__":
 
 if __name__ == "__search_page__":
     manager.run()
+
+if __name__ == "__updates__":
+    manager.run()
