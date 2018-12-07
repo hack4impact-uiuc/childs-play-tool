@@ -474,7 +474,9 @@ def edit_game(game_id):
 @games_page.route(GAMES_INCOMPLETE_URL, methods=["GET"])
 @Auth.authenticate
 def get_incomplete_games():
-    if Game.query.filter(Game.current == False).count() == 0:
+    missing_description = Game.query.filter(Game.description == "")
+    missing_image = Game.query.filter(Game.image == "")
+    if missing_description.union(missing_image).count() == 0:
         return create_response(status=400, message="No incomplete games found.")
     systems = {}
     for system in Game.system.type.enums:
