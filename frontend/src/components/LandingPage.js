@@ -7,40 +7,67 @@ import { Button, Container, Col, Row, Media } from 'reactstrap'
 import '../styles/landingpage.scss'
 
 class LandingPage extends Component {
+  constructor(props) {
+    super(props)
+
+    // this.contactRef = React.createRef()
+    // this.howtoRef = React.createRef()
+  }
+
+  componentDidMount() {
+    // if (this.props.location.hash === '#Contacts') {
+    //   window.scrollTo({
+    //     top: this.contactRef.current.offsetTop,
+    //     behavior: "auto"
+    //   })
+    // } else if (this.props.location.hash === '#HowToUse') {
+    //   window.scrollTo({
+    //     top: this.howtoRef.current.offsetTop,
+    //     behavior: "auto"
+    //   })
+    // }
+    if (this.props.location.hash) {
+      document.querySelector(this.props.location.hash).scrollIntoView()
+    }
+  }
+
   render() {
     return (
       <div className="backgroundL">
+      <div className="rowcolor">
         <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" />
         <img className="cleared2"
-              src={require('../styles/cplogogreen.png')}
+              src={require('../styles/cplogo.png')}
               alt="Child's Play logo"
-              height="200px"
+              height="220px"
             />
         <h3 className="homeTextL">Welcome!</h3>
-        <h3 className="subtitles">Therapeutic Video Game Guide</h3>
+        <h3 className="subtitles2">Therapeutic&nbsp; Video&nbsp; Game&nbsp; Guide</h3>
         <p className="padded">
           This guide was designed as a quick reference to help caretakers quickly select games for
           their patients. Caretakers can reference the category that best fits the symptoms of the
           patient and select one of the games listed. The games recommended in this guide were
-          curated by researchers at EEDAR, a market-leading video game research firm.
+          curated by researchers at EEDAR, a market-leading video game research firm in collaboration 
+          with mental health researchers at UCSD.
         </p>
         <Link to="/search">
           <Button className="buttonpad">Search Games</Button>
         </Link>
         <div>
-          <a href="http://childsplaycharity.org/assets/downloads/booklet.pdf">
+          <a href="https://childsplaycharity.org/assets/downloads/booklet.pdf">
             {' '}
             Click here for English pdf Guide
           </a>
           <br />
-          <a href="http://childsplaycharity.org/assets/downloads/booklet.pdf">
+          <a href="https://childsplaycharity.org/tvgg-es">
             {' '}
             Click here for Spanish pdf Guide
           </a>
         </div>
         <div className="line" />
+        </div>
 
-        <Container id="HowToUse" className="separator">
+        <Container id="HowToUse" className="separator" ref={this.howtoRef}>
           <h3 className="homeText2L">How to Use</h3>
           <Row className="mspace imageCentered">
             <p className="padded">
@@ -110,6 +137,7 @@ class LandingPage extends Component {
         </Container>
         <div className="line" />
 
+        <div className="rowcolor"> 
         <Container className="separator">
           <h3 className="homeText2L">Saving this Guide as a Mobile App</h3>
           <Row>
@@ -133,10 +161,11 @@ class LandingPage extends Component {
           </Row>
         </Container>
         <div className="line" />
+        </div>
 
         <Container id="Contacts" className="separator">
-          <Row>
-            <Col>
+        <Row>
+          <Col>
               <h3> About Child&#39;s Play</h3>
               <img
                 className="cleared"
@@ -148,28 +177,38 @@ class LandingPage extends Component {
                 Child&#39;s Play is a game industry charity dedicated to improving the lives of
                 children with toys and games in a network of over 150 hospitals worldwide.
               </p>
-              <a href="http://childsplaycharity.org"> Learn More </a>
-            </Col>
-            <Col>
-              <h3>Contact Information</h3>
+              <a href="https://childsplaycharity.org"> Learn More </a>
+              </Col>
+        </Row>
+        </Container>
+        <div className="contacts">
+        <Container>
+        <Row ref={this.contactRef}>
+        <Col>
+          <h3>Contact Information</h3>
               <p className="address">
                 <br />
                 Child’s Play <br />
-                8151 164th Ave NE
+                9660 153rd Ave NE
                 <br />
                 PMB #418
                 <br />
                 Redmond, WA 98052 <br />
                 <br />
-                Facebook:{' '}
+              </p>
+            </Col>
+            <Col>
+            <p>
+            Facebook:{' '}
                 <a href="https://www.facebook.com/ChildsPlayCharity/">ChildsPlayCharity</a>
                 <br />
                 Twitter: <a href="https://twitter.com/CPCharity/">@CPCharity</a> <br />
                 <a href="https://childsplaycharity.org/about#contact"> More Contact Information </a>
-              </p>
+            </p>
             </Col>
           </Row>
         </Container>
+        </div>
       </div>
     )
   }
