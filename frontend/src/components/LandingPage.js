@@ -17,7 +17,7 @@ class LandingPage extends Component {
   render() {
     return (
       <div className="backgroundL">
-        <div className="rowcolor">
+        <div className="rowcolor2">
           <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" />
           <img
             className="cleared2"

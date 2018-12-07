@@ -1,7 +1,8 @@
 $color-background: white;
 $color-back: rgb(205, 232, 212);
-$grad: linear-gradient(to right top, #edffe8, #defad3, #d1f4bd, #c6eea5, #bce88d);
-$grad: linear-gradient(to right top, #ffffff, #e2f9ff, #acf9ff, #94f6d5, #bce88d);
+$graddiag: linear-gradient(to right top, #edffe8, #defad3, #d1f4bd, #c6eea5, #bce88d);
+$rad: radial-gradient(circle, #fdfffc, #effde7, #e3fad2, #d8f7bb, #cdf4a4);
+$grad: linear-gradient(to top, #fdfffc, #f3fdec, #e9fcdc, #e0f9cc, #d8f7bb, #d0f2af, #c9eea3, #c1e997, #b8e18e, #b0d984, #a7d17b, #9fc972);
 $cp: #9FC972;
 $cpdark: #4a7f10;
 $cpdark2:rgb(52, 91, 11);
@@ -26,7 +27,8 @@ $cpdark2:rgb(52, 91, 11);
 
 .rowcolor2{
     // background-image: $grad;
-    background-image: radial-gradient(circle, #fdfffc, #effde7, #e3fad2, #d8f7bb, #cdf4a4);
+    // background-image: radial-gradient(circle, #fdfffc, #effde7, #e3fad2, #d8f7bb, #cdf4a4);
+    background-image: $rad;
 }
 
 .homeText2L{
@@ -187,6 +189,7 @@ img{
     border-radius:0px;
     margin-bottom: 20px;
     box-shadow: None;
+    padding-left:4%;
 }
 
 .footer{
