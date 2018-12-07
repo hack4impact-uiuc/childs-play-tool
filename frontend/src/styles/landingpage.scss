@@ -4,6 +4,7 @@ $grad: linear-gradient(to right top, #edffe8, #defad3, #d1f4bd, #c6eea5, #bce88d
 $grad: linear-gradient(to right top, #ffffff, #e2f9ff, #acf9ff, #94f6d5, #bce88d);
 $cp: #9FC972;
 $cpdark: #4a7f10;
+$cpdark2:rgb(52, 91, 11);
 
 .homeTextL{
     font-size: 175%;
@@ -179,4 +180,26 @@ img{
 
 .inline{
     display: inline;
+}
+
+.cleared3{
+    border: 0px;
+    border-radius:0px;
+    margin-bottom: 20px;
+    box-shadow: None;
+}
+
+.footer{
+    padding-top: 2%;
+    background-color: $cpdark2;
+    a{
+        color: lightblue;
+    }
+    color: white;
+    text-align: left;
+}
+
+.spaceme{
+    padding-left: 3%;
+    font-size: 13px;
 }

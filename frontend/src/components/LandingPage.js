@@ -189,6 +189,23 @@ class LandingPage extends Component {
             </Row>
           </Container>
         </div>
+        <div className="footer">
+        <Container>
+        <Row>
+              <img
+              className="cleared3"
+              src={require('../styles/applogo_white.png')}
+              alt="Hack4impact logo"
+              height="35px"
+            />
+            <p className="spaceme">
+              <a href="https://uiuc.hack4impact.org/">https://uiuc.hack4impact.org/</a> <br></br>
+              <a href="https://github.com/hack4impact-uiuc/childs-play-tool">https://github.com/hack4impact-uiuc/childs-play-tool</a> 
+            </p>
+            </Row>
+        </Container>
+        </div>
+        
       </div>
     )
   }
