@@ -332,7 +332,6 @@ def post_games():
         db.session.rollback()
         db.session.query(Update).filter(Update.valid == False).delete()
         update = {}
-        # update["time"] = datetime.datetime.now(pytz.timezone('US/Pacific'))
         update["time"] = datetime.now()
         update["valid"] = False
         u = Update(update)
