@@ -65,8 +65,7 @@ class DropdownButton extends Component {
       return this.props.savedSearches
     } else if (fieldName === 'consoleNames') {
       return Object.keys(this.props.results)
-    } 
-    else {
+    } else {
       return Constants[fieldName]
     }
   }
