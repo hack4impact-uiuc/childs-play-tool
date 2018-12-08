@@ -150,7 +150,7 @@ class LandingPage extends Component {
           </Row>
         </Container>
 
-        <div className="contacts">
+        <div id="Contacts" className="contacts">
           <Container>
             <Row>
               <Col sm="3" xs="12">
