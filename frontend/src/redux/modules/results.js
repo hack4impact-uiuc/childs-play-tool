@@ -89,6 +89,7 @@ export default function reducer(state = resultsState, action) {
       }
     case DELETE_SEARCH:
       return {
+        ...state,
         searches: state.searches.filter(search => {
           return search.value !== action.value
         })
