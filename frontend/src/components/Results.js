@@ -64,7 +64,8 @@ const mapStateToProps = state => ({
   allGames: state.results.allGames,
   noImage: state.searchpage.noImage,
   authenticated: state.auth.authenticated,
-  loading: state.results.loading
+  loading: state.results.loading,
+  currentConsole: state.results.currentConsole
 })
 
 const mapDispatchToProps = dispatch => {
@@ -150,10 +151,10 @@ class Results extends Component {
         games: results,
         query: {}
       })
-      this.props.updateConsole(Object.keys(results)[0])
-      this.setState({
-        incompleteGamesView: true
-      })
+      if (results) {
+        this.props.updateConsole(Object.keys(results)[0])
+      }
+      this.setState({ incompleteGamesView: true })
       this.props.endLoading()
     })
   }
@@ -165,7 +166,9 @@ class Results extends Component {
         games: results,
         query: {}
       })
-      this.props.updateConsole(Object.keys(results)[0])
+      if (results) {
+        this.props.updateConsole(Object.keys(results)[0])
+      }
       this.setState({ incompleteGamesView: false })
       this.props.endLoading()
     })
@@ -224,9 +227,7 @@ class Results extends Component {
               <div>
                 <div style={{ float: window.innerWidth >= 400 ? 'right' : '' }}>
                   <DropdownButton
-                    title={
-                      this.determineConsoles(this.props.results)[parseInt(this.props.activeTab) - 1]
-                    }
+                    title={this.props.currentConsole}
                     items={this.determineConsoles(this.props.results)}
                     updateTabConsole={this.updateTab}
                   />
