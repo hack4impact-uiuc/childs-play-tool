@@ -1,6 +1,6 @@
 .cardStyle {
     width: 30%;
-    height: 500px;
+    height: 460px;
     display: inline-table;
     color: black;
     font-family: Arial;
@@ -12,7 +12,13 @@
     margin: 1%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1024px) {
+    .cardStyle {
+        width: 45%;
+        height: 460px;
+    }
+}
+@media only screen and (max-width: 800px) {
     .cardStyle {
         width: 100%;
         height: 0%;
@@ -33,9 +39,16 @@
     margin: 1%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1024px) {
+    .cardStyleNoImage {
+        width: 45%;
+        height: 460px;
+    }
+}
+@media only screen and (max-width: 800px) {
     .cardStyleNoImage {
         width: 100%;
+        height: 0%;
     }
 }
 
@@ -46,7 +59,7 @@
 .cardName {
     font-size: 125%;
     text-align: center;
-    height: 75px;
+    padding-bottom: 25px;
     margin: 1%;
 }
 .cardNameNoImage {
@@ -64,9 +77,29 @@
 }
 .tagBox {
     width: 100%;
-    height: 70px;
+    height: 110px;
 }
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1024px) {
+    .imageCard {
+        width: 36%;
+        height: 200px;
+    }
+    .tagBox {
+        width: 100%;
+        height: 100px;
+    }
+    .cardName {
+        font-size: 125%;
+        text-align: center;
+        padding-bottom: 25px;
+        margin: 1%;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .imageCard {
+        width: 80%;
+        height: 200px;
+    }
     .tagBox {
         height: 0%;
     }
@@ -76,11 +109,12 @@
 }
 .tagBoxNoImage {
     width: 100%;
-    height: 75px;
+    height: 100px;
     margin-bottom: 1%;
 }
 .tag{
     color: white;
+    max-width: 160px;
     font-size: 70%;
     border-radius: 25px;
     margin: 1%;
