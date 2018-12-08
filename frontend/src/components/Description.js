@@ -72,7 +72,7 @@ class Description extends Component {
       )
     } else {
       descriptionRender = (
-        <div>
+        <div className="card-description">
           <br />
           {this.state.updateDescription
             ? this.state.updateDescription
@@ -146,9 +146,10 @@ class Description extends Component {
           <br />
 
           {imageRender}
-          {descriptionRender}
 
           <br />
+          <br />
+
           <div align="center">
             {this.props.location.state.game.gender &&
             this.props.location.state.game.gender != DescriptionStrings['noGender'] ? (
@@ -169,18 +170,22 @@ class Description extends Component {
             {!this.props.location.state.game.current ? <Tag type={'old'} tag={'Old'} /> : null}
             <br />
           </div>
+
+          {descriptionRender}
+
           <br />
 
           {editButton}
           {saveButton}
 
           {this.props.auth ? <br /> : null}
-
-          <Link to={{ pathname: './results' }}>
-            <Button outline color="success">
-              {DescriptionStrings['return']}
-            </Button>
-          </Link>
+          <div className="returnButton">
+            <Link to={{ pathname: './results' }}>
+              <Button outline color="success">
+                {DescriptionStrings['return']}
+              </Button>
+            </Link>
+          </div>
         </div>
       </div>
     )

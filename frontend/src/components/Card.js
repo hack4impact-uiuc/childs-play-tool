@@ -56,9 +56,8 @@ class Card extends Component {
             {this.props.game.tags
               ? this.props.game.tags.symptoms.map(t => <Tag type={'symptom'} tag={t} card={true} />)
               : null}
-            {!this.props.game.current ? <Tag type={'old'} tag={'Old'} /> : null}
+            {!this.props.game.current ? <Tag type={'old'} tag={'Old'} card={true} /> : null}
           </div>
-          <br />
           <p className="cardDescription">
             {this.state.description ? this.state.description : null}
           </p>

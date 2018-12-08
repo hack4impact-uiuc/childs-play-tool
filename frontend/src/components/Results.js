@@ -177,10 +177,7 @@ class Results extends Component {
   render() {
     if (this.props.loading) {
       return (
-        <div
-          className="resultsText"
-          style={{ paddingTop: window.innerWidth >= 550 ? '10%' : '20%' }}
-        >
+        <div className="resultsText" style={{ paddingTop: '75px' }}>
           {ResultsStrings['loading']}
           <Loader type="Puff" color="green" height="100" width="100" />
         </div>
@@ -217,7 +214,9 @@ class Results extends Component {
             {this.props.search && this.props.search !== '' ? (
               <h4>
                 {' '}
-                {ResultsStrings['resultsSearched']} {this.props.search}{' '}
+                {ResultsStrings['resultsSearched']} {'"'}
+                {this.props.search}
+                {'"'}
               </h4>
             ) : null}
           </div>
