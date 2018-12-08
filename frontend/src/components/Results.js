@@ -214,7 +214,9 @@ class Results extends Component {
             {this.props.search && this.props.search !== '' ? (
               <h4>
                 {' '}
-                {ResultsStrings['resultsSearched']} {this.props.search}{' '}
+                {ResultsStrings['resultsSearched']} {'"'}
+                {this.props.search}
+                {'"'}
               </h4>
             ) : null}
           </div>
