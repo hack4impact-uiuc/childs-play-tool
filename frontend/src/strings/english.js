@@ -34,7 +34,7 @@ export const LandingPageStrings = {
   spanishPDF: 'Click here for Spanish pdf Guide',
   tutorialHeader: 'How to Use',
   tutorial0:
-    'Searching for game recommendations by name will simply return ALL games that contain the given name. Type the name into the following input field:',
+    'Searching for game recommendations by name will return all games that contain the given name. Type the name into the following input field:',
   tutorial1:
     'After completing a search, there will be the option to copy a shareable URL link that can bring anyone to the results page of this search:',
   tutorial2:
@@ -45,7 +45,7 @@ export const LandingPageStrings = {
   tutorial5:
     'Each game has labels that describe its intended age group, applicable symptoms, and gender of the main character.',
   tutorial6:
-    'After performing a search, there is the option to save its results at the bottom of the results page. Be sure to provide a descriptive name that will help you identify it for later viewing.',
+    'After completing a search, there is the option to save its results at the bottom of the results page. Be sure to provide a descriptive name that will help you identify it for later viewing.',
   tutorial7:
     'Load a saved search at the bottom of the search page to view the previously saved game recommendations.',
   mobileGuideHeader: 'Saving this Guide as a Mobile App',
