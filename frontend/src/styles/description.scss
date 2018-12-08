@@ -1,3 +1,6 @@
+$backcolor: #edffe8;
+
+
 .white-box{
         width: 100%;
         border-radius: 25px;
@@ -52,6 +55,7 @@
     height: 100vh;
     width: 100hw;
     font-family: 'Cabin', sans-serif;
+    background: $backcolor;
   }
 
 .image {
