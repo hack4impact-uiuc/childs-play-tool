@@ -5,7 +5,7 @@ $rad: radial-gradient(circle, #fdfffc, #effde7, #e3fad2, #d8f7bb, #cdf4a4);
 $grad: linear-gradient(to top, #fdfffc, #f3fdec, #e9fcdc, #e0f9cc, #d8f7bb, #d0f2af, #c9eea3, #c1e997, #b8e18e, #b0d984, #a7d17b, #9fc972);
 $cp: #9FC972;
 $cpdark: #4a7f10;
-$cpdark2:rgb(52, 91, 11);
+$cpdark2:rgb(32, 57, 8);
 
 .homeTextL{
     font-size: 175%;
@@ -175,9 +175,24 @@ img{
     a{
         color: lightblue;
     }
-    padding-top: 5%;
+    padding-top: 2%;
     text-align: left;
     padding-left: 5%;
+    // word-break: break-all;    
+    word-wrap: break-word;
+    p {
+        font-size: 13px;
+    }
+}
+
+.equalize{
+    // max-width: 25%;
+    // min-width: 25%;
+    // sm:"4";
+}
+
+.leftist{
+    text-align: left;
 }
 
 .inline{
@@ -187,13 +202,12 @@ img{
 .cleared3{
     border: 0px;
     border-radius:0px;
-    margin-bottom: 20px;
     box-shadow: None;
     padding-left:4%;
 }
 
 .footer{
-    padding-top: 2%;
+    padding-top: 10px;
     background-color: $cpdark2;
     a{
         color: lightblue;
@@ -206,3 +220,16 @@ img{
     padding-left: 3%;
     font-size: 13px;
 }
+
+@media only screen and (max-width: 500px) {
+    .footer{
+        padding-top: 10px;
+        background-color: $cpdark2;
+        a{
+            color: lightblue;
+        }
+        color: white;
+        text-align: left;
+        padding-left: 5%;
+    }
+  }

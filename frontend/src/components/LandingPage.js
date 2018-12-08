@@ -128,9 +128,9 @@ class LandingPage extends Component {
           <div className="line" />
         </div>
 
-        <Container id="Contacts" className="separator2">
+        <Container className="separator2">
           <Row>
-            <Col>
+            <Col class>
               <h3> About Child&#39;s Play</h3>
               <img
                 className="cleared"
@@ -153,37 +153,44 @@ class LandingPage extends Component {
         <div className="contacts">
           <Container>
             <Row>
-              <Col xs="12" sm="6">
-                <h3 ref={this.contactRef}>Contact Information </h3>
+              <Col sm="3" xs="12">
+                <h5 className="leftist" ref={this.contactRef}>
+                  Contact Information{' '}
+                </h5>
+                <p>
+                  <a href="https://childsplaycharity.org/about#contact">
+                    {' '}
+                    More Contact Information{' '}
+                  </a>
+                </p>
+              </Col>
+              <Col sm="3" xs="12">
                 <p className="address">
-                  Address:
-                  <br />
+                  <h6>Address</h6>
                   Child’s Play <br />
                   9660 153rd Ave NE
                   <br />
                   Redmond, WA 98052
                 </p>
               </Col>
-
-              <Col xs="12" sm="6">
+              <Col sm="3" xs="12" className="equalize">
+                <h6>Inquiries</h6>
                 <p>
                   For corporate sponsorships, student or media interviews, or partnership inquiries
                   contact{' '}
                   <a href="childsplaycharity@childsplaycharity.org">
                     childsplaycharity@childsplaycharity.org
                   </a>
-                  . For hospital additions, wishlist updates, or beneficiary inquiries contact{' '}
-                  <a href="foundations@childsplaycharity.org">foundations@childsplaycharity.org</a>.
+                  .
                 </p>
+              </Col>
+              <Col sm="3" xs="12">
+                <h6>Social Media</h6>
                 <p>
                   Facebook:{' '}
                   <a href="https://www.facebook.com/ChildsPlayCharity/">ChildsPlayCharity</a>
                   <br />
                   Twitter: <a href="https://twitter.com/CPCharity/">@CPCharity</a> <br />
-                  <a href="https://childsplaycharity.org/about#contact">
-                    {' '}
-                    More Contact Information{' '}
-                  </a>
                 </p>
               </Col>
             </Row>
