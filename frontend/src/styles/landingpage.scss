@@ -1,8 +1,17 @@
 $color-background: white;
+$color-back: rgb(205, 232, 212);
+$graddiag: linear-gradient(to right top, #edffe8, #defad3, #d1f4bd, #c6eea5, #bce88d);
+$rad: radial-gradient(circle, #fdfffc, #effde7, #e3fad2, #d8f7bb, #cdf4a4);
+$grad: linear-gradient(to top, #fdfffc, #f3fdec, #e9fcdc, #e0f9cc, #d8f7bb, #d0f2af, #c9eea3, #c1e997, #b8e18e, #b0d984, #a7d17b, #9fc972);
+$cp: #9FC972;
+$cpdark: #4a7f10;
+$cpdark2:rgb(52, 91, 11);
 
 .homeTextL{
     font-size: 175%;
     padding: 2%;
+    padding-top: 2%;
+    padding-bottom: 0%;
     text-align: center;
     margin-left: auto;
     margin-right: auto;
@@ -10,6 +19,17 @@ $color-background: white;
     font-family: 'Cabin', sans-serif;
   }
 
+.rowcolor{
+    // background-image: $grad;
+    padding-top: 5%;
+    background-image: linear-gradient(to top, #fdfffc, #f3fdec, #e9fcdc, #e0f9cc, #d8f7bb, #d0f2af, #c9eea3, #c1e997, #b8e18e, #b0d984, #a7d17b, #9fc972);
+}
+
+.rowcolor2{
+    // background-image: $grad;
+    // background-image: radial-gradient(circle, #fdfffc, #effde7, #e3fad2, #d8f7bb, #cdf4a4);
+    background-image: $rad;
+}
 
 .homeText2L{
     font-size: 175%;
@@ -67,6 +87,11 @@ li a:hover {
     padding-top: 5%;
 }
 
+.separator2{
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
 .line{
     padding-bottom: 5%;
     border-bottom: 1px solid #dddddd;
@@ -75,7 +100,6 @@ li a:hover {
 }
 
 .address{
-    padding-left: 35%;
     text-align: left;
 }
 
@@ -89,9 +113,21 @@ li a:hover {
     font-family: 'Cabin', sans-serif;
 }
 
+.subtitles2{
+    font-size: 150%;
+    text-align: center;
+    font-family: 'Cabin', sans-serif;
+}
+
 .mspace{
     margin-bottom: 10%;
 }
+
+@media only screen and (max-width: 500px) {
+    img{
+      max-width: 300px;
+    }
+  }
 
 img{
     border-radius: 10px;
@@ -101,6 +137,14 @@ img{
 .cleared{
     border: 0px;
     padding-bottom: 20px;
+    box-shadow: None;
+}
+
+.cleared2{
+    margin-top: 5%;
+    border: 0px;
+    padding-bottom: 0px;
+    margin-bottom: -10px;
     box-shadow: None;
 }
 
@@ -117,8 +161,48 @@ img{
 .buttonpad{
     margin: 2%;
     font-family: 'Cabin', sans-serif;
+    background-color: rgb(128, 198, 63);
+    border: None;
 }
 
 .font{
     font-family: 'Cabin', sans-serif;
+}
+
+.contacts{
+    background-color: $cpdark;
+    color: white;
+    a{
+        color: lightblue;
+    }
+    padding-top: 5%;
+    text-align: left;
+    padding-left: 5%;
+}
+
+.inline{
+    display: inline;
+}
+
+.cleared3{
+    border: 0px;
+    border-radius:0px;
+    margin-bottom: 20px;
+    box-shadow: None;
+    padding-left:4%;
+}
+
+.footer{
+    padding-top: 2%;
+    background-color: $cpdark2;
+    a{
+        color: lightblue;
+    }
+    color: white;
+    text-align: left;
+}
+
+.spaceme{
+    padding-left: 3%;
+    font-size: 13px;
 }
