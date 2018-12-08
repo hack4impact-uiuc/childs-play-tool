@@ -146,9 +146,10 @@ class Description extends Component {
           <br />
 
           {imageRender}
-          {descriptionRender}
 
           <br />
+          <br />
+
           <div align="center">
             {this.props.location.state.game.gender &&
             this.props.location.state.game.gender != DescriptionStrings['noGender'] ? (
@@ -169,6 +170,9 @@ class Description extends Component {
             {!this.props.location.state.game.current ? <Tag type={'old'} tag={'Old'} /> : null}
             <br />
           </div>
+
+          {descriptionRender}
+
           <br />
 
           {editButton}
