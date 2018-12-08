@@ -168,8 +168,8 @@ class Results extends Component {
       })
       this.props.updateConsole(Object.keys(results)[0])
       this.setState({ incompleteGamesView: false })
+      this.props.endLoading()
     })
-    this.props.endLoading()
   }
 
   render() {
@@ -225,9 +225,7 @@ class Results extends Component {
               <div>
                 <div style={{ float: window.innerWidth >= 400 ? 'right' : '' }}>
                   <DropdownButton
-                    title={
-                      this.props.currentConsole
-                    }
+                    title={this.props.currentConsole}
                     items={this.determineConsoles(this.props.results)}
                     updateTabConsole={this.updateTab}
                   />
