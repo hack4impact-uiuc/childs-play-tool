@@ -247,7 +247,7 @@ class Results extends Component {
                   ) : (
                     <Link to={{ pathname: './search' }}>
                       <Button className="homeButton">
-                        <FontAwesomeIcon icon={faHome} /> {ResultsStrings['searchAgain']}
+                        <FontAwesomeIcon icon={faSearch} /> {ResultsStrings['searchAgain']}
                       </Button>
                     </Link>
                   )}
