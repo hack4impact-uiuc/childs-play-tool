@@ -71,7 +71,7 @@ export const LandingPageStrings = {
 export const NavBarStrings = {
   homeButton: 'Home',
   adminLink: 'Admin',
-  contactLink: 'Contact Us',
+  contactLink: 'Contact',
   tutorialLink: 'How To Use',
   searchLink: 'Search',
   gamesLink: 'All Games'

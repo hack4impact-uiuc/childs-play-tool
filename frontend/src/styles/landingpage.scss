@@ -178,6 +178,21 @@ img{
     padding-top: 5%;
     text-align: left;
     padding-left: 5%;
+    // word-break: break-all;    
+    word-wrap: break-word;
+    p {
+        font-size: 13px;
+    }
+}
+
+.equalize{
+    // max-width: 25%;
+    // min-width: 25%;
+    // sm:"4";
+}
+
+.leftist{
+    text-align: left;
 }
 
 .inline{
