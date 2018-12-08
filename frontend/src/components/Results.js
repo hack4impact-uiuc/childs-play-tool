@@ -222,7 +222,7 @@ class Results extends Component {
           {this.props.results ? (
             <div>
               <div>
-                <div style={{ float: window.innerWidth >= 400 ? 'right' : '' }}>
+                <div style={{ float: window.innerWidth >= 450 ? 'right' : '' }}>
                   <DropdownButton
                     title={
                       this.determineConsoles(this.props.results)[parseInt(this.props.activeTab) - 1]
@@ -231,7 +231,7 @@ class Results extends Component {
                     updateTabConsole={this.updateTab}
                   />
                 </div>
-                <div style={{ float: 'left' }}>
+                <div style={{ float: window.innerWidth >= 450 ? 'left' : '' }}>
                   {this.props.allGames ? (
                     this.props.authenticated ? (
                       this.state.incompleteGamesView ? (
