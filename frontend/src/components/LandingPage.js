@@ -194,7 +194,6 @@ class LandingPage extends Component {
             </Row>
           </Container>
         </div>
-
         <div className="footer">
           <Container>
             <Row>
@@ -213,7 +212,6 @@ class LandingPage extends Component {
             </Row>
           </Container>
         </div>
-
       </div>
     )
   }

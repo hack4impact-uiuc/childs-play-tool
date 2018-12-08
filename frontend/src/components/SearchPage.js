@@ -188,6 +188,9 @@ class SearchPage extends Component {
             <Link to={{ pathname: './results' }}>
               <Button
                 className="searchButton"
+                disabled={
+                  this.props.selectedVal === '' || this.props.selectedVal === 'Saved Searches'
+                }
                 onClick={e => {
                   this.props.getSavedSearch(this.props.selectedVal)
                 }}

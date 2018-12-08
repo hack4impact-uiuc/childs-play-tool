@@ -7,7 +7,7 @@ import '../styles/landingpage.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome } from '@fortawesome/free-solid-svg-icons'
 import { getAllGames } from '../utils/ApiWrapper'
-import { updateResultsAll, beginLoading, endLoading } from '../redux/modules/results'
+import { updateResultsAll, beginLoading, endLoading, updateConsole } from '../redux/modules/results'
 import { NavBarStrings } from '../strings/english'
 
 const mapStateToProps = state => {}
@@ -17,7 +17,8 @@ const mapDispatchToProps = dispatch => {
     {
       updateResultsAll,
       beginLoading,
-      endLoading
+      endLoading,
+      updateConsole
     },
     dispatch
   )
@@ -37,6 +38,9 @@ class NavBar extends Component {
         games: results,
         query: { search: '' }
       })
+      if (results && Object.keys(results).length > 0) {
+        this.props.updateConsole(Object.keys(results)[0])
+      }
       this.props.endLoading()
     })
   }
