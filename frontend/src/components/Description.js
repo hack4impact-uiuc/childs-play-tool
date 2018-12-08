@@ -72,7 +72,7 @@ class Description extends Component {
       )
     } else {
       descriptionRender = (
-        <div>
+        <div className="card-description">
           <br />
           {this.state.updateDescription
             ? this.state.updateDescription
@@ -179,12 +179,13 @@ class Description extends Component {
           {saveButton}
 
           {this.props.auth ? <br /> : null}
-
-          <Link to={{ pathname: './results' }}>
-            <Button outline color="success">
-              {DescriptionStrings['return']}
-            </Button>
-          </Link>
+          <div className="returnButton">
+            <Link to={{ pathname: './results' }}>
+              <Button outline color="success">
+                {DescriptionStrings['return']}
+              </Button>
+            </Link>
+          </div>
         </div>
       </div>
     )

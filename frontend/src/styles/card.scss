@@ -1,6 +1,6 @@
 .cardStyle {
     width: 30%;
-    height: 500px;
+    height: 460px;
     display: inline-table;
     color: black;
     font-family: Arial;
@@ -12,7 +12,7 @@
     margin: 1%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1024px) {
     .cardStyle {
         width: 100%;
         height: 0%;
@@ -33,7 +33,7 @@
     margin: 1%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1024px) {
     .cardStyleNoImage {
         width: 100%;
     }
@@ -46,7 +46,7 @@
 .cardName {
     font-size: 125%;
     text-align: center;
-    height: 75px;
+    padding-bottom: 25px;
     margin: 1%;
 }
 .cardNameNoImage {
@@ -64,19 +64,23 @@
 }
 .tagBox {
     width: 100%;
-    height: 70px;
+    height: 100px;
 }
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1024px) {
     .tagBox {
         height: 0%;
     }
     .cardName {
         height: 0%;
     }
+    .imageCard {
+        width: 36%;
+        height: 200px;
+}
 }
 .tagBoxNoImage {
     width: 100%;
-    height: 75px;
+    height: 100px;
     margin-bottom: 1%;
 }
 .tag{

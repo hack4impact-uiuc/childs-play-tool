@@ -58,7 +58,6 @@ class Card extends Component {
               : null}
             {!this.props.game.current ? <Tag type={'old'} tag={'Old'} /> : null}
           </div>
-          <br />
           <p className="cardDescription">
             {this.state.description ? this.state.description : null}
           </p>
