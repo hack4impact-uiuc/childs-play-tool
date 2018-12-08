@@ -155,6 +155,12 @@ class LandingPage extends Component {
             <Row>
               <Col sm="3" xs="12">
               <h5 className = "leftist" ref={this.contactRef}>Contact Information </h5>
+              <p>
+              <a href="https://childsplaycharity.org/about#contact">
+                    {' '}
+                    More Contact Information{' '}
+                  </a>
+              </p>
               </Col>
               <Col sm="3" xs="12"> 
                 <p className="address">
@@ -183,15 +189,12 @@ class LandingPage extends Component {
                   <a href="https://www.facebook.com/ChildsPlayCharity/">ChildsPlayCharity</a>
                   <br />
                   Twitter: <a href="https://twitter.com/CPCharity/">@CPCharity</a> <br />
-                  <a href="https://childsplaycharity.org/about#contact">
-                    {' '}
-                    More Contact Information{' '}
-                  </a>
                 </p>
               </Col>
             </Row>
           </Container>
         </div>
+
         <div className="footer">
           <Container>
             <Row>
@@ -210,6 +213,7 @@ class LandingPage extends Component {
             </Row>
           </Container>
         </div>
+
       </div>
     )
   }
