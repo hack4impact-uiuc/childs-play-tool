@@ -47,6 +47,19 @@ export const getAllGames = () => {
     })
 }
 
+export const getIncompleteGames = () => {
+  let requestString = BACKEND_URL + '/games/incomplete?key=' + BACKEND_KEY
+  return axios
+    .get(requestString)
+    .then(response => {
+      return response.data.result.games
+    })
+    .catch(error => {
+      console.log('ERROR: ', error)
+      return null
+    })
+}
+
 export const sendFile = file => {
   let data = new FormData()
   data.append('file', file)
@@ -87,5 +100,18 @@ export const editGame = (gameId, description, image) => {
         type: 'UPLOAD_FILE_FAIL',
         error
       }
+    })
+}
+
+export const getUpdates = () => {
+  let requestString = BACKEND_URL + '/updates?key=' + BACKEND_KEY
+  return axios
+    .get(requestString)
+    .then(response => {
+      return response.data.result.updates
+    })
+    .catch(error => {
+      console.log('ERROR: ', error)
+      return null
     })
 }
