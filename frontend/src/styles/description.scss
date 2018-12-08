@@ -52,7 +52,7 @@ $backcolor: #edffe8;
     background-attachment: fixed;
     margin: 0%;
     background-size: cover;
-    height: 100vh;
+    min-height: 100%;
     width: 100hw;
     font-family: 'Cabin', sans-serif;
     background: $backcolor;
@@ -77,7 +77,7 @@ $backcolor: #edffe8;
               background-attachment: fixed;
               margin: 0%;
               background-size: cover;
-              height: 100vh;
+              min-height: 100%;
               width: 100hw;
             }
   }
@@ -92,7 +92,7 @@ $backcolor: #edffe8;
             background-attachment: fixed;
             margin: 0%;
             background-size: cover;
-            height: 100vh;
+            min-height: 100%;
             width: 100hw;
           }
 }

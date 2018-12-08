@@ -60,7 +60,6 @@ ReactDOM.render(
           <Route path="/directorPage" component={Password} />
           <Route path="/uploadPage" component={Update} />
           <Route path="/resultsLink" component={ResultsLink} />
-          <br />
         </div>
       </TopScroll>
     </ConnectedRouter>

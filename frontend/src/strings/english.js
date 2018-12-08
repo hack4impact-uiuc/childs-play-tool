@@ -95,7 +95,7 @@ export const ResultsStrings = {
   loading: 'Loading',
   incompleteGames: 'Incomplete Games',
   resultsAll: 'All Games',
-  resultsFound: 'Results found:',
+  resultsFound: 'Results',
   resultsSearched: 'You searched for:',
   searchAgain: 'Search Again',
   saveLabel: 'Save Search',

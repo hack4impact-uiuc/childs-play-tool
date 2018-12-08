@@ -159,16 +159,18 @@ class DropdownButton extends Component {
                       onClick={e => {
                         this.setState({
                           consoleSelectedVal: (
-                            <html>
+                            <div style={{ display: 'inline-block' }}>
                               {item} {this.chooseImage(item)}
-                            </html>
+                            </div>
                           )
                         })
                         this.props.updateTabConsole((index + 1).toString())
                         this.props.updateConsole(item)
                       }}
                     >
-                      {item} {this.chooseImage(item)}
+                      <div style={{ display: 'inline-block' }}>
+                        {item} {this.chooseImage(item)}
+                      </div>
                     </DropdownItem>
                   ))
                 : this.dropdownItems.length > 0

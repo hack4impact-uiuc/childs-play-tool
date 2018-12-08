@@ -225,14 +225,14 @@ class Results extends Component {
           {this.props.results ? (
             <div>
               <div>
-                <div style={{ float: window.innerWidth >= 400 ? 'right' : '' }}>
+                <div style={{ float: window.innerWidth >= 450 ? 'right' : '' }}>
                   <DropdownButton
                     title={this.props.currentConsole}
                     items={this.determineConsoles(this.props.results)}
                     updateTabConsole={this.updateTab}
                   />
                 </div>
-                <div style={{ float: 'left' }}>
+                <div style={{ float: window.innerWidth >= 450 ? 'left' : '' }}>
                   {this.props.allGames ? (
                     this.props.authenticated ? (
                       this.state.incompleteGamesView ? (
@@ -248,7 +248,7 @@ class Results extends Component {
                   ) : (
                     <Link to={{ pathname: './search' }}>
                       <Button className="homeButton">
-                        <FontAwesomeIcon icon={faHome} /> {ResultsStrings['searchAgain']}
+                        <FontAwesomeIcon icon={faSearch} /> {ResultsStrings['searchAgain']}
                       </Button>
                     </Link>
                   )}
