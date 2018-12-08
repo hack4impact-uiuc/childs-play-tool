@@ -154,9 +154,9 @@ class Results extends Component {
       if (results) {
         this.props.updateConsole(Object.keys(results)[0])
       }
+      this.setState({ incompleteGamesView: true })
+      this.props.endLoading()
     })
-    this.setState({ incompleteGamesView: true })
-    this.props.endLoading()
   }
 
   displayAllGames = () => {
@@ -169,9 +169,9 @@ class Results extends Component {
       if (results) {
         this.props.updateConsole(Object.keys(results)[0])
       }
+      this.setState({ incompleteGamesView: false })
+      this.props.endLoading()
     })
-    this.setState({ incompleteGamesView: false })
-    this.props.endLoading()
   }
 
   render() {

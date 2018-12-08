@@ -41,8 +41,8 @@ class NavBar extends Component {
       if (results && Object.keys(results).length > 0) {
         this.props.updateConsole(Object.keys(results)[0])
       }
+      this.props.endLoading()
     })
-    this.props.endLoading()
   }
 
   toggleNavbar = () => {

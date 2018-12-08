@@ -34,8 +34,8 @@ class ResultsLink extends Component {
         games: results,
         query: { search: this.vals.name }
       })
+      this.props.endLoading()
     })
-    this.props.endLoading()
     return <Redirect to="/Results" />
   }
   filterSearch = () => {
@@ -49,8 +49,8 @@ class ResultsLink extends Component {
           gender: this.vals.gender
         }
       })
+      this.props.endLoading()
     })
-    this.props.endLoading()
     return <Redirect to="/Results" />
   }
   render() {
