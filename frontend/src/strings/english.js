@@ -18,7 +18,10 @@ export const DescriptionStrings = {
 export const DropdownButtonStrings = {
   console: 'Console Type',
   gender: 'Character Gender',
-  none: 'None'
+  none: 'None',
+  savedSearchQuestion: 'Are you sure you want to delete this search?',
+  yes: 'Yes',
+  no: 'No'
 }
 
 export const LandingPageStrings = {
