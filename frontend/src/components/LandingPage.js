@@ -154,37 +154,39 @@ class LandingPage extends Component {
           <Container>
             <Row>
               <Col sm="3" xs="12">
-              <h5 className = "leftist" ref={this.contactRef}>Contact Information </h5>
-              <p>
-              <a href="https://childsplaycharity.org/about#contact">
+                <h5 className="leftist" ref={this.contactRef}>
+                  Contact Information{' '}
+                </h5>
+                <p>
+                  <a href="https://childsplaycharity.org/about#contact">
                     {' '}
                     More Contact Information{' '}
                   </a>
-              </p>
+                </p>
               </Col>
-              <Col sm="3" xs="12"> 
+              <Col sm="3" xs="12">
                 <p className="address">
-                <h6>Address</h6>
+                  <h6>Address</h6>
                   Child’s Play <br />
                   9660 153rd Ave NE
                   <br />
                   Redmond, WA 98052
                 </p>
               </Col>
-                <Col sm="3" xs="12" className="equalize">
+              <Col sm="3" xs="12" className="equalize">
                 <h6>Inquiries</h6>
-                  <p>
-                    For corporate sponsorships, student or media interviews, or partnership inquiries
-                    contact{' '}
-                    <a href="childsplaycharity@childsplaycharity.org">
-                      childsplaycharity@childsplaycharity.org
-                    </a>
-                    .
-                  </p>
-                </Col>
+                <p>
+                  For corporate sponsorships, student or media interviews, or partnership inquiries
+                  contact{' '}
+                  <a href="childsplaycharity@childsplaycharity.org">
+                    childsplaycharity@childsplaycharity.org
+                  </a>
+                  .
+                </p>
+              </Col>
               <Col sm="3" xs="12">
-              <h6>Social Media</h6>
-              <p>
+                <h6>Social Media</h6>
+                <p>
                   Facebook:{' '}
                   <a href="https://www.facebook.com/ChildsPlayCharity/">ChildsPlayCharity</a>
                   <br />
