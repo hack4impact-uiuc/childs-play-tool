@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import '../styles/card.scss'
 import Constants from '../utils/Constants.js'
+import { TagStrings } from '../strings/english'
 class Tag extends Component {
   constructor(props) {
     super(props)
@@ -15,7 +16,7 @@ class Tag extends Component {
     else if (tag === Constants.symptoms[3].value) return '_cognitive'
     else if (tag === Constants.ageRange[0].value) return '_12under'
     else if (tag === Constants.ageRange[1].value) return '_13over'
-    else if (tag === 'All Ages') return '_both'
+    else if (tag === TagStrings['ages']) return '_both'
     else return '_' + tag.toLowerCase()
   }
   display = tag => {
@@ -25,8 +26,8 @@ class Tag extends Component {
       else return this.props.tag
     }
     if (this.props.type === 'gender') {
-      if (tag === 'Male') return '♂'
-      else if (tag === 'Female') return '♀'
+      if (tag === TagStrings['male']) return '♂'
+      else if (tag === TagStrings['female']) return '♀'
       else return '♂/♀'
     }
   }

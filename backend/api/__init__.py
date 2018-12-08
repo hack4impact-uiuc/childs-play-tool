@@ -61,11 +61,12 @@ def create_app(test_config=None):
     Migrate(app, db)
 
     # import and register blueprints
-    from api.views import main, games, search_page
+    from api.views import main, games, search_page, updates
 
     app.register_blueprint(main.main)
     app.register_blueprint(games.games_page)
     app.register_blueprint(search_page.search_page)
+    app.register_blueprint(updates.updates_page)
 
     # register error Handler
     app.register_error_handler(Exception, all_exception_handler)

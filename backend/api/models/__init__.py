@@ -3,4 +3,5 @@
 # to prevent circular dependencies
 from .Game import Game
 from .Ranking import Ranking
+from .Update import Update
 from .base import db
