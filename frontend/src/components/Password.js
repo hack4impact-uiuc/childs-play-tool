@@ -43,8 +43,8 @@ class Password extends Component {
     this.props.beginLoading()
     getUpdates().then(results => {
       this.props.loadUpdates(results)
-      this.props.endLoading()
     })
+    this.props.endLoading()
   }
 
   render() {

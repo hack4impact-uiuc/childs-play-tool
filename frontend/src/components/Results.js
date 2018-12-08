@@ -152,10 +152,8 @@ class Results extends Component {
         query: {}
       })
       this.props.updateConsole(Object.keys(results)[0])
-      this.setState({
-        incompleteGamesView: true
-      })
     })
+    this.setState({ incompleteGamesView: true })
     this.props.endLoading()
   }
 
@@ -167,9 +165,9 @@ class Results extends Component {
         query: {}
       })
       this.props.updateConsole(Object.keys(results)[0])
-      this.setState({ incompleteGamesView: false })
-      this.props.endLoading()
     })
+    this.setState({ incompleteGamesView: false })
+    this.props.endLoading()
   }
 
   render() {
