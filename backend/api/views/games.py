@@ -1,5 +1,5 @@
 from api.models import db, Game, Ranking, Update
-from api.core import create_response, Mixin, Auth, logger
+from api.core import create_response, Mixin, Auth
 from flask import Blueprint, request, current_app as app
 import xlrd
 import math
