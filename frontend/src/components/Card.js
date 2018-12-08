@@ -30,7 +30,6 @@ class Card extends Component {
           <div className={this.props.noImage ? 'cardNameNoImage' : 'cardName'}>
             {this.props.game.name}
           </div>
-          <br />
           {!this.props.noImage ? (
             <img
               className="imageCard"
@@ -59,7 +58,6 @@ class Card extends Component {
               : null}
             {!this.props.game.current ? <Tag type={'old'} tag={'Old'} /> : null}
           </div>
-          <br />
           <br />
           <p className="cardDescription">
             {this.state.description ? this.state.description : null}

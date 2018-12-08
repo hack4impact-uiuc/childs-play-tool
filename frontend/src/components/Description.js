@@ -73,6 +73,7 @@ class Description extends Component {
     } else {
       descriptionRender = (
         <div>
+          <br />
           {this.state.updateDescription
             ? this.state.updateDescription
             : DescriptionStrings['noDesc']}
@@ -142,19 +143,20 @@ class Description extends Component {
         <div className="white-box">
           <div className="description-cardName">{this.props.location.state.game.name}</div>
 
+          <br />
+
           {imageRender}
           {descriptionRender}
 
           <br />
-          <br />
           <div align="center">
             {this.props.location.state.game.gender &&
-            this.props.location.state.game.gender != 'No Discernable Gender' ? (
+            this.props.location.state.game.gender != DescriptionStrings['noGender'] ? (
               <Tag type={'gender'} tag={this.props.location.state.game.gender} />
             ) : null}
             {this.props.location.state.game.tags.ages ? (
               this.props.location.state.game.tags.ages.length == 2 ? (
-                <Tag type={'age'} tag={'All Ages'} />
+                <Tag type={'age'} tag={DescriptionStrings['allAges']} />
               ) : (
                 <Tag type={'age'} tag={this.props.location.state.game.tags.ages[0]} />
               )
@@ -166,53 +168,20 @@ class Description extends Component {
               : null}
             {!this.props.location.state.game.current ? <Tag type={'old'} tag={'Old'} /> : null}
             <br />
-            <br />
-            <div align="center">
-              {this.props.location.state.game.gender &&
-              this.props.location.state.game.gender != DescriptionStrings['noGender'] ? (
-                <Tag type={'gender'} tag={this.props.location.state.game.gender} />
-              ) : null}
-              {this.props.location.state.game.tags.ages ? (
-                this.props.location.state.game.tags.ages.length == 2 ? (
-                  <Tag type={'age'} tag={DescriptionStrings['allAges']} />
-                ) : (
-                  <Tag type={'age'} tag={this.props.location.state.game.tags.ages[0]} />
-                )
-              ) : null}
-              {this.props.location.state.game.tags.symptoms
-                ? this.props.location.state.game.tags.symptoms.map(t => (
-                    <Tag type={'symptom'} tag={t} />
-                  ))
-                : null}
-              <br />
-            </div>
-            <br />
-            <br />
-
-            {editButton}
-            {saveButton}
-
-            <br />
-            <br />
-            <Link to={{ pathname: './results' }}>
-              <Button outline color="success">
-                {DescriptionStrings['return']}
-              </Button>
-            </Link>
           </div>
-          <br />
           <br />
 
           {editButton}
           {saveButton}
 
+          {this.props.auth ? <br /> : null}
+
           <Link to={{ pathname: './results' }}>
             <Button outline color="success">
-              Return to results
+              {DescriptionStrings['return']}
             </Button>
           </Link>
         </div>
-        <br />
       </div>
     )
   }
