@@ -151,20 +151,22 @@ class LandingPage extends Component {
         </Container>
 
         <div className="contacts">
-        <h4 className = "leftist" ref={this.contactRef}>Contact Information </h4>
           <Container>
             <Row>
-              <Col sm="4" xs="12"> 
+              <Col sm="3" xs="12">
+              <h5 className = "leftist" ref={this.contactRef}>Contact Information </h5>
+              </Col>
+              <Col sm="3" xs="12"> 
                 <p className="address">
-                <h5>Address</h5>
+                <h6>Address</h6>
                   Child’s Play <br />
                   9660 153rd Ave NE
                   <br />
                   Redmond, WA 98052
                 </p>
               </Col>
-                <Col sm="4" xs="12" className="equalize">
-                <h5>Inquiries</h5>
+                <Col sm="3" xs="12" className="equalize">
+                <h6>Inquiries</h6>
                   <p>
                     For corporate sponsorships, student or media interviews, or partnership inquiries
                     contact{' '}
@@ -174,8 +176,8 @@ class LandingPage extends Component {
                     .
                   </p>
                 </Col>
-              <Col sm="4" xs="12">
-              <h5>Social Media</h5>
+              <Col sm="3" xs="12">
+              <h6>Social Media</h6>
               <p>
                   Facebook:{' '}
                   <a href="https://www.facebook.com/ChildsPlayCharity/">ChildsPlayCharity</a>
