@@ -83,6 +83,8 @@ class Update extends Component {
             ) : null}
             {this.props.updates && (this.props.updates.valid || this.props.updates.invalid) ? (
               <text>
+                {UpdateStrings['submissionInfo']}
+                <br />
                 <br />
               </text>
             ) : null}

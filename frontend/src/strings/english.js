@@ -145,7 +145,7 @@ export const UpdateStrings = {
   uploadButton: 'Upload File',
   loading: 'Loading',
   lastUpdate: 'Database last updated at',
-  lastInvalidUpdate: 'Invalid attempt at',
+  lastInvalidUpdate: 'Invalid submission at',
   adminInstructions: 'Instructions',
   uploadInstructionsTitle: 'Uploading a File',
   uploadInstructions:
@@ -157,5 +157,6 @@ export const UpdateStrings = {
   findIncompleteGames:
     "You can also find all games that are missing either an image or description after you have logged in. First, in the navigation bar at the top of the screen, click the 'All Games' option. Then, select the 'See Incomplete Games' option in the top left to see the incomplete games sorted by console. You can return to the list of all the games by selecting the 'See All Games'.",
   fileUploaded: 'File uploaded - your submission is being processed.',
-  return: 'Return'
+  return: 'Return',
+  submissionInfo: 'If you submitted a file more recently than this, it is still being processed.'
 }
