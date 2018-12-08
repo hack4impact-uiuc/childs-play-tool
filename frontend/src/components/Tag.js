@@ -32,7 +32,7 @@ class Tag extends Component {
     }
   }
   render() {
-    let width = this.props.card ? '45%' : '160px'
+    let width = this.props.card ? (window.innerWidth >= 300 ? '45%' : '160px') : '160px'
     return (
       <div className={this.state.style} style={{ width: width }}>
         {this.props.type === 'age' || this.props.type === 'gender'
