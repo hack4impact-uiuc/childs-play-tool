@@ -5,6 +5,7 @@ $color-background: #edffe8;
     padding-right: 25%;
     padding-top: 1%;
     text-align: center;
+    justify-content: center;
     min-height: 100%;
     background-size: cover;
     background-repeat: repeat-y;
@@ -13,17 +14,40 @@ $color-background: #edffe8;
     background-color: $color-background;
 }
 
-@media only screen and (max-width: 750px) {
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.filterDropdown {
+  margin: 1.5%;
+  display: inline-block;
+}
+
+@media only screen and (max-width: 800px) {
   .background {
     padding-left: 20%;
     padding-right: 20%;
+  }
+  .flex-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .filterDropdown {
+    margin: 1.5%;
+    align-self: center;
+    display:flex;
   }
 }
 
 @media only screen and (max-width: 500px) {
   .background {
-    padding-left: 10%;
-    padding-right: 10%;
+    padding-bottom: 10%;
+  }
+  .filterDropdown {
+    margin: 1.5%;
   }
 }
 
@@ -75,10 +99,7 @@ $color-background: #edffe8;
   margin: 5%;
 }
 
-.filterDropdown {
-  margin: 1.5%;
-  display: inline-block;
-}
+
 
 .searchButton {
   margin: 5%;

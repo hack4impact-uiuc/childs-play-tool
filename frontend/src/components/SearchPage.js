@@ -111,17 +111,19 @@ class SearchPage extends Component {
           <hr />
           <h>{SearchPageStrings['filterSearchHeader']}</h>
           <br />
-          <div className="filterDropdown">
-            <DropdownButton title={SearchPageStrings['age']} fieldName="ageRange" />
-          </div>
-          <div className="filterDropdown">
-            <DropdownButton title={SearchPageStrings['symptom']} fieldName="symptoms" />
-          </div>
-          <div className="filterDropdown">
-            <DropdownButton title={SearchPageStrings['console']} fieldName="consoles" />
-          </div>
-          <div className="filterDropdown">
-            <DropdownButton title={SearchPageStrings['gender']} fieldName="genders" />
+          <div className="flex-container">
+            <div className="filterDropdown">
+              <DropdownButton title={SearchPageStrings['age']} fieldName="ageRange" />
+            </div>
+            <div className="filterDropdown">
+              <DropdownButton title={SearchPageStrings['symptom']} fieldName="symptoms" />
+            </div>
+            <div className="filterDropdown">
+              <DropdownButton title={SearchPageStrings['console']} fieldName="consoles" />
+            </div>
+            <div className="filterDropdown">
+              <DropdownButton title={SearchPageStrings['gender']} fieldName="genders" />
+            </div>
           </div>
           <br />
           <Link

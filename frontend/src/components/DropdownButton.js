@@ -4,7 +4,16 @@ import { bindActionCreators } from 'redux'
 import Constants from '../utils/Constants'
 import { updateField } from '../redux/modules/searchpage'
 import { updateConsole, deleteSearch } from '../redux/modules/results'
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button } from 'reactstrap'
+import {
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  Button,
+  Modal,
+  ModalBody,
+  ModalFooter
+} from 'reactstrap'
 import '../styles/styles.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGamepad, faVrCardboard, faSave, faHome } from '@fortawesome/free-solid-svg-icons'
@@ -48,16 +57,11 @@ class DropdownButton extends Component {
         ''
       ),
       selectedVal: this.props.title,
-      dropdownOpen: false
+      dropdownOpen: false,
+      modalOpen: false
     }
 
     this.props.updateField(this.props.fieldName, this.state.selectedVal)
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.fieldName === 'selectedSaveSearch') {
-      this.setState({ savedSearches: this.props.savedSearches })
-    }
   }
 
   determineDropdownItems = fieldName => {
@@ -120,15 +124,33 @@ class DropdownButton extends Component {
                     <Button
                       close
                       color="link"
-                      onClick={e => {
-                        e.stopPropagation()
-                        this.props.deleteSearch(item.value)
-                        this.setState({ selectedVal: 'Saved Searches' })
-                        this.toggle()
-                      }}
-                    >
-                      x
-                    </Button>
+                      onClick={() => this.setState({ modalOpen: !this.state.modalOpen })}
+                    />
+
+                    <Modal isOpen={this.state.modalOpen}>
+                      <ModalBody>{DropdownButtonStrings['savedSearchQuestion']}</ModalBody>
+                      <ModalFooter>
+                        <Button
+                          color="primary"
+                          onClick={e => {
+                            e.stopPropagation()
+                            this.props.deleteSearch(item.value)
+                            this.setState({
+                              selectedVal: 'Saved Searches',
+                              modalOpen: !this.state.modalOpen
+                            })
+                          }}
+                        >
+                          {DropdownButtonStrings['yes']}
+                        </Button>
+                        <Button
+                          color="primary"
+                          onClick={() => this.setState({ modalOpen: !this.state.modalOpen })}
+                        >
+                          {DropdownButtonStrings['no']}
+                        </Button>
+                      </ModalFooter>
+                    </Modal>
                   </DropdownItem>
                 ))
               : this.props.items

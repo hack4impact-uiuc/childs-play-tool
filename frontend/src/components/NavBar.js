@@ -31,6 +31,11 @@ class NavBar extends Component {
     }
   }
 
+  loadAllGamesFromNavbar = () => {
+    this.loadAllGames()
+    this.toggleNavbar()
+  }
+
   loadAllGames = () => {
     this.props.beginLoading()
     getAllGames().then(results => {
@@ -72,35 +77,67 @@ class NavBar extends Component {
               navbar
             >
               <NavItem>
-                <NavLink to="/directorPage" tag={RRNavLink}>
+                <NavLink
+                  to="/directorPage"
+                  tag={RRNavLink}
+                  onClick={window.innerWidth < 550 ? this.toggleNavbar : null}
+                >
                   {NavBarStrings['adminLink']}
                 </NavLink>
               </NavItem>
               <NavItem>
                 {this.props.location.pathname === '/' ? (
-                  <NavLink href="/#Contacts">{NavBarStrings['contactLink']}</NavLink>
+                  <NavLink
+                    href="/#Contacts"
+                    onClick={window.innerWidth < 550 ? this.toggleNavbar : null}
+                  >
+                    {NavBarStrings['contactLink']}
+                  </NavLink>
                 ) : (
-                  <NavLink to="/#Contacts" tag={RRNavLink}>
+                  <NavLink
+                    to="/#Contacts"
+                    tag={RRNavLink}
+                    onClick={window.innerWidth < 550 ? this.toggleNavbar : null}
+                  >
                     {NavBarStrings['contactLink']}
                   </NavLink>
                 )}
               </NavItem>
               <NavItem>
                 {this.props.location.pathname === '/' ? (
-                  <NavLink href="/#HowToUse">{NavBarStrings['tutorialLink']}</NavLink>
+                  <NavLink
+                    href="/#HowToUse"
+                    onClick={window.innerWidth < 550 ? this.toggleNavbar : null}
+                  >
+                    {NavBarStrings['tutorialLink']}
+                  </NavLink>
                 ) : (
-                  <NavLink to="/#HowToUse" tag={RRNavLink}>
+                  <NavLink
+                    to="/#HowToUse"
+                    tag={RRNavLink}
+                    onClick={window.innerWidth < 550 ? this.toggleNavbar : null}
+                  >
                     {NavBarStrings['tutorialLink']}
                   </NavLink>
                 )}
               </NavItem>
               <NavItem>
-                <NavLink to="/search" tag={RRNavLink}>
+                <NavLink
+                  to="/search"
+                  tag={RRNavLink}
+                  onClick={window.innerWidth < 550 ? this.toggleNavbar : null}
+                >
                   {NavBarStrings['searchLink']}
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink to="/results" tag={RRNavLink} onClick={this.loadAllGames}>
+                <NavLink
+                  to="/results"
+                  tag={RRNavLink}
+                  onClick={
+                    window.innerWidth < 550 ? this.loadAllGamesFromNavbar : this.loadAllGames
+                  }
+                >
                   {NavBarStrings['gamesLink']}
                 </NavLink>
               </NavItem>
