@@ -104,7 +104,7 @@ class Update extends Component {
                 ))}
               </ul>
               <Button
-                disabled={this.state.files.length == 0}
+                disabled={this.state.files.length === 0}
                 className="right"
                 onClick={e => {
                   sendFile(this.state.files[0])

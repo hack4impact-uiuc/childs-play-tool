@@ -7,9 +7,6 @@ import Card from './Card'
 import {
   TabContent,
   TabPane,
-  Nav,
-  NavItem,
-  NavLink,
   Button,
   InputGroup,
   InputGroupAddon,
@@ -23,7 +20,6 @@ import {
   ModalBody,
   ModalFooter
 } from 'reactstrap'
-import classnames from 'classnames'
 import '../styles/results.scss'
 import {
   saveSearch,
@@ -34,18 +30,15 @@ import {
   endLoading
 } from '../redux/modules/results'
 import { bindActionCreators } from 'redux'
-import Constants from '../utils/Constants.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faSave,
   faGamepad,
-  faHome,
   faSmile,
   faFrown,
   faClipboard,
   faClipboardCheck,
-  faSearch,
-  faSpinner
+  faSearch
 } from '@fortawesome/free-solid-svg-icons'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import Loader from 'react-loader-spinner'

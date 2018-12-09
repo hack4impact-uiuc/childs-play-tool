@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { updateField } from '../redux/modules/searchpage'
-import { Form, FormGroup, Label, Input } from 'reactstrap'
+import { Form, FormGroup, Input } from 'reactstrap'
 import '../styles/styles.scss'
 import { SearchBarCustomStrings } from '../strings/english'
 
@@ -20,10 +20,6 @@ const mapDispatchToProps = dispatch => {
 }
 
 class SearchBarCustom extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   render() {
     return (
       <div>

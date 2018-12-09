@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { Button, Container, Col, Row, Media } from 'reactstrap'
+import { Button, Container, Col, Row } from 'reactstrap'
 import { LandingPageStrings } from '../strings/english'
 
 import '../styles/landingpage.scss'

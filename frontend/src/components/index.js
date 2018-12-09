@@ -1,4 +1,3 @@
-import Counter from './Counter'
 import Password from './Password'
 import Update from './Update'
 import Card from './Card'
@@ -12,7 +11,6 @@ import NavBar from './NavBar'
 import ResultsLink from './ResultsLink'
 
 export {
-  Counter,
   SearchPage,
   DropdownButton,
   SearchBarCustom,

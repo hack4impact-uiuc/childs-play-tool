@@ -81,10 +81,11 @@ class Description extends Component {
       )
       imageRender = (
         <img
+          alt=""
           className="image"
           src={
             !this.props.noImage
-              ? this.props.location.state.game.image == ''
+              ? this.props.location.state.game.image === ''
                 ? require('../styles/placeholderimage.png')
                 : this.props.location.state.game.image
               : null
@@ -152,11 +153,11 @@ class Description extends Component {
 
           <div align="center">
             {this.props.location.state.game.gender &&
-            this.props.location.state.game.gender != DescriptionStrings['noGender'] ? (
+            this.props.location.state.game.gender !== DescriptionStrings['noGender'] ? (
               <Tag type={'gender'} tag={this.props.location.state.game.gender} />
             ) : null}
             {this.props.location.state.game.tags.ages ? (
-              this.props.location.state.game.tags.ages.length == 2 ? (
+              this.props.location.state.game.tags.ages.length === 2 ? (
                 <Tag type={'age'} tag={DescriptionStrings['allAges']} />
               ) : (
                 <Tag type={'age'} tag={this.props.location.state.game.tags.ages[0]} />

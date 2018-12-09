@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import Tag from './Tag'
 import '../styles/results.scss'
 import '../styles/card.scss'
-import Constants from '../utils/Constants'
 import { CardStrings } from '../strings/english'
 
 class Card extends Component {
@@ -12,7 +11,7 @@ class Card extends Component {
     this.state = {
       hover: 'cardStyle',
       description:
-        !this.props.game.description || this.props.game.description.length == 0
+        !this.props.game.description || this.props.game.description.length === 0
           ? CardStrings['noDesc']
           : this.props.game.description && this.props.game.description.length > 100
             ? this.props.game.description.substring(0, 99) + CardStrings['ellipsis']
@@ -32,9 +31,10 @@ class Card extends Component {
           </div>
           {!this.props.noImage ? (
             <img
+              alt=""
               className="imageCard"
               src={
-                this.props.game.image == ''
+                this.props.game.image === ''
                   ? require('../styles/placeholderimage.png')
                   : this.props.game.image
               }

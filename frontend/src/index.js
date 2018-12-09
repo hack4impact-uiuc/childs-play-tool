@@ -4,11 +4,8 @@ import { Provider } from 'react-redux'
 import { Route, withRouter } from 'react-router'
 import { ConnectedRouter } from 'react-router-redux'
 import {
-  Counter,
   Password,
   SearchPage,
-  SearchBarCustom,
-  Dropdown,
   Update,
   Results,
   Description,
@@ -18,7 +15,6 @@ import {
 } from './components'
 import registerServiceWorker from './registerServiceWorker'
 import configureStore, { history } from './redux/configureStore'
-import { loadState } from './redux/localStorage'
 import './styles/htmlstyles.scss'
 
 const store = configureStore()
