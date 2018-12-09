@@ -3,3 +3,4 @@
 !manage.py
 !requirements.txt
 !creds.ini
+!celery-worker.py

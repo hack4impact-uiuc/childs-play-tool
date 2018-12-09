@@ -1,14 +1,18 @@
 from api.models import db, Game, Ranking, Update
 from api.core import create_response, Mixin, Auth
+from api import celery
 from flask import Blueprint, request, current_app as app
 import xlrd
 import math
 import json
 import requests
 import re
+import os
 from difflib import SequenceMatcher
 from collections import defaultdict
 from datetime import datetime
+from uuid import uuid4
+import shutil
 
 games_page = Blueprint("games", __name__)
 
@@ -22,7 +26,6 @@ SYMPTOM_NUMBER = 6
 AGE_NUMBER = 2
 FULL_COLUMN_NUMBER = 5
 NUMBER_RANKINGS = 25
-
 
 @games_page.route(GAMES_URL, methods=["GET"])
 @Auth.authenticate
@@ -144,18 +147,39 @@ def get_games_all():
 @games_page.route(GAMES_URL, methods=["POST"])
 @Auth.authenticate
 def post_games():
+    filepath = os.getcwd() + '/tmp/' + str(uuid4())
+    f = request.files.get("file")
+    if f is None:
+        db.session.query(Update).filter(Update.valid == False).delete()
+        update = {}
+        update["time"] = datetime.now().strftime("%I:%M:%S %p, %m/%d/%Y")
+        update["valid"] = False
+        u = Update(update)
+        db.session.add(u)
+        db.session.commit()
+        return create_response(status=400, message="File not provided.")
+    if not os.path.exists(os.getcwd() + '/tmp/'):
+        os.makedirs(os.getcwd() + '/tmp/')
+    # shutil.copy(f.name, filepath)
+    with open(filepath, "wb+") as dest:
+        dest.write(f.read())
+    post_games_async.delay(filepath)
+    return create_response(status=201, message="Database update begun.")
+
+@celery.task
+def post_games_async(filepath):
     try:
-        file = request.files.get("file")
-        if file is None:
-            db.session.query(Update).filter(Update.valid == False).delete()
-            update = {}
-            update["time"] = datetime.now().strftime("%I:%M:%S %p, %m/%d/%Y")
-            update["valid"] = False
-            u = Update(update)
-            db.session.add(u)
-            db.session.commit()
-            return create_response(status=400, message="File not provided.")
-        book = xlrd.open_workbook(file_contents=file.read())
+        # file = request.files.get("file")
+        # if file is None:
+        #     db.session.query(Update).filter(Update.valid == False).delete()
+        #     update = {}
+        #     update["time"] = datetime.now().strftime("%I:%M:%S %p, %m/%d/%Y")
+        #     update["valid"] = False
+        #     u = Update(update)
+        #     db.session.add(u)
+        #     db.session.commit()
+        #     return create_response(status=400, message="File not provided.")
+        book = xlrd.open_workbook(filepath)
         # Entering the games into database
         id = 0
         # dictionary to store ids of current games and tags of old games
@@ -327,8 +351,9 @@ def post_games():
         u = Update(update)
         db.session.add(u)
         db.session.commit()
-        return create_response(status=201, message="Database updated.")
-    except:
+        print("Success")
+        os.remove(filepath)
+    except Exception as e:
         db.session.rollback()
         db.session.query(Update).filter(Update.valid == False).delete()
         update = {}
@@ -337,7 +362,8 @@ def post_games():
         u = Update(update)
         db.session.add(u)
         db.session.commit()
-        return create_response(status=400, message="Invalid file format.")
+        print(e)
+        os.remove(filepath)
 
 
 def get_giantbomb_data(game_name):

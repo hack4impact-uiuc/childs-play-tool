@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 import os
 import logging
 
@@ -8,14 +9,15 @@ from sqlalchemy_utils import create_database, database_exists
 
 from api.config import config
 from api.core import all_exception_handler, Auth
+from celery import Celery
 
+celery = Celery(__name__, broker="redis://localhost:6379/0")
 
 class RequestFormatter(logging.Formatter):
     def format(self, record):
         record.url = request.url
         record.remote_addr = request.remote_addr
         return super().format(record)
-
 
 def create_app(test_config=None):
     app = Flask(__name__)
@@ -30,7 +32,7 @@ def create_app(test_config=None):
     else:
         app.config.from_object(config[env])
         Auth.set_key()
-
+    celery.conf.update(app.config)
     # logging
     formatter = RequestFormatter(
         "%(asctime)s %(remote_addr)s: requested %(url)s: %(levelname)s in [%(module)s: %(lineno)d]: %(message)s"

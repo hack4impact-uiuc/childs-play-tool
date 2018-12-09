@@ -10,3 +10,4 @@ postgres-data/
 api.log
 test.db
 creds.ini
+tmp/
