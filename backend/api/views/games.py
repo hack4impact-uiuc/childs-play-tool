@@ -154,7 +154,7 @@ def post_games():
     if f is None:
         db.session.query(Update).filter(Update.valid == False).delete()
         update = {}
-        update["time"] = datetime.now(pytz.timezone("US/Pacific")).strftime(
+        update["time"] = datetime.now(pytz.timezone("UTC")).strftime(
             "%I:%M:%S %p, %m/%d/%Y"
         )
         update["valid"] = False
@@ -351,7 +351,7 @@ def post_games_async(filepath):
                     id = id + 1
         db.session.query(Update).delete()
         update = {}
-        update["time"] = datetime.now(pytz.timezone("US/Pacific")).strftime(
+        update["time"] = datetime.now(pytz.timezone("UTC")).strftime(
             "%I:%M:%S %p, %m/%d/%Y"
         )
         update["valid"] = True
@@ -364,7 +364,7 @@ def post_games_async(filepath):
         db.session.rollback()
         db.session.query(Update).filter(Update.valid == False).delete()
         update = {}
-        update["time"] = datetime.now(pytz.timezone("US/Pacific")).strftime(
+        update["time"] = datetime.now(pytz.timezone("UTC")).strftime(
             "%I:%M:%S %p, %m/%d/%Y"
         )
         update["valid"] = False
