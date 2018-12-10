@@ -97,13 +97,17 @@ class LandingPage extends Component {
             </Col>
           </Row>
           <Row>
-            <Col>
+            <Col className="smallspace">
               <p>{LandingPageStrings['tutorial1']}</p>
               <img
                 src={require('../styles/copysearchurl.png')}
                 alt="Copy search URL field"
                 height="80px"
               />
+            </Col>
+            <Col>
+              <p>{LandingPageStrings['tutorial8']}</p>
+              <img src={require('../styles/noimages.png')} alt="No Images checkbox" height="50px" />
             </Col>
           </Row>
         </Container>

@@ -48,6 +48,8 @@ export const LandingPageStrings = {
     'After completing a search, there is the option to save its results at the bottom of the results page. Be sure to provide a descriptive name that will help you identify it for later viewing.',
   tutorial7:
     'Load a saved search at the bottom of the search page to view the previously saved game recommendations.',
+  tutorial8:
+    'If you want to conserve internet usage, check the Search With No Images box to get a faster search without images.',
   mobileGuideHeader: 'Saving this Guide as a Mobile App',
   android: 'Android',
   androidDesc:
