@@ -58,6 +58,7 @@ class DropdownButton extends Component {
       ),
       selectedVal: this.props.title,
       dropdownOpen: false,
+      deleteField: null,
       modalOpen: false
     }
 
@@ -124,33 +125,8 @@ class DropdownButton extends Component {
                     <Button
                       close
                       color="link"
-                      onClick={() => this.setState({ modalOpen: !this.state.modalOpen })}
+                      onClick={() => this.setState({ modalOpen: !this.state.modalOpen, deleteField: item.value })}
                     />
-
-                    <Modal isOpen={this.state.modalOpen}>
-                      <ModalBody>{DropdownButtonStrings['savedSearchQuestion']}</ModalBody>
-                      <ModalFooter>
-                        <Button
-                          color="primary"
-                          onClick={e => {
-                            e.stopPropagation()
-                            this.props.deleteSearch(item.value)
-                            this.setState({
-                              selectedVal: 'Saved Searches',
-                              modalOpen: !this.state.modalOpen
-                            })
-                          }}
-                        >
-                          {DropdownButtonStrings['yes']}
-                        </Button>
-                        <Button
-                          color="primary"
-                          onClick={() => this.setState({ modalOpen: !this.state.modalOpen })}
-                        >
-                          {DropdownButtonStrings['no']}
-                        </Button>
-                      </ModalFooter>
-                    </Modal>
                   </DropdownItem>
                 ))
               : this.props.items
@@ -201,6 +177,30 @@ class DropdownButton extends Component {
             )}
           </DropdownMenu>
         </Dropdown>
+        <Modal isOpen={this.state.modalOpen}>
+          <ModalBody>{DropdownButtonStrings['savedSearchQuestion']}</ModalBody>
+          <ModalFooter>
+            <Button
+              color="primary"
+              onClick={e => {
+                e.stopPropagation()
+                this.props.deleteSearch(this.state.deleteField)
+                this.setState({
+                  selectedVal: 'Saved Searches',
+                  modalOpen: !this.state.modalOpen
+                })
+              }}
+            >
+              {DropdownButtonStrings['yes']}
+            </Button>
+            <Button
+              color="primary"
+              onClick={() => this.setState({ modalOpen: !this.state.modalOpen })}
+            >
+              {DropdownButtonStrings['no']}
+            </Button>
+          </ModalFooter>
+        </Modal>
       </div>
     )
   }
