@@ -11,7 +11,7 @@ from api.config import config
 from api.core import all_exception_handler, Auth
 from celery import Celery
 
-celery = Celery(__name__, broker="redis://localhost:6379/0")
+celery = Celery(__name__, broker=config[os.environ.get("FLASK_ENV", "dev")].REDIS_URL)
 
 class RequestFormatter(logging.Formatter):
     def format(self, record):

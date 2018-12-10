@@ -11,6 +11,7 @@ class Config:
 class DevelopmentConfig(Config):
     GIANTBOMB_KEY = get_api_keys()
     SQLALCHEMY_DATABASE_URI = "postgresql://testusr:password@127.0.0.1:5432/cpdb"
+    REDIS_URL = "redis://localhost:6379/0"
     # SQLALCHEMY_DATABASE_URI = 'postgres://127.0.0.1:5432'
     DEBUG = True
 
@@ -18,6 +19,7 @@ class DevelopmentConfig(Config):
 class ProductionConfig(Config):
     GIANTBOMB_KEY = get_api_keys()
     SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
+    REDIS_URL = os.environ.get("REDIS_URL")
     DEBUG = False
 
 
