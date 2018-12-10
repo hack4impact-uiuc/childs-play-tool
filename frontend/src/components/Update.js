@@ -43,6 +43,14 @@ class Update extends Component {
     })
   }
 
+  convertTime = time => {
+    let utc_date = new Date(time)
+    let curr = new Date()
+    let minutesFromUTC = curr.getTimezoneOffset()
+    let local = new Date(utc_date.getTime() - minutesFromUTC * 60000)
+    return local.toLocaleString()
+  }
+
   toggle = () => {
     this.setState({
       modal: !this.state.modal,
@@ -71,13 +79,14 @@ class Update extends Component {
           <section className="droppedBox">
             {this.props.updates && this.props.updates.valid ? (
               <text>
-                {UpdateStrings['lastUpdate']} {this.props.updates.valid.time}
+                {UpdateStrings['lastUpdate']} {this.convertTime(this.props.updates.valid.time)}
                 <br />
               </text>
             ) : null}
             {this.props.updates && this.props.updates.invalid ? (
               <text>
-                {UpdateStrings['lastInvalidUpdate']} {this.props.updates.invalid.time}
+                {UpdateStrings['lastInvalidUpdate']}{' '}
+                {this.convertTime(this.props.updates.invalid.time)}
                 <br />
               </text>
             ) : null}

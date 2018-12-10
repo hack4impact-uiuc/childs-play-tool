@@ -85,7 +85,7 @@ class Auth:
 
     @classmethod
     def set_key(cls):
-        if (os.environ.get("FLASK_ENV", "dev") == "prod"):
+        if os.environ.get("FLASK_ENV", "dev") == "prod":
             cls.auth_key = os.environ.get("SECURITY_KEY", None)
             return
         try:
