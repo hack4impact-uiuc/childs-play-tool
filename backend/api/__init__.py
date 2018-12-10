@@ -13,11 +13,13 @@ from celery import Celery
 
 celery = Celery(__name__, broker=config[os.environ.get("FLASK_ENV", "dev")].REDIS_URL)
 
+
 class RequestFormatter(logging.Formatter):
     def format(self, record):
         record.url = request.url
         record.remote_addr = request.remote_addr
         return super().format(record)
+
 
 def create_app(test_config=None):
     app = Flask(__name__)
