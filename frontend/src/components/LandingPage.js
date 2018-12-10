@@ -105,6 +105,14 @@ class LandingPage extends Component {
                 height="80px"
               />
             </Col>
+            <Col>
+              <p>{LandingPageStrings['tutorial8']}</p>
+              <img
+                src={require('../styles/copysearchurl.png')}
+                alt="No Images checkbox"
+                height="80px"
+              />
+            </Col>
           </Row>
         </Container>
         <div className="line" />
