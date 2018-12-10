@@ -84,6 +84,9 @@ class Auth:
 
     @classmethod
     def set_key(cls):
+        if (os.environ.get("FLASK_ENV", "dev") == "prod"):
+            cls.auth_key = os.environ.get("SECURITY_KEY", None)
+            return
         try:
             config = configparser.ConfigParser()
             config.read("creds.ini")
@@ -112,7 +115,7 @@ class Auth:
             else:
                 data = request.args
             key = data.get("key")
-            if key is None or key != cls.auth_key:
+            if key is None or cls.auth_key is None or key != cls.auth_key:
                 return create_response(status=400, message="No/Wrong key provided")
             return f(*args, **kwargs)
 

@@ -125,7 +125,9 @@ class DropdownButton extends Component {
                     <Button
                       close
                       color="link"
-                      onClick={() => this.setState({ modalOpen: !this.state.modalOpen, deleteField: item.value })}
+                      onClick={() =>
+                        this.setState({ modalOpen: !this.state.modalOpen, deleteField: item.value })
+                      }
                     />
                   </DropdownItem>
                 ))

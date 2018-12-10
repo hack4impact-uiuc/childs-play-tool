@@ -17,7 +17,7 @@ class DevelopmentConfig(Config):
 
 
 class ProductionConfig(Config):
-    GIANTBOMB_KEY = get_api_keys()
+    GIANTBOMB_KEY = os.environ.get("GIANTBOMB_KEY")
     SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
     REDIS_URL = os.environ.get("REDIS_URL")
     DEBUG = False
