@@ -49,7 +49,7 @@ export const LandingPageStrings = {
   tutorial7:
     'Load a saved search at the bottom of the search page to view the previously saved game recommendations.',
   tutorial8:
-    'If you want to conserve internet usage, check the No Images box to get a faster search without images.',
+    'If you want to conserve internet usage, check the Search With No Images box to get a faster search without images.',
   mobileGuideHeader: 'Saving this Guide as a Mobile App',
   android: 'Android',
   androidDesc:
