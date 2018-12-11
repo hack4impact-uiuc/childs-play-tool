@@ -1,5 +1,8 @@
 {
   "name": "childs-play-frontend",
   "type": "npm",
-  "alias": "h4i-childs-play.now.sh"
+  "alias": "h4i-childs-play.now.sh",
+  "env": {
+    "NODE_ENV": "production"
+  }
 }

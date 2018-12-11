@@ -17,3 +17,4 @@ redis==3.0.1
 sqlalchemy-utils==0.33.5
 typing==3.6.6
 xlrd==1.1.0
+pytz==2018.7

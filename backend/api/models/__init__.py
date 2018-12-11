@@ -4,4 +4,5 @@
 from .Game import Game
 from .Ranking import Ranking
 from .Update import Update
+from .TmpFile import TmpFile
 from .base import db
