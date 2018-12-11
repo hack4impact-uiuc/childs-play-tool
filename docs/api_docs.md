@@ -225,7 +225,7 @@ Get a json of all games split by console and sorted by rank, where game is missi
 
 **Description**
 
-Get a json of games split by console and sorted by rank where all games have parameter as substring.
+Get a json of games split by console where all games have parameter as substring.
 
 **Parameters**
 
