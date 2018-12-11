@@ -1,9 +1,9 @@
 let ADMIN_KEY
-if (process.env.KEYS === 'production' && process.env.ADMIN_KEY.length > 1) {
+// if (process.env.KEYS === 'production' && process.env.ADMIN_KEY.length > 1) {
   ADMIN_KEY = process.env.ADMIN_KEY
-} else {
-  ADMIN_KEY = require('../../keys').ADMIN_KEY
-}
+// } else {
+  // ADMIN_KEY = require('../../keys').ADMIN_KEY
+// }
 
 const LOGIN = 'auth/login'
 const LOAD_UPDATES = 'auth/load_updates'
