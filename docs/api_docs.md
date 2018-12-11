@@ -201,7 +201,7 @@ Get a json of all games split by console and sorted by rank.
 
 ### Endpoint
 
-    GET /games
+    GET /games/incomplete
 
 **Description**
 
