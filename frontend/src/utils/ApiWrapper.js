@@ -1,6 +1,12 @@
 import axios from 'axios'
 import BACKEND_URL from './ApiConfig'
-import { BACKEND_KEY } from '../keys'
+
+let BACKEND_KEY
+if (process.env.NODE_ENV === 'production' && process.env.BACKEND_KEY.length > 1) {
+  BACKEND_KEY = process.env.BACKEND_KEY
+} else {
+  BACKEND_KEY = require('../keys').BACKEND_KEY
+}
 
 export const getGamesByName = name => {
   return axios
