@@ -1,9 +1,4 @@
-// let ADMIN_KEY
-// if (process.env.KEYS === 'production' && process.env.ADMIN_KEY.length > 1) {
-  // ADMIN_KEY = 
-// } else {
-  // ADMIN_KEY = require('../../keys').ADMIN_KEY
-// }
+import { ADMIN_KEY } from '../../keys'
 
 const LOGIN = 'auth/login'
 const LOAD_UPDATES = 'auth/load_updates'
@@ -20,7 +15,7 @@ export default function reducer(state = initialState, action) {
     case LOGIN:
       return {
         ...state,
-        authenticated: action.value === process.env.ADMIN_KEY
+        authenticated: action.value === ADMIN_KEY
       }
     case LOAD_UPDATES:
       return {
