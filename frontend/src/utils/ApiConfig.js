@@ -1,5 +1,7 @@
+const hostname = window && window.location && window.location.hostname
 let backend_url
-if (process.env.KEYS === 'production') {
+
+if (hostname === 'childs-play.herokuapp.com') {
   backend_url = 'https://childs-play-backend.herokuapp.com'
 } else {
   backend_url = 'http://localhost:8080'
